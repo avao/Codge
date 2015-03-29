@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Model"
+    targetNamespace="http://codge/Model.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://codge/Model.xsd"
+    xmlns:mstns="http://codge/Model.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:element name="Model" type="ModelDesc"/>
+
+  <xs:complexType name="ModelDesc">
+    <xs:sequence>
+      <xs:element name="Namespace" type="NamespaceDesc"/>
+    </xs:sequence>
+    
+  </xs:complexType>
+
+
+  <xs:complexType name="NamespaceDesc">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Primitive" type="Primitive" />
+        <xs:element name="Enumeration" type="Enumeration"/>
+        <xs:element name="Composite" type="Composite"/>
+      </xs:choice>
+      <xs:element name="Namespace" type="NamespaceDesc" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Primitive">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Enumeration">
+    <xs:sequence>
+      <xs:element name="item" type="Item" minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="Item">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:int"/>
+  </xs:complexType>
+  
+  <xs:complexType name="Composite">
+    <xs:sequence>
+      <xs:element name="Extends" type="Extends" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Field" type="Field" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>    
+  </xs:complexType>
+
+  <xs:complexType name="Extends">
+    <xs:attribute name="type" type="xs:string" use="required"/>
+  </xs:complexType>
+  
+  <xs:complexType name="Field">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="required"/>
+    <xs:attribute name="isCollection" type="xs:boolean"/>
+  </xs:complexType>
+  
+</xs:schema>
+

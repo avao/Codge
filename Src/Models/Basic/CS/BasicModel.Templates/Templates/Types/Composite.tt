@@ -1,0 +1,72 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" inherits="T4TemplateAction<TypeBase>" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Codge.DataModel" #>
+<#@ import namespace="Codge.Generator" #>
+
+
+namespace Types.<#= Type.Namespace.GetFullName(".") #>
+{
+	public class <#= Type.Name #>
+	{
+		public <#= Type.Name #>(<#= GetCtorParamters(Type) #>)
+		{
+<#				
+					foreach(var field in Type.Fields)
+					{
+#>
+			<#= field.Name #> = <#= GetParameterName(field) #>;
+<#				
+					}
+#>
+		}
+
+
+<#				
+					foreach(var field in Type.Fields)
+					{
+#>
+		public	<#= field.Type.Name #> <#= field.Name#> {get; private set;}
+<#				
+					}
+#>
+	}
+}
+
+
+<#+
+	private static string GetMemberName(CompositeType.Field field)
+	{
+		return field.Name;
+	}
+
+	private static string GetParameterName(CompositeType.Field field)
+	{
+		return "_"+field.Name;
+	}
+
+	private static string GetCtorParamters(CompositeType type)
+	{
+		return string.Join(",", type.Fields.Select(f => f.Type.Name + " " + GetParameterName(f)));
+	}
+
+	public CompositeType Type{get; private set;}
+
+	public Composite(TypeBase type)
+	{
+		Type = type as CompositeType;
+	}
+
+	public override bool IsApplicable()
+	{
+		return Type!=null;
+	}
+
+	public override PathAndContent Execute(Context context)
+	{
+		return new PathAndContent(Utils.GetOutputPath(Type, "Types", "cs"), TransformText());
+	}
+#>

@@ -1,0 +1,49 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" inherits="T4TemplateAction<TypeBase>" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="Codge.DataModel" #>
+<#@ import namespace="Codge.Generator" #>
+
+
+namespace Types.<#= Type.Namespace.GetFullName(".") #>
+{
+	enum <#= Type.Name #>
+	{
+
+<#				
+					bool first=true;
+					foreach(var item in Type.Items)
+					{
+						string prefix = first ? "" : ",";
+#>
+		<#= prefix #><#= item.Name #>
+<#						
+						first=false;
+					}
+#>
+	
+	}
+}
+
+
+<#+
+	public EnumerationType Type{get; private set;}
+
+	public Enum(TypeDescriptor type)
+	{
+		Type = type as EnumerationType;
+	}
+
+	public override bool IsApplicable()
+	{
+		return Type!=null;
+	}
+
+	public override PathAndContent Execute(Context context)
+	{
+		return new PathAndContent(Utils.GetOutputPath(Type, "Types", "cs"), TransformText());
+	}
+#>

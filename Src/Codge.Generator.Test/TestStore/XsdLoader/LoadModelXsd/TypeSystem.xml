@@ -1,0 +1,25 @@
+<TypeSystem>
+  <Type name="string" />
+  <Type name="int" />
+  <Type name="bool" />
+  <Type name="double" />
+  <Namespace name="MyModel">
+    <Type name="ModelDesc">
+      <Field name="Namespace" type="MyModel.NamespaceDesc" />
+    </Type>
+    <Type name="NamespaceDesc">
+      <Field name="Namespace" type="MyModel.NamespaceDesc" />
+    </Type>
+    <Type name="Primitive" />
+    <Type name="Enumeration">
+      <Field name="item" type="MyModel.Item" />
+    </Type>
+    <Type name="Item" />
+    <Type name="Composite">
+      <Field name="Extends" type="MyModel.Extends" />
+      <Field name="Field" type="MyModel.Field" />
+    </Type>
+    <Type name="Extends" />
+    <Type name="Field" />
+  </Namespace>
+</TypeSystem>

@@ -1,0 +1,6 @@
+﻿group dork;
+
+test(name) ::= <<<(name)()>
+>>
+first() ::= "the first"
+second() ::= "the second"
