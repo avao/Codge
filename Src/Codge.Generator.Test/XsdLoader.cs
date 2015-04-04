@@ -17,11 +17,26 @@ namespace Codge.Generator.Test
         [Test]
         public void LoadModelXsd()
         {
-            var typeSystem = new TypeSystem();
-            ModelLoader.Load(typeSystem, @"D:\work\CodeGen\Codge.Generator\Presentations\Xml\Model.xsd", "MyModel");
-
             var testCase = TestSystem.GetTestCase("LoadModelXsd");
+
+            var typeSystem = new TypeSystem();
+            ModelLoader.Load(typeSystem, @"..\..\..\Codge.Generator\Presentations\Xml\Model.xsd", "MyModel");//TODO proper path
+                        
             testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "TypeSystem.xml", true);
+        }
+
+        [Test]
+        public void LoadXsd()
+        {
+            var testCase = TestSystem.GetTestCase("LoadXsd");
+            
+            var typeSystem = new TypeSystem();
+            using (var stream = testCase.GetStream("Test.xsd"))
+            {
+                ModelLoader.Load(typeSystem, stream, "AModel");
+            }
+            
+            testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "XsdTypes.xml", true);
         }
     }
 }

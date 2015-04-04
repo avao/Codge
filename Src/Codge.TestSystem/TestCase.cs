@@ -54,5 +54,10 @@ namespace Codge.TestSystem
                 Assert.Fail("Just in case...");
             }
         }
+
+        public Stream GetStream(string name)
+        {
+            return TestSystem.DataStorage.GetStream(Name, name);
+        }
     }
 }

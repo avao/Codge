@@ -16,6 +16,11 @@ namespace Codge.TestSystem.FileBased
             BasePath = basePath;
         }
 
+        public Stream GetStream(string testCaseId, string itemId)
+        {
+            return File.OpenRead(GetAbsolutePath(testCaseId, itemId));
+        }
+
         public string GetContent(string testCaseId, string itemId)
         {
             string absolutePath = GetAbsolutePath(testCaseId, itemId);

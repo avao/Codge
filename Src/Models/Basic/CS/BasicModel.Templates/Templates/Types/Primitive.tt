@@ -21,7 +21,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	public PrimitiveType Type{get; private set;}
 
-	public Primitive(TypeDescriptor type)
+	public Primitive(TypeBase type)
 	{
 		Type = type as PrimitiveType;
 	}

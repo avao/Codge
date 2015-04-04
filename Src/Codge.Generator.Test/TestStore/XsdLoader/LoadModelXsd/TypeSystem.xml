@@ -8,18 +8,35 @@
       <Field name="Namespace" type="MyModel.NamespaceDesc" />
     </Type>
     <Type name="NamespaceDesc">
+      <Field name="name" type="string" />
+      <Field name="Primitive" type="MyModel.Primitive" />
+      <Field name="Enumeration" type="MyModel.Enumeration" />
+      <Field name="Composite" type="MyModel.Composite" />
       <Field name="Namespace" type="MyModel.NamespaceDesc" />
     </Type>
-    <Type name="Primitive" />
+    <Type name="Primitive">
+      <Field name="name" type="string" />
+    </Type>
     <Type name="Enumeration">
+      <Field name="name" type="string" />
       <Field name="item" type="MyModel.Item" />
     </Type>
-    <Type name="Item" />
+    <Type name="Item">
+      <Field name="name" type="string" />
+      <Field name="value" type="int" />
+    </Type>
     <Type name="Composite">
+      <Field name="name" type="string" />
       <Field name="Extends" type="MyModel.Extends" />
       <Field name="Field" type="MyModel.Field" />
     </Type>
-    <Type name="Extends" />
-    <Type name="Field" />
+    <Type name="Extends">
+      <Field name="type" type="string" />
+    </Type>
+    <Type name="Field">
+      <Field name="name" type="string" />
+      <Field name="type" type="string" />
+      <Field name="isCollection" type="bool" />
+    </Type>
   </Namespace>
 </TypeSystem>

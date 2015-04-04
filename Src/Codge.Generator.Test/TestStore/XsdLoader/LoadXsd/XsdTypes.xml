@@ -1,0 +1,15 @@
+<TypeSystem>
+  <Type name="string" />
+  <Type name="int" />
+  <Type name="bool" />
+  <Type name="double" />
+  <Namespace name="AModel">
+    <Type name="ordertype">
+      <Field name="status" type="string" />
+      <Field name="customer" type="string" />
+      <Field name="orderdetails" type="string" />
+      <Field name="billto" type="string" />
+      <Field name="shipto" type="string" />
+    </Type>
+  </Namespace>
+</TypeSystem>

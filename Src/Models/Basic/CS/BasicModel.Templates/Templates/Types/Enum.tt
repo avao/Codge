@@ -32,7 +32,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	public EnumerationType Type{get; private set;}
 
-	public Enum(TypeDescriptor type)
+	public Enum(TypeBase type)
 	{
 		Type = type as EnumerationType;
 	}
