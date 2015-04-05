@@ -47,6 +47,19 @@ namespace Codge.Generator.Presentations.Xsd
                 }
             }
 
+            foreach (DictionaryEntry item in schema.Elements)
+            {
+                var element = item.Value as XmlSchemaElement;
+                if (element != null)
+                {
+                    var complexType = element.ElementSchemaType as XmlSchemaComplexType;
+                    if (complexType != null && complexType.Name == null)
+                    {
+                        processCompositeType(modelDescriptor.RootNamespace, complexType);
+                    }
+                }
+            }
+
             var compiler = new ModelCompiler();
             return compiler.Compile(typeSystem, modelDescriptor);
         }
@@ -59,14 +72,15 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType compexType)
         {
-            var descriptor = namespaceDescriptor.CreateCompositeType(compexType.Name);
+            var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(compexType));
             AddFields(descriptor, compexType.Attributes);
-            if (compexType.Particle!=null)
+            if (compexType.Particle != null)
                 AddField(descriptor, compexType.Particle);
         }
 
         private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 
-                { "boolean", "bool" }
+                { "boolean", "bool" },
+                { "id", "string" }
                 };
 
         private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
@@ -77,6 +91,25 @@ namespace Codge.Generator.Presentations.Xsd
             if (!xsdTypeMapping.TryGetValue(typeCode, out mappedType))
                 return typeCode;
             return mappedType;
+        }
+
+
+        private static string ConvertSchemaType(XmlSchemaType schemaType)
+        {
+            var simpleType = schemaType as XmlSchemaSimpleType;
+            if (simpleType != null)
+                return ConvertSchemaType(simpleType);
+
+            var complexType = schemaType as XmlSchemaComplexType;
+            if (complexType != null)
+            {
+                if (complexType.Name == null)
+                {
+                    return "anonym_" + complexType.LineNumber + "_" + complexType.LinePosition;
+                }
+            }
+
+            return schemaType.Name;
         }
 
         private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item)
@@ -97,7 +130,7 @@ namespace Codge.Generator.Presentations.Xsd
                     }
                     else
                     {
-                        descriptor.AddField(element.RefName.Name, element.ElementSchemaType.Name);
+                        descriptor.AddField(element.RefName.Name, ConvertSchemaType(element.ElementSchemaType));
                     }
                 }
                 else
