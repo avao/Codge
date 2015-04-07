@@ -8,6 +8,7 @@ using Codge.Generator.StringTemplateTasks;
 using Codge.Generator.Tasks;
 using Common.Logging;
 using Codge.DataModel;
+using Codge.DataModel.Descriptors;
 
 
 namespace Codge.Generator.Console
@@ -47,10 +48,20 @@ namespace Codge.Generator.Console
         static Model LoadModel(string path)
         {
             System.Console.WriteLine("Loading model [" + path + "]");
-            var reader = XmlReader.Create(path);
-            var model = Codge.Generator.Presentations.Xml.ModelLoader.Load(reader);
 
             var typeSystem = new TypeSystem();
+
+            ModelDescriptor model;
+            if(path.ToLower().EndsWith(".xsd"))
+            {//loader type selection
+                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(typeSystem, path, "TODO");
+            }
+            else
+            {
+                var reader = XmlReader.Create(path);
+                model = Codge.Generator.Presentations.Xml.ModelLoader.Load(reader);
+            }
+
             var compiler = new ModelCompiler();
             return compiler.Compile(typeSystem, model);
         }

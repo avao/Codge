@@ -14,7 +14,7 @@ namespace Codge.Generator.Presentations.Xsd
 {
     public class ModelLoader
     {
-        public static DataModel.Model Load(TypeSystem typeSystem, Stream stream, string modelName)
+        public static ModelDescriptor Load(TypeSystem typeSystem, Stream stream, string modelName)
         {
             XmlSchema schema = XmlSchema.Read(stream, null);
 
@@ -25,7 +25,7 @@ namespace Codge.Generator.Presentations.Xsd
             return Load(typeSystem, schema, modelName);
         }
 
-        public static DataModel.Model Load(TypeSystem typeSystem, string path, string modelName)
+        public static ModelDescriptor Load(TypeSystem typeSystem, string path, string modelName)
         {
             XmlSchema schema;
             using (var reader = new FileStream(path, FileMode.Open))
@@ -34,7 +34,7 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        public static DataModel.Model Load(TypeSystem typeSystem, XmlSchema schema, string modelName)
+        public static ModelDescriptor Load(TypeSystem typeSystem, XmlSchema schema, string modelName)
         {
             var modelDescriptor = new ModelDescriptor(modelName, modelName);
 
@@ -59,9 +59,7 @@ namespace Codge.Generator.Presentations.Xsd
                     }
                 }
             }
-
-            var compiler = new ModelCompiler();
-            return compiler.Compile(typeSystem, modelDescriptor);
+            return modelDescriptor;
         }
 
         static int id = 3000;
