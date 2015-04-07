@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicModel.Templates.CS", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.TestSystem", "Codge.TestSystem\Codge.TestSystem.csproj", "{2DF872E3-BE69-43DE-8BB8-3F277DA8B8C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicModel.CS", "Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj", "{03057E90-B954-4875-8865-E5B03AAA7267}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,16 @@ Global
 		{2DF872E3-BE69-43DE-8BB8-3F277DA8B8C4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2DF872E3-BE69-43DE-8BB8-3F277DA8B8C4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2DF872E3-BE69-43DE-8BB8-3F277DA8B8C4}.Release|Win32.ActiveCfg = Release|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{03057E90-B954-4875-8865-E5B03AAA7267}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -161,5 +173,6 @@ Global
 		{91F985E1-6C01-4823-9F9A-EBFF626D4A2D} = {08F850D5-C661-4D43-ADE8-4F6F44CF148B}
 		{29EF437D-68F7-4740-8D95-65B88D6AFDEA} = {21119BA0-1F92-4103-AD7C-3A9558CA96B6}
 		{734BC941-9D32-4DCE-AFCE-9FDDBAD3FAB1} = {596B7F2F-0F9A-4AAA-8ABD-9206A76E40B6}
+		{03057E90-B954-4875-8865-E5B03AAA7267} = {596B7F2F-0F9A-4AAA-8ABD-9206A76E40B6}
 	EndGlobalSection
 EndGlobal

@@ -24,7 +24,8 @@ namespace BasicModel.Templates.CS
         {
             return new ITask<Model>[] { 
                 new OutputTask<Model>(new ProjectUpdater(model), Logger),
-                new OutputTask<Model>(new PofConfig(model), Logger)};
+                //new OutputTask<Model>(new PofConfig(model), Logger)
+            };
         }
 
         public IEnumerable<ITask<Namespace>> CreateTasksForNamespace(Namespace model)
@@ -38,7 +39,7 @@ namespace BasicModel.Templates.CS
                 new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Composite(type), Logger),
                 new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Primitive(type), Logger),
                 new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Enum(type), Logger),
-                new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.PofSerialisers.Composite(type), Logger)
+                //new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.PofSerialisers.Composite(type), Logger)
             };
         }
     }

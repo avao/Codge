@@ -27,7 +27,6 @@ namespace Codge.Generator.Presentations.Xsd
 
         public static ModelDescriptor Load(TypeSystem typeSystem, string path, string modelName)
         {
-            XmlSchema schema;
             using (var reader = new FileStream(path, FileMode.Open))
             {
                 return Load(typeSystem, reader, modelName);
