@@ -78,7 +78,11 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 
                 { "boolean", "bool" },
-                { "id", "string" }
+                { "id", "string" },
+                { "date", "string" },
+                { "idref", "string" },
+                { "integer", "int" },
+                { "decimal", "int" }
                 };
 
         private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
