@@ -123,7 +123,7 @@ namespace Codge.Generator.Presentations.Xsd
             var att = item as XmlSchemaAttribute;
             if (att != null)
             {
-                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType));
+                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType), new Dictionary<string, object> {{ "isAttribute", true}});
             }
             else
             {

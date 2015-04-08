@@ -74,7 +74,13 @@ namespace Codge.Generator.Test
                 writer.WriteAttributeString("name", field.Name);
                 writer.WriteAttributeString("type", field.Type.GetFullName("."));
                 if(field.IsCollection)
+                {
                     writer.WriteAttributeString("isCollection", "true");
+                }
+                foreach (var kvp in field.AttachedData)
+                {
+                    writer.WriteElementString(kvp.Key, kvp.Value.ToString());
+                }
                 writer.WriteEndElement();
             }
         }

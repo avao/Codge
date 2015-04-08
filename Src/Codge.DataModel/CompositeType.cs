@@ -24,18 +24,21 @@ namespace Codge.DataModel
             public int MinOccur { get; private set; }
             public int MaxOccur { get; private set; }
 
-            internal Field(string name, int id, TypeBase type)
-                :this(name, id, type, 1, 1)
+            public IDictionary<string, object> AttachedData { get; private set; }
+
+            internal Field(string name, int id, TypeBase type, IDictionary<string, object> attachedData)
+                :this(name, id, type, 1, 1, attachedData)
             {
             }
 
-            internal Field(string name, int id, TypeBase type, int minOccur, int maxOccur)
+            internal Field(string name, int id, TypeBase type, int minOccur, int maxOccur, IDictionary<string, object> attachedData)
             {
                 Type = type;
                 Name = name;
                 Id = id;
                 MinOccur = minOccur;
                 MaxOccur = maxOccur;
+                AttachedData = attachedData;
             }
 
             public bool IsCollection { get { return MaxOccur > 1; } }
@@ -50,14 +53,14 @@ namespace Codge.DataModel
             _fields = new List<Field>();
         }
 
-        public void AddField(string name, TypeBase type)
+        public void AddField(string name, TypeBase type, IDictionary<string, object> attachedData)
         {
-            _fields.Add(new Field(name, _fields.Count, type));
+            _fields.Add(new Field(name, _fields.Count, type, attachedData));
         }
 
-        public void AddCollectionField(string name, TypeBase type)
+        public void AddCollectionField(string name, TypeBase type, IDictionary<string, object> attachedData)
         {
-            _fields.Add(new Field(name, _fields.Count, type, 1, int.MaxValue));
+            _fields.Add(new Field(name, _fields.Count, type, 1, int.MaxValue, attachedData));
         }
 
         public override IEnumerable<TypeBase> Dependencies

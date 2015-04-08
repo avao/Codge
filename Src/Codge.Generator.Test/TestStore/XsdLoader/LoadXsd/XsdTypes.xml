@@ -6,7 +6,9 @@
   <Namespace name="AModel">
     <Type name="emptyComplexType" />
     <Type name="ordertype">
-      <Field name="status" type="string" />
+      <Field name="status" type="string">
+        <isAttribute>True</isAttribute>
+      </Field>
       <Field name="customer" type="string" />
       <Field name="orderdetails" type="string" />
       <Field name="billto" type="string" />
@@ -17,7 +19,9 @@
       <Field name="anElement" type="string" />
     </Type>
     <Type name="complexTypeWithContentWithAttribute">
-      <Field name="anAttribute" type="string" />
+      <Field name="anAttribute" type="string">
+        <isAttribute>True</isAttribute>
+      </Field>
     </Type>
     <Type name="elementWithEmbededType_25_6">
       <Field name="aSubElement" type="string" />

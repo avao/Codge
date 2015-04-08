@@ -91,9 +91,9 @@ namespace Codge.DataModel
                         }
 
                         if(field.IsCollection)
-                            descriptor.AddCollectionField(field.Name, fieldType);
+                            descriptor.AddCollectionField(field.Name, fieldType, field.AttachedData);
                         else
-                            descriptor.AddField(field.Name, fieldType);
+                            descriptor.AddField(field.Name, fieldType, field.AttachedData);
                     }
                 }
             }
