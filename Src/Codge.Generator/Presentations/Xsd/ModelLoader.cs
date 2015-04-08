@@ -71,8 +71,7 @@ namespace Codge.Generator.Presentations.Xsd
         {
             var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(compexType));
             AddFields(descriptor, compexType.Attributes);
-            if (compexType.Particle != null)
-                AddField(descriptor, compexType.Particle);
+            AddField(descriptor, compexType.ContentTypeParticle);
         }
 
         private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 
@@ -150,7 +149,13 @@ namespace Codge.Generator.Presentations.Xsd
                         }
                         else
                         {
-                            throw new NotSupportedException();
+                            if(item.LineNumber==0 &&item.LinePosition==0)
+                            {//empty particle
+                            }
+                            else
+                            {
+                                throw new NotSupportedException();
+                            }
                         }
                     }
                 }

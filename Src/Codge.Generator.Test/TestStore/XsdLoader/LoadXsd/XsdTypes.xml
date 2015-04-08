@@ -4,15 +4,19 @@
   <Type name="bool" />
   <Type name="double" />
   <Namespace name="AModel">
+    <Type name="emptyComplexType" />
     <Type name="ordertype">
       <Field name="status" type="string" />
       <Field name="customer" type="string" />
       <Field name="orderdetails" type="string" />
       <Field name="billto" type="string" />
       <Field name="shipto" type="string" />
-      <Field name="elementWithEmbededType" type="AModel.anonym_22_6" />
+      <Field name="elementWithEmbededType" type="AModel.anonym_25_6" />
     </Type>
-    <Type name="anonym_22_6">
+    <Type name="complexTypeWithContent">
+      <Field name="anElement" type="string" />
+    </Type>
+    <Type name="anonym_25_6">
       <Field name="aSubElement" type="string" />
     </Type>
   </Namespace>

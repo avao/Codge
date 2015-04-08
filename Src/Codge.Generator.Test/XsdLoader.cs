@@ -7,6 +7,7 @@ using Codge.DataModel;
 using Codge.Generator.Presentations.Xsd;
 using Codge.TestSystem.FileBased;
 using NUnit.Framework;
+using Codge.DataModel.Descriptors;
 
 namespace Codge.Generator.Test
 {
@@ -19,9 +20,11 @@ namespace Codge.Generator.Test
         {
             var testCase = TestSystem.GetTestCase("LoadModelXsd");
 
+            ModelDescriptor modelDescriptor;
             var typeSystem = new TypeSystem();
-            ModelLoader.Load(typeSystem, @"..\..\..\Codge.Generator\Presentations\Xml\Model.xsd", "MyModel");//TODO proper path
-                        
+            modelDescriptor = ModelLoader.Load(typeSystem, @"..\..\..\Codge.Generator\Presentations\Xml\Model.xsd", "MyModel");//TODO proper path
+            var compiler = new ModelCompiler();
+            var model = compiler.Compile(typeSystem, modelDescriptor);
             testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "TypeSystem.xml", true);
         }
 
@@ -31,11 +34,15 @@ namespace Codge.Generator.Test
             var testCase = TestSystem.GetTestCase("LoadXsd");
             
             var typeSystem = new TypeSystem();
+            ModelDescriptor modelDescriptor;
             using (var stream = testCase.GetStream("Test.xsd"))
             {
-                ModelLoader.Load(typeSystem, stream, "AModel");
+                modelDescriptor = ModelLoader.Load(typeSystem, stream, "AModel");
             }
-            
+
+            var compiler = new ModelCompiler();
+            var model = compiler.Compile(typeSystem, modelDescriptor);
+
             testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "XsdTypes.xml", true);
         }
     }
