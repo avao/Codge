@@ -42,7 +42,7 @@ namespace Codge.Generator.Presentations.Xsd
                 var complexType = item.Value as XmlSchemaComplexType;
                 if (complexType != null)
                 {
-                    processCompositeType(modelDescriptor.RootNamespace, complexType);
+                    processCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty);
                 }
             }
 
@@ -54,7 +54,7 @@ namespace Codge.Generator.Presentations.Xsd
                     var complexType = element.ElementSchemaType as XmlSchemaComplexType;
                     if (complexType != null && complexType.Name == null)
                     {
-                        processCompositeType(modelDescriptor.RootNamespace, complexType);
+                        processCompositeType(modelDescriptor.RootNamespace, complexType, element.Name);
                     }
                 }
             }
@@ -67,9 +67,9 @@ namespace Codge.Generator.Presentations.Xsd
             return id++;
         }
 
-        private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType)
+        private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
         {
-            var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType));
+            var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint));
             
             foreach (DictionaryEntry entry in complexType.AttributeUses)
             {
@@ -100,7 +100,7 @@ namespace Codge.Generator.Presentations.Xsd
         }
 
 
-        private static string ConvertSchemaType(XmlSchemaType schemaType)
+        private static string ConvertSchemaType(XmlSchemaType schemaType, string hint)
         {
             var simpleType = schemaType as XmlSchemaSimpleType;
             if (simpleType != null)
@@ -111,7 +111,7 @@ namespace Codge.Generator.Presentations.Xsd
             {
                 if (complexType.Name == null)
                 {
-                    return "anonym_" + complexType.LineNumber + "_" + complexType.LinePosition;
+                    return hint + "_" + complexType.LineNumber + "_" + complexType.LinePosition;
                 }
             }
 
@@ -136,7 +136,7 @@ namespace Codge.Generator.Presentations.Xsd
                     }
                     else
                     {
-                        descriptor.AddField(element.RefName.Name, ConvertSchemaType(element.ElementSchemaType));
+                        descriptor.AddField(element.RefName.Name, ConvertSchemaType(element.ElementSchemaType, element.RefName.Name));
                     }
                 }
                 else
