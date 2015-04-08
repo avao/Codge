@@ -11,7 +11,7 @@
       <Field name="orderdetails" type="string" />
       <Field name="billto" type="string" />
       <Field name="shipto" type="string" />
-      <Field name="elementWithEmbededType" type="AModel.anonym_25_6" />
+      <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType_25_6" />
     </Type>
     <Type name="complexTypeWithContent">
       <Field name="anElement" type="string" />
@@ -19,7 +19,7 @@
     <Type name="complexTypeWithContentWithAttribute">
       <Field name="anAttribute" type="string" />
     </Type>
-    <Type name="anonym_25_6">
+    <Type name="elementWithEmbededType_25_6">
       <Field name="aSubElement" type="string" />
     </Type>
   </Namespace>
