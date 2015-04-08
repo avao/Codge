@@ -67,11 +67,17 @@ namespace Codge.Generator.Presentations.Xsd
             return id++;
         }
 
-        private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType compexType)
+        private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType)
         {
-            var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(compexType));
-            AddFields(descriptor, compexType.Attributes);
-            AddField(descriptor, compexType.ContentTypeParticle);
+            var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType));
+            
+            foreach (DictionaryEntry entry in complexType.AttributeUses)
+            {
+                XmlSchemaAttribute attribute =(XmlSchemaAttribute)entry.Value;
+                AddField(descriptor, attribute);
+            }
+
+            AddField(descriptor, complexType.ContentTypeParticle);
         }
 
         private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 

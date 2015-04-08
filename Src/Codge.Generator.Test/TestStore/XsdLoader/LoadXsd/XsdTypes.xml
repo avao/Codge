@@ -16,6 +16,9 @@
     <Type name="complexTypeWithContent">
       <Field name="anElement" type="string" />
     </Type>
+    <Type name="complexTypeWithContentWithAttribute">
+      <Field name="anAttribute" type="string" />
+    </Type>
     <Type name="anonym_25_6">
       <Field name="aSubElement" type="string" />
     </Type>
