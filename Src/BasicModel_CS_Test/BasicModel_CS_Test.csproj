@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{44778CBD-F88F-4CC1-B0B1-EFF8637CDCC9}</ProjectGuid>
+    <ProjectGuid>{29EF437D-68F7-4740-8D95-65B88D6AFDEA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BasicModel</RootNamespace>
-    <AssemblyName>BasicModel</AssemblyName>
+    <RootNamespace>BasicModel_CS_Test</RootNamespace>
+    <AssemblyName>BasicModel_CS_Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,18 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SerialisationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<!-- GENERATED_ENTRIES_BEGIN -->
-    <Compile Include="Types\rootNs\testEnum.cs" />
-    <Compile Include="Types\rootNs\myType.cs" />
-    <Compile Include="Types\rootNs\myType2.cs" />
-    <Compile Include="Serialisers\rootNs\myType2.cs" />
-    <Compile Include="Types\rootNs\nestedNs\typeInNestedNs.cs" />
-    <Compile Include="Serialisers\rootNs\nestedNs\typeInNestedNs.cs" />
-<!-- GENERATED_ENTRIES_END -->
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Generated\CS\BasicModel_CS.csproj">
+      <Project>{44778cbd-f88f-4cc1-b0b1-eff8637cdcc9}</Project>
+      <Name>BasicModel_CS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj">
       <Project>{03057e90-b954-4875-8865-e5b03aaa7267}</Project>
       <Name>BasicModel.CS</Name>
     </ProjectReference>

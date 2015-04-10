@@ -39,6 +39,7 @@ namespace BasicModel.Templates.CS
                 new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Composite(type), Logger),
                 new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Primitive(type), Logger),
                 new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Enum(type), Logger),
+                new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.XmlSerialisers.Composite(type), Logger)
                 //new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.PofSerialisers.Composite(type), Logger)
             };
         }

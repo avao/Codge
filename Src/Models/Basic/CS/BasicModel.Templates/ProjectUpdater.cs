@@ -42,9 +42,9 @@ namespace BasicModel.Templates.CS
                 {
                     builder.AppendLine(string.Format("    <Compile Include=\"{0}\" />", Utils.GetOutputPath(type, "Types", "cs")));
 
-                   /* if(type.IsComposite())
+                    if(type.IsComposite())
                         builder.AppendLine(string.Format("    <Compile Include=\"{0}\" />", Utils.GetOutputPath(type, "Serialisers", "cs")));
-                    */
+                    
                 }
 
                 //builder.AppendLine("<EmbeddedResource Include=\"pof.config\" />");

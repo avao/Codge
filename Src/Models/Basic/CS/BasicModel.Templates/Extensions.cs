@@ -83,5 +83,15 @@ namespace BasicModel.Templates.CS
 
             throw new NotSupportedException("Not supported type name [" + type.Name + "]");
         }
+
+        public static bool IsAttribute(this CompositeType.Field field)
+        {
+            object value;
+            if(field.AttachedData.TryGetValue("isAttribute", out value) && value is bool)
+            {
+                return (bool)value;
+            }
+            return false;
+        }
     }
 }
