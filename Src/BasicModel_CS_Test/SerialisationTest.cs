@@ -15,7 +15,7 @@ namespace BasicModel_CS_Test
         [Test]
         public void SerialiseToXml()
         {
-            var obj = new myType2(2, true, 4);
+            var obj = new myType2(2, true, new int[]{4});
             var serialiser = new Serialisers.rootNs.myType2();
 
             var sb = new StringBuilder();

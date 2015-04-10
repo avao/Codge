@@ -20,7 +20,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 
 <#
 					foreach(var field in Type.Fields)
-					{
+					{ //TODO check if isCollection
 						if(field.IsAttribute())
 						{
 #>

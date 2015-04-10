@@ -58,7 +58,7 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
             #line 21 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
 
 					foreach(var field in Type.Fields)
-					{
+					{ //TODO check if isCollection
 						if(field.IsAttribute())
 						{
 

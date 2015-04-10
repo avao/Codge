@@ -29,7 +29,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var field in Type.Fields)
 					{
 #>
-		public	<#= field.Type.Name #> <#= field.Name#> {get; private set;}
+		public	<#= GetFieldType(field) #> <#= field.Name#> {get; private set;}
 <#				
 					}
 #>
@@ -50,7 +50,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 
 	private static string GetCtorParamters(CompositeType type)
 	{
-		return string.Join(",", type.Fields.Select(f => f.Type.Name + " " + GetParameterName(f)));
+		return string.Join(",", type.Fields.Select(f => GetFieldType(f) + " " + GetParameterName(f)));
 	}
 
 	public CompositeType Type{get; private set;}
@@ -69,4 +69,12 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 	{
 		return new PathAndContent(Utils.GetOutputPath(Type, "Types", "cs"), TransformText());
 	}
+
+	private static string GetFieldType(CompositeType.Field field)
+	{
+		if(field.IsCollection)
+			return field.Type.Name + "[]";
+		return field.Type.Name;
+	}
+
 #>
