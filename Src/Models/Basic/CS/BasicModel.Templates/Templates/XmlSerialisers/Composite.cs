@@ -31,7 +31,7 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
         /// </summary>
         public override string TransformText()
         {
-            this.Write("using BasicModel.CS;\r\nusing System.Xml;\r\n\r\nnamespace Serialisers.");
+            this.Write("using BasicModel.CS.Serialisation;\r\nusing System.Xml;\r\n\r\nnamespace Serialisers.");
             
             #line 12 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Namespace.GetFullName(".")));
@@ -46,7 +46,7 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
             #line default
             #line hidden
             this.Write(" : IXmlSerialiser\r\n\t{\r\n\r\n        public void Serialize(XmlWriter writer, object o" +
-                    ")\r\n        {\r\n            var obj = (");
+                    ", SerialisationContext context)\r\n        {\r\n            var obj = (");
             
             #line 19 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.QName()));
@@ -107,17 +107,17 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
             
             #line default
             #line hidden
-            this.Write("\t\t\twriter.WriteValue(obj.");
+            this.Write("            Utils.Serialise(writer, obj.");
             
             #line 38 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
-            this.Write(");//TODO composite\r\n");
+            this.Write(", context);\r\n");
             
             #line 39 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
-				
+	
 							}
 							else
 							{

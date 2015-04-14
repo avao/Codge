@@ -6,7 +6,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
 <#@ import namespace="Codge.Generator" #>
-using BasicModel.CS;
+using BasicModel.CS.Serialisation;
 using System.Xml;
 
 namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
@@ -14,7 +14,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 	public class <#= Type.Name #> : IXmlSerialiser
 	{
 
-        public void Serialize(XmlWriter writer, object o)
+        public void Serialize(XmlWriter writer, object o, SerialisationContext context)
         {
             var obj = (<#= Type.QName() #>)o;
 
@@ -35,8 +35,8 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 							if(field.Type.IsComposite())
 							{
 #>
-			writer.WriteValue(obj.<#= field.Name #>);//TODO composite
-<#				
+            Utils.Serialise(writer, obj.<#= field.Name #>, context);
+<#	
 							}
 							else
 							{
