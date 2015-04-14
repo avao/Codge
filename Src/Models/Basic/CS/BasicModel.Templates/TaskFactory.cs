@@ -24,7 +24,7 @@ namespace BasicModel.Templates.CS
         {
             return new ITask<Model>[] { 
                 new OutputTask<Model>(new ProjectUpdater(model), Logger),
-                //new OutputTask<Model>(new PofConfig(model), Logger)
+                new OutputTask<Model>(new Registrar(model), Logger)
             };
         }
 

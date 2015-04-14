@@ -47,6 +47,7 @@
     <Compile Include="Serialisers\rootNs\myType2.cs" />
     <Compile Include="Types\rootNs\nestedNs\typeInNestedNs.cs" />
     <Compile Include="Serialisers\rootNs\nestedNs\typeInNestedNs.cs" />
+<Compile Include="Registrar.cs" />
 <!-- GENERATED_ENTRIES_END -->
   </ItemGroup>
   <ItemGroup>

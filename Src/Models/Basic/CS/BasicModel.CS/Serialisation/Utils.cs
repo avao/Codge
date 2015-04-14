@@ -14,5 +14,17 @@ namespace BasicModel.CS.Serialisation
             var serialiser = context.GetSerialiser(o.GetType().FullName);
             serialiser.Serialize(writer, o, context);
         }
+
+        public static string Serialise(object o, string rootTag, SerialisationContext context)
+        {
+            var sb = new StringBuilder();
+            using(var writer = XmlWriter.Create(sb))
+            {
+                writer.WriteStartElement(rootTag);
+                Serialise(writer, o, context);
+                writer.WriteEndElement();
+            }
+            return sb.ToString();
+        }
     }
 }

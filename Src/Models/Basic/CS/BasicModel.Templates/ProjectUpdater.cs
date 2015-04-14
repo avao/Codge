@@ -48,6 +48,7 @@ namespace BasicModel.Templates.CS
                 }
 
                 //builder.AppendLine("<EmbeddedResource Include=\"pof.config\" />");
+                builder.AppendLine("<Compile Include=\"Registrar.cs\" />");
 
                 builder.Append(end);
                 builder.Append(content.Substring(end_pos + end.Length));

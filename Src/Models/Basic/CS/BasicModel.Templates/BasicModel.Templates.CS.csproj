@@ -74,6 +74,11 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskFactory.cs" />
+    <Compile Include="Templates\Registrar.cs">
+      <DependentUpon>Registrar.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Templates\XmlSerialisers\Composite.cs">
       <DependentUpon>Composite.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -101,6 +106,10 @@
     <None Include="Templates\Types\Enum.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Enum.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\Registrar.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Registrar.cs</LastGenOutput>
     </None>
     <None Include="Templates\XmlSerialisers\Composite.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
