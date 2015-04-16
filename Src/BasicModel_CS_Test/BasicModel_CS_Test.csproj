@@ -50,6 +50,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Codge.TestSystem\Codge.TestSystem.csproj">
+      <Project>{2df872e3-be69-43de-8bb8-3f277da8b8c4}</Project>
+      <Name>Codge.TestSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Generated\CS\BasicModel_CS.csproj">
       <Project>{44778cbd-f88f-4cc1-b0b1-eff8637cdcc9}</Project>
       <Name>BasicModel_CS</Name>
