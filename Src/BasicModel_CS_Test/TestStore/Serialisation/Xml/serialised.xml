@@ -1,5 +1,6 @@
 <root>
   <IntField>2</IntField>
   <BoolField>true</BoolField>
-  <CollectionOfInt>4 5</CollectionOfInt>
+  <CollectionOfInt>4</CollectionOfInt>
+  <CollectionOfInt>5</CollectionOfInt>
 </root>
