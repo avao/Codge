@@ -130,13 +130,32 @@ namespace Codge.Generator.Presentations.Xsd
                 var element = item as XmlSchemaElement;
                 if (element != null)
                 {
-                    if (element.Name != null)
+                    string type = element.Name != null
+                        ? element.SchemaTypeName.Name
+                        : ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
+
+                    //TODO optimise
+                    if(element.MaxOccurs == 1)
                     {
-                        descriptor.AddField(element.Name, element.SchemaTypeName.Name);
+                        if (element.Name != null)
+                        {
+                            descriptor.AddField(element.Name, type);
+                        }
+                        else
+                        {
+                            descriptor.AddField(element.RefName.Name, type);
+                        }
                     }
                     else
                     {
-                        descriptor.AddField(element.RefName.Name, ConvertSchemaType(element.ElementSchemaType, element.RefName.Name));
+                        if (element.Name != null)
+                        {
+                            descriptor.AddCollectionField(element.Name, type);
+                        }
+                        else
+                        {
+                            descriptor.AddCollectionField(element.RefName.Name, type);
+                        }
                     }
                 }
                 else

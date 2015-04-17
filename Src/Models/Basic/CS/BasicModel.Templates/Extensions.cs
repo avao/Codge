@@ -84,14 +84,34 @@ namespace BasicModel.Templates.CS
             throw new NotSupportedException("Not supported type name [" + type.Name + "]");
         }
 
+        private static class Names
+        {
+            public const string IsAttribute = "isAttribute";
+        }
+
         public static bool IsAttribute(this CompositeType.Field field)
         {
+            return field.GetAttachedData<bool>(Names.IsAttribute);
+        }
+
+        public static void SetIsAttribute(this CompositeType.Field field, bool value)
+        {
+            field.SetAttachedData(Names.IsAttribute, value);
+        }
+
+        private static T GetAttachedData<T>(this CompositeType.Field field, string name)
+        {
             object value;
-            if(field.AttachedData.TryGetValue("isAttribute", out value) && value is bool)
+            if (field.AttachedData.TryGetValue(name, out value) && value is T)
             {
-                return (bool)value;
+                return (T)value;
             }
-            return false;
+            return default(T);
+        }
+
+        private static void SetAttachedData<T>(this CompositeType.Field field, string name, T value)
+        {
+            field.AttachedData[name] = value;
         }
     }
 }
