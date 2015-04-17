@@ -20,11 +20,37 @@ namespace BasicModel.CS.Serialisation
             var sb = new StringBuilder();
             using(var writer = XmlWriter.Create(sb))
             {
-                writer.WriteStartElement(rootTag);
-                Serialise(writer, o, context);
-                writer.WriteEndElement();
+                Serialise(writer, rootTag, o, context);
             }
             return sb.ToString();
         }
+
+        public static void SerialiseBuiltInCollection<T>(XmlWriter writer, string name, IEnumerable<T> items, SerialisationContext context)
+        {
+            foreach (var item in items)
+            {
+                writer.WriteStartElement(name);
+                writer.WriteValue(item);
+                writer.WriteEndElement();
+            }
+        }
+
+        public static void SerialiseCollection<T>(XmlWriter writer, string name, IEnumerable<T> items, SerialisationContext context)
+        {
+            foreach(var item in items)
+            {
+                Serialise(writer, name, item, context);
+            }
+        }
+
+        public static void Serialise<T>(XmlWriter writer, string tag, T o, SerialisationContext context)
+        {
+            writer.WriteStartElement(tag);
+            Serialise(writer, o, context);
+            writer.WriteEndElement();
+
+        }
+
+        
     }
 }

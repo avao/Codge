@@ -20,8 +20,23 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 
 <#
 					foreach(var field in Type.Fields)
-					{ //TODO check if isCollection
-						if(field.IsAttribute())
+					{
+						if(field.IsCollection)
+						{
+							if(field.Type.IsBuiltIn())
+							{
+#>
+			Utils.SerialiseBuiltInCollection(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+<#				
+							}
+							else
+							{
+#>
+			Utils.SerialiseCollection(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+<#				
+							}
+						}
+						else if(field.IsAttribute())
 						{
 #>
             writer.WriteAttributeString("<#= field.Name #>", obj.<#= field.Name #>.ToString());
@@ -35,7 +50,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 							if(field.Type.IsComposite())
 							{
 #>
-            if(obj != null)
+            if(obj.<#= field.Name #> != null)
 				Utils.Serialise(writer, obj.<#= field.Name #>, context);
 <#	
 							}
