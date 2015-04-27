@@ -11,7 +11,9 @@
       </Field>
       <Field name="customer" type="string" />
       <Field name="orderdetails" type="string" />
-      <Field name="billto" type="string" />
+      <Field name="billto" type="int">
+        <isOptional>True</isOptional>
+      </Field>
       <Field name="shipto" type="string" />
       <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType_25_6" />
     </Type>

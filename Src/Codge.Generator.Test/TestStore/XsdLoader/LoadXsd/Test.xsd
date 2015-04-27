@@ -5,7 +5,7 @@
     <xs:sequence>
       <xs:element name="customer" type="xs:string"/>
       <xs:element name="orderdetails" type="xs:string"/>
-      <xs:element name="billto" type="xs:string"/>
+      <xs:element name="billto" type="xs:int" minOccurs="0"/>
       <xs:element name="shipto" type="xs:string"/>
       <xs:element ref="elementWithEmbededType"/>
     </xs:sequence>
