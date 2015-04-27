@@ -10,6 +10,9 @@ namespace Serialisers.rootNs.nestedNs
         {
             var obj = (Types.rootNs.nestedNs.typeInNestedNs)o;
 
+            writer.WriteStartElement("StringField");
+			writer.WriteValue(obj.StringField);
+            writer.WriteEndElement();
 		}
 
 	}

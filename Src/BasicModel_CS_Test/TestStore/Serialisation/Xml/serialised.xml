@@ -3,4 +3,10 @@
   <BoolField>true</BoolField>
   <CollectionOfInt>4</CollectionOfInt>
   <CollectionOfInt>5</CollectionOfInt>
+  <CollectionOfComposite>
+    <StringField>avalue1</StringField>
+  </CollectionOfComposite>
+  <CollectionOfComposite>
+    <StringField>avalue2</StringField>
+  </CollectionOfComposite>
 </root>

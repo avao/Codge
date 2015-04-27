@@ -10,6 +10,7 @@ using BasicModel.CS.Serialisation;
 using Serialisers;
 using Codge.TestSystem;
 using Codge.TestSystem.FileBased;
+using Types.rootNs.nestedNs;
 
 namespace BasicModel_CS_Test
 {
@@ -21,7 +22,7 @@ namespace BasicModel_CS_Test
         [Test]
         public void SerialiseToXml()
         {
-            var obj = new myType2(2, true, new int[]{4,5});
+            var obj = new myType2(2, true, new[] { 4, 5 }, new[] { new typeInNestedNs("avalue1"), new typeInNestedNs("avalue2") });
             var serialiser = new Serialisers.rootNs.myType2();
 
             var testCase = TestSystem.GetTestCase("Xml");

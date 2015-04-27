@@ -17,6 +17,7 @@ namespace Serialisers.rootNs
 			writer.WriteValue(obj.BoolField);
             writer.WriteEndElement();
 			Utils.SerialiseBuiltInCollection(writer, "CollectionOfInt", obj.CollectionOfInt, context);
+			Utils.SerialiseCollection(writer, "CollectionOfComposite", obj.CollectionOfComposite, context);
 		}
 
 	}
