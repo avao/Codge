@@ -27,6 +27,8 @@ namespace BasicModel.CS.Serialisation
 
         public static void SerialiseBuiltInCollection<T>(XmlWriter writer, string name, IEnumerable<T> items, SerialisationContext context)
         {
+            if (items == null)
+                return;
             foreach (var item in items)
             {
                 writer.WriteStartElement(name);
@@ -37,6 +39,8 @@ namespace BasicModel.CS.Serialisation
 
         public static void SerialiseCollection<T>(XmlWriter writer, string name, IEnumerable<T> items, SerialisationContext context)
         {
+            if (items == null)
+                return;
             foreach(var item in items)
             {
                 Serialise(writer, name, item, context);

@@ -27,6 +27,9 @@ namespace BasicModel.CS.Serialisation
 
         public IXmlSerialiser GetSerialiser(string typeName)
         {
+            //Hack for collections
+            if (typeName.EndsWith("[]"))
+                typeName = typeName.Substring(0, typeName.Length - 2);
             return _serialisers[typeName];
         }
     }
