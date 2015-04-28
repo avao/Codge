@@ -50,11 +50,38 @@ namespace BasicModel.CS.Serialisation
         public static void Serialise<T>(XmlWriter writer, string tag, T o, SerialisationContext context)
         {
             writer.WriteStartElement(tag);
-            Serialise(writer, o, context);
+            if(o != null)
+            {
+                Serialise(writer, o, context);
+            }
             writer.WriteEndElement();
-
         }
 
+        public static void SerialiseValue(XmlWriter writer, string tag, string value, SerialisationContext context)
+        {
+            writer.WriteStartElement(tag);
+            writer.WriteValue(value);
+            writer.WriteEndElement();
+        }
+
+        public static void SerialiseValue<T>(XmlWriter writer, string tag, T value, SerialisationContext context)
+            where T : struct
+        {
+            writer.WriteStartElement(tag);
+            writer.WriteValue(value);
+            writer.WriteEndElement();
+        }
+
+        public static void SerialiseIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, SerialisationContext context)
+            where T : struct
+        {
+            if(value.HasValue)
+            {
+                writer.WriteStartElement(tag);
+                writer.WriteValue(value.Value);
+                writer.WriteEndElement();
+            }
+        }
         
     }
 }

@@ -44,25 +44,27 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 						}
 						else
 						{
-#>
-            writer.WriteStartElement("<#= field.Name #>");
-<#				
 							if(field.Type.IsComposite())
 							{
 #>
-            if(obj.<#= field.Name #> != null)
-				Utils.Serialise(writer, obj.<#= field.Name #>, context);
+			Utils.Serialise(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
 <#	
 							}
 							else
 							{
+                                if(field.IsOptional())
+                                {
 #>
-			writer.WriteValue(obj.<#= field.Name #>);
+			Utils.SerialiseIfHasValue(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
 <#
-							}
+                                }
+                                else
+                                {
 #>
-            writer.WriteEndElement();
-<#				
+			Utils.SerialiseValue(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+<#
+                                }
+							}
 						}
 					}
 #>

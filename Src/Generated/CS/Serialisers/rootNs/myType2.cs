@@ -10,12 +10,8 @@ namespace Serialisers.rootNs
         {
             var obj = (Types.rootNs.myType2)o;
 
-            writer.WriteStartElement("IntField");
-			writer.WriteValue(obj.IntField);
-            writer.WriteEndElement();
-            writer.WriteStartElement("BoolField");
-			writer.WriteValue(obj.BoolField);
-            writer.WriteEndElement();
+			Utils.SerialiseValue(writer, "IntField", obj.IntField, context);
+			Utils.SerialiseValue(writer, "BoolField", obj.BoolField, context);
 			Utils.SerialiseBuiltInCollection(writer, "CollectionOfInt", obj.CollectionOfInt, context);
 			Utils.SerialiseCollection(writer, "CollectionOfComposite", obj.CollectionOfComposite, context);
 		}

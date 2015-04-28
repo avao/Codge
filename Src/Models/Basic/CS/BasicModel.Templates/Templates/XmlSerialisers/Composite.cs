@@ -139,72 +139,84 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
 						}
 						else
 						{
-
-            
-            #line default
-            #line hidden
-            this.Write("            writer.WriteStartElement(\"");
-            
-            #line 48 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
-            
-            #line default
-            #line hidden
-            this.Write("\");\r\n");
-            
-            #line 49 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
-				
 							if(field.Type.IsComposite())
 							{
 
             
             #line default
             #line hidden
-            this.Write("            if(obj.");
+            this.Write("\t\t\tUtils.Serialise(writer, \"");
             
-            #line 53 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            #line 50 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
-            this.Write(" != null)\r\n\t\t\t\tUtils.Serialise(writer, obj.");
+            this.Write("\", obj.");
             
-            #line 54 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            #line 50 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(", context);\r\n");
             
-            #line 55 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            #line 51 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
 	
 							}
 							else
 							{
+                                if(field.IsOptional())
+                                {
 
             
             #line default
             #line hidden
-            this.Write("\t\t\twriter.WriteValue(obj.");
+            this.Write("\t\t\tUtils.SerialiseIfHasValue(writer, \"");
             
-            #line 60 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            #line 58 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
-            this.Write(");\r\n");
+            this.Write("\", obj.");
             
-            #line 61 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            #line 58 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write(", context);\r\n");
+            
+            #line 59 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
 
-							}
+                                }
+                                else
+                                {
 
             
             #line default
             #line hidden
-            this.Write("            writer.WriteEndElement();\r\n");
+            this.Write("\t\t\tUtils.SerialiseValue(writer, \"");
+            
+            #line 64 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", obj.");
+            
+            #line 64 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write(", context);\r\n");
             
             #line 65 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
-				
+
+                                }
+							}
 						}
 					}
 
@@ -215,7 +227,7 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 75 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+        #line 77 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
 
 	public CompositeType Type{get; private set;}
 
