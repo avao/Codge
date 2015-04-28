@@ -37,27 +37,31 @@ namespace Codge.DataModel.Descriptors
             _fields = new List<FieldDescriptor>();
         }
 
-        public void AddField(string name, string fullyQualifiedTypeName, IDictionary<string, object> attachedData)
+        public FieldDescriptor AddField(string name, string fullyQualifiedTypeName, IDictionary<string, object> attachedData)
         {
-            _fields.Add(new FieldDescriptor(name, fullyQualifiedTypeName, false, attachedData));
+            var field = new FieldDescriptor(name, fullyQualifiedTypeName, false, attachedData);
+            _fields.Add(field);
+            return field;
         }
 
-        public void AddCollectionField(string name, string fullyQualifiedTypeName, IDictionary<string, object> attachedData)
+        public FieldDescriptor AddCollectionField(string name, string fullyQualifiedTypeName, IDictionary<string, object> attachedData)
         {
-            _fields.Add(new FieldDescriptor(name, fullyQualifiedTypeName, true, attachedData));
+            var field = new FieldDescriptor(name, fullyQualifiedTypeName, true, attachedData);
+            _fields.Add(field);
+            return field;
         }
     }
 
     public static class CompositeTypeDescriptorExtentions
     {
-        public static void AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName)
+        public static FieldDescriptor AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName)
         {
-            descriptor.AddField(name, fullyQualifiedTypeName, new Dictionary<string, object>());
+            return descriptor.AddField(name, fullyQualifiedTypeName, new Dictionary<string, object>());
         }
 
-        public static void AddCollectionField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName)
+        public static FieldDescriptor AddCollectionField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName)
         {
-            descriptor.AddCollectionField(name, fullyQualifiedTypeName, new Dictionary<string, object>());
+            return descriptor.AddCollectionField(name, fullyQualifiedTypeName, new Dictionary<string, object>());
         }
     }
 }

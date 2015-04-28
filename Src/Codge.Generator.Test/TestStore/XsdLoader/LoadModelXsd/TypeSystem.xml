@@ -14,7 +14,9 @@
       <Field name="Primitive" type="MyModel.Primitive" />
       <Field name="Enumeration" type="MyModel.Enumeration" />
       <Field name="Composite" type="MyModel.Composite" />
-      <Field name="Namespace" type="MyModel.NamespaceDesc" isCollection="true" />
+      <Field name="Namespace" type="MyModel.NamespaceDesc" isCollection="true">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
     <Type name="Primitive">
       <Field name="name" type="string">
@@ -39,8 +41,12 @@
       <Field name="name" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="Extends" type="MyModel.Extends" isCollection="true" />
-      <Field name="Field" type="MyModel.Field" isCollection="true" />
+      <Field name="Extends" type="MyModel.Extends" isCollection="true">
+        <isOptional>True</isOptional>
+      </Field>
+      <Field name="Field" type="MyModel.Field" isCollection="true">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
     <Type name="Extends">
       <Field name="type" type="string">

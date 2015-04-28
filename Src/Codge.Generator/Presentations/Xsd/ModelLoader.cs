@@ -134,29 +134,35 @@ namespace Codge.Generator.Presentations.Xsd
                         ? element.SchemaTypeName.Name
                         : ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
 
+
+                    FieldDescriptor field;
                     //TODO optimise
                     if(element.MaxOccurs == 1)
                     {
                         if (element.Name != null)
                         {
-                            descriptor.AddField(element.Name, type);
+                            field = descriptor.AddField(element.Name, type);
                         }
                         else
                         {
-                            descriptor.AddField(element.RefName.Name, type);
+                            field = descriptor.AddField(element.RefName.Name, type);
                         }
                     }
                     else
                     {
                         if (element.Name != null)
                         {
-                            descriptor.AddCollectionField(element.Name, type);
+                            field = descriptor.AddCollectionField(element.Name, type);
                         }
                         else
                         {
-                            descriptor.AddCollectionField(element.RefName.Name, type);
+                            field = descriptor.AddCollectionField(element.RefName.Name, type);
                         }
                     }
+
+                    if (element.MinOccurs == 0)
+                        field.AttachedData.Add("isOptional", true);
+
                 }
                 else
                 {

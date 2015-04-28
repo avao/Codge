@@ -1,11 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{AEE1C181-C931-4D70-85B8-0CD331D92CFF}"
 	ProjectSection(SolutionItems) = preProject
 		MetaModel.xml = MetaModel.xml
+		Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd = Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd
 		Generated\TestModel.xml = Generated\TestModel.xml
 	EndProjectSection
 EndProject
