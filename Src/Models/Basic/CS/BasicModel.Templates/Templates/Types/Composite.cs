@@ -165,7 +165,8 @@ namespace BasicModel.Templates.CS.Templates.Types
 
 	private static string GetFieldType(CompositeType.Field field)
 	{
-        if(field.IsOptional() && field.Type.IsPrimitive())
+        //TODO hacks
+        if(field.IsOptional() && field.Type.IsBuiltIn() && field.Type.Name != "string")
             return field.Type.GetFullName(".") + "?";
 		if(field.IsCollection)
 			return field.Type.GetFullName(".") + "[]";

@@ -74,10 +74,10 @@ namespace Codge.Generator.Presentations.Xsd
             foreach (DictionaryEntry entry in complexType.AttributeUses)
             {
                 XmlSchemaAttribute attribute =(XmlSchemaAttribute)entry.Value;
-                AddField(descriptor, attribute);
+                AddField(descriptor, attribute, false);
             }
 
-            AddField(descriptor, complexType.ContentTypeParticle);
+            AddField(descriptor, complexType.ContentTypeParticle, false);
         }
 
         private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 
@@ -118,7 +118,7 @@ namespace Codge.Generator.Presentations.Xsd
             return schemaType.Name;
         }
 
-        private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item)
+        private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item, bool isOptional)
         {
             var att = item as XmlSchemaAttribute;
             if (att != null)
@@ -160,7 +160,7 @@ namespace Codge.Generator.Presentations.Xsd
                         }
                     }
 
-                    if (element.MinOccurs == 0)
+                    if (isOptional || element.MinOccurs == 0)
                         field.AttachedData.Add("isOptional", true);
 
                 }
@@ -169,14 +169,14 @@ namespace Codge.Generator.Presentations.Xsd
                     var choice = item as XmlSchemaGroupBase;
                     if (choice != null)
                     {
-                        AddFields(descriptor, choice.Items);
+                        AddFields(descriptor, choice.Items, true);
                     }
                     else
                     {
                         var groupRef = item as XmlSchemaGroupRef;
                         if (groupRef != null)
                         {
-                            AddFields(descriptor, groupRef.Particle.Items);
+                            AddFields(descriptor, groupRef.Particle.Items, false);
                         }
                         else
                         {
@@ -193,11 +193,11 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static void AddFields(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection items)
+        private static void AddFields(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection items, bool isChoice)
         {
             foreach (var item in items)
             {
-                AddField(descriptor, item);
+                AddField(descriptor, item, isChoice);
             }
         }
     }

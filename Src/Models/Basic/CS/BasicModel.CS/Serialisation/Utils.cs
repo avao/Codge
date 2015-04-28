@@ -82,6 +82,16 @@ namespace BasicModel.CS.Serialisation
                 writer.WriteEndElement();
             }
         }
-        
+
+        public static void SerialiseIfHasValue(XmlWriter writer, string tag, string value, SerialisationContext context)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                writer.WriteStartElement(tag);
+                writer.WriteValue(value);
+                writer.WriteEndElement();
+            }
+        }
+     
     }
 }
