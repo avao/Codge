@@ -105,12 +105,39 @@ namespace Codge.Generator.Presentations.Xsd
         }
 
         private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 
+                //TODO TypeCodes
+                { "String", "string" },
+                { "Int", "int" },
+                { "Boolean", "bool" },
+
+                //XSD types
+
                 { "boolean", "bool" },
-                { "id", "string" },
+                
                 { "date", "string" },
                 { "dateTime", "string" },
+                { "duration", "string" },
+                { "gDay", "string" },
+                { "gMonth", "string" },
+                { "gMonthDay", "string" },
+                { "gYear", "string" },
+                { "gYearMonth", "string" },
                 { "time", "string" },
-                { "idref", "string" },
+
+                { "ENTITIES", "string" },
+                { "ENTITY", "string" },
+                { "ID", "string" },
+                { "IDREF", "string" },
+                //{ "IDREFS", "string" },
+                { "language", "string" },
+                { "Name", "string" },
+                { "NCName", "string" },
+                { "NMTOKEN", "string" },
+                //{ "NMTOKENS", "string" },
+                { "normalizedString", "string" },
+                { "QName", "string" },
+                { "token", "string" },
+                
                 { "integer", "int" },
                 { "decimal", "int" }
                 };
@@ -126,7 +153,7 @@ namespace Codge.Generator.Presentations.Xsd
         private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
         {
             //TODO proper conversion
-            string typeCode = simpleType.TypeCode.ToString().ToLower();
+            string typeCode = simpleType.TypeCode.ToString();
             return ConvertSchemaType(typeCode);
         }
 
