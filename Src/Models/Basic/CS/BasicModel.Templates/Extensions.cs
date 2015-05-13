@@ -118,6 +118,7 @@ namespace BasicModel.Templates.CS
         {
             public const string IsAttribute = "isAttribute";
             public const string IsOptional = "isOptional";
+            public const string IsContent = "isContent";
         }
 
         public static bool IsAttribute(this CompositeType.Field field)
@@ -128,6 +129,11 @@ namespace BasicModel.Templates.CS
         public static void SetIsAttribute(this CompositeType.Field field, bool value)
         {
             field.SetAttachedData(Names.IsAttribute, value);
+        }
+
+        public static bool IsContent(this CompositeType.Field field)
+        {
+            return field.GetAttachedData<bool>(Names.IsContent);
         }
 
 

@@ -98,7 +98,7 @@ namespace Codge.Generator.Presentations.Xsd
                 var extension = contentModel.Content as XmlSchemaSimpleContentExtension;
                 if(extension != null)
                 {
-                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name));
+                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name), new Dictionary<string, object>{{"isContent", true}});
                 }
 
             }

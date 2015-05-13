@@ -37,10 +37,18 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 <#				
 							}
 						}
+						else if(field.IsContent())
+						{
+#>
+            if(obj.<#= fieldName #> != null)
+			    writer.WriteValue(obj.<#= fieldName #>.ToString());
+<#				
+						}
 						else if(field.IsAttribute())
 						{
 #>
-            writer.WriteAttributeString("<#= field.Name #>", obj.<#= fieldName #>.ToString());
+            if(obj.<#= fieldName #> != null)
+                writer.WriteAttributeString("<#= field.Name #>", obj.<#= fieldName #>.ToString());
 <#				
 						}
 						else

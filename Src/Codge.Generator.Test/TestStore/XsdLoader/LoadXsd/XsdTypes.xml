@@ -42,7 +42,9 @@
       <Field name="anAttribute" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="Content" type="string" />
+      <Field name="Content" type="string">
+        <isContent>True</isContent>
+      </Field>
     </Type>
     <Type name="simpleType" />
     <Type name="recursiveType">
