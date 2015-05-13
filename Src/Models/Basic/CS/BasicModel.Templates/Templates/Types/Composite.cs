@@ -45,23 +45,30 @@ namespace BasicModel.Templates.CS.Templates.Types
             
             #line default
             #line hidden
-            this.Write("\r\n\t{\r\n\t\tpublic ");
+            this.Write("\r\n\t{\r\n\t    public ");
             
             #line 15 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
+            this.Write("()\r\n\t\t{}\r\n\r\n\t\tpublic ");
+            
+            #line 18 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
+            
+            #line default
+            #line hidden
             this.Write("(");
             
-            #line 15 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 18 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.GetCtorParamters()));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t{\r\n");
             
-            #line 17 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 20 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
 				
 					foreach(var field in Type.Fields)
 					{
@@ -71,21 +78,21 @@ namespace BasicModel.Templates.CS.Templates.Types
             #line hidden
             this.Write("\t\t\t");
             
-            #line 21 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 24 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.GetMemberName(field)));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 21 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 24 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.GetParameterName()));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 22 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 25 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
 				
 					}
 
@@ -94,7 +101,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             #line hidden
             this.Write("\t\t}\r\n\r\n\r\n");
             
-            #line 28 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 31 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
 				
 					foreach(var field in Type.Fields)
 					{
@@ -104,21 +111,21 @@ namespace BasicModel.Templates.CS.Templates.Types
             #line hidden
             this.Write("\t\tpublic\t");
             
-            #line 32 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 35 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.GetNativeType()));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 32 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 35 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.GetMemberName(field)));
             
             #line default
             #line hidden
-            this.Write(" {get; private set;}\r\n");
+            this.Write(" {get; set;}\r\n");
             
-            #line 33 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+            #line 36 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
 				
 					}
 
@@ -129,7 +136,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 40 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
+        #line 43 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
 
 	
 

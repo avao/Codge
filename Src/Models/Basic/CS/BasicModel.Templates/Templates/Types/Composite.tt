@@ -12,6 +12,9 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {
 	public class <#= Type.Name #>
 	{
+	    public <#= Type.Name #>()
+		{}
+
 		public <#= Type.Name #>(<#= Type.GetCtorParamters() #>)
 		{
 <#				
@@ -29,7 +32,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var field in Type.Fields)
 					{
 #>
-		public	<#= field.GetNativeType() #> <#= Type.GetMemberName(field) #> {get; private set;}
+		public	<#= field.GetNativeType() #> <#= Type.GetMemberName(field) #> {get; set;}
 <#				
 					}
 #>
