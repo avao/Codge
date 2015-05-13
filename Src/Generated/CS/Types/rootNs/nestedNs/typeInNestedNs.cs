@@ -7,6 +7,7 @@ namespace Types.rootNs.nestedNs
 	    public typeInNestedNs()
 		{}
 
+
 		public typeInNestedNs(string _StringField)
 		{
 			StringField = _StringField;

@@ -211,6 +211,19 @@ namespace Codge.Generator.Presentations.Xsd
                         ? element.SchemaTypeName.Name
                         : ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
 
+                    if(string.IsNullOrEmpty(type))
+                    {
+                        var elementType = element.ElementSchemaType as XmlSchemaComplexType;
+                        if(elementType != null)
+                        {
+                            if(elementType.ContentModel == null && elementType.Attributes.Count==0)
+                            {
+                                //empty complex type
+                                type = element.Name + "_EmptyComplex";
+                                descriptor.Namespace.CreateCompositeType(type);
+                            }
+                        }
+                    }
 
                     FieldDescriptor field;
                     //TODO optimise

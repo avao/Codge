@@ -15,20 +15,27 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 	    public <#= Type.Name #>()
 		{}
 
+<#				
+					if(Type.Fields.Any())
+					{
+#>
+
 		public <#= Type.Name #>(<#= Type.GetCtorParamters() #>)
 		{
 <#				
-					foreach(var field in Type.Fields)
-					{
+						foreach(var field in Type.Fields)
+						{
 #>
 			<#= Type.GetMemberName(field) #> = <#= field.GetParameterName() #>;
 <#				
-					}
+						}
 #>
 		}
 
 
 <#				
+					}
+
 					foreach(var field in Type.Fields)
 					{
 #>

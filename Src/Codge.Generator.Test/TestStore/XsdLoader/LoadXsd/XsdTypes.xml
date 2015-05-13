@@ -27,7 +27,11 @@
       <Field name="elemSimpleType" type="string">
         <isOptional>True</isOptional>
       </Field>
+      <Field name="elemEmptyType" type="AModel.elemEmptyType_EmptyComplex">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
+    <Type name="elemEmptyType_EmptyComplex" />
     <Type name="complexTypeWithContent">
       <Field name="anElement" type="string">
         <isOptional>True</isOptional>
