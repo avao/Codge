@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel
 {
@@ -10,6 +9,8 @@ namespace Codge.DataModel
     {
         public static string GetFullName(this TypeBase type, string separator)
         {
+            if(type.IsPrimitive())
+                return "string";//TODO HACK
             if (type.Namespace.IsGlobal())
                 return type.Name;
             return type.Namespace.GetFullName(separator) + separator + type.Name;
@@ -20,6 +21,10 @@ namespace Codge.DataModel
             return prefix + separator + type.GetFullName(separator);
         }
 
+        public static string GetNativeType(this TypeBase type)
+        {
+            return type.GetFullName(".");
+        }
 
         public static bool IsComposite(this TypeBase type) { return type is CompositeType; }
         public static bool IsPrimitive(this TypeBase type) { return type is PrimitiveType; }

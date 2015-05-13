@@ -24,6 +24,9 @@
       <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType">
         <isOptional>True</isOptional>
       </Field>
+      <Field name="elemSimpleType" type="string">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
     <Type name="complexTypeWithContent">
       <Field name="anElement" type="string">
@@ -41,6 +44,7 @@
       </Field>
       <Field name="Content" type="string" />
     </Type>
+    <Type name="simpleType" />
     <Type name="elementWithEmbededType">
       <Field name="aSubElement" type="string">
         <isOptional>True</isOptional>

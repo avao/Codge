@@ -8,6 +8,7 @@
       <xs:element name="billto" type="xs:int" minOccurs="0"/>
       <xs:element name="shipto" type="xs:string"/>
       <xs:element ref="elementWithEmbededType"/>
+      <xs:element name="elemSimpleType" type="simpleType"/>
     </xs:sequence>
   </xs:group>
 
@@ -56,7 +57,11 @@
     </xs:simpleContent>
   </xs:complexType>
 
-
+  <xs:simpleType name="simpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="anEnumerationValue"/>
+    </xs:restriction>    
+  </xs:simpleType>
 
 
 </xs:schema>

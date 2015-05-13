@@ -39,10 +39,18 @@ namespace Codge.Generator.Presentations.Xsd
 
             foreach (DictionaryEntry item in schema.SchemaTypes)
             {
-                var complexType = item.Value as XmlSchemaComplexType;
-                if (complexType != null)
+                var simpleType = item.Value as XmlSchemaSimpleType;
+                if(simpleType != null)
                 {
-                    processCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty);
+                    processSimpleType(modelDescriptor.RootNamespace, simpleType);
+                }
+                else
+                {
+                    var complexType = item.Value as XmlSchemaComplexType;
+                    if (complexType != null)
+                    {
+                        processCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty);
+                    }
                 }
             }
 
@@ -65,6 +73,11 @@ namespace Codge.Generator.Presentations.Xsd
         private static int GetId(string typeName)
         {//|TODO
             return id++;
+        }
+
+        private static void processSimpleType(NamespaceDescriptor namespaceDescriptor, XmlSchemaSimpleType simpleType)
+        {
+            var descriptor = namespaceDescriptor.CreatePrimitiveType(simpleType.Name);
         }
 
         private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
@@ -95,6 +108,8 @@ namespace Codge.Generator.Presentations.Xsd
                 { "boolean", "bool" },
                 { "id", "string" },
                 { "date", "string" },
+                { "dateTime", "string" },
+                { "time", "string" },
                 { "idref", "string" },
                 { "integer", "int" },
                 { "decimal", "int" }

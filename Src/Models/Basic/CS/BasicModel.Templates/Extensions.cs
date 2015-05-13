@@ -84,6 +84,18 @@ namespace BasicModel.Templates.CS
             throw new NotSupportedException("Not supported type name [" + type.Name + "]");
         }
 
+
+        public static string GetNativeType(this CompositeType.Field field)
+        {
+            //TODO hacks
+            if (field.IsOptional() && field.Type.IsBuiltIn() && field.Type.Name != "string")
+                return field.Type.GetFullName(".") + "?";
+            if (field.IsCollection)
+                return field.Type.GetFullName(".") + "[]";
+            return field.Type.GetFullName(".");
+        }
+
+
         private static class Names
         {
             public const string IsAttribute = "isAttribute";
