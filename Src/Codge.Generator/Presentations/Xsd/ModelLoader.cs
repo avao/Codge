@@ -152,7 +152,7 @@ namespace Codge.Generator.Presentations.Xsd
                 { "integer", "int" },
                 { "long", "int" },
                 { "negativeInteger", "int" },
-                { "nonNegativeIteger", "int" },
+                { "nonNegativeInteger", "int" },
                 { "positiveInteger", "int" },
                 { "short", "int" },
                 { "unsignedLong", "int" },
@@ -208,7 +208,7 @@ namespace Codge.Generator.Presentations.Xsd
                 if (element != null)
                 {
                     string type = element.Name != null
-                        ? element.SchemaTypeName.Name
+                        ? ConvertSchemaType(element.SchemaTypeName.Name)//TODO use FQN
                         : ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
 
                     if(string.IsNullOrEmpty(type))
