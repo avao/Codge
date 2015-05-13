@@ -220,7 +220,8 @@ namespace Codge.Generator.Presentations.Xsd
                             {
                                 //empty complex type
                                 type = element.Name + "_EmptyComplex";
-                                descriptor.Namespace.CreateCompositeType(type);
+                                if(!descriptor.Namespace.Types.Any(_ => _.Name == type))
+                                    descriptor.Namespace.CreateCompositeType(type);
                             }
                         }
                     }
