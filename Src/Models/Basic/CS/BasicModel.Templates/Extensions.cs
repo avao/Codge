@@ -88,10 +88,10 @@ namespace BasicModel.Templates.CS
         public static string GetNativeType(this CompositeType.Field field)
         {
             //TODO hacks
-            if (field.IsOptional() && field.Type.IsBuiltIn() && field.Type.Name != "string")
-                return field.Type.GetFullName(".") + "?";
             if (field.IsCollection)
                 return field.Type.GetFullName(".") + "[]";
+            if (field.IsOptional() && field.Type.IsBuiltIn() && field.Type.Name != "string")
+                return field.Type.GetFullName(".") + "?";
             return field.Type.GetFullName(".");
         }
 

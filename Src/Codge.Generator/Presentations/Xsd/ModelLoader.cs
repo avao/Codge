@@ -131,6 +131,7 @@ namespace Codge.Generator.Presentations.Xsd
                 { "Idref", "string" },
                 { "Date", "string" },
                 { "DateTime", "string" },
+                { "Time", "string" },
                 { "Integer", "int" },
                 { "Decimal", "int" },
                 { "NonNegativeInteger", "int" },
@@ -245,7 +246,8 @@ namespace Codge.Generator.Presentations.Xsd
                             }
                             else
                             {
-                                processCompositeType(descriptor.Namespace, elementType, element.ElementSchemaType.Name);
+                                processCompositeType(descriptor.Namespace, elementType, element.Name);
+                                type = element.Name;
                             }
                         }
                     }

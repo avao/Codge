@@ -21,11 +21,6 @@ namespace Codge.DataModel
             return prefix + separator + type.GetFullName(separator);
         }
 
-        public static string GetNativeType(this TypeBase type)
-        {
-            return type.GetFullName(".");
-        }
-
         public static bool IsComposite(this TypeBase type) { return type is CompositeType; }
         public static bool IsPrimitive(this TypeBase type) { return type is PrimitiveType; }
         public static bool IsBuiltIn(this TypeBase type) { return type is BuiltInType; }
