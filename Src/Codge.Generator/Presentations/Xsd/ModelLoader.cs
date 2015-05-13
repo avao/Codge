@@ -78,6 +78,17 @@ namespace Codge.Generator.Presentations.Xsd
             }
 
             AddField(descriptor, complexType.ContentTypeParticle, false);
+
+            var contentModel = complexType.ContentModel as XmlSchemaSimpleContent;
+            if(contentModel != null)
+            {
+                var extension = contentModel.Content as XmlSchemaSimpleContentExtension;
+                if(extension != null)
+                {
+                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name));
+                }
+
+            }
         }
 
         private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 
@@ -89,14 +100,19 @@ namespace Codge.Generator.Presentations.Xsd
                 { "decimal", "int" }
                 };
 
-        private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
+        private static string ConvertSchemaType(string typeCode)
         {
-            //TODO proper conversion
-            string typeCode = simpleType.TypeCode.ToString().ToLower();
             string mappedType;
             if (!xsdTypeMapping.TryGetValue(typeCode, out mappedType))
                 return typeCode;
             return mappedType;
+        }
+
+        private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
+        {
+            //TODO proper conversion
+            string typeCode = simpleType.TypeCode.ToString().ToLower();
+            return ConvertSchemaType(typeCode);
         }
 
 
@@ -111,7 +127,7 @@ namespace Codge.Generator.Presentations.Xsd
             {
                 if (complexType.Name == null)
                 {
-                    return hint + "_" + complexType.LineNumber + "_" + complexType.LinePosition;
+                    return hint;// +"_" + complexType.LineNumber + "_" + complexType.LinePosition;
                 }
             }
 

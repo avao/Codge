@@ -9,24 +9,42 @@
       <Field name="status" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="customer" type="string" />
-      <Field name="orderdetails" type="string" />
+      <Field name="customer" type="string">
+        <isOptional>True</isOptional>
+      </Field>
+      <Field name="orderdetails" type="string">
+        <isOptional>True</isOptional>
+      </Field>
       <Field name="billto" type="int">
         <isOptional>True</isOptional>
       </Field>
-      <Field name="shipto" type="string" />
-      <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType_25_6" />
+      <Field name="shipto" type="string">
+        <isOptional>True</isOptional>
+      </Field>
+      <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
     <Type name="complexTypeWithContent">
-      <Field name="anElement" type="string" />
+      <Field name="anElement" type="string">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
     <Type name="complexTypeWithContentWithAttribute">
       <Field name="anAttribute" type="string">
         <isAttribute>True</isAttribute>
       </Field>
     </Type>
-    <Type name="elementWithEmbededType_25_6">
-      <Field name="aSubElement" type="string" />
+    <Type name="complexTypeWithSimpleContent">
+      <Field name="anAttribute" type="string">
+        <isAttribute>True</isAttribute>
+      </Field>
+      <Field name="Content" type="string" />
+    </Type>
+    <Type name="elementWithEmbededType">
+      <Field name="aSubElement" type="string">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
   </Namespace>
 </TypeSystem>
