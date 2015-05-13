@@ -92,15 +92,33 @@ namespace Codge.Generator.Presentations.Xsd
 
             AddField(descriptor, complexType.ContentTypeParticle, false);
 
-            var contentModel = complexType.ContentModel as XmlSchemaSimpleContent;
-            if(contentModel != null)
+            var simpleContentModel = complexType.ContentModel as XmlSchemaSimpleContent;
+            if(simpleContentModel != null)
             {
-                var extension = contentModel.Content as XmlSchemaSimpleContentExtension;
+                var extension = simpleContentModel.Content as XmlSchemaSimpleContentExtension;
                 if(extension != null)
                 {
                     descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name), new Dictionary<string, object>{{"isContent", true}});
                 }
+                //TODO restriction
+            }
+            else
+            {
+                var complexContentModel = complexType.ContentModel as XmlSchemaComplexContent;
+                if(complexContentModel != null)
+                {
+                    var extension = complexContentModel.Content as XmlSchemaComplexContentExtension;
+                    if (extension != null)
+                    {
+                        /*foreach (var item in extension.Attributes)
+                        {
+                            XmlSchemaAttribute attribute = (XmlSchemaAttribute)item;
+                            AddField(descriptor, attribute, false);
+                        }*/
+                    }
 
+                    //TODO restriction
+                }
             }
         }
 
@@ -112,9 +130,11 @@ namespace Codge.Generator.Presentations.Xsd
                 { "Id", "string" },
                 { "Idref", "string" },
                 { "Date", "string" },
+                { "DateTime", "string" },
                 { "Integer", "int" },
                 { "Decimal", "int" },
- 
+                { "NonNegativeInteger", "int" },
+
                 //XSD types
  
                 { "boolean", "bool" },
@@ -222,6 +242,10 @@ namespace Codge.Generator.Presentations.Xsd
                                 type = element.Name + "_EmptyComplex";
                                 if(!descriptor.Namespace.Types.Any(_ => _.Name == type))
                                     descriptor.Namespace.CreateCompositeType(type);
+                            }
+                            else
+                            {
+                                processCompositeType(descriptor.Namespace, elementType, element.ElementSchemaType.Name);
                             }
                         }
                     }
