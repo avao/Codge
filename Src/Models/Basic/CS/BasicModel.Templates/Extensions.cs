@@ -95,6 +95,24 @@ namespace BasicModel.Templates.CS
             return field.Type.GetFullName(".");
         }
 
+        public static string GetMemberName(this CompositeType type, CompositeType.Field field)
+        {
+            if(type.Name == field.Name)
+            {
+                return field.Name + "1";//TODO hack
+            }
+            return field.Name;
+        }
+
+        public static string GetParameterName(this CompositeType.Field field)
+        {
+            return "_" + field.Name;
+        }
+
+        public static string GetCtorParamters(this CompositeType type)
+        {
+            return string.Join(",", type.Fields.Select(f => f.GetNativeType() + " " + GetParameterName(f)));
+        }
 
         private static class Names
         {

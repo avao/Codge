@@ -12,13 +12,13 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {
 	public class <#= Type.Name #>
 	{
-		public <#= Type.Name #>(<#= GetCtorParamters(Type) #>)
+		public <#= Type.Name #>(<#= Type.GetCtorParamters() #>)
 		{
 <#				
 					foreach(var field in Type.Fields)
 					{
 #>
-			<#= field.Name #> = <#= GetParameterName(field) #>;
+			<#= field.Name #> = <#= field.GetParameterName() #>;
 <#				
 					}
 #>
@@ -29,7 +29,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var field in Type.Fields)
 					{
 #>
-		public	<#= field.GetNativeType() #> <#= field.Name#> {get; private set;}
+		public	<#= field.GetNativeType() #> <#= Type.GetMemberName(field)#> {get; private set;}
 <#				
 					}
 #>
@@ -38,20 +38,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 
 
 <#+
-	private static string GetMemberName(CompositeType.Field field)
-	{
-		return field.Name;
-	}
-
-	private static string GetParameterName(CompositeType.Field field)
-	{
-		return "_"+field.Name;
-	}
-
-	private static string GetCtorParamters(CompositeType type)
-	{
-		return string.Join(",", type.Fields.Select(f => f.GetNativeType() + " " + GetParameterName(f)));
-	}
+	
 
 	public CompositeType Type{get; private set;}
 

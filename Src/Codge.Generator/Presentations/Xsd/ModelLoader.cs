@@ -109,11 +109,16 @@ namespace Codge.Generator.Presentations.Xsd
                 { "String", "string" },
                 { "Int", "int" },
                 { "Boolean", "bool" },
-
+                { "Id", "string" },
+                { "Idref", "string" },
+                { "Date", "string" },
+                { "Integer", "int" },
+                { "Decimal", "int" },
+ 
                 //XSD types
-
+ 
                 { "boolean", "bool" },
-                
+               
                 { "date", "string" },
                 { "dateTime", "string" },
                 { "duration", "string" },
@@ -123,7 +128,7 @@ namespace Codge.Generator.Presentations.Xsd
                 { "gYear", "string" },
                 { "gYearMonth", "string" },
                 { "time", "string" },
-
+ 
                 { "ENTITIES", "string" },
                 { "ENTITY", "string" },
                 { "ID", "string" },
@@ -137,9 +142,23 @@ namespace Codge.Generator.Presentations.Xsd
                 { "normalizedString", "string" },
                 { "QName", "string" },
                 { "token", "string" },
-                
+ 
+                { "anyURI", "string" },
+               
+ 
+                { "byte", "int" },
+                { "decimal", "int" },
+                { "int", "int" },
                 { "integer", "int" },
-                { "decimal", "int" }
+                { "long", "int" },
+                { "negativeInteger", "int" },
+                { "nonNegativeIteger", "int" },
+                { "positiveInteger", "int" },
+                { "short", "int" },
+                { "unsignedLong", "int" },
+                { "unsignedInt", "int" },
+                { "unsignedShort", "int" },
+                { "unsignedByte", "int" }
                 };
 
         private static string ConvertSchemaType(string typeCode)

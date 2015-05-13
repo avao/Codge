@@ -63,5 +63,11 @@
     </xs:restriction>    
   </xs:simpleType>
 
+  <xs:complexType name="recursiveType">
+    <xs:choice>
+      <xs:element name="recursiveType" type="recursiveType"/>
+    </xs:choice>
+  </xs:complexType>
+    
 
 </xs:schema>

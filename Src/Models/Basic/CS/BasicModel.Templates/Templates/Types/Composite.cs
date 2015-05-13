@@ -55,7 +55,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             this.Write("(");
             
             #line 15 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GetCtorParamters(Type)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.GetCtorParamters()));
             
             #line default
             #line hidden
@@ -79,7 +79,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             this.Write(" = ");
             
             #line 21 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(GetParameterName(field)));
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.GetParameterName()));
             
             #line default
             #line hidden
@@ -112,7 +112,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             this.Write(" ");
             
             #line 32 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.GetMemberName(field)));
             
             #line default
             #line hidden
@@ -131,20 +131,7 @@ namespace BasicModel.Templates.CS.Templates.Types
         
         #line 40 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
 
-	private static string GetMemberName(CompositeType.Field field)
-	{
-		return field.Name;
-	}
-
-	private static string GetParameterName(CompositeType.Field field)
-	{
-		return "_"+field.Name;
-	}
-
-	private static string GetCtorParamters(CompositeType type)
-	{
-		return string.Join(",", type.Fields.Select(f => f.GetNativeType() + " " + GetParameterName(f)));
-	}
+	
 
 	public CompositeType Type{get; private set;}
 

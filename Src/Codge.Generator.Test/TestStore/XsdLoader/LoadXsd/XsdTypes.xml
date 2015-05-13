@@ -45,6 +45,11 @@
       <Field name="Content" type="string" />
     </Type>
     <Type name="simpleType" />
+    <Type name="recursiveType">
+      <Field name="recursiveType" type="AModel.recursiveType">
+        <isOptional>True</isOptional>
+      </Field>
+    </Type>
     <Type name="elementWithEmbededType">
       <Field name="aSubElement" type="string">
         <isOptional>True</isOptional>
