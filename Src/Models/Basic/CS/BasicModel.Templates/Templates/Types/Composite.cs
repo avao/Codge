@@ -72,7 +72,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             this.Write("\t\t\t");
             
             #line 21 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.GetMemberName(field)));
             
             #line default
             #line hidden

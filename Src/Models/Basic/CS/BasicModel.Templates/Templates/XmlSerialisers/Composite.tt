@@ -21,25 +21,26 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 <#
 					foreach(var field in Type.Fields)
 					{
+						string fieldName = Type.GetMemberName(field);
 						if(field.IsCollection)
 						{
 							if(field.Type.IsBuiltIn())
 							{
 #>
-			Utils.SerialiseBuiltInCollection(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+			Utils.SerialiseBuiltInCollection(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#				
 							}
 							else
 							{
 #>
-			Utils.SerialiseCollection(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+			Utils.SerialiseCollection(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#				
 							}
 						}
 						else if(field.IsAttribute())
 						{
 #>
-            writer.WriteAttributeString("<#= field.Name #>", obj.<#= field.Name #>.ToString());
+            writer.WriteAttributeString("<#= field.Name #>", obj.<#= fieldName #>.ToString());
 <#				
 						}
 						else
@@ -47,7 +48,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 							if(field.Type.IsComposite())
 							{
 #>
-			Utils.Serialise(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+			Utils.Serialise(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#	
 							}
 							else
@@ -55,13 +56,13 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
                                 if(field.IsOptional())
                                 {
 #>
-			Utils.SerialiseIfHasValue(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+			Utils.SerialiseIfHasValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#
                                 }
                                 else
                                 {
 #>
-			Utils.SerialiseValue(writer, "<#= field.Name #>", obj.<#= field.Name #>, context);
+			Utils.SerialiseValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#
                                 }
 							}

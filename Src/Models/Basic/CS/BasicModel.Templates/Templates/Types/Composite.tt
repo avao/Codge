@@ -18,7 +18,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var field in Type.Fields)
 					{
 #>
-			<#= field.Name #> = <#= field.GetParameterName() #>;
+			<#= Type.GetMemberName(field) #> = <#= field.GetParameterName() #>;
 <#				
 					}
 #>
@@ -29,7 +29,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var field in Type.Fields)
 					{
 #>
-		public	<#= field.GetNativeType() #> <#= Type.GetMemberName(field)#> {get; private set;}
+		public	<#= field.GetNativeType() #> <#= Type.GetMemberName(field) #> {get; private set;}
 <#				
 					}
 #>
