@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1B171528-C478-4B91-A055-54E5818D30D7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BasicXsdBased</RootNamespace>
+    <AssemblyName>BasicXsdBased</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <!-- GENERATED_ENTRIES_BEGIN -->
+    <Compile Include="Types\XsdBasedModel\emptyComplexType.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\emptyComplexType.cs" />
+    <Compile Include="Types\XsdBasedModel\ordertype.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\ordertype.cs" />
+    <Compile Include="Types\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithContent.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContent.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithSimpleContent.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\complexTypeWithSimpleContent.cs" />
+    <Compile Include="Types\XsdBasedModel\simpleType.cs" />
+    <Compile Include="Types\XsdBasedModel\recursiveType.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\recursiveType.cs" />
+    <Compile Include="Types\XsdBasedModel\elementWithEmbededType.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededType.cs" />
+<Compile Include="Registrar.cs" />
+<!-- GENERATED_ENTRIES_END -->
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj">
+      <Project>{03057e90-b954-4875-8865-e5b03aaa7267}</Project>
+      <Name>BasicModel.CS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

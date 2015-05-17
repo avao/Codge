@@ -20,6 +20,7 @@ namespace BasicModel.Templates.CS
 
         public PathAndContent Execute(Context context)
         {
+            //TODO if file does not exist - create one from template
             string path = Directory.EnumerateFiles(context.BaseDir, "*.csproj", SearchOption.TopDirectoryOnly).First();
 
             string content = File.ReadAllText(path);

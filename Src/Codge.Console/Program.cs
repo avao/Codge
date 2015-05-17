@@ -21,10 +21,15 @@ namespace Codge.Generator.Console
             ILog logger = LogManager.GetLogger("");
             string modelPath = args[0];
             string outputDir = @"../../../Generated/CS";
-            if(args.Length == 2)//TODO use console args for argument parsing
+            if(args.Length >1)//TODO use console args for argument parsing
                 outputDir = args[1];
+            
+            var modelName = "TODO";
+            if (args.Length > 2)
+                modelName = args[2];
 
-            var model = LoadModel(modelPath);
+
+            var model = LoadModel(modelPath, modelName);
 
             ProcessTemplates(LoadConfig(outputDir),
                              new BasicModel.Templates.CS.TaskFactory(logger),
@@ -51,7 +56,7 @@ namespace Codge.Generator.Console
         }
 
 
-        static Model LoadModel(string path)
+        static Model LoadModel(string path, string modelName)
         {
             System.Console.WriteLine("Loading model [" + path + "]");
 
@@ -60,7 +65,7 @@ namespace Codge.Generator.Console
             ModelDescriptor model;
             if(path.ToLower().EndsWith(".xsd"))
             {//loader type selection
-                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(typeSystem, path, "TODO");
+                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(typeSystem, path, modelName);
             }
             else
             {
