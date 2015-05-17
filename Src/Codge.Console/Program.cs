@@ -15,12 +15,18 @@ namespace Codge.Generator.Console
 {
     class Program
     {
+        //../../../Generated/TestModel.xml  ../../../Generated/CS
         static void Main(string[] args)
         {
             ILog logger = LogManager.GetLogger("");
-            var model = LoadModel(args[0]);//D:\work\CodeGen\TestModel.xml
+            string modelPath = args[0];
+            string outputDir = @"../../../Generated/CS";
+            if(args.Length == 2)//TODO use console args for argument parsing
+                outputDir = args[1];
 
-            ProcessTemplates(LoadConfig(@"../../../Generated/CS"),
+            var model = LoadModel(modelPath);
+
+            ProcessTemplates(LoadConfig(outputDir),
                              new BasicModel.Templates.CS.TaskFactory(logger),
                              model,
                              logger);
