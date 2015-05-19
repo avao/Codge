@@ -17,6 +17,11 @@
 
   <xs:element name="order" type="ordertype"/>
 
+  <xs:complexType name="complexTypeWithAField">
+    <xs:attribute name="aField" type="xs:string"/>
+  </xs:complexType>
+  
+  
   <xs:complexType name="emptyComplexType">
   </xs:complexType>
   
@@ -36,6 +41,16 @@
   <xs:complexType name="complexTypeWithContent">
     <xs:complexContent>
       <xs:extension base="emptyComplexType">
+        <xs:sequence>
+          <xs:element name="anElement" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="complexTypeWithContentAndParentField">
+    <xs:complexContent>
+      <xs:extension base="complexTypeWithAField">
         <xs:sequence>
           <xs:element name="anElement" type="xs:string"/>
         </xs:sequence>

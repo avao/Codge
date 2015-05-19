@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- GENERATED_ENTRIES_BEGIN -->
+    <Compile Include="Types\XsdBasedModel\complexTypeWithAField.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\complexTypeWithAField.cs" />
     <Compile Include="Types\XsdBasedModel\emptyComplexType.cs" />
     <Compile Include="Serialisers\XsdBasedModel\emptyComplexType.cs" />
     <Compile Include="Types\XsdBasedModel\ordertype.cs" />
@@ -49,6 +51,8 @@
     <Compile Include="Serialisers\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
     <Compile Include="Types\XsdBasedModel\complexTypeWithContent.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContent.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithContentAndParentField.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContentAndParentField.cs" />
     <Compile Include="Types\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
     <Compile Include="Types\XsdBasedModel\complexTypeWithSimpleContent.cs" />

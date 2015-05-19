@@ -92,6 +92,9 @@ namespace Codge.Generator.Presentations.Xsd
 
             AddField(descriptor, complexType.ContentTypeParticle, false);
 
+            if (complexType.ContentModel == null)
+                return;
+
             var simpleContentModel = complexType.ContentModel as XmlSchemaSimpleContent;
             if(simpleContentModel != null)
             {
@@ -100,7 +103,18 @@ namespace Codge.Generator.Presentations.Xsd
                 {
                     descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name), new Dictionary<string, object>{{"isContent", true}});
                 }
-                //TODO restriction
+                else
+                {
+                    var restriction = simpleContentModel.Content as XmlSchemaSimpleContentRestriction;
+                    if(restriction != null)
+                    {
+                        descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name), new Dictionary<string, object> { { "isContent", true } });
+                    }
+                    else
+                    {
+                        throw new NotSupportedException("Not supported simple content model ");
+                    }
+                }
             }
             else
             {
