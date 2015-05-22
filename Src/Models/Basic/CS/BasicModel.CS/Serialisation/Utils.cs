@@ -88,9 +88,7 @@ namespace BasicModel.CS.Serialisation
         {
             if (value != null)
             {
-                writer.WriteStartElement(tag);
-                writer.WriteValue(value);
-                writer.WriteEndElement();
+                Serialise(writer, tag, value, context);
             }
         }
 
