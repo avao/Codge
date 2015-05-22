@@ -55,9 +55,18 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 						{
 							if(field.Type.IsComposite())
 							{
+                                if(field.IsOptional())
+                                {
+#>
+			Utils.SerialiseIfHasValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
+<#
+                                }
+                                else
+                                {
 #>
 			Utils.Serialise(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
-<#	
+<#
+                                }
 							}
 							else
 							{
