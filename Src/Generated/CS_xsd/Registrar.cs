@@ -16,6 +16,7 @@ namespace Serialisers
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithContentWithAttribute>(new Serialisers.XsdBasedModel.complexTypeWithContentWithAttribute());
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithSimpleContent>(new Serialisers.XsdBasedModel.complexTypeWithSimpleContent());
 			context.RegisterSerialiser<Types.XsdBasedModel.recursiveType>(new Serialisers.XsdBasedModel.recursiveType());
+			context.RegisterSerialiser<Types.XsdBasedModel.allXsdTypes>(new Serialisers.XsdBasedModel.allXsdTypes());
 			context.RegisterSerialiser<Types.XsdBasedModel.elementWithEmbededType>(new Serialisers.XsdBasedModel.elementWithEmbededType());
 		}
 	}

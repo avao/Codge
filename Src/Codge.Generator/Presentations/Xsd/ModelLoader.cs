@@ -101,14 +101,14 @@ namespace Codge.Generator.Presentations.Xsd
                 var extension = simpleContentModel.Content as XmlSchemaSimpleContentExtension;
                 if(extension != null)
                 {
-                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name), new Dictionary<string, object>{{"isContent", true}});
+                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), new Dictionary<string, object>{{"isContent", true}});
                 }
                 else
                 {
                     var restriction = simpleContentModel.Content as XmlSchemaSimpleContentRestriction;
                     if(restriction != null)
                     {
-                        descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName.Name), new Dictionary<string, object> { { "isContent", true } });
+                        descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), new Dictionary<string, object> { { "isContent", true } });
                     }
                     else
                     {
@@ -136,24 +136,11 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static IDictionary<string, string> xsdTypeMapping = new Dictionary<string, string> { 
-                //TODO TypeCodes
-                { "String", "string" },
-                { "Int", "int" },
-                { "Boolean", "bool" },
-                { "Id", "string" },
-                { "Idref", "string" },
-                { "Date", "string" },
-                { "DateTime", "string" },
-                { "Time", "string" },
-                { "Integer", "int" },
-                { "Decimal", "int" },
-                { "NonNegativeInteger", "int" },
-
-                //XSD types
- 
+        private static IDictionary<string, string> xsdTypeMappingFQN = new Dictionary<string, string> { 
                 { "boolean", "bool" },
                
+                { "string", "string" },
+
                 { "date", "string" },
                 { "dateTime", "string" },
                 { "duration", "string" },
@@ -168,47 +155,57 @@ namespace Codge.Generator.Presentations.Xsd
                 { "ENTITY", "string" },
                 { "ID", "string" },
                 { "IDREF", "string" },
-                //{ "IDREFS", "string" },
+                { "IDREFS", "string" },
                 { "language", "string" },
                 { "Name", "string" },
                 { "NCName", "string" },
                 { "NMTOKEN", "string" },
-                //{ "NMTOKENS", "string" },
+                { "NMTOKENS", "string" },
                 { "normalizedString", "string" },
                 { "QName", "string" },
                 { "token", "string" },
  
                 { "anyURI", "string" },
                
+                { "base64Binary", "string" },
+                { "hexBinary", "string" },
  
                 { "byte", "int" },
-                { "decimal", "int" },
+                { "decimal", "decimal" },
+                { "float", "double" },
+                { "double", "double" },
+
                 { "int", "int" },
                 { "integer", "int" },
                 { "long", "int" },
                 { "negativeInteger", "int" },
                 { "nonNegativeInteger", "int" },
                 { "positiveInteger", "int" },
+                { "nonPositiveInteger", "int" },
                 { "short", "int" },
                 { "unsignedLong", "int" },
                 { "unsignedInt", "int" },
                 { "unsignedShort", "int" },
                 { "unsignedByte", "int" }
-                };
+        };
 
-        private static string ConvertSchemaType(string typeCode)
+        private static string ConvertSchemaType(XmlQualifiedName name)
         {
             string mappedType;
-            if (!xsdTypeMapping.TryGetValue(typeCode, out mappedType))
-                return typeCode;
-            return mappedType;
+            if (name.Namespace == "http://www.w3.org/2001/XMLSchema")
+            {
+                if (xsdTypeMappingFQN.TryGetValue(name.Name, out mappedType))
+                    return mappedType;
+                throw new NotSupportedException(string.Format("Type [{0}] [{1}] is not supported. Failed to find mapping.", name.Namespace, name.Name));
+            }
+            return name.Name;//TODO namespace
         }
 
         private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
         {
             //TODO proper conversion
             string typeCode = simpleType.TypeCode.ToString();
-            return ConvertSchemaType(typeCode);
+            return ConvertSchemaType(simpleType.QualifiedName);
         }
 
 
@@ -242,8 +239,13 @@ namespace Codge.Generator.Presentations.Xsd
                 var element = item as XmlSchemaElement;
                 if (element != null)
                 {
+
+                    
                     string type = element.Name != null
-                        ? ConvertSchemaType(element.SchemaTypeName.Name)//TODO use FQN
+                        ? ConvertSchemaType(element.ElementSchemaType.BaseXmlSchemaType != null 
+                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name!="anySimpleType"
+                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name != "anyType"
+                            ? element.ElementSchemaType.BaseXmlSchemaType.QualifiedName : element.ElementSchemaType.QualifiedName)
                         : ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
 
                     if(string.IsNullOrEmpty(type))

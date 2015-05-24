@@ -10,7 +10,7 @@ namespace Serialisers.XsdBasedModel
         {
             var obj = (Types.XsdBasedModel.recursiveType)o;
 
-			Utils.Serialise(writer, "recursiveType", obj.recursiveType1, context);
+			Utils.SerialiseIfHasValue(writer, "recursiveType", obj.recursiveType1, context);
 		}
 
 	}

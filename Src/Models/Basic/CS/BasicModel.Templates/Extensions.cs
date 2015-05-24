@@ -95,12 +95,25 @@ namespace BasicModel.Templates.CS
             return field.Type.GetFullName(".");
         }
 
+
+        static HashSet<string> _reservedNames = new HashSet<string> { "string", "String", "byte", "Byte", "decimal", "Decimal", "double", "Double", "float", "Float", "int", "Int", "long", "Long","short", "Short"};
+        private static bool IsMemberNameAllowed(string name)
+        {
+            return !_reservedNames.Contains(name);
+        }
+
         public static string GetMemberName(this CompositeType type, CompositeType.Field field)
         {
             if(type.Name == field.Name)
             {
                 return field.Name + "1";//TODO hack
             }
+
+            if(!IsMemberNameAllowed(field.Name))
+            {
+                return field.Name + "_";
+            }
+
             return field.Name;
         }
 

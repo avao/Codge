@@ -16,9 +16,9 @@ namespace Serialisers.XsdBasedModel
 			Utils.SerialiseIfHasValue(writer, "orderdetails", obj.orderdetails, context);
 			Utils.SerialiseIfHasValue(writer, "billto", obj.billto, context);
 			Utils.SerialiseIfHasValue(writer, "shipto", obj.shipto, context);
-			Utils.Serialise(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);
+			Utils.SerialiseIfHasValue(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);
 			Utils.SerialiseIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, context);
-			Utils.Serialise(writer, "elemEmptyType", obj.elemEmptyType, context);
+			Utils.SerialiseIfHasValue(writer, "elemEmptyType", obj.elemEmptyType, context);
 		}
 
 	}
