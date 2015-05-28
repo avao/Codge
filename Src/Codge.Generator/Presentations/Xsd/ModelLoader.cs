@@ -40,7 +40,7 @@ namespace Codge.Generator.Presentations.Xsd
             foreach (DictionaryEntry item in schema.SchemaTypes)
             {
                 var simpleType = item.Value as XmlSchemaSimpleType;
-                if(simpleType != null)
+                if (simpleType != null)
                 {
                     processSimpleType(modelDescriptor.RootNamespace, simpleType);
                 }
@@ -83,10 +83,10 @@ namespace Codge.Generator.Presentations.Xsd
         private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
         {
             var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint));
-            
+
             foreach (DictionaryEntry entry in complexType.AttributeUses)
             {
-                XmlSchemaAttribute attribute =(XmlSchemaAttribute)entry.Value;
+                XmlSchemaAttribute attribute = (XmlSchemaAttribute)entry.Value;
                 AddField(descriptor, attribute, false);
             }
 
@@ -96,17 +96,17 @@ namespace Codge.Generator.Presentations.Xsd
                 return;
 
             var simpleContentModel = complexType.ContentModel as XmlSchemaSimpleContent;
-            if(simpleContentModel != null)
+            if (simpleContentModel != null)
             {
                 var extension = simpleContentModel.Content as XmlSchemaSimpleContentExtension;
-                if(extension != null)
+                if (extension != null)
                 {
-                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), new Dictionary<string, object>{{"isContent", true}});
+                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), new Dictionary<string, object> { { "isContent", true } });
                 }
                 else
                 {
                     var restriction = simpleContentModel.Content as XmlSchemaSimpleContentRestriction;
-                    if(restriction != null)
+                    if (restriction != null)
                     {
                         descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), new Dictionary<string, object> { { "isContent", true } });
                     }
@@ -119,7 +119,7 @@ namespace Codge.Generator.Presentations.Xsd
             else
             {
                 var complexContentModel = complexType.ContentModel as XmlSchemaComplexContent;
-                if(complexContentModel != null)
+                if (complexContentModel != null)
                 {
                     var extension = complexContentModel.Content as XmlSchemaComplexContentExtension;
                     if (extension != null)
@@ -227,37 +227,75 @@ namespace Codge.Generator.Presentations.Xsd
             return schemaType.Name;
         }
 
+        private static bool IsEnumeration(XmlSchemaSimpleType simpleType)
+        {
+            if (simpleType.Content != null)
+            {
+                var restriction = simpleType.Content as XmlSchemaSimpleTypeRestriction;
+                if (restriction != null && restriction.Facets != null && restriction.Facets.Count > 0)
+                {
+                    foreach(var item in restriction.Facets)
+                    {
+                        if (item as XmlSchemaEnumerationFacet == null)
+                            return false;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static string GetTypeForAnElement(XmlSchemaElement element)
+        {
+            if (element.Name != null)
+            {
+                XmlSchemaType type = element.ElementSchemaType;
+                var simpleType = type as XmlSchemaSimpleType;
+                if (simpleType != null && IsEnumeration(simpleType))
+                {
+                    return ConvertSchemaType(simpleType.QualifiedName);
+                }
+                else
+                {
+                    if (element.ElementSchemaType.BaseXmlSchemaType != null
+                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name != "anySimpleType"
+                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name != "anyType")
+                    {
+                        type = element.ElementSchemaType.BaseXmlSchemaType;
+                    }
+                    return ConvertSchemaType(type.QualifiedName);
+                }
+            }
+            else
+            {
+                return ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
+            }
+        }
+
         private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item, bool isOptional)
         {
             var att = item as XmlSchemaAttribute;
             if (att != null)
             {
-                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType), new Dictionary<string, object> {{ "isAttribute", true}});
+                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType), new Dictionary<string, object> { { "isAttribute", true } });
             }
             else
             {
                 var element = item as XmlSchemaElement;
                 if (element != null)
                 {
+                    string type = GetTypeForAnElement(element);
 
-                    
-                    string type = element.Name != null
-                        ? ConvertSchemaType(element.ElementSchemaType.BaseXmlSchemaType != null 
-                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name!="anySimpleType"
-                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name != "anyType"
-                            ? element.ElementSchemaType.BaseXmlSchemaType.QualifiedName : element.ElementSchemaType.QualifiedName)
-                        : ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
-
-                    if(string.IsNullOrEmpty(type))
+                    if (string.IsNullOrEmpty(type))
                     {
                         var elementType = element.ElementSchemaType as XmlSchemaComplexType;
-                        if(elementType != null)
+                        if (elementType != null)
                         {
-                            if(elementType.ContentModel == null && elementType.Attributes.Count==0)
+                            if (elementType.ContentModel == null && elementType.Attributes.Count == 0)
                             {
                                 //empty complex type
                                 type = element.Name + "_EmptyComplex";
-                                if(!descriptor.Namespace.Types.Any(_ => _.Name == type))
+                                if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
                                     descriptor.Namespace.CreateCompositeType(type);
                             }
                             else
@@ -270,7 +308,7 @@ namespace Codge.Generator.Presentations.Xsd
 
                     FieldDescriptor field;
                     //TODO optimise
-                    if(element.MaxOccurs == 1)
+                    if (element.MaxOccurs == 1)
                     {
                         if (element.Name != null)
                         {
@@ -313,7 +351,7 @@ namespace Codge.Generator.Presentations.Xsd
                         }
                         else
                         {
-                            if(item.LineNumber==0 &&item.LinePosition==0)
+                            if (item.LineNumber == 0 && item.LinePosition == 0)
                             {//empty particle
                             }
                             else

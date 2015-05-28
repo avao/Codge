@@ -36,6 +36,9 @@
       <Field name="elemEmptyType" type="AModel.elemEmptyType_EmptyComplex">
         <isOptional>True</isOptional>
       </Field>
+      <Field name="enumField" type="string">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
     <Type name="elemEmptyType_EmptyComplex" />
     <Type name="complexTypeWithContent">
@@ -201,6 +204,7 @@
         <isOptional>True</isOptional>
       </Field>
     </Type>
+    <Type name="enumType" />
     <Type name="elementWithEmbededType">
       <Field name="aSubElement" type="string">
         <isOptional>True</isOptional>

@@ -19,6 +19,7 @@ namespace Serialisers.XsdBasedModel
 			Utils.SerialiseIfHasValue(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);
 			Utils.SerialiseIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, context);
 			Utils.SerialiseIfHasValue(writer, "elemEmptyType", obj.elemEmptyType, context);
+			Utils.SerialiseIfHasValue(writer, "enumField", obj.enumField, context);
 		}
 
 	}

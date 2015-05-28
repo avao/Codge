@@ -62,6 +62,7 @@
     <Compile Include="Serialisers\XsdBasedModel\recursiveType.cs" />
     <Compile Include="Types\XsdBasedModel\allXsdTypes.cs" />
     <Compile Include="Serialisers\XsdBasedModel\allXsdTypes.cs" />
+    <Compile Include="Types\XsdBasedModel\enumType.cs" />
     <Compile Include="Types\XsdBasedModel\elementWithEmbededType.cs" />
     <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededType.cs" />
 <Compile Include="Registrar.cs" />

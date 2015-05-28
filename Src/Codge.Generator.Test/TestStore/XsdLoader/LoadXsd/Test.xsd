@@ -12,6 +12,9 @@
       <xs:element name="elemEmptyType">
         <xs:complexType/>
       </xs:element>
+      <xs:choice>
+        <xs:element name="enumField" type="enumType"/>
+      </xs:choice>
     </xs:sequence>
   </xs:group>
 
@@ -137,7 +140,12 @@
     </xs:sequence>
   </xs:complexType>
 
-
+  <xs:simpleType name="enumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="item1"/>
+      <xs:enumeration value="item2"/>
+    </xs:restriction>
+  </xs:simpleType>
 
 
 </xs:schema>
