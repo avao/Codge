@@ -9,8 +9,6 @@ namespace Codge.DataModel
     {
         public static string GetFullName(this TypeBase type, string separator)
         {
-            if(type.IsPrimitive())
-                return "string";//TODO HACK
             if (type.Namespace.IsGlobal())
                 return type.Name;
             return type.Namespace.GetFullName(separator) + separator + type.Name;

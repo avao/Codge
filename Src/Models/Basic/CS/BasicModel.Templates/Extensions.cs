@@ -87,10 +87,13 @@ namespace BasicModel.Templates.CS
 
         public static string GetNativeType(this CompositeType.Field field)
         {
-            //TODO hacks
+            if (field.Type.IsPrimitive())
+                return "string"; //TODO map primitives to native types
+
+            //TODO other hacks
             if (field.IsCollection)
                 return field.Type.GetFullName(".") + "[]";
-            if (field.IsOptional() && field.Type.IsBuiltIn() && field.Type.Name != "string")
+            if (field.IsOptional() && ((field.Type.IsBuiltIn() && field.Type.Name != "string") || field.Type.IsEnum()))
                 return field.Type.GetFullName(".") + "?";
             return field.Type.GetFullName(".");
         }

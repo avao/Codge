@@ -77,7 +77,17 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static void processSimpleType(NamespaceDescriptor namespaceDescriptor, XmlSchemaSimpleType simpleType)
         {
-            var descriptor = namespaceDescriptor.CreatePrimitiveType(simpleType.Name);
+            var facets = GetEnumerationFacets(simpleType);
+            if (facets.Any())
+            {
+                var descriptor = namespaceDescriptor.CreateEnumerationType(simpleType.Name);
+                foreach (var facet in facets)
+                    descriptor.AddItem(facet.Value);
+            }
+            else
+            {
+                var descriptor = namespaceDescriptor.CreatePrimitiveType(simpleType.Name);
+            }
         }
 
         private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
@@ -227,22 +237,30 @@ namespace Codge.Generator.Presentations.Xsd
             return schemaType.Name;
         }
 
-        private static bool IsEnumeration(XmlSchemaSimpleType simpleType)
+
+        private static IEnumerable<XmlSchemaEnumerationFacet> GetEnumerationFacets(XmlSchemaSimpleType simpleType)
         {
             if (simpleType.Content != null)
             {
                 var restriction = simpleType.Content as XmlSchemaSimpleTypeRestriction;
                 if (restriction != null && restriction.Facets != null && restriction.Facets.Count > 0)
                 {
-                    foreach(var item in restriction.Facets)
+                    foreach (var facet in restriction.Facets)
                     {
-                        if (item as XmlSchemaEnumerationFacet == null)
-                            return false;
+                        var item = facet as XmlSchemaEnumerationFacet;
+                        if (item == null)
+                            yield break;
+
+                        yield return item;
                     }
-                    return true;
                 }
             }
-            return false;
+            yield break;
+        }
+
+        private static bool IsEnumeration(XmlSchemaSimpleType simpleType)
+        {
+            return GetEnumerationFacets(simpleType).Any();
         }
 
         private static string GetTypeForAnElement(XmlSchemaElement element)

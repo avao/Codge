@@ -10,7 +10,7 @@
 
 namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {
-	enum <#= Type.Name #>
+	public enum <#= Type.Name #>
 	{
 
 <#				

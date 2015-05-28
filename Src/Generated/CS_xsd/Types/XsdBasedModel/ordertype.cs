@@ -8,7 +8,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public ordertype(string _status,string _customer,string _orderdetails,int? _billto,string _shipto,XsdBasedModel.elementWithEmbededType _elementWithEmbededType,string _elemSimpleType,XsdBasedModel.elemEmptyType_EmptyComplex _elemEmptyType,string _enumField)
+		public ordertype(string _status,string _customer,string _orderdetails,int? _billto,string _shipto,XsdBasedModel.elementWithEmbededType _elementWithEmbededType,XsdBasedModel.simpleType? _elemSimpleType,XsdBasedModel.elemEmptyType_EmptyComplex _elemEmptyType,XsdBasedModel.enumType? _enumField)
 		{
 			status = _status;
 			customer = _customer;
@@ -28,9 +28,9 @@ namespace Types.XsdBasedModel
 		public	int? billto {get; set;}
 		public	string shipto {get; set;}
 		public	XsdBasedModel.elementWithEmbededType elementWithEmbededType {get; set;}
-		public	string elemSimpleType {get; set;}
+		public	XsdBasedModel.simpleType? elemSimpleType {get; set;}
 		public	XsdBasedModel.elemEmptyType_EmptyComplex elemEmptyType {get; set;}
-		public	string enumField {get; set;}
+		public	XsdBasedModel.enumType? enumField {get; set;}
 	}
 }
 

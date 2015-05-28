@@ -30,13 +30,13 @@
       <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType">
         <isOptional>True</isOptional>
       </Field>
-      <Field name="elemSimpleType" type="string">
+      <Field name="elemSimpleType" type="AModel.simpleType">
         <isOptional>True</isOptional>
       </Field>
       <Field name="elemEmptyType" type="AModel.elemEmptyType_EmptyComplex">
         <isOptional>True</isOptional>
       </Field>
-      <Field name="enumField" type="string">
+      <Field name="enumField" type="AModel.enumType">
         <isOptional>True</isOptional>
       </Field>
     </Type>
@@ -67,7 +67,9 @@
         <isContent>True</isContent>
       </Field>
     </Type>
-    <Type name="simpleType" />
+    <Type name="simpleType">
+      <Item name="anEnumerationValue" value="0" />
+    </Type>
     <Type name="recursiveType">
       <Field name="recursiveType" type="AModel.recursiveType">
         <isOptional>True</isOptional>
@@ -204,7 +206,10 @@
         <isOptional>True</isOptional>
       </Field>
     </Type>
-    <Type name="enumType" />
+    <Type name="enumType">
+      <Item name="item1" value="0" />
+      <Item name="item2" value="1" />
+    </Type>
     <Type name="elementWithEmbededType">
       <Field name="aSubElement" type="string">
         <isOptional>True</isOptional>

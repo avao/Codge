@@ -2,9 +2,11 @@
 
 namespace Types.XsdBasedModel
 {
-	public class enumType
+	public enum enumType
 	{
 
+		item1
+		,item2
 	
 	}
 }

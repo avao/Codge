@@ -2,9 +2,10 @@
 
 namespace Types.XsdBasedModel
 {
-	public class simpleType
+	public enum simpleType
 	{
 
+		anEnumerationValue
 	
 	}
 }
