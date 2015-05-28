@@ -18,7 +18,7 @@ namespace BasicModel.CS.Serialisation
         public static string Serialise(object o, string rootTag, SerialisationContext context)
         {
             var sb = new StringBuilder();
-            using(var writer = XmlWriter.Create(sb))
+            using (var writer = XmlWriter.Create(sb))
             {
                 Serialise(writer, rootTag, o, context);
             }
@@ -41,7 +41,7 @@ namespace BasicModel.CS.Serialisation
         {
             if (items == null)
                 return;
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 Serialise(writer, name, item, context);
             }
@@ -50,7 +50,7 @@ namespace BasicModel.CS.Serialisation
         public static void Serialise<T>(XmlWriter writer, string tag, T o, SerialisationContext context)
         {
             writer.WriteStartElement(tag);
-            if(o != null)
+            if (o != null)
             {
                 Serialise(writer, o, context);
             }
@@ -72,10 +72,27 @@ namespace BasicModel.CS.Serialisation
             writer.WriteEndElement();
         }
 
+        public static void SerialiseEnumAsName<T>(XmlWriter writer, string tag, T value, SerialisationContext context)
+            where T : struct
+        {
+            SerialiseValue(writer, tag, Enum.GetName(typeof(T), value), context);
+        }
+
+
+        public static void SerialiseEnumAsNameIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, SerialisationContext context)
+            where T : struct
+        {
+            if (value.HasValue)
+            {
+                SerialiseEnumAsName(writer, tag, value.Value, context);
+            }
+        }
+
+
         public static void SerialiseIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, SerialisationContext context)
             where T : struct
         {
-            if(value.HasValue)
+            if (value.HasValue)
             {
                 writer.WriteStartElement(tag);
                 writer.WriteValue(value.Value);
@@ -101,6 +118,6 @@ namespace BasicModel.CS.Serialisation
                 writer.WriteEndElement();
             }
         }
-     
+
     }
 }

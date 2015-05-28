@@ -17,9 +17,9 @@ namespace Serialisers.XsdBasedModel
 			Utils.SerialiseIfHasValue(writer, "billto", obj.billto, context);
 			Utils.SerialiseIfHasValue(writer, "shipto", obj.shipto, context);
 			Utils.SerialiseIfHasValue(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);
-			Utils.SerialiseIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, context);
+			Utils.SerialiseEnumAsNameIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, context);
 			Utils.SerialiseIfHasValue(writer, "elemEmptyType", obj.elemEmptyType, context);
-			Utils.SerialiseIfHasValue(writer, "enumField", obj.enumField, context);
+			Utils.SerialiseEnumAsNameIfHasValue(writer, "enumField", obj.enumField, context);
 		}
 
 	}

@@ -225,15 +225,15 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
 
                                 }
 							}
-							else
-							{
+                            else if(field.Type.IsEnum())
+                            {
                                 if(field.IsOptional())
                                 {
 
             
             #line default
             #line hidden
-            this.Write("\t\t\tUtils.SerialiseIfHasValue(writer, \"");
+            this.Write("\t\t\tUtils.SerialiseEnumAsNameIfHasValue(writer, \"");
             
             #line 76 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
@@ -258,7 +258,7 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
             
             #line default
             #line hidden
-            this.Write("\t\t\tUtils.SerialiseValue(writer, \"");
+            this.Write("\t\t\tUtils.SerialiseEnumAsName(writer, \"");
             
             #line 82 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
@@ -277,7 +277,62 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
             #line 83 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
 
                                 }
+
+                            }
+                            else
+							{
+                                if(field.IsOptional())
+                                {
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\tUtils.SerialiseIfHasValue(writer, \"");
+            
+            #line 92 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", obj.");
+            
+            #line 92 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
+            
+            #line default
+            #line hidden
+            this.Write(", context);\r\n");
+            
+            #line 93 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+
+                                }
+                                else
+                                {
+
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\tUtils.SerialiseValue(writer, \"");
+            
+            #line 98 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
+            
+            #line default
+            #line hidden
+            this.Write("\", obj.");
+            
+            #line 98 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(fieldName));
+            
+            #line default
+            #line hidden
+            this.Write(", context);\r\n");
+            
+            #line 99 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+
+                                }
 							}
+                            
 						}
 					}
 
@@ -288,7 +343,7 @@ namespace BasicModel.Templates.CS.Templates.XmlSerialisers
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 95 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
+        #line 112 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
 
 	public CompositeType Type{get; private set;}
 

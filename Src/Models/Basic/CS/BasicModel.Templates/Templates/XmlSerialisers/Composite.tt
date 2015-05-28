@@ -68,7 +68,23 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 <#
                                 }
 							}
-							else
+                            else if(field.Type.IsEnum())
+                            {
+                                if(field.IsOptional())
+                                {
+#>
+			Utils.SerialiseEnumAsNameIfHasValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
+<#
+                                }
+                                else
+                                {
+#>
+			Utils.SerialiseEnumAsName(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
+<#
+                                }
+
+                            }
+                            else
 							{
                                 if(field.IsOptional())
                                 {
@@ -83,6 +99,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 <#
                                 }
 							}
+                            
 						}
 					}
 #>
