@@ -191,24 +191,19 @@ namespace Codge.Generator.Presentations.Xsd
             return name.Name;//TODO namespace
         }
 
-        private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
-        {
-            return ConvertSchemaType(simpleType.QualifiedName);
-        }
-
 
         private static string ConvertSchemaType(XmlSchemaType schemaType, string hint)
         {
             var simpleType = schemaType as XmlSchemaSimpleType;
             if (simpleType != null)
-                return ConvertSchemaType(simpleType);
+                return ConvertSchemaType(simpleType.QualifiedName);
 
             var complexType = schemaType as XmlSchemaComplexType;
             if (complexType != null)
             {
                 if (complexType.Name == null)
                 {
-                    return hint;// +"_" + complexType.LineNumber + "_" + complexType.LinePosition;
+                    return hint;
                 }
             }
 
@@ -273,7 +268,7 @@ namespace Codge.Generator.Presentations.Xsd
             var att = item as XmlSchemaAttribute;
             if (att != null)
             {
-                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType), new Dictionary<string, object> { { "isAttribute", true } });
+                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType.QualifiedName), new Dictionary<string, object> { { "isAttribute", true } });
             }
             else
             {
