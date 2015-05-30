@@ -61,6 +61,7 @@
     <Compile Include="Presentations\Xml\ModelLoader.cs" />
     <Compile Include="PathAndContent.cs" />
     <Compile Include="Presentations\Xsd\ModelLoader.cs" />
+    <Compile Include="Presentations\Xsd\SchemaLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringTemplateTasks\ModelTask.cs" />
     <Compile Include="StringTemplateTasks\NamespaceTask.cs" />

@@ -14,27 +14,13 @@ namespace Codge.Generator.Presentations.Xsd
 {
     public class ModelLoader
     {
-        public static ModelDescriptor Load(TypeSystem typeSystem, Stream stream, string modelName)
+        //TODO pass schemaSet in?
+        public static ModelDescriptor Load(TypeSystem typeSystem, XmlSchema schema, string modelName)
         {
-            XmlSchema schema = XmlSchema.Read(stream, null);
-
             var set = new XmlSchemaSet();
             set.Add(schema);
             set.Compile();
 
-            return Load(typeSystem, schema, modelName);
-        }
-
-        public static ModelDescriptor Load(TypeSystem typeSystem, string path, string modelName)
-        {
-            using (var reader = new FileStream(path, FileMode.Open))
-            {
-                return Load(typeSystem, reader, modelName);
-            }
-        }
-
-        public static ModelDescriptor Load(TypeSystem typeSystem, XmlSchema schema, string modelName)
-        {
             var modelDescriptor = new ModelDescriptor(modelName, modelName);
 
             foreach (DictionaryEntry item in schema.SchemaTypes)
@@ -207,8 +193,6 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static string ConvertSchemaType(XmlSchemaSimpleType simpleType)
         {
-            //TODO proper conversion
-            string typeCode = simpleType.TypeCode.ToString();
             return ConvertSchemaType(simpleType.QualifiedName);
         }
 

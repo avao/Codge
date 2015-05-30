@@ -65,7 +65,8 @@ namespace Codge.Generator.Console
             ModelDescriptor model;
             if(path.ToLower().EndsWith(".xsd"))
             {//loader type selection
-                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(typeSystem, path, modelName);
+                var schema = Codge.Generator.Presentations.Xsd.SchemaLoader.Load(path);
+                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(typeSystem, schema, modelName);
             }
             else
             {
