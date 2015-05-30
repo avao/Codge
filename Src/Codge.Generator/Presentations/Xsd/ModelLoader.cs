@@ -298,28 +298,14 @@ namespace Codge.Generator.Presentations.Xsd
                     }
 
                     FieldDescriptor field;
-                    //TODO optimise
+                    string fieldName = element.Name != null ? element.Name : element.RefName.Name;
                     if (element.MaxOccurs == 1)
                     {
-                        if (element.Name != null)
-                        {
-                            field = descriptor.AddField(element.Name, type);
-                        }
-                        else
-                        {
-                            field = descriptor.AddField(element.RefName.Name, type);
-                        }
+                        field = descriptor.AddField(fieldName, type);
                     }
                     else
                     {
-                        if (element.Name != null)
-                        {
-                            field = descriptor.AddCollectionField(element.Name, type);
-                        }
-                        else
-                        {
-                            field = descriptor.AddCollectionField(element.RefName.Name, type);
-                        }
+                        field = descriptor.AddCollectionField(fieldName, type);
                     }
 
                     if (isOptional || element.MinOccurs == 0)
