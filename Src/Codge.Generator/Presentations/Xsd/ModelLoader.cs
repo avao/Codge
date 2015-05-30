@@ -91,14 +91,14 @@ namespace Codge.Generator.Presentations.Xsd
                 var extension = simpleContentModel.Content as XmlSchemaSimpleContentExtension;
                 if (extension != null)
                 {
-                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), new Dictionary<string, object> { { "isContent", true } });
+                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
                 }
                 else
                 {
                     var restriction = simpleContentModel.Content as XmlSchemaSimpleContentRestriction;
                     if (restriction != null)
                     {
-                        descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), new Dictionary<string, object> { { "isContent", true } });
+                        descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
                     }
                     else
                     {
@@ -268,7 +268,7 @@ namespace Codge.Generator.Presentations.Xsd
             var att = item as XmlSchemaAttribute;
             if (att != null)
             {
-                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType.QualifiedName), new Dictionary<string, object> { { "isAttribute", true } });
+                descriptor.AddField(att.Name, ConvertSchemaType(att.AttributeSchemaType.QualifiedName), false, new Dictionary<string, object> { { "isAttribute", true } });
             }
             else
             {
@@ -299,18 +299,10 @@ namespace Codge.Generator.Presentations.Xsd
 
                     FieldDescriptor field;
                     string fieldName = element.Name != null ? element.Name : element.RefName.Name;
-                    if (element.MaxOccurs == 1)
-                    {
-                        field = descriptor.AddField(fieldName, type);
-                    }
-                    else
-                    {
-                        field = descriptor.AddCollectionField(fieldName, type);
-                    }
+                    field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1);
 
                     if (isOptional || element.MinOccurs == 0)
                         field.AttachedData.Add("isOptional", true);
-
                 }
                 else
                 {

@@ -66,8 +66,8 @@ namespace Codge.Generator.Test
 
             var composite = model.RootNamespace.CreateCompositeType("MyCompositeType");
             composite.AddField("Field1", BuiltInTypes.Int);
-            composite.AddCollectionField("CollectionOfBuiltInTypes", BuiltInTypes.Bool);
-            composite.AddCollectionField("CollectionOfEnums", "TestEnumeration");
+            composite.AddField("CollectionOfBuiltInTypes", BuiltInTypes.Bool, true);
+            composite.AddField("CollectionOfEnums", "TestEnumeration", true);
 
             CompileAndAssert(model, "CollectionField");
         }

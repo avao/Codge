@@ -30,7 +30,7 @@ namespace Codge.Generator.Presentations.Xml
         {//|TODO
             return id++;
         }
-        
+
         private static void processNamespace(NamespaceDesc ns, NamespaceDescriptor namespaceDescriptor)
         {
             if (ns.Items != null)
@@ -45,10 +45,7 @@ namespace Codge.Generator.Presentations.Xml
                         {
                             foreach (var field in composite.Field)
                             {
-                                if(field.isCollectionSpecified && field.isCollection)
-                                    descriptor.AddCollectionField(field.name, field.type);
-                                else
-                                    descriptor.AddField(field.name, field.type);
+                                descriptor.AddField(field.name, field.type, field.isCollectionSpecified && field.isCollection);
                             }
                         }
                     }
@@ -63,12 +60,12 @@ namespace Codge.Generator.Presentations.Xml
                         else
                         {
                             var enumeration = t as Enumeration;
-                            if(enumeration !=null)
+                            if (enumeration != null)
                             {
                                 var descriptor = namespaceDescriptor.CreateEnumerationType(enumeration.name);
 
                                 int i = 0;
-                                foreach(var item in enumeration.item)
+                                foreach (var item in enumeration.item)
                                 {
                                     if (item.valueSpecified)
                                     {
@@ -81,14 +78,14 @@ namespace Codge.Generator.Presentations.Xml
                                     }
                                     ++i;
                                 }
-                                
+
                             }
                             else
                             {
                                 throw new Exception("Unknown type");
                             }
                         }
-                        
+
                     }
                 }
             }

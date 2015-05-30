@@ -37,16 +37,10 @@ namespace Codge.DataModel.Descriptors
             _fields = new List<FieldDescriptor>();
         }
 
-        public FieldDescriptor AddField(string name, string fullyQualifiedTypeName, IDictionary<string, object> attachedData)
+        //TODO should isCollection be part of attached data?
+        public FieldDescriptor AddField(string name, string fullyQualifiedTypeName, bool isCollection, IDictionary<string, object> attachedData)
         {
-            var field = new FieldDescriptor(name, fullyQualifiedTypeName, false, attachedData);
-            _fields.Add(field);
-            return field;
-        }
-
-        public FieldDescriptor AddCollectionField(string name, string fullyQualifiedTypeName, IDictionary<string, object> attachedData)
-        {
-            var field = new FieldDescriptor(name, fullyQualifiedTypeName, true, attachedData);
+            var field = new FieldDescriptor(name, fullyQualifiedTypeName, isCollection, attachedData);
             _fields.Add(field);
             return field;
         }
@@ -54,14 +48,13 @@ namespace Codge.DataModel.Descriptors
 
     public static class CompositeTypeDescriptorExtentions
     {
+        public static FieldDescriptor AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName, bool isCollection)
+        {
+            return descriptor.AddField(name, fullyQualifiedTypeName, isCollection, new Dictionary<string, object>());
+        }
         public static FieldDescriptor AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName)
         {
-            return descriptor.AddField(name, fullyQualifiedTypeName, new Dictionary<string, object>());
-        }
-
-        public static FieldDescriptor AddCollectionField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName)
-        {
-            return descriptor.AddCollectionField(name, fullyQualifiedTypeName, new Dictionary<string, object>());
+            return descriptor.AddField(name, fullyQualifiedTypeName, false);
         }
     }
 }
