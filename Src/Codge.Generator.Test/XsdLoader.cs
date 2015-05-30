@@ -21,11 +21,13 @@ namespace Codge.Generator.Test
             var testCase = TestSystem.GetTestCase("LoadModelXsd");
 
             ModelDescriptor modelDescriptor;
-            var typeSystem = new TypeSystem();
             var schema = SchemaLoader.Load(@"..\..\..\Codge.Generator\Presentations\Xml\Model.xsd");
-            modelDescriptor = ModelLoader.Load(typeSystem, schema, "MyModel");
+            modelDescriptor = ModelLoader.Load(schema, "MyModel");
+
             var compiler = new ModelCompiler();
+            var typeSystem = new TypeSystem();
             var model = compiler.Compile(typeSystem, modelDescriptor);
+
             testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "TypeSystem.xml", true);
         }
 
@@ -34,14 +36,14 @@ namespace Codge.Generator.Test
         {
             var testCase = TestSystem.GetTestCase("LoadXsd");
 
-            var typeSystem = new TypeSystem();
             ModelDescriptor modelDescriptor;
             using (var stream = testCase.GetStream("Test.xsd"))
             {
                 var schema = SchemaLoader.Load(stream);
-                modelDescriptor = ModelLoader.Load(typeSystem, schema, "AModel");
+                modelDescriptor = ModelLoader.Load(schema, "AModel");
             }
 
+            var typeSystem = new TypeSystem();
             var compiler = new ModelCompiler();
             var model = compiler.Compile(typeSystem, modelDescriptor);
 

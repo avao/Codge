@@ -60,13 +60,11 @@ namespace Codge.Generator.Console
         {
             System.Console.WriteLine("Loading model [" + path + "]");
 
-            var typeSystem = new TypeSystem();
-
             ModelDescriptor model;
             if(path.ToLower().EndsWith(".xsd"))
             {//loader type selection
                 var schema = Codge.Generator.Presentations.Xsd.SchemaLoader.Load(path);
-                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(typeSystem, schema, modelName);
+                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(schema, modelName);
             }
             else
             {
@@ -74,6 +72,7 @@ namespace Codge.Generator.Console
                 model = Codge.Generator.Presentations.Xml.ModelLoader.Load(reader);
             }
 
+            var typeSystem = new TypeSystem();
             var compiler = new ModelCompiler();
             return compiler.Compile(typeSystem, model);
         }

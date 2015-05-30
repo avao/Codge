@@ -15,7 +15,7 @@ namespace Codge.Generator.Presentations.Xsd
     public class ModelLoader
     {
         //TODO pass schemaSet in?
-        public static ModelDescriptor Load(TypeSystem typeSystem, XmlSchema schema, string modelName)
+        public static ModelDescriptor Load(XmlSchema schema, string modelName)
         {
             var set = new XmlSchemaSet();
             set.Add(schema);
