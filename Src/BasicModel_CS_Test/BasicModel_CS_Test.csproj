@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="XsdsBasedSerialisationTest.cs" />
     <Compile Include="SerialisationTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\Generated\CS\BasicModel_CS.csproj">
       <Project>{44778cbd-f88f-4cc1-b0b1-eff8637cdcc9}</Project>
       <Name>BasicModel_CS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Generated\CS_xsd\BasicXsdBased.csproj">
+      <Project>{1b171528-c478-4b91-a055-54e5818d30d7}</Project>
+      <Name>BasicXsdBased</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj">
       <Project>{03057e90-b954-4875-8865-e5b03aaa7267}</Project>

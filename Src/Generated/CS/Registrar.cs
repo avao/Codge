@@ -1,6 +1,6 @@
 using BasicModel.CS.Serialisation;
 
-namespace Serialisers
+namespace Serialisers.rootNs
 {
 
 	public static class Registrar

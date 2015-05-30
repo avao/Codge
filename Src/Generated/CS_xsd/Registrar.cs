@@ -1,6 +1,6 @@
 using BasicModel.CS.Serialisation;
 
-namespace Serialisers
+namespace Serialisers.XsdBasedModel
 {
 
 	public static class Registrar

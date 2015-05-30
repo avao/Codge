@@ -2,7 +2,7 @@
 
 namespace Types.rootNs
 {
-	enum testEnum
+	public enum testEnum
 	{
 
 		enumValue1

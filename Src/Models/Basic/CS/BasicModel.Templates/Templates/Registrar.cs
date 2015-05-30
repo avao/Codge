@@ -31,9 +31,15 @@ namespace BasicModel.Templates.CS.Templates
         /// </summary>
         public override string TransformText()
         {
-            this.Write("using BasicModel.CS.Serialisation;\r\n\r\nnamespace Serialisers\r\n{\r\n\r\n\tpublic static " +
-                    "class Registrar\r\n\t{\r\n\t\tpublic static void RegisterSerialisers(SerialisationConte" +
-                    "xt context)\r\n\t\t{\r\n");
+            this.Write("using BasicModel.CS.Serialisation;\r\n\r\nnamespace Serialisers.");
+            
+            #line 11 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Registrar.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Model.Namespace.GetFullName(".")));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n{\r\n\r\n\tpublic static class Registrar\r\n\t{\r\n\t\tpublic static void RegisterSerialise" +
+                    "rs(SerialisationContext context)\r\n\t\t{\r\n");
             
             #line 18 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Registrar.tt"
 

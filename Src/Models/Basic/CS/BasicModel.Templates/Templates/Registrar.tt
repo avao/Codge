@@ -8,7 +8,7 @@
 <#@ import namespace="Codge.Generator" #>
 using BasicModel.CS.Serialisation;
 
-namespace Serialisers
+namespace Serialisers.<#= Model.Namespace.GetFullName(".") #>
 {
 
 	public static class Registrar
