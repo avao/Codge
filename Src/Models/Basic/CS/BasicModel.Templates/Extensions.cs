@@ -60,8 +60,8 @@ namespace BasicModel.Templates.CS
             }
             else if (type.IsBuiltIn())
             {
-                switch(type.Name)
-                { 
+                switch (type.Name)
+                {
                     case "bool":
                         return "Boolean";
                     case "string":
@@ -88,7 +88,7 @@ namespace BasicModel.Templates.CS
         public static string GetNativeType(this CompositeType.Field field)
         {
             if (field.Type.IsPrimitive())
-                return "string"; //TODO map primitives to native types
+                return "string";
 
             //TODO other hacks
             if (field.IsCollection)
@@ -99,7 +99,7 @@ namespace BasicModel.Templates.CS
         }
 
 
-        static HashSet<string> _reservedNames = new HashSet<string> { "string", "String", "byte", "Byte", "decimal", "Decimal", "double", "Double", "float", "Float", "int", "Int", "long", "Long","short", "Short"};
+        static HashSet<string> _reservedNames = new HashSet<string> { "string", "String", "byte", "Byte", "decimal", "Decimal", "double", "Double", "float", "Float", "int", "Int", "long", "Long", "short", "Short" };
         private static bool IsMemberNameAllowed(string name)
         {
             return !_reservedNames.Contains(name);
@@ -107,12 +107,12 @@ namespace BasicModel.Templates.CS
 
         public static string GetMemberName(this CompositeType type, CompositeType.Field field)
         {
-            if(type.Name == field.Name)
+            if (type.Name == field.Name)
             {
                 return field.Name + "1";//TODO hack
             }
 
-            if(!IsMemberNameAllowed(field.Name))
+            if (!IsMemberNameAllowed(field.Name))
             {
                 return field.Name + "_";
             }

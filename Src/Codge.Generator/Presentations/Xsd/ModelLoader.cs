@@ -69,12 +69,6 @@ namespace Codge.Generator.Presentations.Xsd
             return modelDescriptor;
         }
 
-        static int id = 3000;
-        private static int GetId(string typeName)
-        {//|TODO
-            return id++;
-        }
-
         private static void processSimpleType(NamespaceDescriptor namespaceDescriptor, XmlSchemaSimpleType simpleType)
         {
             var facets = GetEnumerationFacets(simpleType);
