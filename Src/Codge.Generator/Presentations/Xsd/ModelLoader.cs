@@ -57,7 +57,7 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static void processSimpleType(NamespaceDescriptor namespaceDescriptor, XmlSchemaSimpleType simpleType)
         {
-            var facets = GetEnumerationFacets(simpleType);
+            var facets = simpleType.GetEnumerationFacets();
             if (facets.Any())
             {
                 var descriptor = namespaceDescriptor.CreateEnumerationType(simpleType.Name);
@@ -211,38 +211,13 @@ namespace Codge.Generator.Presentations.Xsd
         }
 
 
-        private static IEnumerable<XmlSchemaEnumerationFacet> GetEnumerationFacets(XmlSchemaSimpleType simpleType)
-        {
-            if (simpleType.Content != null)
-            {
-                var restriction = simpleType.Content as XmlSchemaSimpleTypeRestriction;
-                if (restriction != null && restriction.Facets != null && restriction.Facets.Count > 0)
-                {
-                    foreach (var facet in restriction.Facets)
-                    {
-                        var item = facet as XmlSchemaEnumerationFacet;
-                        if (item == null)
-                            yield break;
-
-                        yield return item;
-                    }
-                }
-            }
-            yield break;
-        }
-
-        private static bool IsEnumeration(XmlSchemaSimpleType simpleType)
-        {
-            return GetEnumerationFacets(simpleType).Any();
-        }
-
         private static string GetTypeForAnElement(XmlSchemaElement element)
         {
             if (element.Name != null)
             {
                 XmlSchemaType type = element.ElementSchemaType;
                 var simpleType = type as XmlSchemaSimpleType;
-                if (simpleType != null && IsEnumeration(simpleType))
+                if (simpleType != null && simpleType.IsEnumeration())
                 {
                     return ConvertSchemaType(simpleType.QualifiedName);
                 }
@@ -276,15 +251,13 @@ namespace Codge.Generator.Presentations.Xsd
                 if (element != null)
                 {
                     string type = GetTypeForAnElement(element);
-
                     if (string.IsNullOrEmpty(type))
                     {
                         var elementType = element.ElementSchemaType as XmlSchemaComplexType;
                         if (elementType != null)
                         {
-                            if (elementType.ContentModel == null && elementType.Attributes.Count == 0)
+                            if (elementType.IsEmptyType())
                             {
-                                //empty complex type
                                 type = element.Name + "_EmptyComplex";
                                 if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
                                     descriptor.Namespace.CreateCompositeType(type);
@@ -297,9 +270,8 @@ namespace Codge.Generator.Presentations.Xsd
                         }
                     }
 
-                    FieldDescriptor field;
                     string fieldName = element.Name != null ? element.Name : element.RefName.Name;
-                    field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1);
+                    FieldDescriptor field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1);
 
                     if (isOptional || element.MinOccurs == 0)
                         field.AttachedData.Add("isOptional", true);
@@ -310,24 +282,23 @@ namespace Codge.Generator.Presentations.Xsd
                     if (choice != null)
                     {
                         AddFields(descriptor, choice.Items, true);
+                        return;
+                    }
+
+                    var groupRef = item as XmlSchemaGroupRef;
+                    if (groupRef != null)
+                    {
+                        AddFields(descriptor, groupRef.Particle.Items, false);
+                        return;
+                    }
+
+                    if (item.LineNumber == 0 && item.LinePosition == 0)
+                    {//empty particle
+                        return;
                     }
                     else
                     {
-                        var groupRef = item as XmlSchemaGroupRef;
-                        if (groupRef != null)
-                        {
-                            AddFields(descriptor, groupRef.Particle.Items, false);
-                        }
-                        else
-                        {
-                            if (item.LineNumber == 0 && item.LinePosition == 0)
-                            {//empty particle
-                            }
-                            else
-                            {
-                                throw new NotSupportedException();
-                            }
-                        }
+                        throw new NotSupportedException();
                     }
                 }
             }
