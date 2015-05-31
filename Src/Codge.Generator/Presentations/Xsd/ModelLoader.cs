@@ -258,7 +258,7 @@ namespace Codge.Generator.Presentations.Xsd
                         {
                             if (elementType.IsEmptyType())
                             {
-                                type = element.Name + "_EmptyComplex";
+                                type = element.Name + "_EmptyComplex"; //TODO should there be the only empty complex?
                                 if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
                                     descriptor.Namespace.CreateCompositeType(type);
                             }
