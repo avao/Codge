@@ -66,7 +66,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             #line hidden
             
             #line 22 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Enum.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
+            this.Write(this.ToStringHelper.ToStringWithCulture(item.GetEnumItemName()));
             
             #line default
             #line hidden

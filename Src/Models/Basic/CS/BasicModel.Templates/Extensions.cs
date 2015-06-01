@@ -125,6 +125,22 @@ namespace BasicModel.Templates.CS
             return "_" + field.Name;
         }
 
+        public static string GetEnumItemName(this EnumerationType.Item item)
+        {
+            var builder = new StringBuilder(item.Name.Length);
+            if(Char.IsDigit(item.Name[0]))
+                builder.Append('_');
+
+            foreach(char c  in item.Name)
+            {
+                if (Char.IsLetterOrDigit(c))
+                    builder.Append(c);
+                else
+                    builder.Append('_');
+            }
+            return builder.ToString();
+        }
+
         public static string GetCtorParamters(this CompositeType type)
         {
             return string.Join(",", type.Fields.Select(f => f.GetNativeType() + " " + GetParameterName(f)));

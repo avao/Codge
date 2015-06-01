@@ -19,7 +19,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					{
 						string prefix = first ? "" : ",";
 #>
-		<#= prefix #><#= item.Name #>
+		<#= prefix #><#= item.GetEnumItemName() #>
 <#						
 						first=false;
 					}

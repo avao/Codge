@@ -209,6 +209,8 @@
     <Type name="enumType">
       <Item name="item1" value="0" />
       <Item name="item2" value="1" />
+      <Item name="1itemStartsWithDigit" value="2" />
+      <Item name="item With Spaces" value="3" />
     </Type>
     <Type name="elementWithEmbededType">
       <Field name="aSubElement" type="string">
