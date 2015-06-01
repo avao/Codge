@@ -1,5 +1,6 @@
 using BasicModel.CS.Serialisation;
 using System.Xml;
+using Types.rootNs.nestedNs;
 
 namespace Serialisers.rootNs.nestedNs
 {

@@ -9,6 +9,22 @@ namespace Types.rootNs
 		,enumValue2
 	
 	}
+
+    public static class testEnumConverter
+	{
+        private static string[] _values = new string[2];
+
+        static testEnumConverter()
+        {
+		    _values[(int)testEnum.enumValue1] = "enumValue1";
+		    _values[(int)testEnum.enumValue2] = "enumValue2";
+        }
+
+        public static string ConvertToString(testEnum value)
+        {
+            return _values[(int)value];
+	    }
+	}
 }
 
 
