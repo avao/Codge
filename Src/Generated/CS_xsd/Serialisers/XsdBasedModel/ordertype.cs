@@ -1,5 +1,6 @@
 using BasicModel.CS.Serialisation;
 using System.Xml;
+using Types.XsdBasedModel;
 
 namespace Serialisers.XsdBasedModel
 {
@@ -17,9 +18,9 @@ namespace Serialisers.XsdBasedModel
 			Utils.SerialiseIfHasValue(writer, "billto", obj.billto, context);
 			Utils.SerialiseIfHasValue(writer, "shipto", obj.shipto, context);
 			Utils.SerialiseIfHasValue(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);
-			Utils.SerialiseEnumAsNameIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, context);
+			Utils.SerialiseEnumAsStringIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, simpleTypeConverter.ConvertToString, context);
 			Utils.SerialiseIfHasValue(writer, "elemEmptyType", obj.elemEmptyType, context);
-			Utils.SerialiseEnumAsNameIfHasValue(writer, "enumField", obj.enumField, context);
+			Utils.SerialiseEnumAsStringIfHasValue(writer, "enumField", obj.enumField, enumTypeConverter.ConvertToString, context);
 		}
 
 	}

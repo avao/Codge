@@ -26,6 +26,28 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 #>
 	
 	}
+
+    public static class <#= Type.Name #>Converter
+	{
+        private static string[] _values = new string[<#= Type.Items.Count() #>];
+
+        static <#= Type.Name #>Converter()
+        {
+<#				
+					foreach(var item in Type.Items)
+					{
+#>
+		    _values[(int)<#= Type.Name #>.<#= item.GetEnumItemName() #>] = "<#= item.Name #>";
+<#						
+					}
+#>
+        }
+
+        public static string ConvertToString(<#= Type.Name #> value)
+        {
+            return _values[(int)value];
+	    }
+	}
 }
 
 

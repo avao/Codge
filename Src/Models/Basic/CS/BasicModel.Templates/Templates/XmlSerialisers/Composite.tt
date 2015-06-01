@@ -8,6 +8,7 @@
 <#@ import namespace="Codge.Generator" #>
 using BasicModel.CS.Serialisation;
 using System.Xml;
+using Types.<#= Type.Namespace.GetFullName(".") #>;
 
 namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 {
@@ -73,7 +74,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
                                 if(field.IsOptional())
                                 {
 #>
-			Utils.SerialiseEnumAsNameIfHasValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
+			Utils.SerialiseEnumAsStringIfHasValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, <#= field.Type.Name #>Converter.ConvertToString, context);
 <#
                                 }
                                 else

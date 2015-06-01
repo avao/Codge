@@ -88,6 +88,21 @@ namespace BasicModel.CS.Serialisation
             }
         }
 
+        public static void SerialiseEnumAsString<T>(XmlWriter writer, string tag, T value, Func<T, string> mapValueFunc, SerialisationContext context)
+            where T : struct
+        {
+            SerialiseValue(writer, tag, mapValueFunc(value), context);
+        }
+
+
+        public static void SerialiseEnumAsStringIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, Func<T, string> mapValueFunc, SerialisationContext context)
+            where T : struct
+        {
+            if (value.HasValue)
+            {
+                SerialiseEnumAsString(writer, tag, value.Value, mapValueFunc, context);
+            }
+        }
 
         public static void SerialiseIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, SerialisationContext context)
             where T : struct

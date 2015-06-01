@@ -22,7 +22,7 @@ namespace BasicModel_CS_Test
         public void SerialiseToXml()
         {
             var obj = new Types.XsdBasedModel.ordertype();
-            obj.enumField = enumType.item2;
+            obj.enumField = enumType.item_With_Spaces;
             var testCase = TestSystem.GetTestCase("XmlXsdBased");
 
             SerialisationContext context = new SerialisationContext();
