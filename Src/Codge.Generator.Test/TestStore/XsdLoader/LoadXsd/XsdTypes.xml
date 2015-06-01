@@ -39,6 +39,9 @@
       <Field name="enumField" type="AModel.enumType">
         <isOptional>True</isOptional>
       </Field>
+      <Field name="enumFieldCollection" type="AModel.enumType" isCollection="true">
+        <isOptional>True</isOptional>
+      </Field>
     </Type>
     <Type name="elemEmptyType_EmptyComplex" />
     <Type name="complexTypeWithContent">

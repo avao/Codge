@@ -1,3 +1,4 @@
 <order>
   <enumField>item With Spaces</enumField>
+  <enumFieldCollection>item With Spaces</enumFieldCollection>
 </order>

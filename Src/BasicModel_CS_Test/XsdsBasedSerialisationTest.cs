@@ -23,6 +23,7 @@ namespace BasicModel_CS_Test
         {
             var obj = new Types.XsdBasedModel.ordertype();
             obj.enumField = enumType.item_With_Spaces;
+            obj.enumFieldCollection = new[] { enumType.item_With_Spaces };
             var testCase = TestSystem.GetTestCase("XmlXsdBased");
 
             SerialisationContext context = new SerialisationContext();

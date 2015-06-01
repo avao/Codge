@@ -31,6 +31,12 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 			Utils.SerialiseBuiltInCollection(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#				
 							}
+                            else if(field.Type.IsEnum())
+                            {
+#>
+			Utils.SerialiseEnumCollectionAsString(writer, "<#= field.Name #>", obj.<#= fieldName #>, <#= field.Type.Name #>Converter.ConvertToString, context);
+<#				
+                            }
 							else
 							{
 #>

@@ -21,6 +21,7 @@ namespace Serialisers.XsdBasedModel
 			Utils.SerialiseEnumAsStringIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, simpleTypeConverter.ConvertToString, context);
 			Utils.SerialiseIfHasValue(writer, "elemEmptyType", obj.elemEmptyType, context);
 			Utils.SerialiseEnumAsStringIfHasValue(writer, "enumField", obj.enumField, enumTypeConverter.ConvertToString, context);
+			Utils.SerialiseEnumCollectionAsString(writer, "enumFieldCollection", obj.enumFieldCollection, enumTypeConverter.ConvertToString, context);
 		}
 
 	}

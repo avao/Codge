@@ -37,6 +37,18 @@ namespace BasicModel.CS.Serialisation
             }
         }
 
+        public static void SerialiseEnumCollectionAsString<T>(XmlWriter writer, string name, IEnumerable<T> items, Func<T, string> mapValueFunc, SerialisationContext context)
+        {
+            if (items == null)
+                return;
+            foreach (var item in items)
+            {
+                writer.WriteStartElement(name);
+                writer.WriteValue(mapValueFunc(item));
+                writer.WriteEndElement();
+            }
+        }
+
         public static void SerialiseCollection<T>(XmlWriter writer, string name, IEnumerable<T> items, SerialisationContext context)
         {
             if (items == null)
@@ -46,6 +58,7 @@ namespace BasicModel.CS.Serialisation
                 Serialise(writer, name, item, context);
             }
         }
+
 
         public static void Serialise<T>(XmlWriter writer, string tag, T o, SerialisationContext context)
         {
