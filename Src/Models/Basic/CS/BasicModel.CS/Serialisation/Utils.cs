@@ -17,8 +17,12 @@ namespace BasicModel.CS.Serialisation
 
         public static string Serialise(object o, string rootTag, SerialisationContext context)
         {
+            XmlWriterSettings settings = new XmlWriterSettings {
+                    OmitXmlDeclaration = true
+                };
+
             var sb = new StringBuilder();
-            using (var writer = XmlWriter.Create(sb))
+            using (var writer = XmlWriter.Create(sb, settings))
             {
                 Serialise(writer, rootTag, o, context);
             }
