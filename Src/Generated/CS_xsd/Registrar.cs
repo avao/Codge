@@ -10,6 +10,7 @@ namespace Serialisers.XsdBasedModel
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithAField>(new Serialisers.XsdBasedModel.complexTypeWithAField());
 			context.RegisterSerialiser<Types.XsdBasedModel.emptyComplexType>(new Serialisers.XsdBasedModel.emptyComplexType());
 			context.RegisterSerialiser<Types.XsdBasedModel.ordertype>(new Serialisers.XsdBasedModel.ordertype());
+			context.RegisterSerialiser<Types.XsdBasedModel.elementWithEmbededTypeInPlace>(new Serialisers.XsdBasedModel.elementWithEmbededTypeInPlace());
 			context.RegisterSerialiser<Types.XsdBasedModel.elemEmptyType_EmptyComplex>(new Serialisers.XsdBasedModel.elemEmptyType_EmptyComplex());
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithContent>(new Serialisers.XsdBasedModel.complexTypeWithContent());
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithContentAndParentField>(new Serialisers.XsdBasedModel.complexTypeWithContentAndParentField());

@@ -18,7 +18,7 @@
       <Field name="customer" type="string">
         <isOptional>True</isOptional>
       </Field>
-      <Field name="orderdetails" type="string">
+      <Field name="elementWithEmbededTypeInPlace" type="AModel.elementWithEmbededTypeInPlace">
         <isOptional>True</isOptional>
       </Field>
       <Field name="billto" type="int">
@@ -40,6 +40,14 @@
         <isOptional>True</isOptional>
       </Field>
       <Field name="enumFieldCollection" type="AModel.enumType" isCollection="true">
+        <isOptional>True</isOptional>
+      </Field>
+    </Type>
+    <Type name="elementWithEmbededTypeInPlace">
+      <Field name="aField" type="string">
+        <isAttribute>True</isAttribute>
+      </Field>
+      <Field name="extraField" type="string">
         <isOptional>True</isOptional>
       </Field>
     </Type>
@@ -145,7 +153,7 @@
       <Field name="int" type="int">
         <isOptional>True</isOptional>
       </Field>
-      <Field name="integer" type="decimal">
+      <Field name="integer" type="int">
         <isOptional>True</isOptional>
       </Field>
       <Field name="language" type="string">

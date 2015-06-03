@@ -14,7 +14,7 @@ namespace Serialisers.XsdBasedModel
             if(obj.status != null)
                 writer.WriteAttributeString("status", obj.status.ToString());
 			Utils.SerialiseIfHasValue(writer, "customer", obj.customer, context);
-			Utils.SerialiseIfHasValue(writer, "orderdetails", obj.orderdetails, context);
+			Utils.SerialiseIfHasValue(writer, "elementWithEmbededTypeInPlace", obj.elementWithEmbededTypeInPlace, context);
 			Utils.SerialiseIfHasValue(writer, "billto", obj.billto, context);
 			Utils.SerialiseIfHasValue(writer, "shipto", obj.shipto, context);
 			Utils.SerialiseIfHasValue(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);

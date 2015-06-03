@@ -223,12 +223,6 @@ namespace Codge.Generator.Presentations.Xsd
                 }
                 else
                 {
-                    if (element.ElementSchemaType.BaseXmlSchemaType != null
-                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name != "anySimpleType"
-                            && element.ElementSchemaType.BaseXmlSchemaType.QualifiedName.Name != "anyType")
-                    {
-                        type = element.ElementSchemaType.BaseXmlSchemaType;
-                    }
                     return ConvertSchemaType(type.QualifiedName);
                 }
             }

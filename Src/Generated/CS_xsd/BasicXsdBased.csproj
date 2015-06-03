@@ -47,6 +47,8 @@
     <Compile Include="Serialisers\XsdBasedModel\emptyComplexType.cs" />
     <Compile Include="Types\XsdBasedModel\ordertype.cs" />
     <Compile Include="Serialisers\XsdBasedModel\ordertype.cs" />
+    <Compile Include="Types\XsdBasedModel\elementWithEmbededTypeInPlace.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededTypeInPlace.cs" />
     <Compile Include="Types\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
     <Compile Include="Serialisers\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
     <Compile Include="Types\XsdBasedModel\complexTypeWithContent.cs" />

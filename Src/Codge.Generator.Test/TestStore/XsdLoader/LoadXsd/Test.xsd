@@ -4,7 +4,17 @@
   <xs:group name="custGroup">
     <xs:sequence>
       <xs:element name="customer" type="xs:string"/>
-      <xs:element name="orderdetails" type="xs:string"/>
+      <xs:element name="elementWithEmbededTypeInPlace" >
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="complexTypeWithAField">
+              <xs:sequence>
+                <xs:element name="extraField" type="xs:string"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="billto" type="xs:int" minOccurs="0"/>
       <xs:element name="shipto" type="xs:string"/>
       <xs:element ref="elementWithEmbededType"/>
