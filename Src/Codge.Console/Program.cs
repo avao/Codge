@@ -9,33 +9,42 @@ using Codge.Generator.Tasks;
 using Common.Logging;
 using Codge.DataModel;
 using Codge.DataModel.Descriptors;
+using CommandLine;
 
 
 namespace Codge.Generator.Console
 {
+    class Options
+    {
+        [Option('m', "model", Required = true, HelpText = "Path to a model file (xml or xsd)")]
+        public string Model { get; set; }
+
+        [Option('n', "modelName", Required = false, HelpText = "Name of the model.", DefaultValue="TODO")]
+        public string ModelName { get; set; }
+
+        [Option('o', "outputDir", Required = false, HelpText = "Path to a output directory.", DefaultValue = @"../../../Generated/CS")]
+        public string OutputDir { get; set; }
+    }
+
     class Program
     {
-        //../../../Generated/TestModel.xml  ../../../Generated/CS
+        //-m "%scriptDir%\Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd" -o "%scriptDir%/Generated/CS_xsd" -n XsdBasedModel
         static void Main(string[] args)
         {
             ILog logger = LogManager.GetLogger("");
-            string modelPath = args[0];
-            string outputDir = @"../../../Generated/CS";
-            if(args.Length >1)//TODO use console args for argument parsing
-                outputDir = args[1];
+
+            var options = new Options();
+            if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
+            {
+                var model = LoadModel(options.Model, options.ModelName);
+
+                ProcessTemplates(LoadConfig(options.OutputDir),
+                                 new BasicModel.Templates.CS.TaskFactory(logger),
+                                 model,
+                                 logger);
+            }
+
             
-            var modelName = "TODO";
-            if (args.Length > 2)
-                modelName = args[2];
-
-
-            var model = LoadModel(modelPath, modelName);
-
-            ProcessTemplates(LoadConfig(outputDir),
-                             new BasicModel.Templates.CS.TaskFactory(logger),
-                             model,
-                             logger);
-
 
           /*  ProcessTemplates(LoadConfig(@"../../../Generated/CPP"),
                              new BasicModel.Templates.CPP.TaskFactory(logger),
