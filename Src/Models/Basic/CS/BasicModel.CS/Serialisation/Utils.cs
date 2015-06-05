@@ -151,5 +151,14 @@ namespace BasicModel.CS.Serialisation
             }
         }
 
+        public static void SerialiseCDataIfHasValue(XmlWriter writer, string tag, string value, SerialisationContext context)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                writer.WriteStartElement(tag);
+                writer.WriteCData(value);
+                writer.WriteEndElement();
+            }
+        }
     }
 }
