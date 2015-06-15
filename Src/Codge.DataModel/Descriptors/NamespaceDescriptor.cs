@@ -16,7 +16,7 @@ namespace Codge.DataModel.Descriptors
         private IList<TypeDescriptor> _types;
         public IEnumerable<TypeDescriptor> Types { get { return _types; } }
 
-        internal NamespaceDescriptor(string name)
+        public NamespaceDescriptor(string name)
         {
             _namespaces = new List<NamespaceDescriptor>();
             _types = new List<TypeDescriptor>();
@@ -50,6 +50,12 @@ namespace Codge.DataModel.Descriptors
             var type = new EnumerationTypeDescriptor(name, this);
             _types.Add(type);
             return type;
+        }
+
+        public void Add(NamespaceDescriptor ns)
+        {
+            //TODO duplicates
+            _namespaces.Add(ns);
         }
 
 

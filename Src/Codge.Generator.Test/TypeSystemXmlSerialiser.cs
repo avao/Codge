@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Codge.DataModel;
+using System.Xml.Linq;
+using Codge.DataModel.Descriptors;
 
 namespace Codge.Generator.Test
 {
@@ -47,7 +49,7 @@ namespace Codge.Generator.Test
             else
             {
                 var enumeration = type as EnumerationType;
-                if(enumeration != null)
+                if (enumeration != null)
                 {
                     WriteEnumerationType(writer, enumeration);
                 }
@@ -73,7 +75,7 @@ namespace Codge.Generator.Test
                 writer.WriteStartElement("Field");
                 writer.WriteAttributeString("name", field.Name);
                 writer.WriteAttributeString("type", field.Type.GetFullName("."));
-                if(field.IsCollection)
+                if (field.IsCollection)
                 {
                     writer.WriteAttributeString("isCollection", "true");
                 }

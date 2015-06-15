@@ -31,7 +31,7 @@ namespace Codge.DataModel.Descriptors
         IList<FieldDescriptor> _fields;
         public IEnumerable<FieldDescriptor> Fields { get { return _fields; } }
 
-        internal CompositeTypeDescriptor(string name, NamespaceDescriptor nameSpace)
+        public CompositeTypeDescriptor(string name, NamespaceDescriptor nameSpace)
             : base(name, nameSpace)
         {
             _fields = new List<FieldDescriptor>();

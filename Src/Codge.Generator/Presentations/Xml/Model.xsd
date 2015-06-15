@@ -34,6 +34,7 @@
 
   <xs:complexType name="Enumeration">
     <xs:sequence>
+      <!-- TODO Item instead of item -->
       <xs:element name="item" type="Item" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>

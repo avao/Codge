@@ -12,10 +12,16 @@ namespace Codge.DataModel.Descriptors
         public NamespaceDescriptor RootNamespace { get; private set; }
 
         public ModelDescriptor(string modelName, string rootNamespace)
+            : this(modelName, new NamespaceDescriptor(rootNamespace))
+        {
+            //TODO check "."
+        }
+
+        public ModelDescriptor(string modelName, NamespaceDescriptor rootNamespace)
         {
             Name = modelName;
             //TODO check "."
-            RootNamespace = new NamespaceDescriptor(rootNamespace);
+            RootNamespace = rootNamespace;
         }
 
     }

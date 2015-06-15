@@ -49,5 +49,6 @@ namespace Codge.Generator.Test
 
             testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "XsdTypes.xml", true);
         }
+
     }
 }
