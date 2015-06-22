@@ -279,8 +279,8 @@ namespace Codge.Generator.Presentations.Xml {
         private string nameField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("item")]
-        public Item[] item {
+        [System.Xml.Serialization.XmlElementAttribute("Item")]
+        public Item[] Item {
             get {
                 return this.itemField;
             }

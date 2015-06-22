@@ -69,6 +69,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TestStore\XsdLoader\LoadXsd\Test.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestStore\ModelBuilding\CollectionField\TypeSystem.xml" />
+    <Content Include="TestStore\ModelBuilding\DependentTypes\TypeSystem.xml" />
+    <Content Include="TestStore\ModelBuilding\Enumeration\TypeSystem.xml" />
+    <Content Include="TestStore\ModelSerialisation\RoundTrip\Model.xml" />
+    <Content Include="TestStore\ModelSerialisation\RoundTrip\Serialised.xml" />
+    <Content Include="TestStore\XsdLoader\LoadModelXsd\TypeSystem.xml" />
+    <Content Include="TestStore\XsdLoader\LoadXsd\XsdTypes.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

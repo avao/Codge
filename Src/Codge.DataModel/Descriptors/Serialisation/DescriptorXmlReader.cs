@@ -146,7 +146,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             if (ReadToDescendantElement(reader))
             {
                 ReadEnumItem(reader, descriptor);
-                while (reader.ReadToNextSibling("item"))
+                while (reader.ReadToNextSibling("Item"))
                 {
                     ReadEnumItem(reader, descriptor);
                 }

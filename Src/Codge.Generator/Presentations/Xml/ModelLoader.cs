@@ -65,7 +65,7 @@ namespace Codge.Generator.Presentations.Xml
                                 var descriptor = namespaceDescriptor.CreateEnumerationType(enumeration.name);
 
                                 int i = 0;
-                                foreach (var item in enumeration.item)
+                                foreach (var item in enumeration.Item)
                                 {
                                     if (item.valueSpecified)
                                     {

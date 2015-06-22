@@ -36,7 +36,7 @@
       <Field name="name" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="item" type="MyModel.Item" isCollection="true">
+      <Field name="Item" type="MyModel.Item" isCollection="true">
         <isOptional>True</isOptional>
       </Field>
     </Type>
