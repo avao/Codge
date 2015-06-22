@@ -133,7 +133,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             {
                 if(reader.NodeType == XmlNodeType.Element)
                 {
-                    reader.readEle
+                   // reader.readEle
                 }
                 ReadEndElement(reader);
             }
