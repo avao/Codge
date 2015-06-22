@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Codge.DataModel.Descriptors.Serialisation
 {
-    public static class DescriptorXmlSerialiser
+    public static class DescriptorXmlReader
     {
         public static ModelDescriptor Read(XmlReader reader, string modelName, string rootNamespace)
         {
@@ -17,7 +17,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             return new ModelDescriptor(modelName, ns);
         }
 
-        public static NamespaceDescriptor ReadNamespace(XmlReader reader)
+        private static NamespaceDescriptor ReadNamespace(XmlReader reader)
         {
             bool bEmpty = reader.IsEmptyElement;
             reader.MoveToFirstAttribute();
@@ -37,7 +37,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             return ns;
         }
 
-        public static void ReadNamespaceItem(XmlReader reader, NamespaceDescriptor ns)
+        private static void ReadNamespaceItem(XmlReader reader, NamespaceDescriptor ns)
         {
             switch (reader.Name)
             {
@@ -60,7 +60,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             MoveToNonWhitespace(reader);
         }
 
-        public static void ReadPrimitive(XmlReader reader, NamespaceDescriptor namespaceDescriptor)
+        private static void ReadPrimitive(XmlReader reader, NamespaceDescriptor namespaceDescriptor)
         {
             bool bEmpty = reader.IsEmptyElement;
             reader.MoveToFirstAttribute();
@@ -71,7 +71,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
                 ReadEndElement(reader);
         }
 
-        public static void MoveToNonWhitespace(XmlReader reader)
+        private static void MoveToNonWhitespace(XmlReader reader)
         {
             while (reader.NodeType == XmlNodeType.Whitespace)
             {
@@ -79,7 +79,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             }
         }
 
-        public static void ReadEndElement(XmlReader reader)
+        private static void ReadEndElement(XmlReader reader)
         {
             if (reader.IsEmptyElement)
                 reader.Read();//TODO
@@ -87,7 +87,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
                 reader.ReadEndElement();
         }
 
-        public static void ReadComposite(XmlReader reader, NamespaceDescriptor namespaceDescriptor)
+        private static void ReadComposite(XmlReader reader, NamespaceDescriptor namespaceDescriptor)
         {
             reader.MoveToFirstAttribute();
             var descriptor = namespaceDescriptor.CreateCompositeType(reader.Value);
@@ -102,7 +102,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             ReadEndElement(reader);
         }
 
-        public static void ReadField(XmlReader reader, CompositeTypeDescriptor composite)
+        private static void ReadField(XmlReader reader, CompositeTypeDescriptor composite)
         {
             bool bEmpty = reader.IsEmptyElement;
 
@@ -130,10 +130,16 @@ namespace Codge.DataModel.Descriptors.Serialisation
             var descriptor = composite.AddField(name, type, isCollection != null ? bool.Parse(isCollection) : false);
             reader.Read();
             if (!bEmpty)
+            {
+                if(reader.NodeType == XmlNodeType.Element)
+                {
+                    reader.readEle
+                }
                 ReadEndElement(reader);
+            }
         }
 
-        public static void ReadEnum(XmlReader reader, NamespaceDescriptor namespaceDescriptor)
+        private static void ReadEnum(XmlReader reader, NamespaceDescriptor namespaceDescriptor)
         {
             reader.MoveToFirstAttribute();
             var descriptor = namespaceDescriptor.CreateEnumerationType(reader.Value);
@@ -148,7 +154,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             ReadEndElement(reader);
         }
 
-        public static void ReadEnumItem(XmlReader reader, EnumerationTypeDescriptor descriptor)
+        private static void ReadEnumItem(XmlReader reader, EnumerationTypeDescriptor descriptor)
         {
             var item = ReadEnumItem(reader);
             if (item.Value.HasValue)
@@ -157,7 +163,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
                 descriptor.AddItem(item.Key);
         }
 
-        public static KeyValuePair<string, int?> ReadEnumItem(XmlReader reader)
+        private static KeyValuePair<string, int?> ReadEnumItem(XmlReader reader)
         {
             string name = string.Empty;
             int? value = null;
@@ -186,7 +192,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             return new KeyValuePair<string, int?>(name, value);
         }
 
-        public static bool ReadToDescendantElement(XmlReader reader)
+        private static bool ReadToDescendantElement(XmlReader reader)
         {
             //TODO check long and short form of empty elements
             var r = reader.Read();

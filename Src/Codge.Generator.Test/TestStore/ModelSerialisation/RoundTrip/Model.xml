@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Model xmlns="http://codge/Model.xsd">
+  <Namespace name="rootNs">
+    <Enumeration name="testEnum">
+      <item name="enumValue1" />
+      <item name="enumValue2" value="2" />
+    </Enumeration>
+    <Primitive name="myType" />
+    <Composite name="myType2">
+      <Field name="IntField" type="int" />
+      <Field name="BoolField" type="bool" />
+      <Field name="CollectionOfInt" type="int" isCollection="true" />
+      <Field name="CollectionOfComposite" type="nestedNs.typeInNestedNs" isCollection="true" />
+    </Composite>
+    <Namespace name="nestedNs">
+      <Composite name="typeInNestedNs">
+        <Field name="StringField" type="string" />
+      </Composite>
+    </Namespace>
+  </Namespace>
+</Model>
