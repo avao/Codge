@@ -131,12 +131,38 @@ namespace Codge.DataModel.Descriptors.Serialisation
             reader.Read();
             if (!bEmpty)
             {
+                MoveToNonWhitespace(reader);
                 if(reader.NodeType == XmlNodeType.Element)
                 {
-                   // reader.readEle
+                    if(reader.ReadToDescendant("Item"))
+                    {
+                        descriptor.AttachedData.Add(ReadAttachedDataItem(reader));
+                        while(reader.ReadToNextSibling("Item"))
+                        {
+                            descriptor.AttachedData.Add(ReadAttachedDataItem(reader));
+                        }
+                    }
+                    ReadEndElement(reader);
                 }
                 ReadEndElement(reader);
             }
+        }
+
+        private static string ReadRequiredAttribute(XmlReader reader, string name)
+        {
+            if(!reader.MoveToAttribute(name))
+            {
+                throw new NotSupportedException(string.Format("Required attribute [{0}] does not exist.", name));
+            }
+            return reader.Value;
+        }
+
+        private static KeyValuePair<string, object> ReadAttachedDataItem(XmlReader reader)
+        {
+            var item = new KeyValuePair<string, object>(ReadRequiredAttribute(reader, "key"), ReadRequiredAttribute(reader, "value"));
+            reader.MoveToElement();
+            reader.ReadOuterXml();
+            return item;
         }
 
         private static void ReadEnum(XmlReader reader, NamespaceDescriptor namespaceDescriptor)

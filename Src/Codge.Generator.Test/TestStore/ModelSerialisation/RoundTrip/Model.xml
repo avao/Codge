@@ -8,7 +8,11 @@
     <Primitive name="myType" />
     <Composite name="myType2">
       <Field name="IntField" type="int" />
-      <Field name="BoolField" type="bool" />
+      <Field name="BoolField" type="bool">
+        <AttachedData>
+          <Item key="isOptional" value="true" />
+        </AttachedData>
+      </Field>
       <Field name="CollectionOfInt" type="int" isCollection="true" />
       <Field name="CollectionOfComposite" type="nestedNs.typeInNestedNs" isCollection="true" />
     </Composite>

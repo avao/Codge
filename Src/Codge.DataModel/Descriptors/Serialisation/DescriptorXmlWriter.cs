@@ -95,9 +95,17 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteAttributeString("type", descriptor.TypeName);
             if (descriptor.IsCollection)
                 writer.WriteAttributeString("isCollection", "true");
-            foreach(var kvp in descriptor.AttachedData)
+            if(descriptor.AttachedData.Count > 0)
             {
-                writer.WriteElementString(kvp.Key, kvp.Value.ToString());
+                writer.WriteStartElement("AttachedData");
+                foreach (var kvp in descriptor.AttachedData)
+                {
+                    writer.WriteStartElement("Item");
+                    writer.WriteAttributeString("key", kvp.Key);
+                    writer.WriteAttributeString("value", kvp.Value.ToString());
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
             }
             writer.WriteEndElement();
         }

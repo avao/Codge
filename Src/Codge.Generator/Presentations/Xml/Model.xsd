@@ -57,10 +57,24 @@
   </xs:complexType>
   
   <xs:complexType name="Field">
+    <xs:sequence minOccurs="0">
+      <xs:element name="AttachedData" type="AttachedData"/>
+    </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="type" type="xs:string" use="required"/>
     <xs:attribute name="isCollection" type="xs:boolean"/>
   </xs:complexType>
-  
+
+  <xs:complexType name="AttachedData">
+    <xs:sequence>
+      <xs:element name="Item" type="AttachedDataItem" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="AttachedDataItem">
+    <xs:attribute name="key" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
 </xs:schema>
 

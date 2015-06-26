@@ -163,7 +163,44 @@ namespace Codge.Generator.Presentations.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://codge/Model.xsd")]
+    public partial class AttachedDataItem {
+        
+        private string keyField;
+        
+        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string key {
+            get {
+                return this.keyField;
+            }
+            set {
+                this.keyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.18020")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://codge/Model.xsd")]
     public partial class Field {
+        
+        private AttachedDataItem[] attachedDataField;
         
         private string nameField;
         
@@ -172,6 +209,17 @@ namespace Codge.Generator.Presentations.Xml {
         private bool isCollectionField;
         
         private bool isCollectionFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Item", IsNullable=false)]
+        public AttachedDataItem[] AttachedData {
+            get {
+                return this.attachedDataField;
+            }
+            set {
+                this.attachedDataField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
