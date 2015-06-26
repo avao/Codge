@@ -25,7 +25,7 @@ namespace Codge.Generator.Test
             using (var reader = XmlReader.Create(stream))
             {
                 reader.MoveToContent();
-                model = DescriptorXmlReader.Read(reader, "Name", "Namespace");
+                model = DescriptorXmlReader.Read(reader);
             }
 
             var output = new StringBuilder();

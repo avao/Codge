@@ -6,6 +6,9 @@
   <Type name="decimal" />
   <Namespace name="MyModel">
     <Type name="ModelDesc">
+      <Field name="name" type="string">
+        <isAttribute>True</isAttribute>
+      </Field>
       <Field name="Namespace" type="MyModel.NamespaceDesc">
         <isOptional>True</isOptional>
       </Field>

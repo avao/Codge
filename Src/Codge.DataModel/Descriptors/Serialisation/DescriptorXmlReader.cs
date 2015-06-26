@@ -9,8 +9,9 @@ namespace Codge.DataModel.Descriptors.Serialisation
 {
     public static class DescriptorXmlReader
     {
-        public static ModelDescriptor Read(XmlReader reader, string modelName, string rootNamespace)
+        public static ModelDescriptor Read(XmlReader reader)
         {
+            string modelName = ReadRequiredAttribute(reader, "name");
             reader.ReadToDescendant("Namespace");
             var ns = ReadNamespace(reader);
             ReadEndElement(reader);//Model
@@ -154,7 +155,9 @@ namespace Codge.DataModel.Descriptors.Serialisation
             {
                 throw new NotSupportedException(string.Format("Required attribute [{0}] does not exist.", name));
             }
-            return reader.Value;
+            string value = reader.Value;
+            reader.MoveToElement();
+            return value;
         }
 
         private static KeyValuePair<string, object> ReadAttachedDataItem(XmlReader reader)

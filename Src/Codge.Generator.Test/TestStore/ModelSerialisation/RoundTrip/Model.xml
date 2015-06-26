@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Model xmlns="http://codge/Model.xsd">
+<Model name="TestModel" xmlns="http://codge/Model.xsd">
   <Namespace name="rootNs">
     <Enumeration name="testEnum">
       <Item name="enumValue1" />

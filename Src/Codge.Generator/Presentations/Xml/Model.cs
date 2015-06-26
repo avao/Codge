@@ -26,6 +26,8 @@ namespace Codge.Generator.Presentations.Xml {
         
         private NamespaceDesc namespaceField;
         
+        private string nameField;
+        
         /// <remarks/>
         public NamespaceDesc Namespace {
             get {
@@ -33,6 +35,17 @@ namespace Codge.Generator.Presentations.Xml {
             }
             set {
                 this.namespaceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
             }
         }
     }

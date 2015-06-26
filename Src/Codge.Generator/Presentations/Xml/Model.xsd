@@ -12,7 +12,7 @@
     <xs:sequence>
       <xs:element name="Namespace" type="NamespaceDesc"/>
     </xs:sequence>
-    
+    <xs:attribute name="name" type="xs:string"/>
   </xs:complexType>
 
 

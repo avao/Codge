@@ -12,6 +12,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
         public static void Write(XmlWriter writer, ModelDescriptor descriptor)
         {
             writer.WriteStartElement("Model", "http://codge/Model.xsd");
+            writer.WriteAttributeString("name", descriptor.Name);
             Write(writer, descriptor.RootNamespace);
             writer.WriteEndElement();
         }
