@@ -10,8 +10,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Code generation core module</description>
     <copyright>Copyright 2015</copyright>
-    <files>
-      <file src="..\bin\Release\Codge.DataModel.dll"/>
-    </files>
   </metadata>
+  <files>
+    <file src="..\bin\Release\Codge.DataModel.dll"/>
+  </files>
 </package>
