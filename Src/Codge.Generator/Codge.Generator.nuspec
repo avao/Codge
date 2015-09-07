@@ -11,7 +11,7 @@
     <description>Code generation core module</description>
     <copyright>Copyright 2015</copyright>
     <files>
-      <file src="..\bin\$config$\Codge.DataModel.dll"/>
+      <file src="..\bin\Release\Codge.DataModel.dll"/>
     </files>
   </metadata>
 </package>
