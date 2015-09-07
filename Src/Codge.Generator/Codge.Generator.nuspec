@@ -12,6 +12,6 @@
     <copyright>Copyright 2015</copyright>
   </metadata>
   <files>
-    <file src="..\bin\Release\Codge.DataModel.dll"/>
+    <file src="Codge.DataModel.dll"/>
   </files>
 </package>
