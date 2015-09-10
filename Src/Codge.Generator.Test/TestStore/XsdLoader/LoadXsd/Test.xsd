@@ -154,6 +154,7 @@
   <xs:simpleType name="enumType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="item1"/>
+      <xs:enumeration value="item1"/>
       <xs:enumeration value="item2"/>
       <xs:enumeration value="1itemStartsWithDigit"/>
       <xs:enumeration value="item With Spaces"/>

@@ -62,7 +62,10 @@ namespace Codge.Generator.Presentations.Xsd
             {
                 var descriptor = namespaceDescriptor.CreateEnumerationType(simpleType.Name);
                 foreach (var facet in facets)
-                    descriptor.AddItem(facet.Value);
+                {
+                    if (!descriptor.Items.Any(_ => _.Name==facet.Value))
+                        descriptor.AddItem(facet.Value);
+                }
             }
             else
             {
@@ -265,10 +268,14 @@ namespace Codge.Generator.Presentations.Xsd
                     }
 
                     string fieldName = element.Name != null ? element.Name : element.RefName.Name;
-                    FieldDescriptor field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1);
+                    var field = descriptor.GetField(fieldName);
+                    if (field == null)
+                    {//TODO what if any of the properties are different?
+                        field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1);
 
-                    if (isOptional || element.MinOccurs == 0)
-                        field.AttachedData.Add("isOptional", true);
+                        if (isOptional || element.MinOccurs == 0)
+                            field.AttachedData.Add("isOptional", true);
+                    }
                 }
                 else
                 {

@@ -56,5 +56,9 @@ namespace Codge.DataModel.Descriptors
         {
             return descriptor.AddField(name, fullyQualifiedTypeName, false);
         }
+        public static FieldDescriptor GetField(this CompositeTypeDescriptor descriptor, string name)
+        {
+            return descriptor.Fields.SingleOrDefault(_ => _.Name == name);
+        }
     }
 }
