@@ -13,13 +13,13 @@ namespace Serialisers.XsdBasedModel
 
             if(obj.status != null)
                 writer.WriteAttributeString("status", obj.status.ToString());
-			Utils.SerialiseIfHasValue(writer, "customer", obj.customer, context);
-			Utils.SerialiseIfHasValue(writer, "elementWithEmbededTypeInPlace", obj.elementWithEmbededTypeInPlace, context);
+			Utils.SerialiseValue(writer, "customer", obj.customer, context);
+			Utils.Serialise(writer, "elementWithEmbededTypeInPlace", obj.elementWithEmbededTypeInPlace, context);
 			Utils.SerialiseIfHasValue(writer, "billto", obj.billto, context);
-			Utils.SerialiseIfHasValue(writer, "shipto", obj.shipto, context);
-			Utils.SerialiseIfHasValue(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);
-			Utils.SerialiseEnumAsStringIfHasValue(writer, "elemSimpleType", obj.elemSimpleType, simpleTypeConverter.ConvertToString, context);
-			Utils.SerialiseIfHasValue(writer, "elemEmptyType", obj.elemEmptyType, context);
+			Utils.SerialiseValue(writer, "shipto", obj.shipto, context);
+			Utils.Serialise(writer, "elementWithEmbededType", obj.elementWithEmbededType, context);
+			Utils.SerialiseEnumAsName(writer, "elemSimpleType", obj.elemSimpleType, context);
+			Utils.Serialise(writer, "elemEmptyType", obj.elemEmptyType, context);
 			Utils.SerialiseEnumAsStringIfHasValue(writer, "enumField", obj.enumField, enumTypeConverter.ConvertToString, context);
 			Utils.SerialiseEnumCollectionAsString(writer, "enumFieldCollection", obj.enumFieldCollection, enumTypeConverter.ConvertToString, context);
 		}

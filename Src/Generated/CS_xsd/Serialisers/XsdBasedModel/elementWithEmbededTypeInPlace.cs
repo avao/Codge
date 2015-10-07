@@ -13,7 +13,7 @@ namespace Serialisers.XsdBasedModel
 
             if(obj.aField != null)
                 writer.WriteAttributeString("aField", obj.aField.ToString());
-			Utils.SerialiseIfHasValue(writer, "extraField", obj.extraField, context);
+			Utils.SerialiseValue(writer, "extraField", obj.extraField, context);
 		}
 
 	}
