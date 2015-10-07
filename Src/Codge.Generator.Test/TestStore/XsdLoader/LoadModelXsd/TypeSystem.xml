@@ -9,9 +9,7 @@
       <Field name="name" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="Namespace" type="MyModel.NamespaceDesc">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="Namespace" type="MyModel.NamespaceDesc" />
     </Type>
     <Type name="NamespaceDesc">
       <Field name="name" type="string">
@@ -39,9 +37,7 @@
       <Field name="name" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="Item" type="MyModel.Item" isCollection="true">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="Item" type="MyModel.Item" isCollection="true" />
     </Type>
     <Type name="Item">
       <Field name="name" type="string">
@@ -77,14 +73,10 @@
       <Field name="isCollection" type="bool">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="AttachedData" type="MyModel.AttachedData">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="AttachedData" type="MyModel.AttachedData" />
     </Type>
     <Type name="AttachedData">
-      <Field name="Item" type="MyModel.AttachedDataItem" isCollection="true">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="Item" type="MyModel.AttachedDataItem" isCollection="true" />
     </Type>
     <Type name="AttachedDataItem">
       <Field name="key" type="string">

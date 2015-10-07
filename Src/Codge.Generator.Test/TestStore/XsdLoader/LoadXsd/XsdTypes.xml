@@ -15,27 +15,15 @@
       <Field name="status" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="customer" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="elementWithEmbededTypeInPlace" type="AModel.elementWithEmbededTypeInPlace">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="customer" type="string" />
+      <Field name="elementWithEmbededTypeInPlace" type="AModel.elementWithEmbededTypeInPlace" />
       <Field name="billto" type="int">
         <isOptional>True</isOptional>
       </Field>
-      <Field name="shipto" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="elemSimpleType" type="AModel.simpleType">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="elemEmptyType" type="AModel.elemEmptyType_EmptyComplex">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="shipto" type="string" />
+      <Field name="elementWithEmbededType" type="AModel.elementWithEmbededType" />
+      <Field name="elemSimpleType" type="AModel.simpleType" />
+      <Field name="elemEmptyType" type="AModel.elemEmptyType_EmptyComplex" />
       <Field name="enumField" type="AModel.enumType">
         <isOptional>True</isOptional>
       </Field>
@@ -47,23 +35,17 @@
       <Field name="aField" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="extraField" type="string">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="extraField" type="string" />
     </Type>
     <Type name="elemEmptyType_EmptyComplex" />
     <Type name="complexTypeWithContent">
-      <Field name="anElement" type="string">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="anElement" type="string" />
     </Type>
     <Type name="complexTypeWithContentAndParentField">
       <Field name="aField" type="string">
         <isAttribute>True</isAttribute>
       </Field>
-      <Field name="anElement" type="string">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="anElement" type="string" />
     </Type>
     <Type name="complexTypeWithContentWithAttribute">
       <Field name="anAttribute" type="string">
@@ -87,135 +69,49 @@
       </Field>
     </Type>
     <Type name="allXsdTypes">
-      <Field name="anyUri" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="base64Binary" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="boolean" type="bool">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="byte" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="date" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="dateTime" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="decimal" type="decimal">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="double" type="double">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="duration" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="Entities" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="Entity" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="float" type="double">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="gDay" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="gMonth" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="gMonthDay" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="gYear" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="gYearMonth" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="hexBinary" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="id" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="idRef" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="idRefs" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="int" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="integer" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="language" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="long" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="Name" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="ncName" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="negativeInteger" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="nmToken" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="nmTokens" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="nonNegativeInteger" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="nonPositiveInteger" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="normalizedString" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="positiveInteger" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="QName" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="short" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="string" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="time" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="token" type="string">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="unsignedByte" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="unsignedIint" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="unsignedLong" type="int">
-        <isOptional>True</isOptional>
-      </Field>
-      <Field name="unsignedShort" type="int">
-        <isOptional>True</isOptional>
-      </Field>
+      <Field name="anyUri" type="string" />
+      <Field name="base64Binary" type="string" />
+      <Field name="boolean" type="bool" />
+      <Field name="byte" type="int" />
+      <Field name="date" type="string" />
+      <Field name="dateTime" type="string" />
+      <Field name="decimal" type="decimal" />
+      <Field name="double" type="double" />
+      <Field name="duration" type="string" />
+      <Field name="Entities" type="string" />
+      <Field name="Entity" type="string" />
+      <Field name="float" type="double" />
+      <Field name="gDay" type="string" />
+      <Field name="gMonth" type="string" />
+      <Field name="gMonthDay" type="string" />
+      <Field name="gYear" type="string" />
+      <Field name="gYearMonth" type="string" />
+      <Field name="hexBinary" type="string" />
+      <Field name="id" type="string" />
+      <Field name="idRef" type="string" />
+      <Field name="idRefs" type="string" />
+      <Field name="int" type="int" />
+      <Field name="integer" type="int" />
+      <Field name="language" type="string" />
+      <Field name="long" type="int" />
+      <Field name="Name" type="string" />
+      <Field name="ncName" type="string" />
+      <Field name="negativeInteger" type="int" />
+      <Field name="nmToken" type="string" />
+      <Field name="nmTokens" type="string" />
+      <Field name="nonNegativeInteger" type="int" />
+      <Field name="nonPositiveInteger" type="int" />
+      <Field name="normalizedString" type="string" />
+      <Field name="positiveInteger" type="int" />
+      <Field name="QName" type="string" />
+      <Field name="short" type="int" />
+      <Field name="string" type="string" />
+      <Field name="time" type="string" />
+      <Field name="token" type="string" />
+      <Field name="unsignedByte" type="int" />
+      <Field name="unsignedIint" type="int" />
+      <Field name="unsignedLong" type="int" />
+      <Field name="unsignedShort" type="int" />
     </Type>
     <Type name="enumType">
       <Item name="item1" value="0" />
@@ -224,7 +120,11 @@
       <Item name="item With Spaces" value="3" />
     </Type>
     <Type name="elementWithEmbededType">
-      <Field name="aSubElement" type="string">
+      <Field name="aSubElement" type="string" />
+      <Field name="elementInAChoice1" type="string">
+        <isOptional>True</isOptional>
+      </Field>
+      <Field name="elementInAChoice2" type="string">
         <isOptional>True</isOptional>
       </Field>
     </Type>
