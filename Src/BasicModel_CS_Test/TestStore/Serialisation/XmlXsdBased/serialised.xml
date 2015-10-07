@@ -1,4 +1,10 @@
 <order>
+  <customer />
+  <elementWithEmbededTypeInPlace />
+  <shipto />
+  <elementWithEmbededType />
+  <elemSimpleType>anEnumerationValue</elemSimpleType>
+  <elemEmptyType />
   <enumField>item With Spaces</enumField>
   <enumFieldCollection>item With Spaces</enumFieldCollection>
 </order>

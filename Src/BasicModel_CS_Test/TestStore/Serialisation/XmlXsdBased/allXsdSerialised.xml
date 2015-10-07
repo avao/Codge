@@ -23,6 +23,7 @@
   <int>3</int>
   <integer>4</integer>
   <language>language</language>
+  <long>0</long>
   <Name>name</Name>
   <ncName>nName</ncName>
   <negativeInteger>-1</negativeInteger>
@@ -39,5 +40,6 @@
   <token>token</token>
   <unsignedByte>9</unsignedByte>
   <unsignedIint>10</unsignedIint>
+  <unsignedLong>0</unsignedLong>
   <unsignedShort>9</unsignedShort>
 </allXsdTypes>
