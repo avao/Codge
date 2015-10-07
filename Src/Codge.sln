@@ -40,11 +40,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.Generator.Test", "Cod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.Console", "Codge.Console\Codge.Console.csproj", "{20D3E344-EAAE-4498-98F1-B0BA3E860F20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicModel.Templates.CS", "Models\Basic\CS\BasicModel.Templates\BasicModel.Templates.CS.csproj", "{734BC941-9D32-4DCE-AFCE-9FDDBAD3FAB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.BasicModel.Templates.CS", "Models\Basic\CS\BasicModel.Templates\Codge.BasicModel.Templates.CS.csproj", "{734BC941-9D32-4DCE-AFCE-9FDDBAD3FAB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.TestSystem", "Codge.TestSystem\Codge.TestSystem.csproj", "{2DF872E3-BE69-43DE-8BB8-3F277DA8B8C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicModel.CS", "Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj", "{03057E90-B954-4875-8865-E5B03AAA7267}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.BasicModel.CS", "Models\Basic\CS\BasicModel.CS\Codge.BasicModel.CS.csproj", "{03057E90-B954-4875-8865-E5B03AAA7267}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CS_xsd", "CS_xsd", "{286FEB67-EAB7-4B83-A76B-2F2649188E79}"
 EndProject

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -67,13 +67,13 @@
     <Compile Include="Types\XsdBasedModel\enumType.cs" />
     <Compile Include="Types\XsdBasedModel\elementWithEmbededType.cs" />
     <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededType.cs" />
-<Compile Include="Registrar.cs" />
-<!-- GENERATED_ENTRIES_END -->
+    <Compile Include="Registrar.cs" />
+    <!-- GENERATED_ENTRIES_END -->
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj">
+    <ProjectReference Include="..\..\Models\Basic\CS\BasicModel.CS\Codge.BasicModel.CS.csproj">
       <Project>{03057e90-b954-4875-8865-e5b03aaa7267}</Project>
-      <Name>BasicModel.CS</Name>
+      <Name>Codge.BasicModel.CS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
