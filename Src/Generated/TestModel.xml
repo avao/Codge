@@ -2,8 +2,8 @@
 <Model xmlns="http://codge/Model.xsd">
   <Namespace name="rootNs">
     <Enumeration name="testEnum">
-      <item name="enumValue1"/>
-      <item name="enumValue2" value="2"/>
+      <Item name="enumValue1"/>
+      <Item name="enumValue2" value="2"/>
     </Enumeration>
     <Primitive name="myType"/>
     <Composite name="myType2">
