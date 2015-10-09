@@ -7,6 +7,33 @@ using Codge.DataModel.Descriptors;
 
 namespace Codge.DataModel
 {
+    public class NamespaceTracingTypeSystemEventHandler<T>
+    : ICompositeNodeEventHandler<NamespaceDescriptor>
+    {
+        private readonly Stack<T> _namespaces;
+        private Func<T, NamespaceDescriptor, T> _converter;
+        public NamespaceTracingTypeSystemEventHandler(T ns, Func<T, NamespaceDescriptor,T> converter)
+        {
+            _namespaces = new Stack<T>();
+            _namespaces.Push(ns);
+            _converter = converter;
+        }
+
+        public void OnEnter(NamespaceDescriptor node)
+        {
+            _namespaces.Push(_converter(Namespace, node));
+        }
+
+        public void OnLeave(NamespaceDescriptor node)
+        {
+            _namespaces.Pop();
+        }
+
+        protected T Namespace { get { return _namespaces.Peek(); } }
+    }
+
+
+
     public class ModelCompiler
     {
         public Model Compile(TypeSystem typeSystem, ModelDescriptor model)
@@ -31,27 +58,16 @@ namespace Codge.DataModel
         }
 
         public class TypeSystemCompileHandlerFirstPass
-            : ICompositeNodeEventHandler<NamespaceDescriptor>
+            : NamespaceTracingTypeSystemEventHandler<Namespace>
             , IAtomicNodeEnventHandler<PrimitiveTypeDescriptor>
             , IAtomicNodeEnventHandler<CompositeTypeDescriptor>
             , IAtomicNodeEnventHandler<EnumerationTypeDescriptor>
         {
-            private readonly Stack<Namespace> _namespaces;
             public TypeSystemCompileHandlerFirstPass(Namespace ns)
+                : base(ns, (n, descriptor) => n.GetOrCreateNamespace(descriptor.Name))
             {
-                _namespaces = new Stack<Namespace>();
-                _namespaces.Push(ns);
             }
 
-            public void OnEnter(NamespaceDescriptor node)
-            {
-                _namespaces.Push(Namespace.GetOrCreateNamespace(node.Name));
-            }
-
-            public void OnLeave(NamespaceDescriptor node)
-            {
-                _namespaces.Pop();
-            }
 
             public void Handle(PrimitiveTypeDescriptor primitive)
             {
@@ -74,31 +90,16 @@ namespace Codge.DataModel
                         descriptor.AddItem(item.Name);
                 }
             }
-
-            private Namespace Namespace { get { return _namespaces.Peek(); } }
         }
 
         public class TypeSystemCompileHandlerSecondPass
-            : ICompositeNodeEventHandler<NamespaceDescriptor>
+            : NamespaceTracingTypeSystemEventHandler<Namespace>
             , IAtomicNodeEnventHandler<CompositeTypeDescriptor>
         {
-            private readonly Stack<Namespace> _namespaces;
             public TypeSystemCompileHandlerSecondPass(Namespace ns)
+                : base(ns, (n, descriptor) => n.GetOrCreateNamespace(descriptor.Name))
             {
-                _namespaces = new Stack<Namespace>();
-                _namespaces.Push(ns);
             }
-
-            public void OnEnter(NamespaceDescriptor node)
-            {
-                _namespaces.Push(Namespace.GetOrCreateNamespace(node.Name));
-            }
-
-            public void OnLeave(NamespaceDescriptor node)
-            {
-                _namespaces.Pop();
-            }
-
 
             public void Handle(CompositeTypeDescriptor composite)
             {
@@ -117,8 +118,6 @@ namespace Codge.DataModel
                         descriptor.AddField(field.Name, fieldType, field.AttachedData);
                 }
             }
-
-            private Namespace Namespace { get { return _namespaces.Peek(); } }
         }
 
     }
