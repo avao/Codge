@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-<!-- GENERATED_ENTRIES_BEGIN -->
+    <!-- GENERATED_ENTRIES_BEGIN -->
     <Compile Include="Types\rootNs\testEnum.cs" />
     <Compile Include="Types\rootNs\myType.cs" />
     <Compile Include="Types\rootNs\myType2.cs" />
@@ -51,9 +51,9 @@
 <!-- GENERATED_ENTRIES_END -->
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj">
+    <ProjectReference Include="..\..\Models\Basic\CS\BasicModel.CS\Codge.BasicModel.CS.csproj">
       <Project>{03057e90-b954-4875-8865-e5b03aaa7267}</Project>
-      <Name>BasicModel.CS</Name>
+      <Name>Codge.BasicModel.CS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

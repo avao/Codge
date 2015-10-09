@@ -11,7 +11,9 @@ namespace Serialisers.XsdBasedModel
         {
             var obj = (Types.XsdBasedModel.elementWithEmbededType)o;
 
-			Utils.SerialiseIfHasValue(writer, "aSubElement", obj.aSubElement, context);
+			Utils.SerialiseValue(writer, "aSubElement", obj.aSubElement, context);
+			Utils.SerialiseIfHasValue(writer, "elementInAChoice1", obj.elementInAChoice1, context);
+			Utils.SerialiseIfHasValue(writer, "elementInAChoice2", obj.elementInAChoice2, context);
 		}
 
 	}

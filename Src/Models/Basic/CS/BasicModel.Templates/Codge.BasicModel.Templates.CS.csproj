@@ -7,8 +7,8 @@
     <ProjectGuid>{734BC941-9D32-4DCE-AFCE-9FDDBAD3FAB1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BasicModel.Templates.CS</RootNamespace>
-    <AssemblyName>BasicModel.Templates.CS</AssemblyName>
+    <RootNamespace>Codge.BasicModel.Templates.CS</RootNamespace>
+    <AssemblyName>Codge.BasicModel.Templates.CS</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

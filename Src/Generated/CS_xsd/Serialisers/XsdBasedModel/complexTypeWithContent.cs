@@ -11,7 +11,7 @@ namespace Serialisers.XsdBasedModel
         {
             var obj = (Types.XsdBasedModel.complexTypeWithContent)o;
 
-			Utils.SerialiseIfHasValue(writer, "anElement", obj.anElement, context);
+			Utils.SerialiseValue(writer, "anElement", obj.anElement, context);
 		}
 
 	}

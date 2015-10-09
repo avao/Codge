@@ -48,6 +48,10 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="aSubElement" type="xs:string"/>
+        <xs:choice>
+          <xs:element name="elementInAChoice1" type="xs:string"/>
+          <xs:element name="elementInAChoice2" type="xs:string"/>
+        </xs:choice>
       </xs:sequence>
     </xs:complexType>
   </xs:element>

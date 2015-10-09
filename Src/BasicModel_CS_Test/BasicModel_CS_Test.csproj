@@ -63,9 +63,9 @@
       <Project>{1b171528-c478-4b91-a055-54e5818d30d7}</Project>
       <Name>BasicXsdBased</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Basic\CS\BasicModel.CS\BasicModel.CS.csproj">
+    <ProjectReference Include="..\Models\Basic\CS\BasicModel.CS\Codge.BasicModel.CS.csproj">
       <Project>{03057e90-b954-4875-8865-e5b03aaa7267}</Project>
-      <Name>BasicModel.CS</Name>
+      <Name>Codge.BasicModel.CS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

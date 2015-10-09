@@ -279,10 +279,10 @@ namespace Codge.Generator.Presentations.Xsd
                 }
                 else
                 {
-                    var choice = item as XmlSchemaGroupBase;
-                    if (choice != null)
+                    var groupBase = item as XmlSchemaGroupBase;
+                    if (groupBase != null)
                     {
-                        AddFields(descriptor, choice.Items, true);
+                        AddFields(descriptor, groupBase.Items, groupBase is XmlSchemaChoice);
                         return;
                     }
 

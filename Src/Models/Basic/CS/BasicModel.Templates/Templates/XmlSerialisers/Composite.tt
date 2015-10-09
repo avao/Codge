@@ -86,7 +86,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
                                 else
                                 {
 #>
-			Utils.SerialiseEnumAsName(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
+			Utils.SerialiseEnumAsString(writer, "<#= field.Name #>", obj.<#= fieldName #>, <#= field.Type.Name #>Converter.ConvertToString, context);
 <#
                                 }
 
