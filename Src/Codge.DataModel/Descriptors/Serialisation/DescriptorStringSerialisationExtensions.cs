@@ -14,7 +14,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             var builder = new StringBuilder();
             using (var writer = XmlWriter.Create(builder))
             {
-                DescriptorXmlWriter.WriteField(writer, field);
+                field.ToXml(writer);
             }
             return builder.ToString();
         }

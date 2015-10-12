@@ -31,7 +31,7 @@ namespace Codge.Generator.Test
             var output = new StringBuilder();
             using (var writer = XmlWriter.Create(output))
             {
-                DescriptorXmlWriter.Write(writer, model);
+                model.ToXml(writer);
             }
 
             testCase.AssertContentXml(output.ToString(), "Serialised.xml", true);

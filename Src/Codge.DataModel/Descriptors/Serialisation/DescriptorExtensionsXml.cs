@@ -7,17 +7,17 @@ using System.Xml;
 
 namespace Codge.DataModel.Descriptors.Serialisation
 {
-    public static class DescriptorXmlWriter
+    public static class DescriptorExtensionsXml
     {
-        public static void Write(XmlWriter writer, ModelDescriptor descriptor)
+        public static void ToXml(this ModelDescriptor descriptor, XmlWriter writer)
         {
             writer.WriteStartElement("Model", "http://codge/Model.xsd");
             writer.WriteAttributeString("name", descriptor.Name);
-            Write(writer, descriptor.RootNamespace);
+            descriptor.RootNamespace.ToXml(writer);
             writer.WriteEndElement();
         }
 
-        public static void Write(XmlWriter writer, NamespaceDescriptor descriptor)
+        public static void ToXml(this NamespaceDescriptor descriptor, XmlWriter writer)
         {
             writer.WriteStartElement("Namespace");
             writer.WriteAttributeString("name", descriptor.Name);
@@ -26,19 +26,19 @@ namespace Codge.DataModel.Descriptors.Serialisation
                 var composite = type as CompositeTypeDescriptor;
                 if(composite != null)
                 {
-                    WriteComposite(writer, composite);
+                    composite.ToXml(writer);
                     continue;
                 }
                 var enumeration = type as EnumerationTypeDescriptor;
                 if(enumeration != null)
                 {
-                    WriteEnumeration(writer, enumeration);
+                    enumeration.ToXml(writer);
                     continue;
                 }
                 var primitive = type as PrimitiveTypeDescriptor;
                 if(primitive != null)
                 {
-                    WritePrimitive(writer, primitive);
+                    primitive.ToXml(writer);
                     continue;
                 }
                 throw new NotSupportedException("Not supported type " + type.GetType().Name);
@@ -46,30 +46,30 @@ namespace Codge.DataModel.Descriptors.Serialisation
 
             foreach(var ns in descriptor.Namespaces)
             {
-                Write(writer, ns);
+                ns.ToXml(writer);
             }
             writer.WriteEndElement();
         }
 
-        public static void WritePrimitive(XmlWriter writer, PrimitiveTypeDescriptor descriptor)
+        public static void ToXml(this PrimitiveTypeDescriptor descriptor, XmlWriter writer)
         {
             writer.WriteStartElement("Primitive");
             writer.WriteAttributeString("name", descriptor.Name);
             writer.WriteEndElement();
         }
 
-        public static void WriteEnumeration(XmlWriter writer, EnumerationTypeDescriptor descriptor)
+        public static void ToXml(this EnumerationTypeDescriptor descriptor, XmlWriter writer)
         {
             writer.WriteStartElement("Enumeration");
             writer.WriteAttributeString("name", descriptor.Name);
             foreach (var item in descriptor.Items)
             {
-                WriteItem(writer, item);
+                item.ToXml(writer);
             }
             writer.WriteEndElement();
         }
 
-        public static void WriteItem(XmlWriter writer, ItemDescriptor descriptor)
+        public static void ToXml(this ItemDescriptor descriptor, XmlWriter writer)
         {
             writer.WriteStartElement("Item");
             writer.WriteAttributeString("name", descriptor.Name);
@@ -78,18 +78,18 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteEndElement();
         }
 
-        public static void WriteComposite(XmlWriter writer, CompositeTypeDescriptor descriptor)
+        public static void ToXml(this CompositeTypeDescriptor descriptor, XmlWriter writer)
         {
             writer.WriteStartElement("Composite");
             writer.WriteAttributeString("name", descriptor.Name);
             foreach (var field in descriptor.Fields)
             {
-                WriteField(writer, field);
+                field.ToXml(writer);
             }
             writer.WriteEndElement();
         }
 
-        public static void WriteField(XmlWriter writer, FieldDescriptor descriptor)
+        public static void ToXml(this FieldDescriptor descriptor, XmlWriter writer)
         {
             writer.WriteStartElement("Field");
             writer.WriteAttributeString("name", descriptor.Name);

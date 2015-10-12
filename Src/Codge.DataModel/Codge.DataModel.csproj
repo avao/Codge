@@ -47,8 +47,9 @@
     <Compile Include="Descriptors\CompositeTypeDescriptor.cs" />
     <Compile Include="Descriptors\ModelDescriptor.cs" />
     <Compile Include="Descriptors\NamespaceDescriptor.cs" />
+    <Compile Include="Descriptors\Serialisation\DescriptorExtensionsXml.cs" />
+    <Compile Include="Descriptors\Serialisation\DescriptorStringSerialisationExtensions.cs" />
     <Compile Include="Descriptors\Serialisation\DescriptorXmlReader.cs" />
-    <Compile Include="Descriptors\Serialisation\DescriptorXmlWriter.cs" />
     <Compile Include="Descriptors\TypeDescriptor.cs" />
     <Compile Include="EnumerationType.cs" />
     <Compile Include="Model.cs" />

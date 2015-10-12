@@ -35,7 +35,7 @@ namespace Codge.DataModel.Descriptors
             //TODO use Qart.Core
             using (var writer = XmlWriter.Create(path, new XmlWriterSettings { Indent = true }))
             {
-                DescriptorXmlWriter.Write(writer, model);
+                model.ToXml(writer);
             }
         }
     }
