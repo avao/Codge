@@ -97,24 +97,20 @@ namespace Codge.ModelProcessor.Console
                     lhsType = Namespace.CreateCompositeType(composite.Name);
                 }
 
-
-                //TODO preserve position of the field
-                FieldDescriptor lhsPrevField = null;
                 foreach(var field in composite.Fields)
                 {
                     var lhsField = lhsType.Fields.FirstOrDefault(_ => _.Name == field.Name);
                     if(lhsField == null)
                     {
+                        //TODO fields are apended, think about proper merge
                         lhsField = lhsType.AddField(field.Name, field.TypeName, field.IsCollection);
                     }
 
-                    if (lhsField.IsCollection != field.IsCollection)
-                        Logger.WarnFormat("different field definitions {0} {1}", lhsField.IsCollection, field.IsCollection);
-                    if(lhsField.TypeName != field.TypeName)
-                        throw new Exception("different Type");
-                        //TODO check type
+                    if (lhsField.IsCollection != field.IsCollection || lhsField.TypeName != field.TypeName)
+                        Logger.WarnFormat("different field definitions lhs:[{0}], rhs:[{1}]", lhsField.ToXml(), field.ToXml());
                 }
             }
+
 
             public void Handle(EnumerationTypeDescriptor enumeration)
             {
@@ -130,11 +126,14 @@ namespace Codge.ModelProcessor.Console
                     var lhsItem = lhsType.Items.FirstOrDefault(_ => _.Name == item.Name);
                     if(lhsItem == null)
                     {
-                        lhsType.AddItem(item.Name);//TODO value
+                        if(item.Value.HasValue)
+                            lhsType.AddItem(item.Name, item.Value.Value);
+                        else
+                            lhsType.AddItem(item.Name);
                     }
                     else
                     {
-                        //TODO check value
+                        Logger.WarnFormat("different item definitions lhs:[{0}], rhs:[{1}]", lhsItem.ToXml(), item.ToXml());
                     }
                 }
             }
