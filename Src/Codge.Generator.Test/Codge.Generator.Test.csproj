@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="DescriptorsSerialisation.cs" />
     <Compile Include="ModelBuilding.cs" />
-    <Compile Include="TestUtils.cs" />
     <Compile Include="TypeSystemXmlSerialiser.cs" />
     <Compile Include="XsdLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
