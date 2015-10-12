@@ -7,6 +7,33 @@ using Codge.DataModel.Descriptors;
 
 namespace Codge.DataModel
 {
+    public class NamespaceTracingTypeSystemEventHandler<T>
+    : ICompositeNodeEventHandler<NamespaceDescriptor>
+    {
+        private readonly Stack<T> _namespaces;
+        private Func<T, NamespaceDescriptor, T> _converter;
+        public NamespaceTracingTypeSystemEventHandler(T ns, Func<T, NamespaceDescriptor,T> converter)
+        {
+            _namespaces = new Stack<T>();
+            _namespaces.Push(ns);
+            _converter = converter;
+        }
+
+        public void OnEnter(NamespaceDescriptor node)
+        {
+            _namespaces.Push(_converter(Namespace, node));
+        }
+
+        public void OnLeave(NamespaceDescriptor node)
+        {
+            _namespaces.Pop();
+        }
+
+        protected T Namespace { get { return _namespaces.Peek(); } }
+    }
+
+
+
     public class ModelCompiler
     {
         public Model Compile(TypeSystem typeSystem, ModelDescriptor model)
@@ -16,10 +43,10 @@ namespace Codge.DataModel
             var compiledModel = new Model(ns);
 
             //first pass - create type stubs
-            processNamespaceFirstPass(compiledModel.Namespace, model.RootNamespace);
+            TypeSystemWalker.Walk(model.RootNamespace, new TypeSystemCompileHandlerFirstPass(compiledModel.Namespace));
 
             //second pass - fill composite types with fields
-            processNamespaceSecondPass(compiledModel.Namespace, model.RootNamespace);
+            TypeSystemWalker.Walk(model.RootNamespace, new TypeSystemCompileHandlerSecondPass(compiledModel.Namespace));
 
             return compiledModel;
         }
@@ -30,77 +57,66 @@ namespace Codge.DataModel
             return id++;//TODO
         }
 
-        private static void processNamespaceFirstPass(Namespace ns, NamespaceDescriptor namespaceDescriptor)
+        public class TypeSystemCompileHandlerFirstPass
+            : NamespaceTracingTypeSystemEventHandler<Namespace>
+            , IAtomicNodeEnventHandler<PrimitiveTypeDescriptor>
+            , IAtomicNodeEnventHandler<CompositeTypeDescriptor>
+            , IAtomicNodeEnventHandler<EnumerationTypeDescriptor>
         {
-            foreach (var t in namespaceDescriptor.Types)
+            public TypeSystemCompileHandlerFirstPass(Namespace ns)
+                : base(ns, (n, descriptor) => n.GetOrCreateNamespace(descriptor.Name))
             {
-                var composite = t as CompositeTypeDescriptor;
-                if (composite != null)
-                {
-                    ns.CreateCompositeType(GetId(composite.Name), composite.Name);
-                }
-                else
-                {
-                    var primitive = t as PrimitiveTypeDescriptor;
-                    if (primitive != null)
-                    {
-                        ns.CreatePrimitiveType(GetId(primitive.Name), primitive.Name);
-                    }
-                    else
-                    {
-                        var enumeration = t as EnumerationTypeDescriptor;
-                        if (enumeration != null)
-                        {
-                            var descriptor = ns.CreateEnumerationType(GetId(enumeration.Name), enumeration.Name);
-                            foreach (var item in enumeration.Items)
-                            {
-                                if (item.Value.HasValue)
-                                    descriptor.AddItem(item.Name, item.Value.Value);
-                                else
-                                    descriptor.AddItem(item.Name);
-                            }
-                        }
-                        else
-                        {
-                            throw new Exception("Unknown type");
-                        }
-                    }
-                }
             }
 
-            foreach (var n in namespaceDescriptor.Namespaces)
+
+            public void Handle(PrimitiveTypeDescriptor primitive)
             {
-                processNamespaceFirstPass(ns.GetOrCreateNamespace(n.Name), n);
+                Namespace.CreatePrimitiveType(GetId(primitive.Name), primitive.Name);
+            }
+
+            public void Handle(CompositeTypeDescriptor composite)
+            {
+                Namespace.CreateCompositeType(GetId(composite.Name), composite.Name);
+            }
+
+            public void Handle(EnumerationTypeDescriptor enumeration)
+            {
+                var descriptor = Namespace.CreateEnumerationType(GetId(enumeration.Name), enumeration.Name);
+                foreach (var item in enumeration.Items)
+                {
+                    if (item.Value.HasValue)
+                        descriptor.AddItem(item.Name, item.Value.Value);
+                    else
+                        descriptor.AddItem(item.Name);
+                }
             }
         }
 
-        private static void processNamespaceSecondPass(Namespace ns, NamespaceDescriptor namespaceDescriptor)
+        public class TypeSystemCompileHandlerSecondPass
+            : NamespaceTracingTypeSystemEventHandler<Namespace>
+            , IAtomicNodeEnventHandler<CompositeTypeDescriptor>
         {
-            foreach (var t in namespaceDescriptor.Types)
+            public TypeSystemCompileHandlerSecondPass(Namespace ns)
+                : base(ns, (n, descriptor) => n.GetOrCreateNamespace(descriptor.Name))
             {
-                var composite = t as CompositeTypeDescriptor;
-                if (composite != null)
-                {
-                    var descriptor = ns.GetType<CompositeType>(composite.Name);
-                    foreach (var field in composite.Fields)
-                    {
-                        var fieldType = ns.findTypeByPartialName(field.TypeName);
-                        if (fieldType == null)
-                        {
-                            throw new Exception("Field [" + field.Name + "] is of unknown type [" + field.TypeName + "]");
-                        }
-
-                        if(field.IsCollection)
-                            descriptor.AddCollectionField(field.Name, fieldType, field.AttachedData);
-                        else
-                            descriptor.AddField(field.Name, fieldType, field.AttachedData);
-                    }
-                }
             }
 
-            foreach (var n in namespaceDescriptor.Namespaces)
+            public void Handle(CompositeTypeDescriptor composite)
             {
-                processNamespaceSecondPass(ns.GetOrCreateNamespace(n.Name), n);
+                var descriptor = Namespace.GetType<CompositeType>(composite.Name);
+                foreach (var field in composite.Fields)
+                {
+                    var fieldType = Namespace.findTypeByPartialName(field.TypeName);
+                    if (fieldType == null)
+                    {
+                        throw new Exception("Field [" + field.Name + "] is of unknown type [" + field.TypeName + "]");
+                    }
+
+                    if (field.IsCollection)
+                        descriptor.AddCollectionField(field.Name, fieldType, field.AttachedData);
+                    else
+                        descriptor.AddField(field.Name, fieldType, field.AttachedData);
+                }
             }
         }
 

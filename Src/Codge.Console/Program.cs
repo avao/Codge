@@ -10,6 +10,7 @@ using Common.Logging;
 using Codge.DataModel;
 using Codge.DataModel.Descriptors;
 using CommandLine;
+using Codge.DataModel.Descriptors.Serialisation;
 
 
 namespace Codge.Generator.Console
@@ -24,6 +25,9 @@ namespace Codge.Generator.Console
 
         [Option('o', "outputDir", Required = false, HelpText = "Path to a output directory.", DefaultValue = @"../../../Generated/CS")]
         public string OutputDir { get; set; }
+
+        [Option('r', "overrides", Required = false, HelpText = "Path to model descriptor overrides.")]
+        public string OverridesPath { get; set; }
     }
 
     class Program
@@ -36,7 +40,7 @@ namespace Codge.Generator.Console
             var options = new Options();
             if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
             {
-                var model = LoadModel(options.Model, options.ModelName);
+                var model = LoadModel(options.Model, options.ModelName, options.OverridesPath);
 
                 ProcessTemplates(LoadConfig(options.OutputDir),
                                  new BasicModel.Templates.CS.TaskFactory(logger),
@@ -65,7 +69,7 @@ namespace Codge.Generator.Console
         }
 
 
-        static Model LoadModel(string path, string modelName)
+        static Model LoadModel(string path, string modelName, string modelOverridesPath)
         {
             System.Console.WriteLine("Loading model [" + path + "]");
 
@@ -81,6 +85,18 @@ namespace Codge.Generator.Console
                 model = Codge.Generator.Presentations.Xml.ModelLoader.Load(reader);
             }
 
+            if (!string.IsNullOrEmpty(modelOverridesPath))
+            {
+                ModelDescriptor modelOverrides;
+                using (var reader = XmlReader.Create(modelOverridesPath))
+                {
+                    reader.MoveToContent();
+                    modelOverrides = DescriptorXmlReader.Read(reader);
+                }
+
+                //TODO apply overrides
+            }
+            
             var typeSystem = new TypeSystem();
             var compiler = new ModelCompiler();
             return compiler.Compile(typeSystem, model);

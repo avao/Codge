@@ -17,4 +17,12 @@ namespace Codge.DataModel.Descriptors
             Namespace = nameSpace;
         }
     }
+
+    public static class TypeDescriptorExtensions
+    {
+        public static TypeDescriptor FindByName(this IEnumerable<TypeDescriptor> types, string name)
+        {
+            return types.SingleOrDefault(_ => _.Name == name);
+        }
+    }
 }
