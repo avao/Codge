@@ -33,10 +33,11 @@ namespace Codge.ModelProcessor.Console
 
     class Program
     {
+        static ILog Logger = LogManager.GetLogger("");
+
         //-m "%scriptDir%\Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd" -o "%scriptDir%/Generated/CS_xsd" -n XsdBasedModel
         static void Main(string[] args)
         {
-            ILog logger = LogManager.GetLogger("");
 
             var options = new Options();
             if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
@@ -54,6 +55,7 @@ namespace Codge.ModelProcessor.Console
                     {
                         var model = LoadModel(files.First(), options.ModelName);
                         files.Skip(1).Select(_ => LoadModel(_, options.ModelName)).Aggregate(model, Merge);
+                        model.Save(options.Output);
                     }
                 }
                 else
@@ -97,17 +99,20 @@ namespace Codge.ModelProcessor.Console
 
 
                 //TODO preserve position of the field
+                FieldDescriptor lhsPrevField = null;
                 foreach(var field in composite.Fields)
                 {
                     var lhsField = lhsType.Fields.FirstOrDefault(_ => _.Name == field.Name);
                     if(lhsField == null)
                     {
-                        lhsField = lhsType.AddField(field.Name, field.TypeName);
+                        lhsField = lhsType.AddField(field.Name, field.TypeName, field.IsCollection);
                     }
-                    else
-                    {
+
+                    if (lhsField.IsCollection != field.IsCollection)
+                        Logger.WarnFormat("different field definitions {0} {1}", lhsField.IsCollection, field.IsCollection);
+                    if(lhsField.TypeName != field.TypeName)
+                        throw new Exception("different Type");
                         //TODO check type
-                    }
                 }
             }
 
@@ -144,16 +149,7 @@ namespace Codge.ModelProcessor.Console
         static void ConvertModel(string path, string modelName, string outputPath)
         {
             var model = LoadModel(path, modelName);
-            SaveModel(outputPath, model);
-        }
-
-        //TODO extension
-        static void SaveModel(string path, ModelDescriptor model)
-        {
-            using (var writer = XmlWriter.Create(path, new XmlWriterSettings { Indent = true }))
-            {
-                DescriptorXmlWriter.Write(writer, model);
-            }
+            model.Save(outputPath);   
         }
 
         //TODO copy paste

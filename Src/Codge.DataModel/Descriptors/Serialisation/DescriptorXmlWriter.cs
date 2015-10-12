@@ -17,7 +17,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteEndElement();
         }
 
-        private static void Write(XmlWriter writer, NamespaceDescriptor descriptor)
+        public static void Write(XmlWriter writer, NamespaceDescriptor descriptor)
         {
             writer.WriteStartElement("Namespace");
             writer.WriteAttributeString("name", descriptor.Name);
@@ -51,14 +51,14 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteEndElement();
         }
 
-        private static void WritePrimitive(XmlWriter writer, PrimitiveTypeDescriptor descriptor)
+        public static void WritePrimitive(XmlWriter writer, PrimitiveTypeDescriptor descriptor)
         {
             writer.WriteStartElement("Primitive");
             writer.WriteAttributeString("name", descriptor.Name);
             writer.WriteEndElement();
         }
 
-        private static void WriteEnumeration(XmlWriter writer, EnumerationTypeDescriptor descriptor)
+        public static void WriteEnumeration(XmlWriter writer, EnumerationTypeDescriptor descriptor)
         {
             writer.WriteStartElement("Enumeration");
             writer.WriteAttributeString("name", descriptor.Name);
@@ -69,7 +69,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteEndElement();
         }
 
-        private static void WriteItem(XmlWriter writer, ItemDescriptor descriptor)
+        public static void WriteItem(XmlWriter writer, ItemDescriptor descriptor)
         {
             writer.WriteStartElement("Item");
             writer.WriteAttributeString("name", descriptor.Name);
@@ -78,7 +78,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteEndElement();
         }
 
-        private static void WriteComposite(XmlWriter writer, CompositeTypeDescriptor descriptor)
+        public static void WriteComposite(XmlWriter writer, CompositeTypeDescriptor descriptor)
         {
             writer.WriteStartElement("Composite");
             writer.WriteAttributeString("name", descriptor.Name);
@@ -89,7 +89,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteEndElement();
         }
 
-        private static void WriteField(XmlWriter writer, FieldDescriptor descriptor)
+        public static void WriteField(XmlWriter writer, FieldDescriptor descriptor)
         {
             writer.WriteStartElement("Field");
             writer.WriteAttributeString("name", descriptor.Name);
