@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Codge.DataModel.Descriptors;
 
-namespace Codge.DataModel
+namespace Codge.DataModel.Framework
 {
     public class NamespaceTracingTypeSystemEventHandler<T>
     : ICompositeNodeEventHandler<NamespaceDescriptor>

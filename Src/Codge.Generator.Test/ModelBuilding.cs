@@ -9,6 +9,7 @@ using Codge.DataModel.Descriptors;
 using NUnit.Framework;
 using Qart.Testing;
 using Qart.Testing.FileBased;
+using Codge.DataModel.Framework;
 
 namespace Codge.Generator.Test
 {

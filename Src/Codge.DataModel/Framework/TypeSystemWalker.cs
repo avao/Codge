@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Codge.DataModel
+namespace Codge.DataModel.Framework
 {
     public interface INodeEventHandler { }
 

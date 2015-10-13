@@ -11,6 +11,8 @@ using Codge.DataModel;
 using Codge.DataModel.Descriptors;
 using CommandLine;
 using Codge.DataModel.Descriptors.Serialisation;
+using Codge.DataModel.Framework;
+using Codge.Generator.Presentations;
 
 
 namespace Codge.Generator.Console
@@ -32,10 +34,12 @@ namespace Codge.Generator.Console
 
     class Program
     {
+        private static ILog _logger = LogManager.GetLogger("");
+
+
         //-m "%scriptDir%\Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd" -o "%scriptDir%/Generated/CS_xsd" -n XsdBasedModel
         static void Main(string[] args)
         {
-            ILog logger = LogManager.GetLogger("");
 
             var options = new Options();
             if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
@@ -43,9 +47,9 @@ namespace Codge.Generator.Console
                 var model = LoadModel(options.Model, options.ModelName, options.OverridesPath);
 
                 ProcessTemplates(LoadConfig(options.OutputDir),
-                                 new BasicModel.Templates.CS.TaskFactory(logger),
+                                 new BasicModel.Templates.CS.TaskFactory(_logger),
                                  model,
-                                 logger);
+                                 _logger);
             }
 
             
@@ -73,17 +77,7 @@ namespace Codge.Generator.Console
         {
             System.Console.WriteLine("Loading model [" + path + "]");
 
-            ModelDescriptor model;
-            if(path.ToLower().EndsWith(".xsd"))
-            {//loader type selection
-                var schema = Codge.Generator.Presentations.Xsd.SchemaLoader.Load(path);
-                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(schema, modelName);
-            }
-            else
-            {
-                var reader = XmlReader.Create(path);
-                model = Codge.Generator.Presentations.Xml.ModelLoader.Load(reader);
-            }
+            var model = new ModelLoader(_logger).LoadModel(path, modelName);
 
             if (!string.IsNullOrEmpty(modelOverridesPath))
             {

@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Common.Logging.3.3.0\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core">
+      <HintPath>..\packages\Common.Logging.Core.3.3.0\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,16 +58,19 @@
     <Compile Include="Descriptors\Serialisation\DescriptorXmlReader.cs" />
     <Compile Include="Descriptors\TypeDescriptor.cs" />
     <Compile Include="EnumerationType.cs" />
+    <Compile Include="Framework\ModelMergeTypeSystemEventHandler.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="ModelCompiler.cs" />
+    <Compile Include="Framework\ModelCompiler.cs" />
     <Compile Include="Namespace.cs" />
     <Compile Include="PrimitiveType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeBase.cs" />
     <Compile Include="TypeSystem.cs" />
-    <Compile Include="TypeSystemWalker.cs" />
+    <Compile Include="Framework\TypeSystemWalker.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

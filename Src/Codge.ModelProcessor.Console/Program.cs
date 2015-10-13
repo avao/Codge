@@ -1,6 +1,8 @@
 ﻿using Codge.DataModel;
 using Codge.DataModel.Descriptors;
 using Codge.DataModel.Descriptors.Serialisation;
+using Codge.DataModel.Framework;
+using Codge.Generator.Presentations;
 using CommandLine;
 using Common.Logging;
 using System;
@@ -68,80 +70,10 @@ namespace Codge.ModelProcessor.Console
             }
         }
 
-        public class ModelMergeTypeSystemEventHandler
-            : NamespaceTracingTypeSystemEventHandler<NamespaceDescriptor>
-            , IAtomicNodeEnventHandler<PrimitiveTypeDescriptor>
-            , IAtomicNodeEnventHandler<CompositeTypeDescriptor>
-            , IAtomicNodeEnventHandler<EnumerationTypeDescriptor>
-        {
-            public ModelMergeTypeSystemEventHandler(NamespaceDescriptor ns)
-                : base(ns, (n, descriptor)=> n.GetOrCreateNamespace(descriptor.Name))
-            {
-            }
-
-
-            public void Handle(PrimitiveTypeDescriptor primitive)
-            {
-                var lhsType = Namespace.Types.FindByName(primitive.Name);
-                if(lhsType == null)
-                {
-                    Namespace.CreatePrimitiveType(primitive.Name);
-                }
-            }
-
-            public void Handle(CompositeTypeDescriptor composite)
-            {
-                var lhsType = Namespace.Types.FindByName(composite.Name)as CompositeTypeDescriptor;
-                if (lhsType == null)
-                {
-                    lhsType = Namespace.CreateCompositeType(composite.Name);
-                }
-
-                foreach(var field in composite.Fields)
-                {
-                    var lhsField = lhsType.Fields.FirstOrDefault(_ => _.Name == field.Name);
-                    if(lhsField == null)
-                    {
-                        //TODO fields are apended, think about proper merge
-                        lhsField = lhsType.AddField(field.Name, field.TypeName, field.IsCollection);
-                    }
-
-                    if (lhsField.IsCollection != field.IsCollection || lhsField.TypeName != field.TypeName)
-                        Logger.WarnFormat("different field definitions lhs:[{0}], rhs:[{1}]", lhsField.ToXml(), field.ToXml());
-                }
-            }
-
-
-            public void Handle(EnumerationTypeDescriptor enumeration)
-            {
-                var lhsType = Namespace.Types.FindByName(enumeration.Name) as EnumerationTypeDescriptor;
-                if (lhsType == null)
-                {
-                    lhsType = Namespace.CreateEnumerationType(enumeration.Name);
-                }
-
-                //TODO preserve position?
-                foreach(var item in enumeration.Items)
-                {
-                    var lhsItem = lhsType.Items.FirstOrDefault(_ => _.Name == item.Name);
-                    if(lhsItem == null)
-                    {
-                        if(item.Value.HasValue)
-                            lhsType.AddItem(item.Name, item.Value.Value);
-                        else
-                            lhsType.AddItem(item.Name);
-                    }
-                    else
-                    {
-                        Logger.WarnFormat("different item definitions lhs:[{0}], rhs:[{1}]", lhsItem.ToXml(), item.ToXml());
-                    }
-                }
-            }
-        }
-
+        
         static ModelDescriptor Merge(ModelDescriptor lhs, ModelDescriptor rhs)
         {
-            TypeSystemWalker.Walk(rhs.RootNamespace, new ModelMergeTypeSystemEventHandler(lhs.RootNamespace));
+            TypeSystemWalker.Walk(rhs.RootNamespace, new ModelMergeTypeSystemEventHandler(lhs.RootNamespace, Logger));
             return lhs;
         }
 
@@ -151,24 +83,10 @@ namespace Codge.ModelProcessor.Console
             model.Save(outputPath);   
         }
 
-        //TODO copy paste
         static ModelDescriptor LoadModel(string path, string modelName)
         {
             System.Console.WriteLine("Loading model [" + path + "]");
-
-            ModelDescriptor model;
-            if (path.ToLower().EndsWith(".xsd"))
-            {//loader type selection
-                var schema = Codge.Generator.Presentations.Xsd.SchemaLoader.Load(path);
-                model = Codge.Generator.Presentations.Xsd.ModelLoader.Load(schema, modelName);
-            }
-            else
-            {
-                var reader = XmlReader.Create(path);
-                model = Codge.Generator.Presentations.Xml.ModelLoader.Load(reader);
-            }
-
-            return model;
+            return new ModelLoader(Logger).LoadModel(path, modelName);
         }
     }
 }

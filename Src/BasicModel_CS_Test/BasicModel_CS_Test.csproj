@@ -34,8 +34,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Qart.Core">
-      <HintPath>..\packages\Qart.Core.1.0.0.13\lib\net45\Qart.Core.dll</HintPath>
+    <Reference Include="Qart.Core, Version=1.0.0.19, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Qart.Core.1.0.0.19\lib\net45\Qart.Core.dll</HintPath>
     </Reference>
     <Reference Include="Qart.Testing">
       <HintPath>..\packages\Qart.Testing.1.0.0.13\lib\net45\Qart.Testing.dll</HintPath>
