@@ -7,13 +7,14 @@ using NUnit.Framework;
 using System.Xml;
 using Codge.DataModel.Descriptors.Serialisation;
 using Codge.DataModel.Descriptors;
-using Codge.TestSystem.FileBased;
+using Qart.Testing;
+using Qart.Testing.FileBased;
 
 namespace Codge.Generator.Test
 {
     public class DescriptorsSerialisation
     {
-        public static TestSystem.TestSystem TestSystem = new TestSystem.TestSystem(new DataStorage("../../TestStore/ModelSerialisation"));
+        public static TestSystem TestSystem = new TestSystem(new DataStorage("../../TestStore/ModelSerialisation"));
 
         [Test]
         public void TestReadTypeSystem()

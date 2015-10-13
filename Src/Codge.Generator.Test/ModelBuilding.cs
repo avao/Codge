@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using System.Xml;
 using Codge.DataModel;
 using Codge.DataModel.Descriptors;
-using Codge.TestSystem.FileBased;
 using NUnit.Framework;
+using Qart.Testing;
+using Qart.Testing.FileBased;
 
 namespace Codge.Generator.Test
 {
     class ModelBuilding
     {
-        public static TestSystem.TestSystem TestSystem = new TestSystem.TestSystem(new DataStorage("../../TestStore/ModelBuilding"));
+        public static TestSystem TestSystem = new TestSystem(new DataStorage("../../TestStore/ModelBuilding"));
 
         private static void CompileAndAssert(ModelDescriptor model, string testCaseName)
         {

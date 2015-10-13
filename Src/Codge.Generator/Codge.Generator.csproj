@@ -76,6 +76,7 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Codge.Generator.nuspec" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -34,8 +34,26 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Qart.Core">
+      <HintPath>..\packages\Qart.Core.1.0.0.13\lib\net45\Qart.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Qart.Testing">
+      <HintPath>..\packages\Qart.Testing.1.0.0.13\lib\net45\Qart.Testing.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,7 +63,6 @@
   <ItemGroup>
     <Compile Include="DescriptorsSerialisation.cs" />
     <Compile Include="ModelBuilding.cs" />
-    <Compile Include="TestUtils.cs" />
     <Compile Include="TypeSystemXmlSerialiser.cs" />
     <Compile Include="XsdLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,10 +75,6 @@
     <ProjectReference Include="..\Codge.Generator\Codge.Generator.csproj">
       <Project>{33c5683d-8e50-43d9-92c8-f764d642630a}</Project>
       <Name>Codge.Generator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Codge.TestSystem\Codge.TestSystem.csproj">
-      <Project>{2df872e3-be69-43de-8bb8-3f277da8b8c4}</Project>
-      <Name>Codge.TestSystem</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
