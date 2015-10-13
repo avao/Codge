@@ -48,6 +48,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CS_xsd", "CS_xsd", "{286FEB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicXsdBased", "Generated\CS_xsd\BasicXsdBased.csproj", "{1B171528-C478-4B91-A055-54E5818D30D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.ModelProcessor.Console", "Codge.ModelProcessor.Console\Codge.ModelProcessor.Console.csproj", "{76438C90-2175-40CC-9765-D8CC1B12306C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -148,6 +150,16 @@ Global
 		{1B171528-C478-4B91-A055-54E5818D30D7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1B171528-C478-4B91-A055-54E5818D30D7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1B171528-C478-4B91-A055-54E5818D30D7}.Release|Win32.ActiveCfg = Release|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{76438C90-2175-40CC-9765-D8CC1B12306C}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
