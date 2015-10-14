@@ -45,7 +45,11 @@ namespace Codge.Generator.Presentations.Xml
                         {
                             foreach (var field in composite.Field)
                             {
-                                descriptor.AddField(field.name, field.type, field.isCollectionSpecified && field.isCollection);
+                                var newField = descriptor.AddField(field.name, field.type, field.isCollectionSpecified && field.isCollection);
+                                if(field.AttachedData!=null)
+                                {
+                                    field.AttachedData.Select(_ => new KeyValuePair<string,object>(_.key, _.value)).ToList().ForEach(_ => newField.AttachedData.Add(_));
+                                }
                             }
                         }
                     }
