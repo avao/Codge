@@ -47,8 +47,8 @@ namespace Codge.Generator.Presentations.Xml
                             {
                                 var newField = descriptor.AddField(field.name, field.type, field.isCollectionSpecified && field.isCollection);
                                 if(field.AttachedData!=null)
-                                {
-                                    field.AttachedData.Select(_ => new KeyValuePair<string,object>(_.key, _.value)).ToList().ForEach(_ => newField.AttachedData.Add(_));
+                                {//TODO hack for boolean values
+                                    field.AttachedData.Select(_ => new KeyValuePair<string,object>(_.key, _.value == "True" ? (object)true:_.value)).ToList().ForEach(_ => newField.AttachedData.Add(_));
                                 }
                             }
                         }
