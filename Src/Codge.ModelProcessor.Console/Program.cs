@@ -49,7 +49,7 @@ namespace Codge.ModelProcessor.Console
                     var files = Directory.EnumerateFiles(options.Input).OrderBy(_ => _).ToList();
                     if (options.Convert)
                     {
-                        files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileName(_))));
+                        files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileNameWithoutExtension(_)+".xml")));
                     }
                     else if (options.Merge)
                     {
