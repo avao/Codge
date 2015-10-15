@@ -29,7 +29,7 @@ namespace Codge.ModelProcessor.Console
         [Option('c', "convert", Required = false, HelpText = "Processing - convert to XML representation.")]
         public bool Convert { get; set; }
 
-        [Option('m', "merge", Required = false, HelpText = "Processing - merge multiple models into one.")]
+        [Option('m', "merge", Required = false, HelpText = "Processing - merge multiple models into one. Files will be processed in alphabetical order.")]
         public bool Merge { get; set; }
     }
 
@@ -44,11 +44,9 @@ namespace Codge.ModelProcessor.Console
             var options = new Options();
             if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
             {
-                //TODO check merge and convert
-
                 if (Directory.Exists(options.Input))
                 {//directory
-                    var files = Directory.EnumerateFiles(options.Input).ToList();
+                    var files = Directory.EnumerateFiles(options.Input).OrderBy(_ => _).ToList();
                     if (options.Convert)
                     {
                         files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileName(_))));
