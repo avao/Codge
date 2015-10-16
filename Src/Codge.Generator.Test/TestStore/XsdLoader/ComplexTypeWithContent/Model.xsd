@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:complexType name="emptyComplexType">
+  </xs:complexType>
+
+  <xs:complexType name="complexTypeWithAField">
+    <xs:attribute name="aField" type="xs:string"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="complexTypeWithContent">
+    <xs:complexContent>
+      <xs:extension base="emptyComplexType">
+        <xs:sequence>
+          <xs:element name="anElement" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="complexTypeWithContentAndParentField">
+    <xs:complexContent>
+      <xs:extension base="complexTypeWithAField">
+        <xs:sequence>
+          <xs:element name="anElement" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <xs:complexType name="complexTypeWithContentWithAttribute">
+    <xs:complexContent>
+      <xs:extension base="emptyComplexType">
+        <xs:attribute name="anAttribute" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="complexTypeWithSimpleContent">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="anAttribute" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+</xs:schema>

@@ -39,8 +39,9 @@ namespace Codge.Generator.Test
         [TestCase("LoadXsd")]
         [TestCase("SequenceInChoice")]
         [TestCase("BuiltInTypes")]
+        [TestCase("ComplexTypeWithContent")]
         public void Process(string testId)
-        {
+            {
             var testCase = TestSystem.GetTestCase(testId);
 
             XmlSchema schema = testCase.UsingReadStream("Model.xsd", stream => SchemaLoader.Load(stream));

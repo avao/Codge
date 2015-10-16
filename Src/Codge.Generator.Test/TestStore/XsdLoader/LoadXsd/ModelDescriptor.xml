@@ -45,36 +45,6 @@
       <Field name="extraField" type="string" />
     </Composite>
     <Composite name="elemEmptyType_EmptyComplex" />
-    <Composite name="complexTypeWithContent">
-      <Field name="anElement" type="string" />
-    </Composite>
-    <Composite name="complexTypeWithContentAndParentField">
-      <Field name="aField" type="string">
-        <AttachedData>
-          <Item key="isAttribute" value="True" />
-        </AttachedData>
-      </Field>
-      <Field name="anElement" type="string" />
-    </Composite>
-    <Composite name="complexTypeWithContentWithAttribute">
-      <Field name="anAttribute" type="string">
-        <AttachedData>
-          <Item key="isAttribute" value="True" />
-        </AttachedData>
-      </Field>
-    </Composite>
-    <Composite name="complexTypeWithSimpleContent">
-      <Field name="anAttribute" type="string">
-        <AttachedData>
-          <Item key="isAttribute" value="True" />
-        </AttachedData>
-      </Field>
-      <Field name="Content" type="string">
-        <AttachedData>
-          <Item key="isContent" value="True" />
-        </AttachedData>
-      </Field>
-    </Composite>
     <Enumeration name="simpleType">
       <Item name="anEnumerationValue" />
     </Enumeration>
