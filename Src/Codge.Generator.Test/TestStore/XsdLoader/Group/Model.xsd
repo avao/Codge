@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:group name="aGroup">
+    <xs:sequence>
+      <xs:element name="element" type="xs:string"/>
+    </xs:sequence>
+  </xs:group>
+
+  <xs:complexType name="ordertype">
+    <xs:group ref="aGroup"/>
+    <xs:attribute name="status" type="xs:string"/>
+  </xs:complexType>
+
+
+</xs:schema>

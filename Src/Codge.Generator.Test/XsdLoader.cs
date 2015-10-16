@@ -41,6 +41,9 @@ namespace Codge.Generator.Test
         [TestCase("BuiltInTypes")]
         [TestCase("ComplexTypeWithContent")]
         [TestCase("RecursiveType")]
+        [TestCase("Enumeration")]
+        [TestCase("ElementWithEmbededType")]
+        [TestCase("Group")]
         public void Process(string testId)
             {
             var testCase = TestSystem.GetTestCase(testId);

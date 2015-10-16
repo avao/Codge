@@ -7,7 +7,6 @@
         </AttachedData>
       </Field>
     </Composite>
-    <Composite name="emptyComplexType" />
     <Composite name="ordertype">
       <Field name="status" type="string">
         <AttachedData>
@@ -21,9 +20,7 @@
           <Item key="isOptional" value="True" />
         </AttachedData>
       </Field>
-      <Field name="shipto" type="string" />
-      <Field name="elementWithEmbededType" type="elementWithEmbededType" />
-      <Field name="elemSimpleType" type="simpleType" />
+      <Field name="elemSimpleType" type="enumType" />
       <Field name="elemEmptyType" type="elemEmptyType_EmptyComplex" />
       <Field name="enumField" type="enumType">
         <AttachedData>
@@ -45,27 +42,8 @@
       <Field name="extraField" type="string" />
     </Composite>
     <Composite name="elemEmptyType_EmptyComplex" />
-    <Enumeration name="simpleType">
+    <Enumeration name="enumType">
       <Item name="anEnumerationValue" />
     </Enumeration>
-    <Enumeration name="enumType">
-      <Item name="item1" />
-      <Item name="item2" />
-      <Item name="1itemStartsWithDigit" />
-      <Item name="item With Spaces" />
-    </Enumeration>
-    <Composite name="elementWithEmbededType">
-      <Field name="aSubElement" type="string" />
-      <Field name="elementInAChoice1" type="string">
-        <AttachedData>
-          <Item key="isOptional" value="True" />
-        </AttachedData>
-      </Field>
-      <Field name="elementInAChoice2" type="string">
-        <AttachedData>
-          <Item key="isOptional" value="True" />
-        </AttachedData>
-      </Field>
-    </Composite>
   </Namespace>
 </Model>

@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:group name="custGroup">
+  <xs:complexType name="complexTypeWithAField">
+    <xs:attribute name="aField" type="xs:string"/>
+  </xs:complexType>
+  
+  <xs:complexType name="ordertype">
     <xs:sequence>
       <xs:element name="customer" type="xs:string"/>
       <xs:element name="elementWithEmbededTypeInPlace" >
@@ -16,9 +20,7 @@
         </xs:complexType>
       </xs:element>
       <xs:element name="billto" type="xs:int" minOccurs="0"/>
-      <xs:element name="shipto" type="xs:string"/>
-      <xs:element ref="elementWithEmbededType"/>
-      <xs:element name="elemSimpleType" type="simpleType"/>
+      <xs:element name="elemSimpleType" type="enumType"/>
       <xs:element name="elemEmptyType">
         <xs:complexType/>
       </xs:element>
@@ -27,51 +29,13 @@
         <xs:element name="enumFieldCollection" type="enumType" maxOccurs="unbounded"/>
       </xs:choice>
     </xs:sequence>
-  </xs:group>
-
-  <xs:element name="order" type="ordertype"/>
-
-  <xs:complexType name="complexTypeWithAField">
-    <xs:attribute name="aField" type="xs:string"/>
-  </xs:complexType>
-  
-  
-  <xs:complexType name="emptyComplexType">
-  </xs:complexType>
-  
-  <xs:complexType name="ordertype">
-    <xs:group ref="custGroup"/>
     <xs:attribute name="status" type="xs:string"/>
   </xs:complexType>
 
-  <xs:element name="elementWithEmbededType">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element name="aSubElement" type="xs:string"/>
-        <xs:choice>
-          <xs:element name="elementInAChoice1" type="xs:string"/>
-          <xs:element name="elementInAChoice2" type="xs:string"/>
-        </xs:choice>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-
-
-  <xs:simpleType name="simpleType">
+  <xs:simpleType name="enumType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="anEnumerationValue"/>
     </xs:restriction>    
   </xs:simpleType>
-
-  <xs:simpleType name="enumType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="item1"/>
-      <xs:enumeration value="item1"/>
-      <xs:enumeration value="item2"/>
-      <xs:enumeration value="1itemStartsWithDigit"/>
-      <xs:enumeration value="item With Spaces"/>
-    </xs:restriction>
-  </xs:simpleType>
-
 
 </xs:schema>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="enumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="item1"/>
+      <xs:enumeration value="item1"/>
+      <xs:enumeration value="item2"/>
+      <xs:enumeration value="1itemStartsWithDigit"/>
+      <xs:enumeration value="item With Spaces"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
