@@ -11,12 +11,13 @@ using Qart.Testing;
 using Qart.Testing.FileBased;
 using Codge.DataModel.Framework;
 using Qart.Core.Xsd;
+using Codge.DataModel.Descriptors.Serialisation;
 
 namespace Codge.Generator.Test
 {
     public class XsdLoader
     {
-        public static TestSystem TestSystem = new TestSystem(new DataStorage("../../TestStore/XsdLoader"));
+        public static TestSystem TestSystem = new TestSystem(new DataStore("../../TestStore/XsdLoader"));
 
         [Test]
         public void LoadModelXsd()
@@ -34,23 +35,28 @@ namespace Codge.Generator.Test
             testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "TypeSystem.xml", true);
         }
 
-        [Test]
-        public void LoadXsd()
+        [TestCase("LoadXsd")]
+        public void Process(string testId)
         {
-            var testCase = TestSystem.GetTestCase("LoadXsd");
+            var testCase = TestSystem.GetTestCase(testId);
 
             ModelDescriptor modelDescriptor;
-            using (var stream = testCase.GetStream("Test.xsd"))
+            using (var stream = testCase.GetReadStream("Model.xsd"))
             {
                 var schema = SchemaLoader.Load(stream);
                 modelDescriptor = ModelLoader.Load(schema, "AModel");
             }
 
+            testCase.AssertContentXml(modelDescriptor.ToXml(), "ModelDescriptor.xml", true);
+            testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(CompileModel(modelDescriptor)), "TypeSystem.xml", true);
+        }
+
+        private static TypeSystem CompileModel(ModelDescriptor modelDescriptor)
+        {
             var typeSystem = new TypeSystem();
             var compiler = new ModelCompiler();
-            var model = compiler.Compile(typeSystem, modelDescriptor);
-
-            testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(typeSystem), "XsdTypes.xml", true);
+            compiler.Compile(typeSystem, modelDescriptor);
+            return typeSystem;
         }
 
     }

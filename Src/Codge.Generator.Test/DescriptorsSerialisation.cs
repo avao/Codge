@@ -14,29 +14,21 @@ namespace Codge.Generator.Test
 {
     public class DescriptorsSerialisation
     {
-        public static TestSystem TestSystem = new TestSystem(new DataStorage("../../TestStore/ModelSerialisation"));
+        public static TestSystem TestSystem = new TestSystem(new DataStore("../../TestStore/ModelSerialisation"));
 
         [Test]
         public void TestReadTypeSystem()
         {
             var testCase = TestSystem.GetTestCase("RoundTrip");
 
-            ModelDescriptor model;
-            using (var stream = testCase.GetStream("Model.xml"))
-            using (var reader = XmlReader.Create(stream))
+            ModelDescriptor model=null;
+            testCase.UsingXmlReader("Model.xml", reader =>
             {
                 reader.MoveToContent();
                 model = DescriptorXmlReader.Read(reader);
-            }
+            });
 
-            var output = new StringBuilder();
-            using (var writer = XmlWriter.Create(output))
-            {
-                model.ToXml(writer);
-            }
-
-            testCase.AssertContentXml(output.ToString(), "Serialised.xml", true);
-
+            testCase.AssertContentXml(  model.ToXml(), "Serialised.xml", true);
         }
     }
 }

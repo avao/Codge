@@ -9,14 +9,19 @@ namespace Codge.DataModel.Descriptors.Serialisation
 {
     public static class DescriptorStringSerialisationExtensions
     {
-        public static string ToXml(this FieldDescriptor field)
+        public static string ToXml(this ModelDescriptor descriptor)
         {
-            return ToXml(_ => field.ToXml(_));
+            return ToXml(_ => descriptor.ToXml(_));
         }
 
-        public static string ToXml(this ItemDescriptor item)
+        public static string ToXml(this FieldDescriptor descriptor)
         {
-            return ToXml(_ => item.ToXml(_));
+            return ToXml(_ => descriptor.ToXml(_));
+        }
+
+        public static string ToXml(this ItemDescriptor descriptor)
+        {
+            return ToXml(_ => descriptor.ToXml(_));
         }
 
         private static string ToXml(Action<XmlWriter> action)

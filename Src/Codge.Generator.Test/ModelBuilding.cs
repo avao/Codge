@@ -15,7 +15,7 @@ namespace Codge.Generator.Test
 {
     class ModelBuilding
     {
-        public static TestSystem TestSystem = new TestSystem(new DataStorage("../../TestStore/ModelBuilding"));
+        public static TestSystem TestSystem = new TestSystem(new DataStore("../../TestStore/ModelBuilding"));
 
         private static void CompileAndAssert(ModelDescriptor model, string testCaseName)
         {

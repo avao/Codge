@@ -16,7 +16,7 @@ namespace BasicModel_CS_Test
     
     public class XsdBasedSerialisationTest
     {
-        public static TestSystem TestSystem = new TestSystem(new DataStorage("../../TestStore/Serialisation"));
+        public static TestSystem TestSystem = new TestSystem(new DataStore("../../TestStore/Serialisation"));
 
         [Test]
         public void SerialiseToXml()
