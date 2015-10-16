@@ -36,6 +36,7 @@ namespace Codge.Generator.Test
         }
 
         [TestCase("LoadXsd")]
+        [TestCase("SequenceInChoice")]
         public void Process(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);
@@ -48,16 +49,6 @@ namespace Codge.Generator.Test
             }
 
             testCase.AssertContentXml(modelDescriptor.ToXml(), "ModelDescriptor.xml", true);
-            testCase.AssertContentXml(TypeSystemXmlSerialiser.ToString(CompileModel(modelDescriptor)), "TypeSystem.xml", true);
         }
-
-        private static TypeSystem CompileModel(ModelDescriptor modelDescriptor)
-        {
-            var typeSystem = new TypeSystem();
-            var compiler = new ModelCompiler();
-            compiler.Compile(typeSystem, modelDescriptor);
-            return typeSystem;
-        }
-
     }
 }

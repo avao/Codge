@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ChoiceWithSequenceType">
+    <xs:choice>
+      <xs:element name="elementInChoice1" type="xs:string"/>
+      <xs:element name="elementInChoice2" type="xs:string"/>
+       <xs:sequence>
+        <xs:element name="elementInSequence1" type="xs:string"/>
+        <xs:choice>
+          <xs:element name="elementInNestedChoice1" type="xs:string"/>
+          <xs:element name="elementInNestedChoice2" type="xs:string"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:choice>
+  </xs:complexType>
+</xs:schema>
