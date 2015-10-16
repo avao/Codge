@@ -12,6 +12,7 @@ using Qart.Testing.FileBased;
 using Codge.DataModel.Framework;
 using Qart.Core.Xsd;
 using Codge.DataModel.Descriptors.Serialisation;
+using System.Xml.Schema;
 
 namespace Codge.Generator.Test
 {
@@ -41,12 +42,8 @@ namespace Codge.Generator.Test
         {
             var testCase = TestSystem.GetTestCase(testId);
 
-            ModelDescriptor modelDescriptor;
-            using (var stream = testCase.GetReadStream("Model.xsd"))
-            {
-                var schema = SchemaLoader.Load(stream);
-                modelDescriptor = ModelLoader.Load(schema, "AModel");
-            }
+            XmlSchema schema = testCase.UsingReadStream("Model.xsd", stream => SchemaLoader.Load(stream));
+            ModelDescriptor modelDescriptor = ModelLoader.Load(schema, "AModel");
 
             testCase.AssertContentXml(modelDescriptor.ToXml(), "ModelDescriptor.xml", true);
         }
