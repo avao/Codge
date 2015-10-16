@@ -38,6 +38,7 @@ namespace Codge.Generator.Test
 
         [TestCase("LoadXsd")]
         [TestCase("SequenceInChoice")]
+        [TestCase("BuiltInTypes")]
         public void Process(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);

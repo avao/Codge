@@ -1,0 +1,49 @@
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="allXsdTypes">
+      <Field name="anyUri" type="string" />
+      <Field name="base64Binary" type="string" />
+      <Field name="boolean" type="bool" />
+      <Field name="byte" type="int" />
+      <Field name="date" type="string" />
+      <Field name="dateTime" type="string" />
+      <Field name="decimal" type="decimal" />
+      <Field name="double" type="double" />
+      <Field name="duration" type="string" />
+      <Field name="Entities" type="string" />
+      <Field name="Entity" type="string" />
+      <Field name="float" type="double" />
+      <Field name="gDay" type="string" />
+      <Field name="gMonth" type="string" />
+      <Field name="gMonthDay" type="string" />
+      <Field name="gYear" type="string" />
+      <Field name="gYearMonth" type="string" />
+      <Field name="hexBinary" type="string" />
+      <Field name="id" type="string" />
+      <Field name="idRef" type="string" />
+      <Field name="idRefs" type="string" />
+      <Field name="int" type="int" />
+      <Field name="integer" type="int" />
+      <Field name="language" type="string" />
+      <Field name="long" type="int" />
+      <Field name="Name" type="string" />
+      <Field name="ncName" type="string" />
+      <Field name="negativeInteger" type="int" />
+      <Field name="nmToken" type="string" />
+      <Field name="nmTokens" type="string" />
+      <Field name="nonNegativeInteger" type="int" />
+      <Field name="nonPositiveInteger" type="int" />
+      <Field name="normalizedString" type="string" />
+      <Field name="positiveInteger" type="int" />
+      <Field name="QName" type="string" />
+      <Field name="short" type="int" />
+      <Field name="string" type="string" />
+      <Field name="time" type="string" />
+      <Field name="token" type="string" />
+      <Field name="unsignedByte" type="int" />
+      <Field name="unsignedIint" type="int" />
+      <Field name="unsignedLong" type="int" />
+      <Field name="unsignedShort" type="int" />
+    </Composite>
+  </Namespace>
+</Model>
