@@ -282,7 +282,7 @@ namespace Codge.Generator.Presentations.Xsd
                     var groupBase = item as XmlSchemaGroupBase;
                     if (groupBase != null)
                     {
-                        AddFields(descriptor, groupBase.Items, groupBase is XmlSchemaChoice);
+                        AddFields(descriptor, groupBase.Items, isOptional || groupBase is XmlSchemaChoice);
                         return;
                     }
 
