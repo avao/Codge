@@ -63,14 +63,6 @@
     </xs:restriction>    
   </xs:simpleType>
 
-  <xs:complexType name="recursiveType">
-    <xs:choice>
-      <xs:element name="recursiveType" type="recursiveType"/>
-    </xs:choice>
-  </xs:complexType>
-
-
-
   <xs:simpleType name="enumType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="item1"/>

@@ -48,13 +48,6 @@
     <Enumeration name="simpleType">
       <Item name="anEnumerationValue" />
     </Enumeration>
-    <Composite name="recursiveType">
-      <Field name="recursiveType" type="recursiveType">
-        <AttachedData>
-          <Item key="isOptional" value="True" />
-        </AttachedData>
-      </Field>
-    </Composite>
     <Enumeration name="enumType">
       <Item name="item1" />
       <Item name="item2" />

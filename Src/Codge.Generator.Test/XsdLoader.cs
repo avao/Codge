@@ -40,6 +40,7 @@ namespace Codge.Generator.Test
         [TestCase("SequenceInChoice")]
         [TestCase("BuiltInTypes")]
         [TestCase("ComplexTypeWithContent")]
+        [TestCase("RecursiveType")]
         public void Process(string testId)
             {
             var testCase = TestSystem.GetTestCase(testId);
