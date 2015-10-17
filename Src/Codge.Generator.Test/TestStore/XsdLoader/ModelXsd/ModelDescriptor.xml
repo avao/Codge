@@ -1,0 +1,123 @@
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="ModelDesc">
+      <Field name="name" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Namespace" type="NamespaceDesc" />
+    </Composite>
+    <Composite name="NamespaceDesc">
+      <Field name="name" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Primitive" type="Primitive">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Enumeration" type="Enumeration">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Composite" type="Composite">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Namespace" type="NamespaceDesc" isCollection="true">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="Primitive">
+      <Field name="name" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="Enumeration">
+      <Field name="name" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Item" type="Item" isCollection="true" />
+    </Composite>
+    <Composite name="Item">
+      <Field name="name" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="value" type="int">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="Composite">
+      <Field name="name" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Extends" type="Extends" isCollection="true">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Field" type="Field" isCollection="true">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="Extends">
+      <Field name="type" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="Field">
+      <Field name="name" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="type" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="isCollection" type="bool">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="AttachedData" type="AttachedData" />
+    </Composite>
+    <Composite name="AttachedData">
+      <Field name="Item" type="AttachedDataItem" isCollection="true" />
+    </Composite>
+    <Composite name="AttachedDataItem">
+      <Field name="key" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="value" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+  </Namespace>
+</Model>
