@@ -4,38 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Codge.DataModel.Descriptors;
+using Common.Logging;
 
 namespace Codge.DataModel.Framework
 {
-    public class NamespaceTracingTypeSystemEventHandler<T>
-    : ICompositeNodeEventHandler<NamespaceDescriptor>
+    public class ModelProcessor
     {
-        private readonly Stack<T> _namespaces;
-        private Func<T, NamespaceDescriptor, T> _converter;
-        public NamespaceTracingTypeSystemEventHandler(T ns, Func<T, NamespaceDescriptor,T> converter)
-        {
-            _namespaces = new Stack<T>();
-            _namespaces.Push(ns);
-            _converter = converter;
-        }
+        static ILog Logger = LogManager.GetLogger("ModelProcessor");
 
-        public void OnEnter(NamespaceDescriptor node)
-        {
-            _namespaces.Push(_converter(Namespace, node));
-        }
-
-        public void OnLeave(NamespaceDescriptor node)
-        {
-            _namespaces.Pop();
-        }
-
-        protected T Namespace { get { return _namespaces.Peek(); } }
-    }
-
-
-
-    public class ModelCompiler
-    {
         public Model Compile(TypeSystem typeSystem, ModelDescriptor model)
         {
             var ns = typeSystem.GetOrCreateNamespace(model.RootNamespace.Name);
@@ -49,6 +25,19 @@ namespace Codge.DataModel.Framework
             TypeSystemWalker.Walk(model.RootNamespace, new TypeSystemCompileHandlerSecondPass(compiledModel.Namespace));
 
             return compiledModel;
+        }
+
+        public static ModelDescriptor MergeToLhs(ModelDescriptor lhs, ModelDescriptor rhs)
+        {
+            TypeSystemWalker.Walk(rhs.RootNamespace, new ModelMergeTypeSystemEventHandler(lhs.RootNamespace, Logger));
+            return lhs;
+        }
+
+        public static ModelDescriptor MergeToLhs(IEnumerable<ModelDescriptor> descriptors)
+        {
+            var model = descriptors.First();
+            descriptors.Skip(1).Aggregate(model, DataModel.Framework.ModelProcessor.MergeToLhs);
+            return model;
         }
 
         static int id = 3000;

@@ -92,7 +92,7 @@ namespace Codge.Generator.Console
             }
             
             var typeSystem = new TypeSystem();
-            var compiler = new ModelCompiler();
+            var compiler = new ModelProcessor();
             return compiler.Compile(typeSystem, model);
         }
 

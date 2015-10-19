@@ -1,0 +1,22 @@
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="Compo">
+      <Field name="Field1" type="string" />
+      <Field name="Field2" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Field3" type="string">
+        <AttachedData>
+          <Item key="isOptional" value="False" />
+        </AttachedData>
+      </Field>
+      <Field name="Field4" type="string">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+  </Namespace>
+</Model>

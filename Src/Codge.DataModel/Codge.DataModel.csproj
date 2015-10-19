@@ -59,8 +59,9 @@
     <Compile Include="Descriptors\TypeDescriptor.cs" />
     <Compile Include="EnumerationType.cs" />
     <Compile Include="Framework\ModelMergeTypeSystemEventHandler.cs" />
+    <Compile Include="Framework\NamespaceTracingTypeSystemEventHandler.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="Framework\ModelCompiler.cs" />
+    <Compile Include="Framework\ModelProcessor.cs" />
     <Compile Include="Namespace.cs" />
     <Compile Include="PrimitiveType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

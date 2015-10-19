@@ -34,13 +34,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Qart.Core, Version=1.0.0.31, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qart.Core, Version=1.0.0.35, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Qart.Core.1.0.0.31\lib\net40\Qart.Core.dll</HintPath>
+      <HintPath>..\packages\Qart.Core.1.0.0.35\lib\net40\Qart.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Qart.Testing, Version=1.0.0.31, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qart.Testing, Version=1.0.0.35, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Qart.Testing.1.0.0.31\lib\net40\Qart.Testing.dll</HintPath>
+      <HintPath>..\packages\Qart.Testing.1.0.0.35\lib\net40\Qart.Testing.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="DescriptorsSerialisation.cs" />
     <Compile Include="ModelBuilding.cs" />
+    <Compile Include="ModelProcessorTests.cs" />
     <Compile Include="TypeSystemXmlSerialiser.cs" />
     <Compile Include="XsdLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +82,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="TestStore\XsdLoader\BuiltInTypes\Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TestStore\XsdLoader\ComplexTypeWithContent\Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TestStore\XsdLoader\ElementWithEmbededType\Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TestStore\XsdLoader\Enumeration\Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TestStore\XsdLoader\Group\Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TestStore\XsdLoader\LoadXsd\Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="TestStore\XsdLoader\LoadXsd\Test.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TestStore\XsdLoader\ModelXsd\Model.xsd.ref" />
+    <None Include="TestStore\XsdLoader\RecursiveType\Model.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="TestStore\XsdLoader\SequenceInChoice\Model.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -89,10 +115,21 @@
     <Content Include="TestStore\ModelBuilding\CollectionField\TypeSystem.xml" />
     <Content Include="TestStore\ModelBuilding\DependentTypes\TypeSystem.xml" />
     <Content Include="TestStore\ModelBuilding\Enumeration\TypeSystem.xml" />
+    <Content Include="TestStore\ModelProcessor\Optional\Models\ModelDescriptor1.xml" />
+    <Content Include="TestStore\ModelProcessor\Optional\Models\ModelDescriptor2.xml" />
     <Content Include="TestStore\ModelSerialisation\RoundTrip\Model.xml" />
     <Content Include="TestStore\ModelSerialisation\RoundTrip\Serialised.xml" />
+    <Content Include="TestStore\XsdLoader\BuiltInTypes\ModelDescriptor.xml" />
+    <Content Include="TestStore\XsdLoader\ComplexTypeWithContent\ModelDescriptor.xml" />
+    <Content Include="TestStore\XsdLoader\ElementWithEmbededType\ModelDescriptor.xml" />
+    <Content Include="TestStore\XsdLoader\Enumeration\ModelDescriptor.xml" />
+    <Content Include="TestStore\XsdLoader\Group\ModelDescriptor.xml" />
     <Content Include="TestStore\XsdLoader\LoadModelXsd\TypeSystem.xml" />
+    <Content Include="TestStore\XsdLoader\LoadXsd\ModelDescriptor.xml" />
     <Content Include="TestStore\XsdLoader\LoadXsd\XsdTypes.xml" />
+    <Content Include="TestStore\XsdLoader\ModelXsd\ModelDescriptor.xml" />
+    <Content Include="TestStore\XsdLoader\RecursiveType\ModelDescriptor.xml" />
+    <Content Include="TestStore\XsdLoader\SequenceInChoice\ModelDescriptor.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

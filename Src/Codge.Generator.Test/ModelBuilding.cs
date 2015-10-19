@@ -21,7 +21,7 @@ namespace Codge.Generator.Test
         {
             var typeSystem = new TypeSystem();
 
-            var compiler = new ModelCompiler();
+            var compiler = new ModelProcessor();
 
             var compiledModel = compiler.Compile(typeSystem, model);
 

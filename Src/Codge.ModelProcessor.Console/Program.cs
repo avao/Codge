@@ -53,8 +53,7 @@ namespace Codge.ModelProcessor.Console
                     }
                     else if (options.Merge)
                     {
-                        var model = LoadModel(files.First(), options.ModelName);
-                        files.Skip(1).Select(_ => LoadModel(_, options.ModelName)).Aggregate(model, Merge);
+                        var model = Codge.DataModel.Framework.ModelProcessor.MergeToLhs(files.Select(_ => LoadModel(_, options.ModelName)));
                         model.Save(options.Output);
                     }
                 }
@@ -66,13 +65,6 @@ namespace Codge.ModelProcessor.Console
                     }
                 }
             }
-        }
-
-        
-        static ModelDescriptor Merge(ModelDescriptor lhs, ModelDescriptor rhs)
-        {
-            TypeSystemWalker.Walk(rhs.RootNamespace, new ModelMergeTypeSystemEventHandler(lhs.RootNamespace, Logger));
-            return lhs;
         }
 
         static void ConvertModel(string path, string modelName, string outputPath)
