@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Xml;
-using BasicModel.CS.Serialisation;
+using Codge.BasicModel.CS.Serialisation;
 using Types.XsdBasedModel;
 using Serialisers.XsdBasedModel;
 using Qart.Testing;
@@ -17,7 +17,7 @@ namespace BasicModel_CS_Test
     public class XsdBasedSerialisationTest
     {
         public static TestSystem TestSystem = new TestSystem(new DataStore("../../TestStore/Serialisation"));
-
+        
         [Test]
         public void SerialiseToXml()
         {
@@ -91,7 +91,6 @@ namespace BasicModel_CS_Test
             string actualContent = Utils.Serialise(obj, "allXsdTypes", context);
             testCase.AssertContentXml(actualContent, "allXsdSerialised.xml", true);
         }
-
     }
 }
 

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BasicModel.Templates.CS.Templates;
+using Codge.BasicModel.Templates.CS.Templates;
 using Codge.Generator;
 using Codge.Generator.Tasks;
 using Common.Logging;
 using Codge.DataModel;
 
-namespace BasicModel.Templates.CS
+namespace Codge.BasicModel.Templates.CS
 {
     public class TaskFactory : ITaskFactory
     {
@@ -36,10 +36,10 @@ namespace BasicModel.Templates.CS
         public IEnumerable<ITask<TypeBase>> CreateTasksForType(TypeBase type)
         {
             return new[] {
-                new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Composite(type), Logger),
-                new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Primitive(type), Logger),
-                new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.Types.Enum(type), Logger),
-                new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.XmlSerialisers.Composite(type), Logger)
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Composite(type), Logger),
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Primitive(type), Logger),
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Enum(type), Logger),
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.XmlSerialisers.Composite(type), Logger)
                 //new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.PofSerialisers.Composite(type), Logger)
             };
         }

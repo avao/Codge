@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace BasicModel.Templates.CS.Templates.Types
+namespace Codge.BasicModel.Templates.CS.Templates.Types
 {
     using System.IO;
     using System.Linq;
@@ -21,7 +21,7 @@ namespace BasicModel.Templates.CS.Templates.Types
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
+    #line 1 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class Primitive : T4TemplateAction<TypeBase>
     {
@@ -33,14 +33,14 @@ namespace BasicModel.Templates.CS.Templates.Types
         {
             this.Write("\r\n\r\nnamespace Types.");
             
-            #line 11 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
+            #line 11 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Namespace.GetFullName(".")));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic class ");
             
-            #line 13 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
+            #line 13 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
@@ -49,7 +49,7 @@ namespace BasicModel.Templates.CS.Templates.Types
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 21 "D:\work\Codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
+        #line 21 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Types\Primitive.tt"
 
 	public PrimitiveType Type{get; private set;}
 

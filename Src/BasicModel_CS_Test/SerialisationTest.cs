@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using System.Xml;
-using BasicModel.CS.Serialisation;
+using Codge.BasicModel.CS.Serialisation;
 using Serialisers;
 using Types.rootNs;
 using Types.rootNs.nestedNs;

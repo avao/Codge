@@ -1,5 +1,4 @@
 
-
 namespace Types.rootNs
 {
 	public class myType2

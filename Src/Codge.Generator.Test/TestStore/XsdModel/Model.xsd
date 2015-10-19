@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:group name="custGroup">
+    <xs:sequence>
+      <xs:element name="customer" type="xs:string"/>
+      <xs:element name="elementWithEmbededTypeInPlace" >
+        <xs:complexType>
+          <xs:complexContent>
+            <xs:extension base="complexTypeWithAField">
+              <xs:sequence>
+                <xs:element name="extraField" type="xs:string"/>
+              </xs:sequence>
+            </xs:extension>
+          </xs:complexContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="billto" type="xs:int" minOccurs="0"/>
+      <xs:element name="shipto" type="xs:string"/>
+      <xs:element ref="elementWithEmbededType"/>
+      <xs:element name="elemSimpleType" type="simpleType"/>
+      <xs:element name="elemEmptyType">
+        <xs:complexType/>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="enumField" type="enumType"/>
+        <xs:element name="enumFieldCollection" type="enumType" maxOccurs="unbounded"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+
+  <xs:element name="order" type="ordertype"/>
+
+  <xs:complexType name="complexTypeWithAField">
+    <xs:attribute name="aField" type="xs:string"/>
+  </xs:complexType>
+  
+  
+  <xs:complexType name="emptyComplexType">
+  </xs:complexType>
+  
+  <xs:complexType name="ordertype">
+    <xs:group ref="custGroup"/>
+    <xs:attribute name="status" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:element name="elementWithEmbededType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="aSubElement" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="complexTypeWithContent">
+    <xs:complexContent>
+      <xs:extension base="emptyComplexType">
+        <xs:sequence>
+          <xs:element name="anElement" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="complexTypeWithContentAndParentField">
+    <xs:complexContent>
+      <xs:extension base="complexTypeWithAField">
+        <xs:sequence>
+          <xs:element name="anElement" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <xs:complexType name="complexTypeWithContentWithAttribute">
+    <xs:complexContent>
+      <xs:extension base="emptyComplexType">
+        <xs:attribute name="anAttribute" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="complexTypeWithSimpleContent">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="anAttribute" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="simpleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="anEnumerationValue"/>
+    </xs:restriction>    
+  </xs:simpleType>
+
+  <xs:complexType name="recursiveType">
+    <xs:choice>
+      <xs:element name="recursiveType" type="recursiveType"/>
+    </xs:choice>
+  </xs:complexType>
+
+
+  <xs:complexType name="allXsdTypes">
+    <xs:sequence>
+      <xs:element name="anyUri" type="xs:anyURI"/>
+      <xs:element name="base64Binary" type="xs:base64Binary"/>
+      <xs:element name="boolean" type="xs:boolean"/>
+      <xs:element name="byte" type="xs:byte"/>
+      <xs:element name="date" type="xs:date"/>
+      <xs:element name="dateTime" type="xs:dateTime"/>
+      <xs:element name="decimal" type="xs:decimal"/>
+      <xs:element name="double" type="xs:double"/>
+      <xs:element name="duration" type="xs:duration"/>
+      <xs:element name="Entities" type="xs:ENTITIES"/>
+      <xs:element name="Entity" type="xs:ENTITY"/>
+      <xs:element name="float" type="xs:float"/>
+      <xs:element name="gDay" type="xs:gDay"/>
+      <xs:element name="gMonth" type="xs:gMonth"/>
+      <xs:element name="gMonthDay" type="xs:gMonthDay"/>
+      <xs:element name="gYear" type="xs:gYear"/>
+      <xs:element name="gYearMonth" type="xs:gYearMonth"/>
+      <xs:element name="hexBinary" type="xs:hexBinary"/>
+      <xs:element name="id" type="xs:ID"/>
+      <xs:element name="idRef" type="xs:IDREF"/>
+      <xs:element name="idRefs" type="xs:IDREFS"/>
+      <xs:element name="int" type="xs:int"/>
+      <xs:element name="integer" type="xs:integer"/>
+      <xs:element name="language" type="xs:language"/>
+      <xs:element name="long" type="xs:long"/>
+      <xs:element name="Name" type="xs:Name"/>
+      <xs:element name="ncName" type="xs:NCName"/>
+      <xs:element name="negativeInteger" type="xs:negativeInteger"/>
+      <xs:element name="nmToken" type="xs:NMTOKEN"/>
+      <xs:element name="nmTokens" type="xs:NMTOKENS"/>
+      <xs:element name="nonNegativeInteger" type="xs:nonNegativeInteger"/>
+      <xs:element name="nonPositiveInteger" type="xs:nonPositiveInteger"/>
+      <xs:element name="normalizedString" type="xs:normalizedString"/>
+      <!-- <xs:element name="Notation" type="xs:NOTATION"/> -->
+      <xs:element name="positiveInteger" type="xs:positiveInteger"/>
+      <xs:element name="QName" type="xs:QName"/>
+      <xs:element name="short" type="xs:short"/>
+      <xs:element name="string" type="xs:string"/>
+      <xs:element name="time" type="xs:time"/>
+      <xs:element name="token" type="xs:token"/>
+      <xs:element name="unsignedByte" type="xs:unsignedByte"/>
+      <xs:element name="unsignedIint" type="xs:unsignedInt"/>
+      <xs:element name="unsignedLong" type="xs:unsignedLong"/>
+      <xs:element name="unsignedShort" type="xs:unsignedShort"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="enumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="item1"/>
+      <xs:enumeration value="item1"/>
+      <xs:enumeration value="item2"/>
+      <xs:enumeration value="1itemStartsWithDigit"/>
+      <xs:enumeration value="item With Spaces"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+</xs:schema>

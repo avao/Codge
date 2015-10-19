@@ -6,7 +6,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
 <#@ import namespace="Codge.Generator" #>
-using BasicModel.CS.Serialisation;
+using Codge.BasicModel.CS.Serialisation;
 
 namespace Serialisers.<#= Model.Namespace.GetFullName(".") #>
 {

@@ -1,4 +1,4 @@
-using BasicModel.CS.Serialisation;
+using Codge.BasicModel.CS.Serialisation;
 using System.Xml;
 using Types.rootNs.nestedNs;
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Codge.DataModel;
 
-namespace BasicModel.Templates.CS
+namespace Codge.BasicModel.Templates.CS
 {
     internal static class Extensions
     {

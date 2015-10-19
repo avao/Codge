@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Codge.DataModel;
 using Codge.Generator;
 
-namespace BasicModel.Templates.CS
+namespace Codge.BasicModel.Templates.CS
 {
     public class ProjectUpdater : IOutputAction<Model>
     {

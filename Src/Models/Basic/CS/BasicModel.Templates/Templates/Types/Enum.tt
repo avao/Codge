@@ -6,7 +6,9 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
 <#@ import namespace="Codge.Generator" #>
+<#@ import namespace="Codge.BasicModel.Templates.CS" #>
 
+using System.Collections.Generic;
 
 namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {
@@ -30,6 +32,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
     public static class <#= Type.Name #>Converter
 	{
         private static string[] _values = new string[<#= Type.Items.Count() #>];
+        private static IDictionary<string, <#= Type.Name #> > _stringToEnum = new Dictionary<string, <#= Type.Name #> >();
 
         static <#= Type.Name #>Converter()
         {
@@ -38,6 +41,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					{
 #>
 		    _values[(int)<#= Type.Name #>.<#= item.GetEnumItemName() #>] = "<#= item.Name #>";
+            _stringToEnum.Add("<#= item.Name #>", <#= Type.Name #>.<#= item.GetEnumItemName() #>);
 <#						
 					}
 #>
@@ -46,6 +50,11 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
         public static string ConvertToString(<#= Type.Name #> value)
         {
             return _values[(int)value];
+	    }
+
+        public static <#= Type.Name #> ConvertToEnum(string value)
+        {
+            return _stringToEnum[value];
 	    }
 	}
 }

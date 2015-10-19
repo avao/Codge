@@ -1,4 +1,4 @@
-using BasicModel.CS.Serialisation;
+using Codge.BasicModel.CS.Serialisation;
 
 namespace Serialisers.XsdBasedModel
 {

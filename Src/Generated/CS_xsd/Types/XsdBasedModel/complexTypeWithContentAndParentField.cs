@@ -1,5 +1,4 @@
 
-
 namespace Types.XsdBasedModel
 {
 	public class complexTypeWithContentAndParentField

@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 // ------------------------------------------------------------------------------
-namespace BasicModel.Templates.CS.Templates
+namespace Codge.BasicModel.Templates.CS.Templates
 {
     using System.IO;
     using System.Linq;
@@ -31,7 +31,7 @@ namespace BasicModel.Templates.CS.Templates
         /// </summary>
         public override string TransformText()
         {
-            this.Write("using BasicModel.CS.Serialisation;\r\n\r\nnamespace Serialisers.");
+            this.Write("using Codge.BasicModel.CS.Serialisation;\r\n\r\nnamespace Serialisers.");
             
             #line 11 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\Registrar.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Model.Namespace.GetFullName(".")));

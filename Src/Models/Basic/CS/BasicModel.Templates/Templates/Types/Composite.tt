@@ -7,7 +7,6 @@
 <#@ import namespace="Codge.DataModel" #>
 <#@ import namespace="Codge.Generator" #>
 
-
 namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {
 	public class <#= Type.Name #>

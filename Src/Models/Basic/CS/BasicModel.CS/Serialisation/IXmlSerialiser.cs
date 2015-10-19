@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace BasicModel.CS.Serialisation
+namespace Codge.BasicModel.CS.Serialisation
 {
     public interface IXmlSerialiser
     {

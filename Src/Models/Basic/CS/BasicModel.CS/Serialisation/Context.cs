@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicModel.CS.Serialisation
+namespace Codge.BasicModel.CS.Serialisation
 {
     public class SerialisationContext
     {
