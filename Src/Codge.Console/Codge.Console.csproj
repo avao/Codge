@@ -79,7 +79,7 @@
       <Project>{33c5683d-8e50-43d9-92c8-f764d642630a}</Project>
       <Name>Codge.Generator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Basic\CS\BasicModel.Templates\Codge.BasicModel.Templates.CS.csproj">
+    <ProjectReference Include="..\Models\Basic\CS\Codge.BasicModel.Templates\Codge.BasicModel.Templates.CS.csproj">
       <Project>{734bc941-9d32-4dce-afce-9fddbad3fab1}</Project>
       <Name>Codge.BasicModel.Templates.CS</Name>
     </ProjectReference>

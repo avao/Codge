@@ -51,7 +51,7 @@
 <!-- GENERATED_ENTRIES_END -->
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Models\Basic\CS\BasicModel.CS\Codge.BasicModel.CS.csproj">
+    <ProjectReference Include="..\..\Models\Basic\CS\Codge.BasicModel.CS\Codge.BasicModel.CS.csproj">
       <Project>{03057e90-b954-4875-8865-e5b03aaa7267}</Project>
       <Name>Codge.BasicModel.CS</Name>
     </ProjectReference>
