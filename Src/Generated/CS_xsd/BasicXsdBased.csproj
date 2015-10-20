@@ -59,6 +59,7 @@
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
     <Compile Include="Types\XsdBasedModel\complexTypeWithSimpleContent.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithSimpleContent.cs" />
+    <Compile Include="Types\XsdBasedModel\shortString.cs" />
     <Compile Include="Types\XsdBasedModel\simpleType.cs" />
     <Compile Include="Types\XsdBasedModel\recursiveType.cs" />
     <Compile Include="Serialisers\XsdBasedModel\recursiveType.cs" />

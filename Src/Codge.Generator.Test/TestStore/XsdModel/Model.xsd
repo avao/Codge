@@ -18,7 +18,8 @@
       <xs:element name="billto" type="xs:int" minOccurs="0"/>
       <xs:element name="shipto" type="xs:string"/>
       <xs:element ref="elementWithEmbededType"/>
-      <xs:element name="elemSimpleType" type="simpleType"/>
+      <xs:element name="shortStringCollection" type="shortString" maxOccurs="unbounded"/>     
+      <xs:element name="elemSimpleType" type="simpleType"/>    
       <xs:element name="elemEmptyType">
         <xs:complexType/>
       </xs:element>
@@ -88,6 +89,12 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:simpleType name="shortString">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3"/>
+    </xs:restriction>    
+  </xs:simpleType>
 
   <xs:simpleType name="simpleType">
     <xs:restriction base="xs:string">
