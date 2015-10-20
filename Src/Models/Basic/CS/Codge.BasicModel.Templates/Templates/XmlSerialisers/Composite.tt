@@ -25,7 +25,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 						string fieldName = Type.GetMemberName(field);
 						if(field.IsCollection)
 						{
-							if(field.Type.IsBuiltIn())
+							if(field.Type.IsBuiltIn() || field.Type.IsPrimitive())
 							{
 #>
 			Utils.SerialiseBuiltInCollection(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
