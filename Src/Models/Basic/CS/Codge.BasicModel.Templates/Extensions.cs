@@ -88,7 +88,12 @@ namespace Codge.BasicModel.Templates.CS
         public static string GetNativeType(this CompositeType.Field field)
         {
             if (field.Type.IsPrimitive())
-                return "string";
+            {
+                if (field.IsCollection)
+                    return "string[]";
+                else
+                    return "string";
+            }
 
             //TODO other hacks
             if (field.IsCollection)
