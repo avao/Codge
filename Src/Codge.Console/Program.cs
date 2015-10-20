@@ -27,9 +27,6 @@ namespace Codge.Generator.Console
 
         [Option('o', "outputDir", Required = false, HelpText = "Path to a output directory.", DefaultValue = @"../../../Generated/CS")]
         public string OutputDir { get; set; }
-
-        [Option('r', "overrides", Required = false, HelpText = "Path to model descriptor overrides.")]
-        public string OverridesPath { get; set; }
     }
 
     class Program
@@ -40,25 +37,16 @@ namespace Codge.Generator.Console
         //-m "%scriptDir%\Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd" -o "%scriptDir%/Generated/CS_xsd" -n XsdBasedModel
         static void Main(string[] args)
         {
-
             var options = new Options();
             if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
             {
-                var model = LoadModel(options.Model, options.ModelName, options.OverridesPath);
+                var model = LoadModel(options.Model, options.ModelName);
 
                 ProcessTemplates(LoadConfig(options.OutputDir),
                                  new BasicModel.Templates.CS.TaskFactory(_logger),
                                  model,
                                  _logger);
             }
-
-            
-
-          /*  ProcessTemplates(LoadConfig(@"../../../Generated/CPP"),
-                             new BasicModel.Templates.CPP.TaskFactory(logger),
-                             model,
-                             logger);*/
-            
         }
 
         static void ProcessTemplates(Config config, ITaskFactory taskFactory, Model model, ILog logger)
@@ -73,24 +61,12 @@ namespace Codge.Generator.Console
         }
 
 
-        static Model LoadModel(string path, string modelName, string modelOverridesPath)
+        static Model LoadModel(string path, string modelName)
         {
             System.Console.WriteLine("Loading model [" + path + "]");
 
             var model = new ModelLoader(_logger).LoadModel(path, modelName);
 
-            if (!string.IsNullOrEmpty(modelOverridesPath))
-            {
-                ModelDescriptor modelOverrides;
-                using (var reader = XmlReader.Create(modelOverridesPath))
-                {
-                    reader.MoveToContent();
-                    modelOverrides = DescriptorXmlReader.Read(reader);
-                }
-
-                //TODO apply overrides
-            }
-            
             var typeSystem = new TypeSystem();
             var compiler = new ModelProcessor();
             return compiler.Compile(typeSystem, model);

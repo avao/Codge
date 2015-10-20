@@ -29,6 +29,7 @@ namespace Codge.Generator.Test
         [TestCase("ElementWithEmbededType")]
         [TestCase("Group")]
         [TestCase("ModelXsd")]
+        [TestCase("SimpleType")]
         public void Process(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);
