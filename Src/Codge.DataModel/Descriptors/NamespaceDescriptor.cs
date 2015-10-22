@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Qart.Core.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace Codge.DataModel.Descriptors
 
         public NamespaceDescriptor(string name)
         {
+            Require.DoesNotContain(name, ".");
+
             _namespaces = new List<NamespaceDescriptor>();
             _types = new List<TypeDescriptor>();
 
@@ -54,7 +57,7 @@ namespace Codge.DataModel.Descriptors
 
         public void Add(NamespaceDescriptor ns)
         {
-            //TODO duplicates
+            Require.That(() => !_namespaces.Any(_ => _.Name == ns.Name), () => "Namespace with name " + ns.Name + "] already exists");
             _namespaces.Add(ns);
         }
 

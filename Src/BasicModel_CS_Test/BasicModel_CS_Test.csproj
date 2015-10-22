@@ -34,13 +34,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Qart.Core, Version=1.0.0.35, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qart.Core, Version=1.0.0.37, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Qart.Core.1.0.0.35\lib\net40\Qart.Core.dll</HintPath>
+      <HintPath>..\packages\Qart.Core.1.0.0.37\lib\net40\Qart.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Qart.Testing, Version=1.0.0.35, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Qart.Testing, Version=1.0.0.37, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Qart.Testing.1.0.0.35\lib\net40\Qart.Testing.dll</HintPath>
+      <HintPath>..\packages\Qart.Testing.1.0.0.37\lib\net40\Qart.Testing.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

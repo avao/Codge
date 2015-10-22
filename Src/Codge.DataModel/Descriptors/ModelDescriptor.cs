@@ -1,4 +1,6 @@
 ﻿using Codge.DataModel.Descriptors.Serialisation;
+using Qart.Core.Validation;
+using Qart.Core.Xml;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +17,14 @@ namespace Codge.DataModel.Descriptors
 
         public ModelDescriptor(string modelName, string rootNamespace)
             : this(modelName, new NamespaceDescriptor(rootNamespace))
-        {
-            //TODO check "."
+        {            
         }
 
         public ModelDescriptor(string modelName, NamespaceDescriptor rootNamespace)
         {
+            Require.DoesNotContain(modelName, ".");
+
             Name = modelName;
-            //TODO check "."
             RootNamespace = rootNamespace;
         }
     }
@@ -32,11 +34,7 @@ namespace Codge.DataModel.Descriptors
     {
         public static void Save(this ModelDescriptor model, string path)
         {
-            //TODO use Qart.Core
-            using (var writer = XmlWriter.Create(path, new XmlWriterSettings { Indent = true }))
-            {
-                model.ToXml(writer);
-            }
+            XmlWriterUtils.ToXmlFile(path, writer => model.ToXml(writer), true);
         }
     }
 }
