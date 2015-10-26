@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Logging;
+using Qart.Core.Validation;
+using Qart.Core.Io;
 
 
 namespace Codge.Generator.Tasks
@@ -28,29 +30,18 @@ namespace Codge.Generator.Tasks
         public void Execute(Context context)
         {
             var pathAndContent = Action.Execute(context);
-
-            if (string.IsNullOrEmpty(pathAndContent.Path))
-            {
-                throw new Exception("aa");//TODO
-            }
+            Require.NotNullOrEmpty(pathAndContent.Path);
 
             string path = context.GetAbsolutePath(pathAndContent.Path);
 
             if (File.Exists(path) && File.ReadAllText(path) == pathAndContent.Content)
             {//same content 
-                //TODO hashing?
                 context.Tracker.OnFileSkipped(pathAndContent.Path);
             }
             else
             {//did not exist or has changed
-                string dirPath = Path.GetDirectoryName(path);
-                if (!Directory.Exists(dirPath))
-                {
-                    Directory.CreateDirectory(dirPath);
-                }
-
+                FileUtils.WriteAllText(path, pathAndContent.Content);
                 context.Tracker.OnFileUpdated(pathAndContent.Path);
-                File.WriteAllText(path, pathAndContent.Content);
             }
         }
     }

@@ -14,12 +14,14 @@ namespace Codge.Generator.Presentations.Xsd
 {
     public class ModelLoader
     {
-        //TODO pass schemaSet in?
         public static ModelDescriptor Load(XmlSchema schema, string modelName)
         {
-            var set = new XmlSchemaSet();
-            set.Add(schema);
-            set.Compile();
+            if(!schema.IsCompiled)
+            {
+                var set = new XmlSchemaSet();
+                set.Add(schema);
+                set.Compile();
+            }
 
             var modelDescriptor = new ModelDescriptor(modelName, modelName);
 
