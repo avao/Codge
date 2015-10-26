@@ -30,7 +30,7 @@ namespace Codge.Generator.Test
         [TestCase("Group")]
         [TestCase("ModelXsd")]
         [TestCase("SimpleType")]
-        public void Process(string testId)
+        public void LoadXsd(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);
 

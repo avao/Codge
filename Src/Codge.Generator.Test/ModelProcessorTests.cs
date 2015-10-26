@@ -19,7 +19,7 @@ namespace Codge.Generator.Test
         public static TestSystem TestSystem = new TestSystem(new DataStore("../../TestStore/ModelProcessor"));
 
         [TestCase("Optional")]
-        public void Process(string testId)
+        public void ProcessModels(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);
             var modelDescriptors = testCase.GetItemIds("Models").Select(_ => (ModelDescriptor)testCase.UsingXmlReader(_, reader => ModelLoader.Load(reader)));
