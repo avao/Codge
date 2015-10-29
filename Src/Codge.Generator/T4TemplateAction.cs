@@ -10,8 +10,14 @@ namespace Codge.Generator
     {
         public abstract PathAndContent Execute(Context context);
         public abstract bool IsApplicable();
+        public IModelBehaviour ModelBehaviour { get; private set; }
 
         public abstract string TransformText();
+
+        public T4TemplateAction(IModelBehaviour modelBehaviour)
+        {
+            ModelBehaviour = modelBehaviour;
+        }
 
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -66,7 +66,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.XmlSerialisers
 
 					foreach(var field in Type.Fields)
 					{
-						string fieldName = Type.GetMemberName(field);
+						string fieldName = ModelBehaviour.GetMemberName(field);
 						if(field.IsCollection)
 						{
 							if(field.Type.IsBuiltIn() || field.Type.IsPrimitive())
@@ -400,7 +400,8 @@ namespace Codge.BasicModel.Templates.CS.Templates.XmlSerialisers
 
 	public CompositeType Type{get; private set;}
 
-	public Composite(TypeBase type)
+	public Composite(TypeBase type, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Type = type as CompositeType;
 	}

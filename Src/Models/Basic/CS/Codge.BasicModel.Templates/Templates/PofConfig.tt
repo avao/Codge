@@ -32,7 +32,8 @@
 <#+
 	public Model Model{get; private set;}
 
-	public PofConfig(Model model)
+	public PofConfig(Model model, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Model = model;
 	}

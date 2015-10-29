@@ -71,6 +71,7 @@
     <Compile Include="Descriptors\Serialisation\DescriptorXmlReader.cs" />
     <Compile Include="Descriptors\TypeDescriptor.cs" />
     <Compile Include="EnumerationType.cs" />
+    <Compile Include="AttachedDataExtensions.cs" />
     <Compile Include="Framework\ModelMergeTypeSystemEventHandler.cs" />
     <Compile Include="Framework\NamespaceTracingTypeSystemEventHandler.cs" />
     <Compile Include="Model.cs" />

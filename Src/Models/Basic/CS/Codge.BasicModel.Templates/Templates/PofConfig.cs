@@ -21,7 +21,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+    #line 1 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class PofConfig : T4TemplateAction<Model>
     {
@@ -34,7 +34,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
             this.Write("<?xml version=\"1.0\"?>\r\n<pof-config xmlns=\"http://schemas.tangosol.com/pof\">\r\n  <u" +
                     "ser-type-list>\r\n");
             
-            #line 12 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+            #line 12 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
 				
 					foreach(var type in Model.Namespace.AllTypes().Where(t => t is CompositeType))
 					{
@@ -44,42 +44,42 @@ namespace Codge.BasicModel.Templates.CS.Templates
             #line hidden
             this.Write("    <user-type>\r\n      <type-id>");
             
-            #line 17 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+            #line 17 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(type.Id));
             
             #line default
             #line hidden
             this.Write("</type-id>\r\n      <class-name>");
             
-            #line 18 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+            #line 18 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(type.QName()));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 18 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+            #line 18 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(type.AssemblyName()));
             
             #line default
             #line hidden
             this.Write("</class-name>\r\n      <serializer>\r\n        <class-name>");
             
-            #line 20 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+            #line 20 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(type.SerialiserQName()));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 20 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+            #line 20 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(type.AssemblyName()));
             
             #line default
             #line hidden
             this.Write("</class-name>\r\n      </serializer>\r\n    </user-type>\r\n");
             
-            #line 23 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+            #line 23 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
 						
 					}
 
@@ -90,11 +90,12 @@ namespace Codge.BasicModel.Templates.CS.Templates
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 32 "C:\Work\Projects\codge\Src\Models\Basic\CS\BasicModel.Templates\Templates\PofConfig.tt"
+        #line 32 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
 
 	public Model Model{get; private set;}
 
-	public PofConfig(Model model)
+	public PofConfig(Model model, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Model = model;
 	}

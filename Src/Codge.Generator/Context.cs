@@ -10,15 +10,16 @@ namespace Codge.Generator
 {
     public class Context
     {
-        public Context(string baseDir, ILog logger)
+        public string BaseDir { get; private set; }
+        public Tracker Tracker { get; private set; }
+        public IModelBehaviour ModelBehaviour { get; private set; }
+
+        public Context(string baseDir, ILog logger, IModelBehaviour modelBehaviour)
         {
             BaseDir = baseDir;
             Tracker = new Tracker(logger);
+            ModelBehaviour = modelBehaviour;
         }
-        
-        public string BaseDir { get; private set; }
-
-        public Tracker Tracker { get; private set; }
     }
 
     public static class ContextExtensions

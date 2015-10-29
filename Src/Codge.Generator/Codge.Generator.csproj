@@ -63,9 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.cs" />
+    <Compile Include="GeneratorConfig.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="IModelBehaviour.cs" />
     <Compile Include="IOutputTask.cs" />
     <Compile Include="ITask.cs" />
     <Compile Include="ITaskFactory.cs" />

@@ -21,7 +21,8 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	public PrimitiveType Type{get; private set;}
 
-	public Primitive(TypeBase type)
+	public Primitive(TypeBase type, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Type = type as PrimitiveType;
 	}

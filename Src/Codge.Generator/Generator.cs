@@ -11,24 +11,23 @@ namespace Codge.Generator
 {
     public class Generator
     {
-        public Config Config { get; private set; }
+        public GeneratorConfig Config { get; private set; }
         public Context Context { get; private set; }
-        public ITaskFactory TaskFactory { get; private set; }
+        public IModelBehaviour ModelBehaviour { get; private set; }
         public ILog Logger { get; private set; }
 
 
-        public Generator(Config config, ITaskFactory taskFactory, ILog logger)
+        public Generator(GeneratorConfig config, ILog logger)
         {
             Config = config;
-            Context = new Context(config.BaseDir, logger);
-            TaskFactory = taskFactory;
+            Context = new Context(config.BaseDir, logger, config.ModelBehaviour);
             Logger = logger;
         }
 
         public void Generate(Model model)
         {
             Logger.Info(m => m("Starting generation for model baseDir=[{0}]", Config.BaseDir));
-            foreach (var task in TaskFactory.CreateTasksForModel(model))
+            foreach (var task in Config.TaskFactory.CreateTasksForModel(model, Config.ModelBehaviour))
             {
                 if (task.IsApplicable())
                 {
@@ -42,8 +41,8 @@ namespace Codge.Generator
 
         void ProcessNamespace(Namespace ns)
         {
-            
-            foreach (var task in TaskFactory.CreateTasksForNamespace(ns))
+
+            foreach (var task in Config.TaskFactory.CreateTasksForNamespace(ns, Config.ModelBehaviour))
             {
                 if (task.IsApplicable())
                 {
@@ -64,8 +63,8 @@ namespace Codge.Generator
 
         void ProcessType(TypeBase type)
         {
-            
-            foreach (var task in TaskFactory.CreateTasksForType(type))
+
+            foreach (var task in Config.TaskFactory.CreateTasksForType(type, Config.ModelBehaviour))
             {
                 if (task.IsApplicable())
                 {

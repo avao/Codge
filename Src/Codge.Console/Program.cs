@@ -43,15 +43,14 @@ namespace Codge.Generator.Console
                 var model = LoadModel(options.Model, options.ModelName);
 
                 ProcessTemplates(LoadConfig(options.OutputDir),
-                                 new BasicModel.Templates.CS.TaskFactory(_logger),
                                  model,
                                  _logger);
             }
         }
 
-        static void ProcessTemplates(Config config, ITaskFactory taskFactory, Model model, ILog logger)
+        static void ProcessTemplates(GeneratorConfig config, Model model, ILog logger)
         {
-            var generator = new Codge.Generator.Generator(config, taskFactory, logger);
+            var generator = new Codge.Generator.Generator(config, logger);
             generator.Generate(model);
             
             logger.Info("--------------------");
@@ -72,11 +71,12 @@ namespace Codge.Generator.Console
             return compiler.Compile(typeSystem, model);
         }
 
+        static HashSet<string> _reservedNames = new HashSet<string> { "string", "String", "byte", "Byte", "decimal", "Decimal", "double", "Double", "float", "Float", "int", "Int", "long", "Long", "short", "Short" };
 
-        static Config LoadConfig(string path)
+        static GeneratorConfig LoadConfig(string path)
         {
-            var config = new Config(path);
-                        
+            var config = new GeneratorConfig(path, new BasicModel.Templates.CS.TaskFactory(_logger), new ModelBehaviour(_reservedNames));
+            
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Composite.stg"))));
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Primitive.stg"))));
 

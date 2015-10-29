@@ -19,13 +19,13 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					{
 #>
 
-		public <#= Type.Name #>(<#= Type.GetCtorParamters() #>)
+		public <#= Type.Name #>(<#= ModelBehaviour.GetCtorParamters(Type) #>)
 		{
 <#				
 						foreach(var field in Type.Fields)
 						{
 #>
-			<#= Type.GetMemberName(field) #> = <#= field.GetParameterName() #>;
+			<#= ModelBehaviour.GetMemberName(field) #> = <#= ModelBehaviour.GetParameterName(field) #>;
 <#				
 						}
 #>
@@ -38,7 +38,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var field in Type.Fields)
 					{
 #>
-		public	<#= field.GetNativeType() #> <#= Type.GetMemberName(field) #> {get; set;}
+		public	<#= ModelBehaviour.GetNativeType(field) #> <#= ModelBehaviour.GetMemberName(field) #> {get; set;}
 <#				
 					}
 #>
@@ -49,9 +49,10 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	
 
-	public CompositeType Type{get; private set;}
+	public CompositeType Type {get; private set;}
 
-	public Composite(TypeBase type)
+	public Composite(TypeBase type, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Type = type as CompositeType;
 	}

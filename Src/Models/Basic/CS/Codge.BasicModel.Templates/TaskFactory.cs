@@ -20,26 +20,26 @@ namespace Codge.BasicModel.Templates.CS
             Logger = logger;
         }
 
-        public IEnumerable<ITask<Model>> CreateTasksForModel(Model model)
+        public IEnumerable<ITask<Model>> CreateTasksForModel(Model model, IModelBehaviour modelBehaviour)
         {
             return new ITask<Model>[] { 
                 new OutputTask<Model>(new ProjectUpdater(model), Logger),
-                new OutputTask<Model>(new Registrar(model), Logger)
+                new OutputTask<Model>(new Registrar(model, modelBehaviour), Logger)
             };
         }
 
-        public IEnumerable<ITask<Namespace>> CreateTasksForNamespace(Namespace model)
+        public IEnumerable<ITask<Namespace>> CreateTasksForNamespace(Namespace model, IModelBehaviour modelBehaviour)
         {
             return new ITask<Namespace>[] { };
         }
 
-        public IEnumerable<ITask<TypeBase>> CreateTasksForType(TypeBase type)
+        public IEnumerable<ITask<TypeBase>> CreateTasksForType(TypeBase type, IModelBehaviour modelBehaviour)
         {
             return new[] {
-                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Composite(type), Logger),
-                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Primitive(type), Logger),
-                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Enum(type), Logger),
-                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.XmlSerialisers.Composite(type), Logger)
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Composite(type, modelBehaviour), Logger),
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Primitive(type, modelBehaviour), Logger),
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.Types.Enum(type, modelBehaviour), Logger),
+                new OutputTask<TypeBase>(new Codge.BasicModel.Templates.CS.Templates.XmlSerialisers.Composite(type, modelBehaviour), Logger)
                 //new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.PofSerialisers.Composite(type), Logger)
             };
         }

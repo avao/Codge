@@ -30,7 +30,8 @@ namespace Serialisers.<#= Model.Namespace.GetFullName(".") #>
 <#+
 	public Model Model{get; private set;}
 
-	public Registrar(Model model)
+	public Registrar(Model model, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Model = model;
 	}

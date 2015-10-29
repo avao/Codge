@@ -9,8 +9,8 @@ namespace Codge.Generator
 {
     public interface ITaskFactory
     {
-        IEnumerable<ITask<Model>> CreateTasksForModel(Model model);
-        IEnumerable<ITask<Namespace>> CreateTasksForNamespace(Namespace model);
-        IEnumerable<ITask<TypeBase>> CreateTasksForType(TypeBase type);
+        IEnumerable<ITask<Model>> CreateTasksForModel(Model model, IModelBehaviour modelBehaviour);
+        IEnumerable<ITask<Namespace>> CreateTasksForNamespace(Namespace model, IModelBehaviour modelBehaviour);
+        IEnumerable<ITask<TypeBase>> CreateTasksForType(TypeBase type, IModelBehaviour modelBehaviour);
     }
 }

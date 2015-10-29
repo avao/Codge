@@ -53,7 +53,8 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	public CompositeType Type{get; private set;}
 
-	public Composite(TypeBase type)
+	public Composite(TypeBase type, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Type = type as CompositeType;
 	}

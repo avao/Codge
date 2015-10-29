@@ -21,7 +21,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					{
 						string prefix = first ? "" : ",";
 #>
-		<#= prefix #><#= item.GetEnumItemName() #>
+		<#= prefix #><#= ModelBehaviour.GetEnumItemName(item) #>
 <#						
 						first=false;
 					}
@@ -40,8 +40,8 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var item in Type.Items)
 					{
 #>
-		    _values[(int)<#= Type.Name #>.<#= item.GetEnumItemName() #>] = "<#= item.Name #>";
-            _stringToEnum.Add("<#= item.Name #>", <#= Type.Name #>.<#= item.GetEnumItemName() #>);
+		    _values[(int)<#= Type.Name #>.<#= ModelBehaviour.GetEnumItemName(item) #>] = "<#= item.Name #>";
+            _stringToEnum.Add("<#= item.Name #>", <#= Type.Name #>.<#= ModelBehaviour.GetEnumItemName(item) #>);
 <#						
 					}
 #>
@@ -63,7 +63,8 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	public EnumerationType Type{get; private set;}
 
-	public Enum(TypeBase type)
+	public Enum(TypeBase type, IModelBehaviour modelBehaviour)
+        : base(modelBehaviour)
 	{
 		Type = type as EnumerationType;
 	}
