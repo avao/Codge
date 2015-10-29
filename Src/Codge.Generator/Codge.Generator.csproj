@@ -70,6 +70,7 @@
     <Compile Include="IOutputTask.cs" />
     <Compile Include="ITask.cs" />
     <Compile Include="ITaskFactory.cs" />
+    <Compile Include="ModelBehaviour.cs" />
     <Compile Include="Presentations\ModelLoader.cs" />
     <Compile Include="Presentations\Xml\Model.cs">
       <DependentUpon>Model.xsd</DependentUpon>
