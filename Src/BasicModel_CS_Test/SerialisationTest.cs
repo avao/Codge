@@ -23,7 +23,7 @@ namespace BasicModel_CS_Test
         [Test]
         public void SerialiseToXml()
         {
-            var obj = new Types.rootNs.myType2(2, true, new[] { 4, 5 }, new[] { new typeInNestedNs("avalue1"), new typeInNestedNs("avalue2") });
+            var obj = new Types.rootNs.myType2(2, true, new[] { 4, 5 }, new[] { new typeInNestedNs("avalue1"), new typeInNestedNs("avalue2") }, "<blah/>");
 
             var testCase = TestSystem.GetTestCase("Xml");
 

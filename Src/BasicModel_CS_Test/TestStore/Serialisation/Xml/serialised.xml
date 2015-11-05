@@ -9,4 +9,5 @@
   <CollectionOfComposite>
     <StringField>avalue2</StringField>
   </CollectionOfComposite>
+  <CDataField><![CDATA[<blah/>]]></CDataField>
 </root>
