@@ -35,9 +35,7 @@ namespace Codge.BasicModel.CS.Serialisation
                 return;
             foreach (var item in items)
             {
-                writer.WriteStartElement(name);
-                writer.WriteValue(item);
-                writer.WriteEndElement();
+                SerialiseValue<T>(writer, name, item, context);
             }
         }
 
@@ -47,9 +45,7 @@ namespace Codge.BasicModel.CS.Serialisation
                 return;
             foreach (var item in items)
             {
-                writer.WriteStartElement(name);
-                writer.WriteValue(mapValueFunc(item));
-                writer.WriteEndElement();
+                SerialiseValue(writer, name, mapValueFunc(item), context);
             }
         }
 
@@ -82,7 +78,6 @@ namespace Codge.BasicModel.CS.Serialisation
         }
 
         public static void SerialiseValue<T>(XmlWriter writer, string tag, T value, SerialisationContext context)
-            where T : struct
         {
             writer.WriteStartElement(tag);
             writer.WriteValue(value);
@@ -126,9 +121,7 @@ namespace Codge.BasicModel.CS.Serialisation
         {
             if (value.HasValue)
             {
-                writer.WriteStartElement(tag);
-                writer.WriteValue(value.Value);
-                writer.WriteEndElement();
+                SerialiseValue(writer, tag, value.Value, context);
             }
         }
 
@@ -145,9 +138,7 @@ namespace Codge.BasicModel.CS.Serialisation
         {
             if (!string.IsNullOrEmpty(value))
             {
-                writer.WriteStartElement(tag);
-                writer.WriteValue(value);
-                writer.WriteEndElement();
+                SerialiseValue(writer, tag, value, context);
             }
         }
 
