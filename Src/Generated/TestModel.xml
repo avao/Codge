@@ -11,6 +11,11 @@
       <Field name="BoolField" type="bool"/>
       <Field name="CollectionOfInt" type="int" isCollection="true"/>
       <Field name="CollectionOfComposite" type="nestedNs.typeInNestedNs" isCollection="true"/>
+      <Field name="CDataField" type="string">
+        <AttachedData>
+          <Item key="isCData" value="True" />
+        </AttachedData>
+      </Field>
     </Composite>
     <Namespace name="nestedNs">
       <Composite name="typeInNestedNs">

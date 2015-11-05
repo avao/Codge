@@ -13,6 +13,7 @@ namespace Codge.DataModel
             public const string IsAttribute = "isAttribute";
             public const string IsOptional = "isOptional";
             public const string IsContent = "isContent";
+            public const string IsCData = "isCData";
         }
 
         public static bool IsAttribute(this CompositeType.Field field)
@@ -30,6 +31,10 @@ namespace Codge.DataModel
             return field.GetAttachedData<bool>(Names.IsContent);
         }
 
+        public static bool IsCData(this CompositeType.Field field)
+        {
+            return field.GetAttachedData<bool>(Names.IsCData);
+        }
 
         public static bool IsOptional(this CompositeType.Field field)
         {

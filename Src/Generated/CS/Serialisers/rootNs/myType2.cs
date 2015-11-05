@@ -15,6 +15,7 @@ namespace Serialisers.rootNs
 			Utils.SerialiseValue(writer, "BoolField", obj.BoolField, context);
 			Utils.SerialiseBuiltInCollection(writer, "CollectionOfInt", obj.CollectionOfInt, context);
 			Utils.SerialiseCollection(writer, "CollectionOfComposite", obj.CollectionOfComposite, context);
+			Utils.SerialiseCDataValue(writer, "CDataField", obj.CDataField, context);
 		}
 
 	}

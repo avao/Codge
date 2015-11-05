@@ -46,10 +46,20 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 						}
 						else if(field.IsContent())
 						{
+                            if(field.IsCData())
+                            {
+#>
+            if(obj.<#= fieldName #> != null)
+			    writer.WriteCData(obj.<#= fieldName #>.ToString());
+<#				
+                            }
+                            else
+                            {
 #>
             if(obj.<#= fieldName #> != null)
 			    writer.WriteValue(obj.<#= fieldName #>.ToString());
 <#				
+                            }
 						}
 						else if(field.IsAttribute())
 						{
@@ -93,16 +103,17 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
                             }
                             else
 							{
+                                string cdata = field.IsCData() ? "CData" : string.Empty;
                                 if(field.IsOptional())
                                 {
 #>
-			Utils.SerialiseIfHasValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
+			Utils.Serialise<#= cdata #>IfHasValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#
                                 }
                                 else
                                 {
 #>
-			Utils.SerialiseValue(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
+			Utils.Serialise<#= cdata #>Value(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
 <#
                                 }
 							}

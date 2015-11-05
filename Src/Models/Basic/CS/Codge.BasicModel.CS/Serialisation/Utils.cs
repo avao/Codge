@@ -17,9 +17,10 @@ namespace Codge.BasicModel.CS.Serialisation
 
         public static string Serialise(object o, string rootTag, SerialisationContext context)
         {
-            XmlWriterSettings settings = new XmlWriterSettings {
-                    OmitXmlDeclaration = true
-                };
+            XmlWriterSettings settings = new XmlWriterSettings
+            {
+                OmitXmlDeclaration = true
+            };
 
             var sb = new StringBuilder();
             using (var writer = XmlWriter.Create(sb, settings))
@@ -146,10 +147,15 @@ namespace Codge.BasicModel.CS.Serialisation
         {
             if (!string.IsNullOrEmpty(value))
             {
-                writer.WriteStartElement(tag);
-                writer.WriteCData(value);
-                writer.WriteEndElement();
+                SerialiseCDataValue(writer, tag, value, context);
             }
+        }
+
+        public static void SerialiseCDataValue(XmlWriter writer, string tag, string value, SerialisationContext context)
+        {
+            writer.WriteStartElement(tag);
+            writer.WriteCData(value);
+            writer.WriteEndElement();
         }
     }
 }
