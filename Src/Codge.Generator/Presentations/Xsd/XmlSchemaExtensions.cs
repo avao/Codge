@@ -11,7 +11,7 @@ namespace Codge.Generator.Presentations.Xsd
     {
         public static bool IsEmptyType(this XmlSchemaComplexType type)
         {
-            return type.ContentModel == null && type.Attributes.Count == 0;
+            return type.ContentModel == null && type.Attributes.Count == 0 && type.ContentType.ToString() == "Empty";
         }
 
         public static IEnumerable<XmlSchemaEnumerationFacet> GetEnumerationFacets(this XmlSchemaSimpleType simpleType)
