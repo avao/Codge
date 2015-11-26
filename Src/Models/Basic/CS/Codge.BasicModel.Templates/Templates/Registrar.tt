@@ -43,6 +43,6 @@ namespace Serialisers.<#= Model.Namespace.GetFullName(".") #>
 
 	public override PathAndContent Execute(Context context)
 	{
-		return new PathAndContent("Registrar.cs", TransformText());
+		return new PathAndContent(new ItemInformation("Registrar",".cs"), TransformText());
 	}
 #>

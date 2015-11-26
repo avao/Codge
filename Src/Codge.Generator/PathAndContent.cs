@@ -8,14 +8,25 @@ namespace Codge.Generator
 {
     public class PathAndContent
     {
-        public string Path { get; private set; }
+        public ItemInformation ItemInfo { get; private set; }
         public string Content { get; private set; }
 
-        public PathAndContent(string path, string content)
+        public PathAndContent(ItemInformation itemInfo, string content)
         {
-            Path = path;
+            ItemInfo = itemInfo;
             Content = content;
         }
+    }
 
+    public class ItemInformation
+    {
+        public string Item{get; private set;}
+        public string Category{get; private set;}
+
+        public ItemInformation(string item, string category)
+        {
+            Item = item;
+            Category = category;
+        }
     }
 }

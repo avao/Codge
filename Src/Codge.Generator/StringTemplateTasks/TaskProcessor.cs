@@ -25,7 +25,7 @@ namespace Codge.Generator.StringTemplateTasks
                 taskInput.Content.Add(kvp.Key, kvp.Value);
             }
 
-            return new PathAndContent(taskInput.OutputPath.Render(), taskInput.Content.Render());
+            return new PathAndContent(new ItemInformation(taskInput.OutputPath.Render(),""), taskInput.Content.Render());
         }
 
 

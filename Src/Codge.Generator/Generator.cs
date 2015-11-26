@@ -20,7 +20,7 @@ namespace Codge.Generator
         public Generator(GeneratorConfig config, ILog logger)
         {
             Config = config;
-            Context = new Context(config.BaseDir, logger, config.ModelBehaviour);
+            Context = new Context(config.BaseDir, logger, config.ModelBehaviour, new OutpuPathMapper());//TODO inject mapper
             Logger = logger;
         }
 

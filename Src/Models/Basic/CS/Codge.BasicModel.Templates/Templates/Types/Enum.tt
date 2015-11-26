@@ -76,6 +76,6 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 
 	public override PathAndContent Execute(Context context)
 	{
-		return new PathAndContent(Utils.GetOutputPath(Type, "Types", "cs"), TransformText());
+		return new PathAndContent(new ItemInformation(Type.QName(), "Types.cs"), TransformText());
 	}
 #>

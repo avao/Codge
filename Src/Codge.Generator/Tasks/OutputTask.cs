@@ -30,18 +30,20 @@ namespace Codge.Generator.Tasks
         public void Execute(Context context)
         {
             var pathAndContent = Action.Execute(context);
-            Require.NotNullOrEmpty(pathAndContent.Path);
+            Require.NotNullOrEmpty(pathAndContent.ItemInfo.Item);
 
-            string path = context.GetAbsolutePath(pathAndContent.Path);
+            //TODO should mapper return absolute path?
+            string relativePath = context.PathMapper.MapPath(pathAndContent.ItemInfo, context);
+            string path = context.GetAbsolutePath(relativePath);
 
             if (File.Exists(path) && File.ReadAllText(path) == pathAndContent.Content)
             {//same content 
-                context.Tracker.OnFileSkipped(pathAndContent.Path);
+                context.Tracker.OnFileSkipped(relativePath);
             }
             else
             {//did not exist or has changed
                 FileUtils.WriteAllText(path, pathAndContent.Content);
-                context.Tracker.OnFileUpdated(pathAndContent.Path);
+                context.Tracker.OnFileUpdated(relativePath);
             }
         }
     }

@@ -21,7 +21,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+    #line 1 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class Composite : T4TemplateAction<TypeBase>
     {
@@ -33,14 +33,14 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
         {
             this.Write("using Tangosol.IO.Pof;\r\n\r\nnamespace Serialisers.");
             
-            #line 11 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 11 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Namespace.GetFullName(".")));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic class ");
             
-            #line 13 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 13 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
@@ -48,14 +48,14 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
             this.Write(" : IPofSerializer\r\n\t{\r\n\r\n\t\tobject IPofSerializer.Deserialize(IPofReader reader)\r\n" +
                     "        {\r\n\t\t\tvar result = new Types.");
             
-            #line 18 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 18 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.GetFullName(".")));
             
             #line default
             #line hidden
             this.Write("(\r\n");
             
-            #line 19 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 19 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
 
 					bool bFirst = true;
 					foreach(var field in Type.Fields)
@@ -66,35 +66,35 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
             #line hidden
             this.Write("\t\t\t\t");
             
-            #line 24 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 24 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(bFirst ? " " : ","));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 24 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 24 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.QName()));
             
             #line default
             #line hidden
             this.Write(")reader.Read");
             
-            #line 24 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 24 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.CoherenceType()));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 24 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 24 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Id));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 25 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 25 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
 				
 						bFirst = false;
 					}
@@ -106,14 +106,14 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
                     "IPofSerializer.Serialize(IPofWriter writer, object o)\r\n        {\r\n            va" +
                     "r obj = (");
             
-            #line 36 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 36 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.QName()));
             
             #line default
             #line hidden
             this.Write(")o;\r\n\r\n");
             
-            #line 38 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 38 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
 
 					foreach(var field in Type.Fields)
 					{
@@ -123,28 +123,28 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
             #line hidden
             this.Write("\t\t\twriter.Write");
             
-            #line 42 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 42 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.CoherenceType()));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 42 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 42 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Id));
             
             #line default
             #line hidden
             this.Write(", obj.");
             
-            #line 42 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 42 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 43 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+            #line 43 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
 				
 					}
 
@@ -155,7 +155,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 53 "C:\Work\Projects\codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
+        #line 53 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
 
 	public CompositeType Type{get; private set;}
 
@@ -172,7 +172,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
 
 	public override PathAndContent Execute(Context context)
 	{
-		return new PathAndContent(Utils.GetOutputPath(Type, "Serialisers", "cs"), TransformText());
+		return new PathAndContent(new ItemInformation(Type.QName(), "Serialisers.cs"), TransformText());
 	}
 
         

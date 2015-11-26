@@ -45,6 +45,6 @@
 
 	public override PathAndContent Execute(Context context)
 	{
-		return new PathAndContent("pof.config", TransformText());
+		return new PathAndContent(new ItemInformation("pof",".config"), TransformText());
 	}
 #>

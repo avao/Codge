@@ -143,6 +143,6 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 
 	public override PathAndContent Execute(Context context)
 	{
-		return new PathAndContent(Utils.GetOutputPath(Type, "Serialisers", "cs"), TransformText());
+		return new PathAndContent(new ItemInformation(Type.QName(), "Serialisers.cs"), TransformText());
 	}
 #>

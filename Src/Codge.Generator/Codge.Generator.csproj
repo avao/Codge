@@ -67,6 +67,7 @@
     <Compile Include="Context.cs" />
     <Compile Include="Generator.cs" />
     <Compile Include="IModelBehaviour.cs" />
+    <Compile Include="IOutputPathMapper.cs" />
     <Compile Include="IOutputTask.cs" />
     <Compile Include="ITask.cs" />
     <Compile Include="ITaskFactory.cs" />

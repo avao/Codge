@@ -13,12 +13,14 @@ namespace Codge.Generator
         public string BaseDir { get; private set; }
         public Tracker Tracker { get; private set; }
         public IModelBehaviour ModelBehaviour { get; private set; }
+        public IOutputPathMapper PathMapper { get; private set; }
 
-        public Context(string baseDir, ILog logger, IModelBehaviour modelBehaviour)
+        public Context(string baseDir, ILog logger, IModelBehaviour modelBehaviour, IOutputPathMapper pathMapper)
         {
             BaseDir = baseDir;
             Tracker = new Tracker(logger);
             ModelBehaviour = modelBehaviour;
+            PathMapper = pathMapper;
         }
     }
 
