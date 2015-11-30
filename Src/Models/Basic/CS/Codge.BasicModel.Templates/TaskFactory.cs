@@ -23,8 +23,8 @@ namespace Codge.BasicModel.Templates.CS
         public IEnumerable<ITask<Model>> CreateTasksForModel(Model model, IModelBehaviour modelBehaviour)
         {
             return new ITask<Model>[] { 
-                new OutputTask<Model>(new ProjectUpdater(model), Logger),
-                new OutputTask<Model>(new Registrar(model, modelBehaviour), Logger)
+                new OutputTask<Model>(new Registrar(model, modelBehaviour), Logger),
+                new OutputTask<Model>(new ProjectUpdater(model), Logger)//Should be last to capture all files
             };
         }
 

@@ -33,23 +33,18 @@ namespace Codge.BasicModel.Templates.CS
 
             if (begin_pos != -1 && end_pos != -1)
             {
-                
-
-                //TODO should updated files be passed in?
                 var builder = new StringBuilder(content.Substring(0, begin_pos));
                 builder.AppendLine(start);
 
-                foreach(var type in Model.Namespace.AllTypes())
+                foreach(var file in context.Tracker.FilesSkipped.Concat(context.Tracker.FilesUpdated).OrderBy(_ => _))
                 {
-                    builder.AppendLine(string.Format("    <Compile Include=\"{0}\" />", Utils.GetOutputPath(type, "Types", "cs")));
-
-                    if(type.IsComposite())
-                        builder.AppendLine(string.Format("    <Compile Include=\"{0}\" />", Utils.GetOutputPath(type, "Serialisers", "cs")));
-                    
+                    if(string.Compare(Path.GetExtension(file), ".cs", true)==0)
+                    {
+                        builder.AppendLine(string.Format("    <Compile Include=\"{0}\" />", file));
+                    }
                 }
-
+                
                 //builder.AppendLine("<EmbeddedResource Include=\"pof.config\" />");
-                builder.AppendLine("<Compile Include=\"Registrar.cs\" />");
 
                 builder.Append(end);
                 builder.Append(content.Substring(end_pos + end.Length));

@@ -41,34 +41,34 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <!-- GENERATED_ENTRIES_BEGIN -->
-    <Compile Include="Types\XsdBasedModel\complexTypeWithAField.cs" />
+    <Compile Include="Registrar.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\allXsdTypes.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithAField.cs" />
-    <Compile Include="Types\XsdBasedModel\emptyComplexType.cs" />
-    <Compile Include="Serialisers\XsdBasedModel\emptyComplexType.cs" />
-    <Compile Include="Types\XsdBasedModel\ordertype.cs" />
-    <Compile Include="Serialisers\XsdBasedModel\ordertype.cs" />
-    <Compile Include="Types\XsdBasedModel\elementWithEmbededTypeInPlace.cs" />
-    <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededTypeInPlace.cs" />
-    <Compile Include="Types\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
-    <Compile Include="Serialisers\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
-    <Compile Include="Types\XsdBasedModel\complexTypeWithContent.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContent.cs" />
-    <Compile Include="Types\XsdBasedModel\complexTypeWithContentAndParentField.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContentAndParentField.cs" />
-    <Compile Include="Types\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
-    <Compile Include="Types\XsdBasedModel\complexTypeWithSimpleContent.cs" />
     <Compile Include="Serialisers\XsdBasedModel\complexTypeWithSimpleContent.cs" />
-    <Compile Include="Types\XsdBasedModel\shortString.cs" />
-    <Compile Include="Types\XsdBasedModel\simpleType.cs" />
-    <Compile Include="Types\XsdBasedModel\recursiveType.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededType.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededTypeInPlace.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\emptyComplexType.cs" />
+    <Compile Include="Serialisers\XsdBasedModel\ordertype.cs" />
     <Compile Include="Serialisers\XsdBasedModel\recursiveType.cs" />
     <Compile Include="Types\XsdBasedModel\allXsdTypes.cs" />
-    <Compile Include="Serialisers\XsdBasedModel\allXsdTypes.cs" />
-    <Compile Include="Types\XsdBasedModel\enumType.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithAField.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithContent.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithContentAndParentField.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithContentWithAttribute.cs" />
+    <Compile Include="Types\XsdBasedModel\complexTypeWithSimpleContent.cs" />
+    <Compile Include="Types\XsdBasedModel\elemEmptyType_EmptyComplex.cs" />
     <Compile Include="Types\XsdBasedModel\elementWithEmbededType.cs" />
-    <Compile Include="Serialisers\XsdBasedModel\elementWithEmbededType.cs" />
-<Compile Include="Registrar.cs" />
+    <Compile Include="Types\XsdBasedModel\elementWithEmbededTypeInPlace.cs" />
+    <Compile Include="Types\XsdBasedModel\emptyComplexType.cs" />
+    <Compile Include="Types\XsdBasedModel\enumType.cs" />
+    <Compile Include="Types\XsdBasedModel\ordertype.cs" />
+    <Compile Include="Types\XsdBasedModel\recursiveType.cs" />
+    <Compile Include="Types\XsdBasedModel\shortString.cs" />
+    <Compile Include="Types\XsdBasedModel\simpleType.cs" />
 <!-- GENERATED_ENTRIES_END -->
   </ItemGroup>
   <ItemGroup>

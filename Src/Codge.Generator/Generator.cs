@@ -27,6 +27,8 @@ namespace Codge.Generator
         public void Generate(Model model)
         {
             Logger.Info(m => m("Starting generation for model baseDir=[{0}]", Config.BaseDir));
+            ProcessNamespace(model.Namespace);
+         
             foreach (var task in Config.TaskFactory.CreateTasksForModel(model, Config.ModelBehaviour))
             {
                 if (task.IsApplicable())
@@ -34,8 +36,6 @@ namespace Codge.Generator
                     task.Execute(Context);
                 }
             }
-
-            ProcessNamespace(model.Namespace);
         }
 
 
