@@ -19,7 +19,7 @@ namespace Serialisers.<#= Model.Namespace.GetFullName(".") #>
 					foreach(var type in Model.Namespace.AllTypes().Where(t => t is CompositeType))
 					{
 #>
-			context.RegisterSerialiser<<#= type.QName() #>>(new <#= type.SerialiserQName() #>());
+			context.RegisterSerialiser<<#= type.TypesQName() #>>(new <#= type.SerialiserQName() #>());
 <#		
 					}
 #>

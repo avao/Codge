@@ -16,7 +16,12 @@ namespace Codge.Generator
     {
         public string MapPath(ItemInformation itemInfo, Context context)
         {
-            string path = itemInfo.Item.Replace('.', Path.DirectorySeparatorChar);
+            string path = itemInfo.Item;
+            if(string.IsNullOrEmpty(itemInfo.Category))
+            {
+                return path;
+            }
+            path = path.Replace('.', Path.DirectorySeparatorChar);
 
             string extension = null;
             string category = itemInfo.Category;

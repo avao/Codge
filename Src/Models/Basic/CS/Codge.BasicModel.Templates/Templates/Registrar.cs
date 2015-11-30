@@ -52,7 +52,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
             this.Write("\t\t\tcontext.RegisterSerialiser<");
             
             #line 22 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Registrar.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(type.QName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(type.TypesQName()));
             
             #line default
             #line hidden

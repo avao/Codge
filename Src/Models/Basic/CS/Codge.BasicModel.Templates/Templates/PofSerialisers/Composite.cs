@@ -74,7 +74,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
             this.Write("(");
             
             #line 24 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.QName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Type.TypesQName()));
             
             #line default
             #line hidden
@@ -107,7 +107,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
                     "r obj = (");
             
             #line 36 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofSerialisers\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Type.QName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.TypesQName()));
             
             #line default
             #line hidden
@@ -172,7 +172,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.PofSerialisers
 
 	public override PathAndContent Execute(Context context)
 	{
-		return new PathAndContent(new ItemInformation(Type.QName(), "Serialisers.cs"), TransformText());
+		return new PathAndContent(new ItemInformation(Type.GetFullName("."), "Serialisers.cs"), TransformText());
 	}
 
         

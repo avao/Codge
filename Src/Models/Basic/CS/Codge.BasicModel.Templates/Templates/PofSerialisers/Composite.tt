@@ -21,7 +21,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var field in Type.Fields)
 					{
 #>
-				<#= bFirst ? " " : ","  #>(<#= field.Type.QName() #>)reader.Read<#= field.CoherenceType() #>(<#= field.Id #>)
+				<#= bFirst ? " " : ","  #>(<#= field.Type.TypesQName() #>)reader.Read<#= field.CoherenceType() #>(<#= field.Id #>)
 <#				
 						bFirst = false;
 					}
@@ -33,7 +33,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 
         void IPofSerializer.Serialize(IPofWriter writer, object o)
         {
-            var obj = (<#= Type.QName() #>)o;
+            var obj = (<#= Type.TypesQName() #>)o;
 
 <#
 					foreach(var field in Type.Fields)
@@ -66,6 +66,6 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 
 	public override PathAndContent Execute(Context context)
 	{
-		return new PathAndContent(new ItemInformation(Type.QName(), "Serialisers.cs"), TransformText());
+		return new PathAndContent(new ItemInformation(Type.GetFullName("."), "Serialisers.cs"), TransformText());
 	}
 #>

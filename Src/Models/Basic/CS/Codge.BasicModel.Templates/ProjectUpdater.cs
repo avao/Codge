@@ -56,7 +56,7 @@ namespace Codge.BasicModel.Templates.CS
                 content = builder.ToString();
             }
 
-            return new PathAndContent(new ItemInformation(path, ".csproj"), content);
+            return new PathAndContent(new ItemInformation(path, string.Empty), content);
         }
 
         public bool IsApplicable()

@@ -17,7 +17,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 
         public void Serialize(XmlWriter writer, object o, SerialisationContext context)
         {
-            var obj = (<#= Type.QName() #>)o;
+            var obj = (<#= Type.TypesQName() #>)o;
 
 <#
 					foreach(var field in Type.Fields)

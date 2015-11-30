@@ -14,9 +14,14 @@ namespace Codge.BasicModel.Templates.CS
             return QName(type, "Serialisers");
         }
 
-        public static string QName(this TypeBase type)
+        public static string TypesQName(this TypeBase type)
         {
             return QName(type, "Types");
+        }
+
+        public static string QName(this TypeBase type)
+        {
+            return type.GetFullName(".");
         }
 
         public static string AssemblyName(this TypeBase type)
@@ -27,15 +32,12 @@ namespace Codge.BasicModel.Templates.CS
 
         private static string QName(this TypeBase type, string prefix)
         {
-            if (type.IsComposite())
-            {
-                return prefix + "." + type.GetFullName(".");
-            }
-            else if (type.IsBuiltIn())
+            if (type.IsBuiltIn())
             {
                 return type.Name;
             }
-            else if (type.IsPrimitive() || type.IsEnum())
+
+            if (type.IsComposite() || type.IsPrimitive() || type.IsEnum())
             {
                 return prefix + "." + type.GetFullName(".");
             }

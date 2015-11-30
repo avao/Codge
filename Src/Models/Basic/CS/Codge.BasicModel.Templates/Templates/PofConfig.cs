@@ -52,7 +52,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
             this.Write("</type-id>\r\n      <class-name>");
             
             #line 18 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(type.QName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(type.TypesQName()));
             
             #line default
             #line hidden

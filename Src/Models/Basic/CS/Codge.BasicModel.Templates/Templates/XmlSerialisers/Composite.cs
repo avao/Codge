@@ -56,7 +56,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.XmlSerialisers
                     ", SerialisationContext context)\r\n        {\r\n            var obj = (");
             
             #line 20 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\XmlSerialisers\Composite.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Type.QName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.TypesQName()));
             
             #line default
             #line hidden
