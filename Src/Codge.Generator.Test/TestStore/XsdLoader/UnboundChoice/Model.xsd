@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="RootType">
+    <xs:sequence>
+      <xs:element name="elem" type="ChoiceWithSequenceType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChoiceWithSequenceType">
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="elementInChoice1" type="xs:string"/>
+      <xs:element name="elementInChoice2" type="xs:string"/>
+    </xs:choice>
+  </xs:complexType>
+</xs:schema>

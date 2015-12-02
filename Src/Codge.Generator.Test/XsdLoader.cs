@@ -30,6 +30,7 @@ namespace Codge.Generator.Test
         [TestCase("Group")]
         [TestCase("ModelXsd")]
         [TestCase("SimpleType")]
+        [TestCase("UnboundChoice")]
         public void LoadXsd(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);

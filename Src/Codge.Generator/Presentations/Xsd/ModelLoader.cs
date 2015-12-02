@@ -250,9 +250,10 @@ namespace Codge.Generator.Presentations.Xsd
                 if (element != null)
                 {
                     string type = GetTypeForAnElement(element);
+
+                    var elementType = element.ElementSchemaType as XmlSchemaComplexType;
                     if (string.IsNullOrEmpty(type))
                     {
-                        var elementType = element.ElementSchemaType as XmlSchemaComplexType;
                         if (elementType != null)
                         {
                             if (elementType.IsEmptyType())
@@ -269,15 +270,26 @@ namespace Codge.Generator.Presentations.Xsd
                         }
                     }
 
+                    bool isCollection = false;
+                    if (elementType != null)
+                    {
+                        if (elementType.ContentTypeParticle.MaxOccurs > 1)
+                        {
+                            isCollection = true;
+                        }
+                    }
+
                     string fieldName = element.Name != null ? element.Name : element.RefName.Name;
                     var field = descriptor.GetField(fieldName);
                     if (field == null)
                     {//TODO what if any of the properties are different?
-                        field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1);
+                        field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1 || isCollection);
 
                         if (isOptional || element.MinOccurs == 0)
                             field.AttachedData.Add("isOptional", true);
                     }
+
+                    
                 }
                 else
                 {

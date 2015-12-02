@@ -1,0 +1,19 @@
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="RootType">
+      <Field name="elem" type="ChoiceWithSequenceType" isCollection="true" />
+    </Composite>
+    <Composite name="ChoiceWithSequenceType">
+      <Field name="elementInChoice1" type="string">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="elementInChoice2" type="string">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+  </Namespace>
+</Model>
