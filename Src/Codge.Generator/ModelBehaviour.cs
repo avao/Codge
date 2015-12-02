@@ -46,11 +46,21 @@ namespace Codge.Generator
             foreach (char c in item.Name)
             {
                 if (Char.IsLetterOrDigit(c))
+                {
                     builder.Append(c);
+                }
                 else
+                {
                     builder.Append('_');
+                }
             }
-            return builder.ToString();
+
+            string value = builder.ToString();
+            if(value != item.Name)
+            {
+                value += "_" + Math.Abs(item.Name.GetHashCode());
+            }
+            return value;
         }
 
 

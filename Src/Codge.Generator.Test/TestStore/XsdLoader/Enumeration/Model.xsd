@@ -8,6 +8,7 @@
       <xs:enumeration value="item2"/>
       <xs:enumeration value="1itemStartsWithDigit"/>
       <xs:enumeration value="item With Spaces"/>
+      <xs:enumeration value="item-With-Dashes"/>
     </xs:restriction>
   </xs:simpleType>
 
