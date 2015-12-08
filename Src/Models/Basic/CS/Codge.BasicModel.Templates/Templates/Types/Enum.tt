@@ -16,14 +16,13 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 	{
 
 <#				
-					bool first=true;
+                    string prefix = string.Empty;
 					foreach(var item in Type.Items)
 					{
-						string prefix = first ? "" : ",";
 #>
-		<#= prefix #><#= ModelBehaviour.GetEnumItemName(item) #>
+		<#= prefix #><#= ModelBehaviour.GetEnumItemName(Type, item) #>
 <#						
-						first=false;
+							prefix = ",";
 					}
 #>
 	
@@ -40,8 +39,8 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var item in Type.Items)
 					{
 #>
-		    _values[(int)<#= Type.Name #>.<#= ModelBehaviour.GetEnumItemName(item) #>] = "<#= item.Name #>";
-            _stringToEnum.Add("<#= item.Name #>", <#= Type.Name #>.<#= ModelBehaviour.GetEnumItemName(item) #>);
+		    _values[(int)<#= Type.Name #>.<#= ModelBehaviour.GetEnumItemName(Type, item) #>] = "<#= item.Name #>";
+            _stringToEnum.Add("<#= item.Name #>", <#= Type.Name #>.<#= ModelBehaviour.GetEnumItemName(Type, item) #>);
 <#						
 					}
 #>

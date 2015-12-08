@@ -12,7 +12,7 @@ namespace Codge.Generator
         string GetMemberName(CompositeType.Field field);
         string GetParameterName(CompositeType.Field field);
         string GetNativeType(CompositeType.Field field);
-        string GetEnumItemName(EnumerationType.Item item);
+        string GetEnumItemName(EnumerationType enumType, EnumerationType.Item item);
     }
 
     public static class ModelBehaviourExtensions

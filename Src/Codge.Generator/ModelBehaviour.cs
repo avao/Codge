@@ -11,9 +11,12 @@ namespace Codge.Generator
     public class ModelBehaviour : IModelBehaviour
     {
         private readonly HashSet<string> _reservedWords;
+        private readonly IDictionary<string, IDictionary<string, string>> _enumItemsCache;
+
         public ModelBehaviour(HashSet<string> reservedWords)
         {
             _reservedWords = reservedWords;
+            _enumItemsCache = new Dictionary<string, IDictionary<string, string>>();
         }
 
         public string GetMemberName(CompositeType.Field field)
@@ -37,13 +40,48 @@ namespace Codge.Generator
             return "_" + field.Name;
         }
 
-        public string GetEnumItemName(EnumerationType.Item item)
+        public string GetEnumItemName(EnumerationType enumType, EnumerationType.Item item)
         {
-            var builder = new StringBuilder(item.Name.Length);
-            if (Char.IsDigit(item.Name[0]))
+            IDictionary<string, string> mappedValues;
+            string typeName = enumType.GetFullName(".");
+            if(!_enumItemsCache.TryGetValue(typeName, out mappedValues))
+            {
+                mappedValues = new Dictionary<string, string>();
+
+                var reversedMappedValues = new Dictionary<string, string>();
+
+                foreach(var it in enumType.Items)
+                {
+                    string value = MapItemName(it.Name);
+                    string clashedItemName;
+                    if (reversedMappedValues.TryGetValue(value, out clashedItemName))
+                    {//clash can be resolved by appending a hash to all values 
+                        mappedValues[clashedItemName] = AddHash(MapItemName(clashedItemName), clashedItemName);
+                        value = AddHash(value, it.Name);
+                    }
+
+                    reversedMappedValues.Add(value, it.Name);
+                    mappedValues.Add(it.Name, value);
+                }
+
+                _enumItemsCache.Add(typeName, mappedValues);
+            }
+
+            return mappedValues[item.Name];
+        }
+
+        private static string AddHash(string current, string name)
+        {
+            return current + "_" + Math.Abs(name.GetHashCode());
+        }
+
+        private static string MapItemName(string name)
+        {
+            var builder = new StringBuilder(name.Length);
+            if (Char.IsDigit(name[0]))
                 builder.Append('_');
 
-            foreach (char c in item.Name)
+            foreach (char c in name)
             {
                 if (Char.IsLetterOrDigit(c))
                 {
@@ -55,12 +93,7 @@ namespace Codge.Generator
                 }
             }
 
-            string value = builder.ToString();
-            if(value != item.Name)
-            {
-                value += "_" + Math.Abs(item.Name.GetHashCode());
-            }
-            return value;
+            return builder.ToString();
         }
 
 
