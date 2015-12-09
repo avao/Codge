@@ -22,7 +22,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+    #line 1 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class Enum : T4TemplateAction<TypeBase>
     {
@@ -34,21 +34,21 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
         {
             this.Write("\r\nusing System.Collections.Generic;\r\n\r\nnamespace Types.");
             
-            #line 13 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 13 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Namespace.GetFullName(".")));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic enum ");
             
-            #line 15 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 15 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n\r\n");
             
-            #line 18 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 18 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
 				
                     string prefix = string.Empty;
 					foreach(var item in Type.Items)
@@ -59,20 +59,20 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
             #line hidden
             this.Write("\t\t");
             
-            #line 23 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 23 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(prefix));
             
             #line default
             #line hidden
             
-            #line 23 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 23 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelBehaviour.GetEnumItemName(Type, item)));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 24 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 24 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
 						
 							prefix = ",";
 					}
@@ -82,42 +82,42 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
             #line hidden
             this.Write("\t\r\n\t}\r\n\r\n    public static class ");
             
-            #line 31 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 31 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write("Converter\r\n\t{\r\n        private static string[] _values = new string[");
             
-            #line 33 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 33 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Items.Count()));
             
             #line default
             #line hidden
             this.Write("];\r\n        private static IDictionary<string, ");
             
-            #line 34 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 34 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write(" > _stringToEnum = new Dictionary<string, ");
             
-            #line 34 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 34 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write(" >();\r\n\r\n        static ");
             
-            #line 36 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 36 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write("Converter()\r\n        {\r\n");
             
-            #line 38 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 38 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
 				
 					foreach(var item in Type.Items)
 					{
@@ -127,49 +127,49 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
             #line hidden
             this.Write("\t\t    _values[(int)");
             
-            #line 42 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 42 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 42 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 42 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelBehaviour.GetEnumItemName(Type, item)));
             
             #line default
             #line hidden
             this.Write("] = \"");
             
-            #line 42 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 42 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\";\r\n            _stringToEnum.Add(\"");
             
-            #line 43 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 43 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(item.Name));
             
             #line default
             #line hidden
             this.Write("\", ");
             
-            #line 43 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 43 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 43 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 43 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ModelBehaviour.GetEnumItemName(Type, item)));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 44 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 44 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
 						
 					}
 
@@ -178,7 +178,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
             #line hidden
             this.Write("        }\r\n\r\n        public static string ConvertToString(");
             
-            #line 49 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 49 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
@@ -186,17 +186,33 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
             this.Write(" value)\r\n        {\r\n            return _values[(int)value];\r\n\t    }\r\n\r\n        pu" +
                     "blic static ");
             
-            #line 54 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            #line 54 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
             
             #line default
             #line hidden
             this.Write(" ConvertToEnum(string value)\r\n        {\r\n            return _stringToEnum[value];" +
-                    "\r\n\t    }\r\n\t}\r\n}\r\n\r\n\r\n");
+                    "\r\n\t    }\r\n\r\n\t\tpublic static ");
+            
+            #line 59 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
+            
+            #line default
+            #line hidden
+            this.Write("? TryConvertToEnum(string value)\r\n        {\r\n            ");
+            
+            #line 61 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Type.Name));
+            
+            #line default
+            #line hidden
+            this.Write(" enumValue;\r\n            if(!_stringToEnum.TryGetValue(value, out enumValue))\r\n  " +
+                    "          {\r\n                return null;\r\n            }\r\n            return enu" +
+                    "mValue;\r\n\t    }\r\n\t}\r\n}\r\n\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 62 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
+        #line 72 "D:\work\Codge\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\Types\Enum.tt"
 
 	public EnumerationType Type{get; private set;}
 
