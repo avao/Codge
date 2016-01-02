@@ -5,7 +5,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
-<#@ import namespace="Codge.Generator" #>
+<#@ import namespace="Codge.Generator.Common" #>
 <#@ import namespace="Codge.BasicModel.Templates.CS" #>
 
 using System.Collections.Generic;
@@ -62,7 +62,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	public EnumerationType Type{get; private set;}
 
-	public Enum(TypeBase type, IModelBehaviour modelBehaviour)
+	public Enum(TypeBase type, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Type = type as EnumerationType;

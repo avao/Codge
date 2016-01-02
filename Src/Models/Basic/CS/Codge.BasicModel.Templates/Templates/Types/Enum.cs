@@ -14,7 +14,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
     using System.Text;
     using System.Collections.Generic;
     using Codge.DataModel;
-    using Codge.Generator;
+    using Codge.Generator.Common;
     using Codge.BasicModel.Templates.CS;
     using System;
     
@@ -200,7 +200,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
 
 	public EnumerationType Type{get; private set;}
 
-	public Enum(TypeBase type, IModelBehaviour modelBehaviour)
+	public Enum(TypeBase type, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Type = type as EnumerationType;

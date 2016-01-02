@@ -5,7 +5,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
-<#@ import namespace="Codge.Generator" #>
+<#@ import namespace="Codge.Generator.Common" #>
 
 namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {
@@ -51,7 +51,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 
 	public CompositeType Type {get; private set;}
 
-	public Composite(TypeBase type, IModelBehaviour modelBehaviour)
+	public Composite(TypeBase type, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Type = type as CompositeType;

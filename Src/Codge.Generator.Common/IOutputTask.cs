@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Codge.Generator
+namespace Codge.Generator.Common
 {
     public interface IOutputAction<T>
     {

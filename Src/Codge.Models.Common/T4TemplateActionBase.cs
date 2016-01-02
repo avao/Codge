@@ -1,23 +1,18 @@
-﻿using System;
+﻿using Codge.Generator.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Codge.Generator
+namespace Codge.Models.Common
 {
-    public abstract class T4TemplateAction <T> : IOutputAction<T>
+    public abstract class T4TemplateActionBase <T> : IOutputAction<T>
     {
         public abstract PathAndContent Execute(Context context);
         public abstract bool IsApplicable();
-        public IModelBehaviour ModelBehaviour { get; private set; }
 
         public abstract string TransformText();
-
-        public T4TemplateAction(IModelBehaviour modelBehaviour)
-        {
-            ModelBehaviour = modelBehaviour;
-        }
 
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Common.Logging;
 using Codge.DataModel;
+using Codge.Generator.Common;
+using Codge.Models.Common;
 
 namespace Codge.Generator
 {
@@ -13,14 +15,13 @@ namespace Codge.Generator
     {
         public GeneratorConfig Config { get; private set; }
         public Context Context { get; private set; }
-        public IModelBehaviour ModelBehaviour { get; private set; }
         public ILog Logger { get; private set; }
 
 
         public Generator(GeneratorConfig config, ILog logger)
         {
             Config = config;
-            Context = new Context(config.BaseDir, logger, config.ModelBehaviour, new OutpuPathMapper());//TODO inject mapper
+            Context = new Context(config.BaseDir, logger, new OutputPathMapper());//TODO inject tracker, mapper
             Logger = logger;
         }
 
@@ -29,12 +30,9 @@ namespace Codge.Generator
             Logger.Info(m => m("Starting generation for model baseDir=[{0}]", Config.BaseDir));
             ProcessNamespace(model.Namespace);
          
-            foreach (var task in Config.TaskFactory.CreateTasksForModel(model, Config.ModelBehaviour))
+            foreach (var task in Config.TaskFactory.CreateTasksForModel(model))
             {
-                if (task.IsApplicable())
-                {
-                    task.Execute(Context);
-                }
+                task.Execute(Context);
             }
         }
 
@@ -42,12 +40,9 @@ namespace Codge.Generator
         void ProcessNamespace(Namespace ns)
         {
 
-            foreach (var task in Config.TaskFactory.CreateTasksForNamespace(ns, Config.ModelBehaviour))
+            foreach (var task in Config.TaskFactory.CreateTasksForNamespace(ns))
             {
-                if (task.IsApplicable())
-                {
-                    task.Execute(Context);
-                }
+                task.Execute(Context);
             }
 
             foreach (var typeDescriptor in ns.Types)
@@ -64,12 +59,9 @@ namespace Codge.Generator
         void ProcessType(TypeBase type)
         {
 
-            foreach (var task in Config.TaskFactory.CreateTasksForType(type, Config.ModelBehaviour))
+            foreach (var task in Config.TaskFactory.CreateTasksForType(type))
             {
-                if (task.IsApplicable())
-                {
-                    task.Execute(Context);
-                }
+                task.Execute(Context);
             }
         }
 

@@ -14,7 +14,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
     using System.Text;
     using System.Collections.Generic;
     using Codge.DataModel;
-    using Codge.Generator;
+    using Codge.Generator.Common;
     using System;
     
     /// <summary>
@@ -53,7 +53,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.Types
 
 	public PrimitiveType Type{get; private set;}
 
-	public Primitive(TypeBase type, IModelBehaviour modelBehaviour)
+	public Primitive(TypeBase type, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Type = type as PrimitiveType;

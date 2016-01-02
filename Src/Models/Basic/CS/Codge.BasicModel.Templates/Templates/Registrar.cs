@@ -14,7 +14,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
     using System.Text;
     using System.Collections.Generic;
     using Codge.DataModel;
-    using Codge.Generator;
+    using Codge.Generator.Common;
     using System;
     
     /// <summary>
@@ -80,7 +80,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
 
 	public Model Model{get; private set;}
 
-	public Registrar(Model model, IModelBehaviour modelBehaviour)
+	public Registrar(Model model, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Model = model;

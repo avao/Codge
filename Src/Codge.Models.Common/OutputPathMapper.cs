@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Codge.Generator.Common;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Codge.Generator
+namespace Codge.Models.Common
 {
-
-    public class OutpuPathMapper : IOutputPathMapper
+    public class OutputPathMapper : IOutputPathMapper
     {
         private ISet<string> _processedFiles = new HashSet<string>();
 

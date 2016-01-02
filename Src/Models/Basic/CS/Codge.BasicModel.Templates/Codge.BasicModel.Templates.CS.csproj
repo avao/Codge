@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelBehaviour.cs" />
     <Compile Include="ProjectUpdater.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="T4TemplateAction.cs" />
     <Compile Include="Templates\PofConfig.cs">
       <DependentUpon>PofConfig.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -126,9 +128,13 @@
       <Project>{2afffc73-87d8-4743-96dd-0f6cf1710791}</Project>
       <Name>Codge.DataModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Codge.Generator\Codge.Generator.csproj">
-      <Project>{33c5683d-8e50-43d9-92c8-f764d642630a}</Project>
-      <Name>Codge.Generator</Name>
+    <ProjectReference Include="..\..\..\..\Codge.Generator.Common\Codge.Generator.Common.csproj">
+      <Project>{eb4d5608-72b3-4eb8-86ab-7f17acddab1c}</Project>
+      <Name>Codge.Generator.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\Codge.Models.Common\Codge.Models.Common.csproj">
+      <Project>{4de01781-4170-49e4-bde6-3e6d768e0dae}</Project>
+      <Name>Codge.Models.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 using Common.Logging;
 using Qart.Core.Validation;
 using Qart.Core.Io;
+using Codge.Generator.Common;
 
 
-namespace Codge.Generator.Tasks
+namespace Codge.Models.Common
 {
     public class OutputTask<T> : ITask<T>
     {
@@ -22,13 +23,10 @@ namespace Codge.Generator.Tasks
             Logger = logger;
         }
 
-        public bool IsApplicable()
-        {
-            return Action.IsApplicable();
-        }
-
         public void Execute(Context context)
         {
+            if (!Action.IsApplicable())
+                return;
             var pathAndContent = Action.Execute(context);
             Require.NotNullOrEmpty(pathAndContent.ItemInfo.Item);
 

@@ -14,7 +14,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.XmlSerialisers
     using System.Text;
     using System.Collections.Generic;
     using Codge.DataModel;
-    using Codge.Generator;
+    using Codge.Generator.Common;
     using System;
     
     /// <summary>
@@ -443,7 +443,7 @@ namespace Codge.BasicModel.Templates.CS.Templates.XmlSerialisers
 
 	public CompositeType Type{get; private set;}
 
-	public Composite(TypeBase type, IModelBehaviour modelBehaviour)
+	public Composite(TypeBase type, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Type = type as CompositeType;

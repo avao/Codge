@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Codge.Generator
+namespace Codge.BasicModel.Templates.CS
 {
-
-    public class ModelBehaviour : IModelBehaviour
+    public class ModelBehaviour
     {
         private readonly HashSet<string> _reservedWords;
         private readonly IDictionary<string, IDictionary<string, string>> _enumItemsCache;
@@ -113,6 +112,11 @@ namespace Codge.Generator
             if (field.IsOptional() && ((field.Type.IsBuiltIn() && field.Type.Name != "string") || field.Type.IsEnum()))
                 return field.Type.GetFullName(".") + "?";
             return field.Type.GetFullName(".");
+        }
+
+        public string GetCtorParamters(CompositeType type)
+        {
+            return string.Join(",", type.Fields.Select(f => GetNativeType(f) + " " + GetParameterName(f)));
         }
     }
 }

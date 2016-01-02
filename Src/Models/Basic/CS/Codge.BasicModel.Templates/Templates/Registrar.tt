@@ -5,7 +5,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
-<#@ import namespace="Codge.Generator" #>
+<#@ import namespace="Codge.Generator.Common" #>
 using Codge.BasicModel.CS.Serialisation;
 
 namespace Serialisers.<#= Model.Namespace.GetFullName(".") #>
@@ -30,7 +30,7 @@ namespace Serialisers.<#= Model.Namespace.GetFullName(".") #>
 <#+
 	public Model Model{get; private set;}
 
-	public Registrar(Model model, IModelBehaviour modelBehaviour)
+	public Registrar(Model model, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Model = model;

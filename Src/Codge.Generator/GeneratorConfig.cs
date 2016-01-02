@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Codge.DataModel;
-using Codge.Generator.StringTemplateTasks;
+using Codge.Generator.Common;
 
 namespace Codge.Generator
 {
@@ -13,14 +13,11 @@ namespace Codge.Generator
     {
         public string BaseDir { get; private set; }
         public ITaskFactory TaskFactory{ get; private set; }
-        public IModelBehaviour ModelBehaviour { get; private set; }
 
-        public GeneratorConfig(string baseDir, ITaskFactory taskFactory, IModelBehaviour modelBehaviour)
+        public GeneratorConfig(string baseDir, ITaskFactory taskFactory)
         {
             BaseDir = Path.GetFullPath(baseDir);
             TaskFactory = taskFactory;
-            ModelBehaviour = modelBehaviour;
         }
-
     }
 }

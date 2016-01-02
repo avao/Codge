@@ -14,7 +14,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
     using System.Text;
     using System.Collections.Generic;
     using Codge.DataModel;
-    using Codge.Generator;
+    using Codge.Generator.Common;
     using System;
     
     /// <summary>
@@ -52,7 +52,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
             this.Write("</type-id>\r\n      <class-name>");
             
             #line 18 "C:\Work\Projects\codge_\Src\Models\Basic\CS\Codge.BasicModel.Templates\Templates\PofConfig.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(type.TypesQName()));
+            this.Write(this.ToStringHelper.ToStringWithCulture(type.QName()));
             
             #line default
             #line hidden
@@ -94,7 +94,7 @@ namespace Codge.BasicModel.Templates.CS.Templates
 
 	public Model Model{get; private set;}
 
-	public PofConfig(Model model, IModelBehaviour modelBehaviour)
+	public PofConfig(Model model, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Model = model;

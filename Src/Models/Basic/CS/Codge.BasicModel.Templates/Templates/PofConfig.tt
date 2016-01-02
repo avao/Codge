@@ -5,7 +5,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
-<#@ import namespace="Codge.Generator" #>
+<#@ import namespace="Codge.Generator.Common" #>
 <?xml version="1.0"?>
 <pof-config xmlns="http://schemas.tangosol.com/pof">
   <user-type-list>
@@ -32,7 +32,7 @@
 <#+
 	public Model Model{get; private set;}
 
-	public PofConfig(Model model, IModelBehaviour modelBehaviour)
+	public PofConfig(Model model, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Model = model;

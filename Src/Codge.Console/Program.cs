@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Codge.Generator;
-using Codge.Generator.StringTemplateTasks;
-using Codge.Generator.Tasks;
 using Common.Logging;
 using Codge.DataModel;
 using Codge.DataModel.Descriptors;
@@ -71,11 +69,10 @@ namespace Codge.Generator.Console
             return compiler.Compile(typeSystem, model);
         }
 
-        static HashSet<string> _reservedNames = new HashSet<string> { "string", "String", "byte", "Byte", "decimal", "Decimal", "double", "Double", "float", "Float", "int", "Int", "long", "Long", "short", "Short" };
 
         static GeneratorConfig LoadConfig(string path)
         {
-            var config = new GeneratorConfig(path, new BasicModel.Templates.CS.TaskFactory(_logger), new ModelBehaviour(_reservedNames));
+            var config = new GeneratorConfig(path, new BasicModel.Templates.CS.TaskFactory(_logger));
             
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Composite.stg"))));
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Primitive.stg"))));

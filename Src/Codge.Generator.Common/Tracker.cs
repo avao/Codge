@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Logging;
+using Codge.Generator.Common;
 
-namespace Codge.Generator
+namespace Codge.Generator.Common
 {
     public class Tracker
     {

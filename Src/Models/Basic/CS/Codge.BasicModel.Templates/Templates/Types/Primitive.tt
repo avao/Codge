@@ -5,7 +5,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
-<#@ import namespace="Codge.Generator" #>
+<#@ import namespace="Codge.Generator.Common" #>
 
 
 namespace Types.<#= Type.Namespace.GetFullName(".") #>
@@ -21,7 +21,7 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 <#+
 	public PrimitiveType Type{get; private set;}
 
-	public Primitive(TypeBase type, IModelBehaviour modelBehaviour)
+	public Primitive(TypeBase type, ModelBehaviour modelBehaviour)
         : base(modelBehaviour)
 	{
 		Type = type as PrimitiveType;
