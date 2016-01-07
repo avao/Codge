@@ -311,9 +311,13 @@ namespace Codge.Generator.Presentations.Xsd
                     {//empty particle
                         return;
                     }
+                    else if(item is XmlSchemaAny)
+                    {//TODO skipped for now, should it be a field created?
+                        return;
+                    }
                     else
                     {
-                        throw new NotSupportedException();
+                        throw new NotSupportedException(string.Format("Not supported item line:{0}, position:{1}", item.LineNumber, item.LinePosition));
                     }
                 }
             }
