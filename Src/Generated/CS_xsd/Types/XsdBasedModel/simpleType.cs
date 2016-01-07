@@ -30,6 +30,16 @@ namespace Types.XsdBasedModel
         {
             return _stringToEnum[value];
 	    }
+
+		public static simpleType? TryConvertToEnum(string value)
+        {
+            simpleType enumValue;
+            if(!_stringToEnum.TryGetValue(value, out enumValue))
+            {
+                return null;
+            }
+            return enumValue;
+	    }
 	}
 }
 

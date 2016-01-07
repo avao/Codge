@@ -33,6 +33,16 @@ namespace Types.rootNs
         {
             return _stringToEnum[value];
 	    }
+
+		public static testEnum? TryConvertToEnum(string value)
+        {
+            testEnum enumValue;
+            if(!_stringToEnum.TryGetValue(value, out enumValue))
+            {
+                return null;
+            }
+            return enumValue;
+	    }
 	}
 }
 
