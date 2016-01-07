@@ -70,7 +70,6 @@
     <Compile Include="Presentations\Xsd\ModelLoader.cs" />
     <Compile Include="Presentations\Xsd\XmlSchemaExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Codge.Generator.nuspec" />
