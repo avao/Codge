@@ -82,7 +82,7 @@ namespace Codge.BasicModel.Templates.CS
 
             foreach (char c in name)
             {
-                if (Char.IsLetterOrDigit(c))
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
                 {
                     builder.Append(c);
                 }

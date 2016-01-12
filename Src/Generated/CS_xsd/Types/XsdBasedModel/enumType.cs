@@ -11,12 +11,13 @@ namespace Types.XsdBasedModel
 		,_1itemStartsWithDigit
 		,item_With_Spaces_835378278
 		,item_With_Spaces_841866342
+		,value_with_utf_characters____
 	
 	}
 
     public static class enumTypeConverter
 	{
-        private static string[] _values = new string[5];
+        private static string[] _values = new string[6];
         private static IDictionary<string, enumType > _stringToEnum = new Dictionary<string, enumType >();
 
         static enumTypeConverter()
@@ -31,6 +32,8 @@ namespace Types.XsdBasedModel
             _stringToEnum.Add("item With Spaces", enumType.item_With_Spaces_835378278);
 		    _values[(int)enumType.item_With_Spaces_841866342] = "item With-Spaces";
             _stringToEnum.Add("item With-Spaces", enumType.item_With_Spaces_841866342);
+		    _values[(int)enumType.value_with_utf_characters____] = "value with utf characters че?";
+            _stringToEnum.Add("value with utf characters че?", enumType.value_with_utf_characters____);
         }
 
         public static string ConvertToString(enumType value)

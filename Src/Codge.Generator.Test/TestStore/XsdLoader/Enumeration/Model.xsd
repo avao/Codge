@@ -9,6 +9,7 @@
       <xs:enumeration value="1itemStartsWithDigit"/>
       <xs:enumeration value="item With Spaces"/>
       <xs:enumeration value="item-With-Dashes"/>
+      <xs:enumeration value="value with utf characters че?"/>
     </xs:restriction>
   </xs:simpleType>
 

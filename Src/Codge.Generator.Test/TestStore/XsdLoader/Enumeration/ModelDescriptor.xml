@@ -6,6 +6,7 @@
       <Item name="1itemStartsWithDigit" />
       <Item name="item With Spaces" />
       <Item name="item-With-Dashes" />
+      <Item name="value with utf characters че?" />
     </Enumeration>
   </Namespace>
 </Model>
