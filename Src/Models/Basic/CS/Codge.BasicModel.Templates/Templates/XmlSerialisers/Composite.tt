@@ -41,7 +41,7 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
 							{
 #>
 			Utils.SerialiseCollection(writer, "<#= field.Name #>", obj.<#= fieldName #>, context);
-<#				
+<#
 							}
 						}
 						else if(field.IsContent())
@@ -52,6 +52,13 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
             if(obj.<#= fieldName #> != null)
 			    writer.WriteCData(obj.<#= fieldName #>.ToString());
 <#				
+                            }
+                            else if(field.Type.IsEnum())
+                            {
+#>
+            if(obj.<#= fieldName #> != null)
+			    writer.WriteValue(<#= field.Type.Name #>Converter.ConvertToString(obj.<#= fieldName #>));
+<#
                             }
                             else
                             {
