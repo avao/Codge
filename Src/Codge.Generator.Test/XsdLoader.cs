@@ -33,6 +33,7 @@ namespace Codge.Generator.Test
         [TestCase("UnboundChoice")]
         [TestCase("AttributeRef")]
         [TestCase("XsdAny")]
+        [TestCase("OptionalSequenceInSequence")]
         public void LoadXsd(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);

@@ -296,7 +296,7 @@ namespace Codge.Generator.Presentations.Xsd
                     var groupBase = item as XmlSchemaGroupBase;
                     if (groupBase != null)
                     {
-                        AddFields(descriptor, groupBase.Items, isOptional || groupBase is XmlSchemaChoice);
+                        AddFields(descriptor, groupBase.Items, isOptional || groupBase is XmlSchemaChoice || groupBase.MinOccurs == 0);
                         return;
                     }
 
@@ -323,11 +323,11 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static void AddFields(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection items, bool isChoice)
+        private static void AddFields(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection items, bool isOptional)
         {
             foreach (var item in items)
             {
-                AddField(descriptor, item, isChoice);
+                AddField(descriptor, item, isOptional);
             }
         }
     }
