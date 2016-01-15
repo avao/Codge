@@ -102,7 +102,11 @@
           <Item key="isAttribute" value="True" />
         </AttachedData>
       </Field>
-      <Field name="AttachedData" type="AttachedData" />
+      <Field name="AttachedData" type="AttachedData">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
     </Composite>
     <Composite name="AttachedData">
       <Field name="Item" type="AttachedDataItem" isCollection="true" />
