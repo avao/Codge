@@ -38,16 +38,20 @@ namespace Codge.DataModel.Descriptors
         }
 
         //TODO should isCollection be part of attached data?
-        public FieldDescriptor AddField(string name, string fullyQualifiedTypeName, bool isCollection, IDictionary<string, object> attachedData)
+        public FieldDescriptor AddField(string name, string fullyQualifiedTypeName, bool isCollection, IDictionary<string, object> attachedData, int position)
         {
             var field = new FieldDescriptor(name, fullyQualifiedTypeName, isCollection, attachedData);
-            _fields.Add(field);
+            _fields.Insert(position, field);
             return field;
         }
     }
 
     public static class CompositeTypeDescriptorExtentions
     {
+        public static FieldDescriptor AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName, bool isCollection, IDictionary<string, object> attachedData)
+        {
+            return descriptor.AddField(name, fullyQualifiedTypeName, isCollection, attachedData, descriptor.Fields.Count());
+        }
         public static FieldDescriptor AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName, bool isCollection)
         {
             return descriptor.AddField(name, fullyQualifiedTypeName, isCollection, new Dictionary<string, object>());
