@@ -56,6 +56,10 @@ namespace Codge.DataModel.Descriptors
         {
             return descriptor.AddField(name, fullyQualifiedTypeName, isCollection, new Dictionary<string, object>());
         }
+        public static FieldDescriptor AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName, bool isCollection, int position)
+        {
+            return descriptor.AddField(name, fullyQualifiedTypeName, isCollection, new Dictionary<string, object>(), position);
+        }
         public static FieldDescriptor AddField(this CompositeTypeDescriptor descriptor, string name, string fullyQualifiedTypeName)
         {
             return descriptor.AddField(name, fullyQualifiedTypeName, false);

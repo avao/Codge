@@ -33,6 +33,21 @@ namespace Codge.DataModel.Framework
             }
         }
 
+        private int GetInsertPosition(List<FieldDescriptor> lhsFields, IList<FieldDescriptor> rhsFields, int rhsFieldPos)
+        {
+            var fieldToLookFor = rhsFields[rhsFieldPos];
+            int pos = lhsFields.FindIndex(_ => _.Name == fieldToLookFor.Name);
+            if (pos == -1)
+            {
+                if(++rhsFieldPos >= rhsFields.Count)
+                {
+                    return lhsFields.Count;
+                }
+                return GetInsertPosition(lhsFields, rhsFields, rhsFieldPos);
+            }
+            return pos;
+        }
+
         public void Handle(CompositeTypeDescriptor composite)
         {
             var lhsType = Namespace.Types.FindByName(composite.Name) as CompositeTypeDescriptor;
@@ -41,13 +56,17 @@ namespace Codge.DataModel.Framework
                 lhsType = Namespace.CreateCompositeType(composite.Name);
             }
 
-            foreach (var field in composite.Fields)
+            var rhsFields = composite.Fields.ToList();
+            int fieldIndex=-1;
+            foreach (var field in rhsFields)
             {
+                ++fieldIndex;
+
                 var lhsField = lhsType.Fields.FirstOrDefault(_ => _.Name == field.Name);
                 if (lhsField == null)
-                {
-                    //TODO fields are apended, think about proper merge
-                    lhsField = lhsType.AddField(field.Name, field.TypeName, field.IsCollection);
+                {//TODO optimise
+                    int insertionPos = GetInsertPosition(lhsType.Fields.ToList(), rhsFields, fieldIndex);
+                    lhsField = lhsType.AddField(field.Name, field.TypeName, field.IsCollection, insertionPos);
                 }
 
                 if (lhsField.IsCollection != field.IsCollection || lhsField.TypeName != field.TypeName)
