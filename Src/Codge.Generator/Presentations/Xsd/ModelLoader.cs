@@ -172,7 +172,7 @@ namespace Codge.Generator.Presentations.Xsd
 
                 { "int", "int" },
                 { "integer", "int" },
-                { "long", "int" },
+                { "long", "long" },
                 { "negativeInteger", "int" },
                 { "nonNegativeInteger", "int" },
                 { "positiveInteger", "int" },

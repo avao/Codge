@@ -4,6 +4,7 @@
   <Type name="bool" />
   <Type name="double" />
   <Type name="decimal" />
+  <Type name="long" />
   <Namespace name="TestModel">
     <Type name="TestEnumeration">
       <Item name="item0" value="0" />

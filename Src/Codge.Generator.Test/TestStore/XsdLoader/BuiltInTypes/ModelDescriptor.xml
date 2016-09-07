@@ -25,7 +25,7 @@
       <Field name="int" type="int" />
       <Field name="integer" type="int" />
       <Field name="language" type="string" />
-      <Field name="long" type="int" />
+      <Field name="long" type="long" />
       <Field name="Name" type="string" />
       <Field name="ncName" type="string" />
       <Field name="negativeInteger" type="int" />

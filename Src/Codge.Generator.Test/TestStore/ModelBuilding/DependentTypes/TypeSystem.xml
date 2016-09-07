@@ -4,6 +4,7 @@
   <Type name="bool" />
   <Type name="double" />
   <Type name="decimal" />
+  <Type name="long" />
   <Namespace name="MyModel">
     <Type name="MyCompositeType">
       <Field name="Field1" type="int" />
