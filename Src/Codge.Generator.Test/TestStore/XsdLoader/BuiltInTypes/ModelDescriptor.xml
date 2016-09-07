@@ -23,18 +23,18 @@
       <Field name="idRef" type="string" />
       <Field name="idRefs" type="string" />
       <Field name="int" type="int" />
-      <Field name="integer" type="int" />
+      <Field name="integer" type="long" />
       <Field name="language" type="string" />
       <Field name="long" type="long" />
       <Field name="Name" type="string" />
       <Field name="ncName" type="string" />
-      <Field name="negativeInteger" type="int" />
+      <Field name="negativeInteger" type="long" />
       <Field name="nmToken" type="string" />
       <Field name="nmTokens" type="string" />
-      <Field name="nonNegativeInteger" type="int" />
-      <Field name="nonPositiveInteger" type="int" />
+      <Field name="nonNegativeInteger" type="long" />
+      <Field name="nonPositiveInteger" type="long" />
       <Field name="normalizedString" type="string" />
-      <Field name="positiveInteger" type="int" />
+      <Field name="positiveInteger" type="long" />
       <Field name="QName" type="string" />
       <Field name="short" type="int" />
       <Field name="string" type="string" />
@@ -42,7 +42,7 @@
       <Field name="token" type="string" />
       <Field name="unsignedByte" type="int" />
       <Field name="unsignedIint" type="int" />
-      <Field name="unsignedLong" type="int" />
+      <Field name="unsignedLong" type="long" />
       <Field name="unsignedShort" type="int" />
     </Composite>
   </Namespace>

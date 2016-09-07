@@ -7,7 +7,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public allXsdTypes(string _anyUri,string _base64Binary,bool _boolean,int _byte,string _date,string _dateTime,decimal _decimal,double _double,string _duration,string _Entities,string _Entity,double _float,string _gDay,string _gMonth,string _gMonthDay,string _gYear,string _gYearMonth,string _hexBinary,string _id,string _idRef,string _idRefs,int _int,int _integer,string _language,long _long,string _Name,string _ncName,int _negativeInteger,string _nmToken,string _nmTokens,int _nonNegativeInteger,int _nonPositiveInteger,string _normalizedString,int _positiveInteger,string _QName,int _short,string _string,string _time,string _token,int _unsignedByte,int _unsignedIint,int _unsignedLong,int _unsignedShort)
+		public allXsdTypes(string _anyUri,string _base64Binary,bool _boolean,int _byte,string _date,string _dateTime,decimal _decimal,double _double,string _duration,string _Entities,string _Entity,double _float,string _gDay,string _gMonth,string _gMonthDay,string _gYear,string _gYearMonth,string _hexBinary,string _id,string _idRef,string _idRefs,int _int,long _integer,string _language,long _long,string _Name,string _ncName,long _negativeInteger,string _nmToken,string _nmTokens,long _nonNegativeInteger,long _nonPositiveInteger,string _normalizedString,long _positiveInteger,string _QName,int _short,string _string,string _time,string _token,int _unsignedByte,int _unsignedIint,long _unsignedLong,int _unsignedShort)
 		{
 			anyUri = _anyUri;
 			base64Binary = _base64Binary;
@@ -77,18 +77,18 @@ namespace Types.XsdBasedModel
 		public	string idRef {get; set;}
 		public	string idRefs {get; set;}
 		public	int int_ {get; set;}
-		public	int integer {get; set;}
+		public	long integer {get; set;}
 		public	string language {get; set;}
 		public	long long_ {get; set;}
 		public	string Name {get; set;}
 		public	string ncName {get; set;}
-		public	int negativeInteger {get; set;}
+		public	long negativeInteger {get; set;}
 		public	string nmToken {get; set;}
 		public	string nmTokens {get; set;}
-		public	int nonNegativeInteger {get; set;}
-		public	int nonPositiveInteger {get; set;}
+		public	long nonNegativeInteger {get; set;}
+		public	long nonPositiveInteger {get; set;}
 		public	string normalizedString {get; set;}
-		public	int positiveInteger {get; set;}
+		public	long positiveInteger {get; set;}
 		public	string QName {get; set;}
 		public	int short_ {get; set;}
 		public	string string_ {get; set;}
@@ -96,7 +96,7 @@ namespace Types.XsdBasedModel
 		public	string token {get; set;}
 		public	int unsignedByte {get; set;}
 		public	int unsignedIint {get; set;}
-		public	int unsignedLong {get; set;}
+		public	long unsignedLong {get; set;}
 		public	int unsignedShort {get; set;}
 	}
 }
