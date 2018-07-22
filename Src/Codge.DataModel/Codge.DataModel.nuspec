@@ -8,7 +8,7 @@
     <owners>AVAO</owners>
     <projectUrl>https://github.com/avao/Codge</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Code generation core module</description>
+    <description>Code generation data model</description>
     <copyright>Copyright 2018</copyright>
   </metadata>
 </package>
