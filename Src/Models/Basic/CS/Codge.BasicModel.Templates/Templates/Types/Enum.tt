@@ -20,9 +20,9 @@ namespace Types.<#= Type.Namespace.GetFullName(".") #>
 					foreach(var item in Type.Items)
 					{
 #>
-		<#= prefix #><#= ModelBehaviour.GetEnumItemName(Type, item) #>
-<#						
-							prefix = ",";
+		<#= prefix #><#= ModelBehaviour.GetEnumItemName(Type, item) #> = <#= item.Value #>
+<#							
+						prefix = ",";
 					}
 #>
 	

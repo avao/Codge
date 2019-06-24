@@ -6,6 +6,7 @@
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="Codge.DataModel" #>
 <#@ import namespace="Codge.Generator.Common" #>
+using System;
 
 namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {

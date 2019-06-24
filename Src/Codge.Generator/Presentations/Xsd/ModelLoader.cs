@@ -286,7 +286,7 @@ namespace Codge.Generator.Presentations.Xsd
                         field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1 || isCollection);
 
                         if (isOptional || element.MinOccurs == 0)
-                            field.AttachedData.Add("isOptional", true);
+                            field.SetIsOptional(true);
                     }
 
                     

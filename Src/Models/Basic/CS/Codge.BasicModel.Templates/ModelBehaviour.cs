@@ -98,6 +98,15 @@ namespace Codge.BasicModel.Templates.CS
 
         public string GetNativeType(CompositeType.Field field)
         {
+            if (field.Type.Name == "any")
+            {
+                if (field.IsCollection)
+                    return "object[]";
+                else
+                    return "object";
+            }
+
+
             if (field.Type.IsPrimitive())
             {
                 if (field.IsCollection)

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BuiltInType.cs" />
     <Compile Include="CompositeType.cs" />
+    <Compile Include="Descriptors\AttachedDataExtensions.cs" />
     <Compile Include="Descriptors\EnumerationTypeDescriptor.cs" />
     <Compile Include="Descriptors\PrimitiveTypeDescriptor.cs" />
     <Compile Include="Descriptors\BuiltInTypes.cs" />
