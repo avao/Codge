@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Schema;
 
 namespace Codge.Generator.Presentations.Xsd
@@ -24,10 +21,8 @@ namespace Codge.Generator.Presentations.Xsd
                     foreach (var facet in restriction.Facets)
                     {
                         var item = facet as XmlSchemaEnumerationFacet;
-                        if (item == null)
-                            yield break;
-
-                        yield return item;
+                        if (item != null)
+                            yield return item;
                     }
                 }
             }
