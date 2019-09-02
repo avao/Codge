@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="complexTypeWithAField">
+      <Field name="aField" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="ordertype">
+      <Field name="status" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="customer" type="string" />
+      <Field name="elementWithEmbededTypeInPlace" type="elementWithEmbededTypeInPlace" />
+      <Field name="billto" type="int">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="elemSimpleType" type="enumType" />
+      <Field name="elemEmptyType" type="elemEmptyType_EmptyComplex" />
+      <Field name="enumField" type="enumType">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="enumFieldCollection" type="enumType" isCollection="true">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="elementWithEmbededTypeInPlace">
+      <Field name="aField" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="extraField" type="string" />
+    </Composite>
+    <Composite name="elemEmptyType_EmptyComplex" />
+    <Enumeration name="enumType">
+      <Item name="anEnumerationValue" />
+    </Enumeration>
+  </Namespace>
+</Model>

@@ -16,7 +16,6 @@ namespace Codge.Models.Common
 
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;
-        private global::System.CodeDom.Compiler.CompilerErrorCollection errorsField;
         private global::System.Collections.Generic.List<int> indentLengthsField;
         private string currentIndentField = "";
         private bool endsWithNewline;
@@ -42,20 +41,7 @@ namespace Codge.Models.Common
                 this.generationEnvironmentField = value;
             }
         }
-        /// <summary>
-        /// The error collection for the generation process
-        /// </summary>
-        public System.CodeDom.Compiler.CompilerErrorCollection Errors
-        {
-            get
-            {
-                if ((this.errorsField == null))
-                {
-                    this.errorsField = new global::System.CodeDom.Compiler.CompilerErrorCollection();
-                }
-                return this.errorsField;
-            }
-        }
+        
         /// <summary>
         /// A list of the lengths of each indent that was added with PushIndent
         /// </summary>
@@ -161,25 +147,7 @@ namespace Codge.Models.Common
         {
             this.WriteLine(string.Format(global::System.Globalization.CultureInfo.CurrentCulture, format, args));
         }
-        /// <summary>
-        /// Raise an error
-        /// </summary>
-        public void Error(string message)
-        {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
-            error.ErrorText = message;
-            this.Errors.Add(error);
-        }
-        /// <summary>
-        /// Raise a warning
-        /// </summary>
-        public void Warning(string message)
-        {
-            System.CodeDom.Compiler.CompilerError error = new global::System.CodeDom.Compiler.CompilerError();
-            error.ErrorText = message;
-            error.IsWarning = true;
-            this.Errors.Add(error);
-        }
+        
         /// <summary>
         /// Increase the indent
         /// </summary>

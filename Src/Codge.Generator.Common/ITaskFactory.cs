@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Codge.DataModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Codge.DataModel;
 
 namespace Codge.Generator.Common
 {

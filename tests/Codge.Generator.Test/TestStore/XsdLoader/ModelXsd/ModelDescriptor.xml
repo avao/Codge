@@ -1,0 +1,148 @@
+<?xml version="1.0"?>
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="complexTypeWithAField">
+      <Field name="aField" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="emptyComplexType" />
+    <Composite name="ordertype">
+      <Field name="status" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="customer" type="string" />
+      <Field name="elementWithEmbededTypeInPlace" type="elementWithEmbededTypeInPlace" />
+      <Field name="billto" type="int">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="shipto" type="string" />
+      <Field name="elementWithEmbededType" type="elementWithEmbededType" />
+      <Field name="shortStringCollection" type="shortString" isCollection="true" />
+      <Field name="elemSimpleType" type="simpleType" />
+      <Field name="elemEmptyType" type="elemEmptyType_EmptyComplex" />
+      <Field name="enumField" type="enumType">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="enumFieldCollection" type="enumType" isCollection="true">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="elementWithEmbededTypeInPlace">
+      <Field name="aField" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="extraField" type="string" />
+    </Composite>
+    <Composite name="elemEmptyType_EmptyComplex" />
+    <Composite name="complexTypeWithContent">
+      <Field name="anElement" type="string" />
+    </Composite>
+    <Composite name="complexTypeWithContentAndParentField">
+      <Field name="aField" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="anElement" type="string" />
+    </Composite>
+    <Composite name="complexTypeWithContentWithAttribute">
+      <Field name="anAttribute" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="complexTypeWithSimpleContent">
+      <Field name="anAttribute" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="Content" type="string">
+        <AttachedData>
+          <Item key="isContent" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Primitive name="shortString" />
+    <Enumeration name="simpleType">
+      <Item name="anEnumerationValue" />
+    </Enumeration>
+    <Composite name="recursiveType">
+      <Field name="recursiveType" type="recursiveType">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+    <Composite name="allXsdTypes">
+      <Field name="anyUri" type="string" />
+      <Field name="base64Binary" type="string" />
+      <Field name="boolean" type="bool" />
+      <Field name="byte" type="int" />
+      <Field name="date" type="string" />
+      <Field name="dateTime" type="string" />
+      <Field name="decimal" type="decimal" />
+      <Field name="double" type="double" />
+      <Field name="duration" type="string" />
+      <Field name="Entities" type="string" />
+      <Field name="Entity" type="string" />
+      <Field name="float" type="double" />
+      <Field name="gDay" type="string" />
+      <Field name="gMonth" type="string" />
+      <Field name="gMonthDay" type="string" />
+      <Field name="gYear" type="string" />
+      <Field name="gYearMonth" type="string" />
+      <Field name="hexBinary" type="string" />
+      <Field name="id" type="string" />
+      <Field name="idRef" type="string" />
+      <Field name="idRefs" type="string" />
+      <Field name="int" type="int" />
+      <Field name="integer" type="long" />
+      <Field name="language" type="string" />
+      <Field name="long" type="long" />
+      <Field name="Name" type="string" />
+      <Field name="ncName" type="string" />
+      <Field name="negativeInteger" type="long" />
+      <Field name="nmToken" type="string" />
+      <Field name="nmTokens" type="string" />
+      <Field name="nonNegativeInteger" type="long" />
+      <Field name="nonPositiveInteger" type="long" />
+      <Field name="normalizedString" type="string" />
+      <Field name="positiveInteger" type="long" />
+      <Field name="QName" type="string" />
+      <Field name="short" type="int" />
+      <Field name="string" type="string" />
+      <Field name="time" type="string" />
+      <Field name="token" type="string" />
+      <Field name="unsignedByte" type="int" />
+      <Field name="unsignedIint" type="int" />
+      <Field name="unsignedLong" type="long" />
+      <Field name="unsignedShort" type="int" />
+    </Composite>
+    <Enumeration name="enumType">
+      <Item name="item1" />
+      <Item name="item2" />
+      <Item name="1itemStartsWithDigit" />
+      <Item name="item With Spaces" />
+      <Item name="item With-Spaces" />
+      <Item name="value with utf characters че?" />
+    </Enumeration>
+    <Composite name="elementWithEmbededType">
+      <Field name="aSubElement" type="string" />
+    </Composite>
+  </Namespace>
+</Model>

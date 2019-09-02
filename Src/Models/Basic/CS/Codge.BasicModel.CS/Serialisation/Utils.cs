@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Codge.BasicModel.CS.Serialisation
@@ -15,11 +13,12 @@ namespace Codge.BasicModel.CS.Serialisation
             serialiser.Serialize(writer, o, context);
         }
 
-        public static string Serialise(object o, string rootTag, SerialisationContext context)
+        public static string Serialise(object o, string rootTag, SerialisationContext context, bool indent = false)
         {
             XmlWriterSettings settings = new XmlWriterSettings
             {
-                OmitXmlDeclaration = true
+                OmitXmlDeclaration = true,
+                Indent = indent
             };
 
             var sb = new StringBuilder();

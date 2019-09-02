@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="ordertype">
+      <Field name="status" type="string">
+        <AttachedData>
+          <Item key="isAttribute" value="True" />
+        </AttachedData>
+      </Field>
+      <Field name="element" type="string" />
+    </Composite>
+  </Namespace>
+</Model>

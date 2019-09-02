@@ -1,13 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Logging;
-using Codge.DataModel;
+﻿using Codge.DataModel;
 using Codge.Generator.Common;
 using Codge.Models.Common;
+using Common.Logging;
+using System.IO;
 
 namespace Codge.Generator
 {
@@ -29,7 +24,7 @@ namespace Codge.Generator
         {
             Logger.Info(m => m("Starting generation for model baseDir=[{0}]", Config.BaseDir));
             ProcessNamespace(model.Namespace);
-         
+
             foreach (var task in Config.TaskFactory.CreateTasksForModel(model))
             {
                 task.Execute(Context);
@@ -69,7 +64,7 @@ namespace Codge.Generator
         {
             return Path.Combine(Config.BaseDir, relativePath);
         }
-                        
+
 
     }
 }

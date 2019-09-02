@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Composite name="recursiveType">
+      <Field name="recursiveType" type="recursiveType">
+        <AttachedData>
+          <Item key="isOptional" value="True" />
+        </AttachedData>
+      </Field>
+    </Composite>
+  </Namespace>
+</Model>

@@ -1,97 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{33C5683D-8E50-43D9-92C8-F764D642630A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Codge.Generator</RootNamespace>
-    <AssemblyName>Codge.Generator</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Qart.Core, Version=1.0.0.161, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Qart.Core.1.0.0.161\lib\net40\Qart.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="GeneratorConfig.cs" />
-    <Compile Include="Generator.cs" />
-    <Compile Include="Presentations\ModelLoader.cs" />
-    <Compile Include="Presentations\Xml\Model.cs">
-      <DependentUpon>Model.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Presentations\Xml\ModelLoader.cs" />
-    <Compile Include="Presentations\Xsd\ModelLoader.cs" />
-    <Compile Include="Presentations\Xsd\XmlSchemaExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Codge.Generator.nuspec" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-    <EmbeddedResource Include="Presentations\Xml\Model.xsd">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Codge.DataModel\Codge.DataModel.csproj">
-      <Project>{2afffc73-87d8-4743-96dd-0f6cf1710791}</Project>
-      <Name>Codge.DataModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Codge.Generator.Common\Codge.Generator.Common.csproj">
-      <Project>{eb4d5608-72b3-4eb8-86ab-7f17acddab1c}</Project>
-      <Name>Codge.Generator.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Codge.Models.Common\Codge.Models.Common.csproj">
-      <Project>{4de01781-4170-49e4-bde6-3e6d768e0dae}</Project>
-      <Name>Codge.Models.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <!--
   <PropertyGroup>
-    <PreBuildEvent>"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A\bin\NETFX 4.0 Tools\xsd.exe" /c /n:Codge.Generator.Presentations.Xml /o:$(ProjectDir)\Presentations\Xml $(ProjectDir)\Presentations\Xml\Model.xsd</PreBuildEvent>
+    <PreBuildEvent>"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7 Tools\xsd.exe" /c /n:Codge.Generator.Presentations.Xml /o:$(SolutionDir)src\codge.generator\Presentations\Xml $(SolutionDir)src\codge.generator\Presentations\Xml\Model.xsd</PreBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+-->
+  <ItemGroup>
+    <PackageReference Include="Qart.Core" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Codge.DataModel\Codge.DataModel.csproj" />
+    <ProjectReference Include="..\Codge.Generator.Common\Codge.Generator.Common.csproj" />
+    <ProjectReference Include="..\Codge.Models.Common\Codge.Models.Common.csproj" />
+  </ItemGroup>
+
 </Project>
