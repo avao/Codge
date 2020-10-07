@@ -23,8 +23,7 @@ namespace Codge.BasicModel.Templates.CS
         public IEnumerable<ITask<Model>> CreateTasksForModel(Model model)
         {
             return new ITask<Model>[] {
-                new OutputTask<Model>(new Registrar(model, _modelBehaviour), Logger),
-                new OutputTask<Model>(new ProjectUpdater(model), Logger)//Should be last to capture all files
+                new OutputTask<Model>(new Registrar(model, _modelBehaviour), Logger)
             };
         }
 
@@ -40,7 +39,6 @@ namespace Codge.BasicModel.Templates.CS
                 new OutputTask<TypeBase>(new Templates.Types.Primitive(type, _modelBehaviour), Logger),
                 new OutputTask<TypeBase>(new Templates.Types.Enum(type, _modelBehaviour), Logger),
                 new OutputTask<TypeBase>(new Templates.XmlSerialisers.Composite(type, _modelBehaviour), Logger)
-                //new OutputTask<TypeBase>(new BasicModel.Templates.CS.Templates.PofSerialisers.Composite(type), Logger)
             };
         }
     }

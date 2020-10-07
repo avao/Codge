@@ -40,19 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelBehaviour.cs" />
-    <Compile Include="ProjectUpdater.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="T4TemplateAction.cs" />
-    <Compile Include="Templates\PofConfig.cs">
-      <DependentUpon>PofConfig.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\PofSerialisers\Composite.cs">
-      <DependentUpon>Composite.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\Types\Composite.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,14 +71,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Templates\PofConfig.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>PofConfig.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\PofSerialisers\Composite.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>Composite.cs</LastGenOutput>
-    </None>
     <None Include="Templates\Types\Composite.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>Composite.cs</LastGenOutput>
