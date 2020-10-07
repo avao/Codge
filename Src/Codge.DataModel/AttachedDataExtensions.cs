@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Codge.DataModel
+﻿namespace Codge.DataModel
 {
     public static class AttachedDataExtensions
     {
@@ -48,12 +42,11 @@ namespace Codge.DataModel
 
         private static T GetAttachedData<T>(this CompositeType.Field field, string name)
         {
-            object value;
-            if (field.AttachedData.TryGetValue(name, out value) && value is T)
+            if (field.AttachedData.TryGetValue(name, out object value) && value is T)
             {
                 return (T)value;
             }
-            return default(T);
+            return default;
         }
 
         private static void SetAttachedData<T>(this CompositeType.Field field, string name, T value)

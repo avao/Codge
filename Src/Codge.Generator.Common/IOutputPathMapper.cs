@@ -1,5 +1,4 @@
-﻿
-namespace Codge.Generator.Common
+﻿namespace Codge.Generator.Common
 {
     public interface IOutputPathMapper
     {

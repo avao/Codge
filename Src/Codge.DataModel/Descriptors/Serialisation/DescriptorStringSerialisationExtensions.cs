@@ -8,17 +8,17 @@ namespace Codge.DataModel.Descriptors.Serialisation
     {
         public static string ToXml(this ModelDescriptor descriptor)
         {
-            return ToXml(_ => descriptor.ToXml(_));
+            return ToXml(descriptor.ToXml);
         }
 
         public static string ToXml(this FieldDescriptor descriptor)
         {
-            return ToXml(_ => descriptor.ToXml(_));
+            return ToXml(descriptor.ToXml);
         }
 
         public static string ToXml(this ItemDescriptor descriptor)
         {
-            return ToXml(_ => descriptor.ToXml(_));
+            return ToXml(descriptor.ToXml);
         }
 
         private static string ToXml(Action<XmlWriter> action)

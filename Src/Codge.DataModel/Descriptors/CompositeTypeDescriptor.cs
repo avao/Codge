@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel.Descriptors
 {
     public class FieldDescriptor
     {
-        public string Name { get; private set; }
-        public string TypeName { get; private set; }
-        public bool IsCollection { get; private set; }
-        public IDictionary<string, object> AttachedData { get; private set; }
+        public string Name { get; }
+        public string TypeName { get; }
+        public bool IsCollection { get; }
+        public IDictionary<string, object> AttachedData { get; }
 
         public FieldDescriptor(string name, string typeName, bool isCollection)
             : this(name, typeName, isCollection, new Dictionary<string, object>())

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Codge.Generator.Common
+﻿namespace Codge.Generator.Common
 {
     public class PathAndContent
     {
-        public ItemInformation ItemInfo { get; private set; }
-        public string Content { get; private set; }
+        public ItemInformation ItemInfo { get; }
+        public string Content { get; }
 
         public PathAndContent(ItemInformation itemInfo, string content)
         {
@@ -20,8 +14,8 @@ namespace Codge.Generator.Common
 
     public class ItemInformation
     {
-        public string Item{get; private set;}
-        public string Category{get; private set;}
+        public string Item { get; }
+        public string Category { get; }
 
         public ItemInformation(string item, string category)
         {

@@ -1,9 +1,5 @@
 ﻿using Codge.DataModel.Descriptors;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel.Framework
 {
@@ -23,20 +19,20 @@ namespace Codge.DataModel.Framework
     public static class NodeEventHandlerExtensions
     {
         public static void TryInvokeAtomicEventHandler<T, TItem>(this INodeEventHandler handler, TItem item)
-        where T : class
+            where T : class
         {
-            var typedItem = item as T;
-            if (typedItem != null)
+            if (item is T typedItem)
             {
-                InvokeAtomicEventHandler<T>(handler, typedItem);
+                InvokeAtomicEventHandler(handler, typedItem);
             }
         }
 
         public static void InvokeAtomicEventHandler<T>(this INodeEventHandler handler, T item)
         {
-            var atomicEventHandler = handler as IAtomicNodeEnventHandler<T>;
-            if (atomicEventHandler != null)
+            if (handler is IAtomicNodeEnventHandler<T> atomicEventHandler)
+            {
                 atomicEventHandler.Handle(item);
+            }
         }
     }
 
@@ -47,30 +43,19 @@ namespace Codge.DataModel.Framework
         {
             foreach (var t in namespaceDescriptor.Types)
             {
-                var composite = t as CompositeTypeDescriptor;
-                if (composite != null)
+                switch (t)
                 {
-                    nodeEventHandler.InvokeAtomicEventHandler<CompositeTypeDescriptor>(composite);
-                }
-                else
-                {
-                    var primitive = t as PrimitiveTypeDescriptor;
-                    if (primitive != null)
-                    {
+                    case CompositeTypeDescriptor composite:
+                        nodeEventHandler.InvokeAtomicEventHandler<CompositeTypeDescriptor>(composite);
+                        break;
+                    case PrimitiveTypeDescriptor primitive:
                         nodeEventHandler.InvokeAtomicEventHandler<PrimitiveTypeDescriptor>(primitive);
-                    }
-                    else
-                    {
-                        var enumeration = t as EnumerationTypeDescriptor;
-                        if (enumeration != null)
-                        {
-                            nodeEventHandler.InvokeAtomicEventHandler<EnumerationTypeDescriptor>(enumeration);
-                        }
-                        else
-                        {
-                            throw new Exception("Unknown type");
-                        }
-                    }
+                        break;
+                    case EnumerationTypeDescriptor enumeration:
+                        nodeEventHandler.InvokeAtomicEventHandler<EnumerationTypeDescriptor>(enumeration);
+                        break;
+                    default:
+                        throw new Exception("Unknown type");
                 }
             }
 

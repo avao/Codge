@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel
 {
@@ -14,13 +11,6 @@ namespace Codge.DataModel
         {
         }
 
-        public override IEnumerable<TypeBase> Dependencies
-        {
-            get
-            {
-                return Enumerable.Empty<TypeBase>();
-            }
-        }
+        public override IEnumerable<TypeBase> Dependencies => Enumerable.Empty<TypeBase>();
     }
-
 }

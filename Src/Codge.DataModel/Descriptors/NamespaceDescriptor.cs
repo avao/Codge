@@ -1,15 +1,12 @@
 ﻿using Qart.Core.Validation;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel.Descriptors
 {
     public class NamespaceDescriptor
     {
-        public string Name { get; private set; }
+        public string Name { get; }
 
         private IList<NamespaceDescriptor> _namespaces;
         public IEnumerable<NamespaceDescriptor> Namespaces { get { return _namespaces; } }

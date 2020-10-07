@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel
 {
@@ -16,20 +14,20 @@ namespace Codge.DataModel
     {
         public class Field
         {
-            public string Name { get; private set; }
-            public TypeBase Type { get; private set; }
+            public string Name { get; }
+            public TypeBase Type { get; }
 
-            public int Id { get; private set; }
+            public int Id { get; }
 
-            public int MinOccur { get; private set; }
-            public int MaxOccur { get; private set; }
+            public int MinOccur { get; }
+            public int MaxOccur { get; }
 
-            public IDictionary<string, object> AttachedData { get; private set; }
+            public IDictionary<string, object> AttachedData { get; }
 
-            public CompositeType ContainingType { get; private set; }
+            public CompositeType ContainingType { get; }
 
             internal Field(string name, int id, TypeBase type, IDictionary<string, object> attachedData, CompositeType containingType)
-                :this(name, id, type, 1, 1, attachedData, containingType)
+                : this(name, id, type, 1, 1, attachedData, containingType)
             {
             }
 
@@ -79,5 +77,4 @@ namespace Codge.DataModel
             get { throw new NotImplementedException(); }
         }
     }
-
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Codge.DataModel.Descriptors.Serialisation
@@ -21,30 +17,25 @@ namespace Codge.DataModel.Descriptors.Serialisation
         {
             writer.WriteStartElement("Namespace");
             writer.WriteAttributeString("name", descriptor.Name);
-            foreach(var type in descriptor.Types)
+            foreach (var type in descriptor.Types)
             {
-                var composite = type as CompositeTypeDescriptor;
-                if(composite != null)
+                switch(type)
                 {
-                    composite.ToXml(writer);
-                    continue;
+                    case CompositeTypeDescriptor composite: 
+                        composite.ToXml(writer); 
+                        break;
+                    case EnumerationTypeDescriptor enumeration:
+                        enumeration.ToXml(writer);
+                        break;
+                    case PrimitiveTypeDescriptor primitive:
+                        primitive.ToXml(writer);
+                        break;
+                    default:
+                        throw new NotSupportedException("Not supported type " + type.GetType().Name);
                 }
-                var enumeration = type as EnumerationTypeDescriptor;
-                if(enumeration != null)
-                {
-                    enumeration.ToXml(writer);
-                    continue;
-                }
-                var primitive = type as PrimitiveTypeDescriptor;
-                if(primitive != null)
-                {
-                    primitive.ToXml(writer);
-                    continue;
-                }
-                throw new NotSupportedException("Not supported type " + type.GetType().Name);
             }
 
-            foreach(var ns in descriptor.Namespaces)
+            foreach (var ns in descriptor.Namespaces)
             {
                 ns.ToXml(writer);
             }
@@ -96,7 +87,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteAttributeString("type", descriptor.TypeName);
             if (descriptor.IsCollection)
                 writer.WriteAttributeString("isCollection", "true");
-            if(descriptor.AttachedData.Count > 0)
+            if (descriptor.AttachedData.Count > 0)
             {
                 writer.WriteStartElement("AttachedData");
                 foreach (var kvp in descriptor.AttachedData)

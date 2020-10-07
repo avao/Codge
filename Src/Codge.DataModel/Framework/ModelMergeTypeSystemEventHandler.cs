@@ -1,11 +1,8 @@
 ﻿using Codge.DataModel.Descriptors;
+using Codge.DataModel.Descriptors.Serialisation;
 using Common.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Codge.DataModel.Descriptors.Serialisation;
 
 namespace Codge.DataModel.Framework
 {
@@ -39,7 +36,7 @@ namespace Codge.DataModel.Framework
             int pos = lhsFields.FindIndex(_ => _.Name == fieldToLookFor.Name);
             if (pos == -1)
             {
-                if(++rhsFieldPos >= rhsFields.Count)
+                if (++rhsFieldPos >= rhsFields.Count)
                 {
                     return lhsFields.Count;
                 }
@@ -57,7 +54,7 @@ namespace Codge.DataModel.Framework
             }
 
             var rhsFields = composite.Fields.ToList();
-            int fieldIndex=-1;
+            int fieldIndex = -1;
             foreach (var field in rhsFields)
             {
                 ++fieldIndex;

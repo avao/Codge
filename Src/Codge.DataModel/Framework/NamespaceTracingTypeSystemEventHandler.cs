@@ -1,9 +1,6 @@
 ﻿using Codge.DataModel.Descriptors;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel.Framework
 {

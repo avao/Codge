@@ -8,9 +8,9 @@ namespace Codge.Generator
 {
     public class Generator
     {
-        public GeneratorConfig Config { get; private set; }
-        public Context Context { get; private set; }
-        public ILog Logger { get; private set; }
+        public GeneratorConfig Config { get; }
+        public Context Context { get; }
+        public ILog Logger { get; }
 
 
         public Generator(GeneratorConfig config, ILog logger)
@@ -64,7 +64,5 @@ namespace Codge.Generator
         {
             return Path.Combine(Config.BaseDir, relativePath);
         }
-
-
     }
 }

@@ -1,22 +1,17 @@
-﻿using System;
+﻿using Common.Logging;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Logging;
-using Codge.Generator.Common;
 
 namespace Codge.Generator.Common
 {
     public class Tracker
     {
         private IList<string> _filesUdated = new List<string>();
-        public IEnumerable<string> FilesUpdated { get { return _filesUdated; } }
+        public IEnumerable<string> FilesUpdated => _filesUdated;
 
         private IList<string> _filesSkipped = new List<string>();
-        public IEnumerable<string> FilesSkipped { get { return _filesSkipped; } }
+        public IEnumerable<string> FilesSkipped => _filesSkipped;
 
-        public ILog Logger { get; private set; }
+        public ILog Logger { get; }
 
         public Tracker(ILog logger)
         {

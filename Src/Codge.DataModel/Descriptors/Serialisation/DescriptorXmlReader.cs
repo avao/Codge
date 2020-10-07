@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Codge.DataModel.Descriptors.Serialisation
@@ -133,12 +130,12 @@ namespace Codge.DataModel.Descriptors.Serialisation
             if (!bEmpty)
             {
                 MoveToNonWhitespace(reader);
-                if(reader.NodeType == XmlNodeType.Element)
+                if (reader.NodeType == XmlNodeType.Element)
                 {
-                    if(reader.ReadToDescendant("Item"))
+                    if (reader.ReadToDescendant("Item"))
                     {
                         descriptor.AttachedData.Add(ReadAttachedDataItem(reader));
-                        while(reader.ReadToNextSibling("Item"))
+                        while (reader.ReadToNextSibling("Item"))
                         {
                             descriptor.AttachedData.Add(ReadAttachedDataItem(reader));
                         }
@@ -151,7 +148,7 @@ namespace Codge.DataModel.Descriptors.Serialisation
 
         private static string ReadRequiredAttribute(XmlReader reader, string name)
         {
-            if(!reader.MoveToAttribute(name))
+            if (!reader.MoveToAttribute(name))
             {
                 throw new NotSupportedException(string.Format("Required attribute [{0}] does not exist.", name));
             }

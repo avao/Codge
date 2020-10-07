@@ -13,19 +13,18 @@ namespace Codge.Generator.Presentations.Xsd
 
         public static IEnumerable<XmlSchemaEnumerationFacet> GetEnumerationFacets(this XmlSchemaSimpleType simpleType)
         {
-            if (simpleType.Content != null)
+            if (simpleType.Content is XmlSchemaSimpleTypeRestriction restriction
+                && restriction.Facets?.Count > 0)
             {
-                var restriction = simpleType.Content as XmlSchemaSimpleTypeRestriction;
-                if (restriction != null && restriction.Facets != null && restriction.Facets.Count > 0)
+                foreach (var facet in restriction.Facets)
                 {
-                    foreach (var facet in restriction.Facets)
+                    if (facet is XmlSchemaEnumerationFacet item)
                     {
-                        var item = facet as XmlSchemaEnumerationFacet;
-                        if (item != null)
-                            yield return item;
+                        yield return item;
                     }
                 }
             }
+
             yield break;
         }
 

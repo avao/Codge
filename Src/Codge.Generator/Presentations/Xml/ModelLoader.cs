@@ -1,19 +1,14 @@
-﻿using System;
+﻿using Codge.DataModel.Descriptors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using Codge.Generator.Presentations;
-using Codge.DataModel;
-using Codge.DataModel.Descriptors;
 
 namespace Codge.Generator.Presentations.Xml
 {
     public class ModelLoader
     {
-
         public static ModelDescriptor Load(XmlReader reader)
         {
             var serialiser = new XmlSerializer(typeof(ModelDesc), "http://codge/Model.xsd");
@@ -25,11 +20,6 @@ namespace Codge.Generator.Presentations.Xml
             return model;
         }
 
-        static int id = 3000;
-        private static int GetId(string typeName)
-        {//|TODO
-            return id++;
-        }
 
         private static void processNamespace(NamespaceDesc ns, NamespaceDescriptor namespaceDescriptor)
         {
@@ -37,8 +27,7 @@ namespace Codge.Generator.Presentations.Xml
             {
                 foreach (var t in ns.Items)
                 {
-                    var composite = t as Composite;
-                    if (composite != null)
+                    if (t is Composite composite)
                     {
                         var descriptor = namespaceDescriptor.CreateCompositeType(composite.name);
                         if (composite.Field != null)
@@ -46,25 +35,22 @@ namespace Codge.Generator.Presentations.Xml
                             foreach (var field in composite.Field)
                             {
                                 var newField = descriptor.AddField(field.name, field.type, field.isCollectionSpecified && field.isCollection);
-                                if(field.AttachedData!=null)
+                                if (field.AttachedData != null)
                                 {//TODO hack for boolean values
-                                    field.AttachedData.Select(_ => new KeyValuePair<string,object>(_.key, _.value == "True" ? (object)true:_.value)).ToList().ForEach(_ => newField.AttachedData.Add(_));
+                                    field.AttachedData.Select(_ => new KeyValuePair<string, object>(_.key, _.value == "True" ? (object)true : _.value)).ToList().ForEach(_ => newField.AttachedData.Add(_));
                                 }
                             }
                         }
                     }
                     else
                     {
-                        var primitive = t as Primitive;
-
-                        if (primitive != null)
+                        if (t is Primitive primitive)
                         {
                             var descriptor = namespaceDescriptor.CreatePrimitiveType(primitive.name);
                         }
                         else
                         {
-                            var enumeration = t as Enumeration;
-                            if (enumeration != null)
+                            if (t is Enumeration enumeration)
                             {
                                 var descriptor = namespaceDescriptor.CreateEnumerationType(enumeration.name);
 
@@ -89,7 +75,6 @@ namespace Codge.Generator.Presentations.Xml
                                 throw new Exception("Unknown type");
                             }
                         }
-
                     }
                 }
             }

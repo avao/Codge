@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Codge.DataModel.Descriptors
+﻿namespace Codge.DataModel.Descriptors
 {
     public class PrimitiveTypeDescriptor : TypeDescriptor
     {

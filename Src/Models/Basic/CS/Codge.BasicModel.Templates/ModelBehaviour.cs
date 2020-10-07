@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.BasicModel.Templates.CS
 {
@@ -43,13 +42,13 @@ namespace Codge.BasicModel.Templates.CS
         {
             IDictionary<string, string> mappedValues;
             string typeName = enumType.GetFullName(".");
-            if(!_enumItemsCache.TryGetValue(typeName, out mappedValues))
+            if (!_enumItemsCache.TryGetValue(typeName, out mappedValues))
             {
                 mappedValues = new Dictionary<string, string>();
 
                 var reversedMappedValues = new Dictionary<string, string>();
 
-                foreach(var it in enumType.Items)
+                foreach (var it in enumType.Items)
                 {
                     string value = MapItemName(it.Name);
                     string clashedItemName;

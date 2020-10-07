@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Codge.DataModel
 {
@@ -12,7 +9,7 @@ namespace Codge.DataModel
         {
             var namespaces = new Stack<Namespace>();
             var ns = descriptor;
-            while (ns != null && ns.Name!=null)
+            while (ns != null && ns.Name != null)
             {
                 namespaces.Push(ns);
                 ns = ns.ParentNamespace;
@@ -41,7 +38,7 @@ namespace Codge.DataModel
         internal static TypeBase findTypeByPartialName(this Namespace ns, string name)
         {
             var type = ns.findTypeByQName(name);
-            if (type == null && ns.ParentNamespace!=null)
+            if (type == null && ns.ParentNamespace != null)
             {
                 type = ns.ParentNamespace.findTypeByPartialName(name);
             }
@@ -60,7 +57,7 @@ namespace Codge.DataModel
                 string nsName = name.Substring(0, pos);
                 var nestedNs = ns.Namespaces.FirstOrDefault(item => item.Name == nsName);
                 if (nestedNs != null)
-                    return findTypeByQName(nestedNs, name.Substring(pos+1));
+                    return findTypeByQName(nestedNs, name.Substring(pos + 1));
             }
 
             return null;
@@ -70,20 +67,19 @@ namespace Codge.DataModel
         {
             return ns.Name == null;
         }
-
     }
 
     public class Namespace
     {
         protected IList<TypeBase> _types;
-        public IEnumerable<TypeBase> Types { get { return _types; } }
+        public IEnumerable<TypeBase> Types => _types;
 
         private IList<Namespace> _namespaces;
-        public IEnumerable<Namespace> Namespaces { get { return _namespaces; } }
+        public IEnumerable<Namespace> Namespaces => _namespaces;
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
-        public Namespace ParentNamespace { get; private set; }
+        public Namespace ParentNamespace { get; }
 
         public TypeSystem TypeSystem { get; protected set; }
 
@@ -160,7 +156,4 @@ namespace Codge.DataModel
             return ns;
         }
     }
-
-
-
 }

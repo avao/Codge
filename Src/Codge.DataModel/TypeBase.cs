@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Codge.DataModel
 {
@@ -9,9 +6,9 @@ namespace Codge.DataModel
     {
         public static string GetFullName(this TypeBase type, string separator)
         {
-            if (type.Namespace.IsGlobal())
-                return type.Name;
-            return type.Namespace.GetFullName(separator) + separator + type.Name;
+            return type.Namespace.IsGlobal()
+                ? type.Name
+                : type.Namespace.GetFullName(separator) + separator + type.Name;
         }
 
         public static string GetFullName(this TypeBase type, string prefix, string separator)
@@ -19,18 +16,18 @@ namespace Codge.DataModel
             return prefix + separator + type.GetFullName(separator);
         }
 
-        public static bool IsComposite(this TypeBase type) { return type is CompositeType; }
-        public static bool IsPrimitive(this TypeBase type) { return type is PrimitiveType; }
-        public static bool IsBuiltIn(this TypeBase type) { return type is BuiltInType; }
-        public static bool IsEnum(this TypeBase type) { return type is EnumerationType; } 
+        public static bool IsComposite(this TypeBase type) => type is CompositeType;
+        public static bool IsPrimitive(this TypeBase type) => type is PrimitiveType;
+        public static bool IsBuiltIn(this TypeBase type) => type is BuiltInType;
+        public static bool IsEnum(this TypeBase type) => type is EnumerationType;
     }
 
     public abstract class TypeBase
     {
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-        public Namespace Namespace { get; private set; }
-        
+        public int Id { get; }
+        public string Name { get; }
+        public Namespace Namespace { get; }
+
         abstract public IEnumerable<TypeBase> Dependencies { get; }
 
         protected TypeBase(int id, string name, Namespace nameSpace)
@@ -39,8 +36,5 @@ namespace Codge.DataModel
             Name = name;
             Id = id;
         }
-                
     }
-        
-    
 }

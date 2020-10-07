@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Codge.DataModel.Descriptors
 {
-
     public class ItemDescriptor
     {
-        public string Name { get; private set; }
-        public int? Value { get; private set; }
+        public string Name { get; }
+        public int? Value { get; }
 
         public ItemDescriptor(string name, int value)
+            : this(name, (int?)value)
+        { }
+
+        public ItemDescriptor(string name)
+            : this(name, null)
+        { }
+
+        private ItemDescriptor(string name, int? value)
         {
             Name = name;
             Value = value;
-        }
-
-        public ItemDescriptor(string name)
-        {
-            Name = name;
-            Value = null;
         }
     }
 
@@ -45,6 +42,5 @@ namespace Codge.DataModel.Descriptors
         {
             _items.Add(new ItemDescriptor(name, value));
         }
-
     }
 }

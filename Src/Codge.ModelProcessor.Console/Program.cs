@@ -1,17 +1,9 @@
-﻿using Codge.DataModel;
-using Codge.DataModel.Descriptors;
-using Codge.DataModel.Descriptors.Serialisation;
-using Codge.DataModel.Framework;
+﻿using Codge.DataModel.Descriptors;
 using Codge.Generator.Presentations;
 using CommandLine;
 using Common.Logging;
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Codge.ModelProcessor.Console
 {
@@ -49,7 +41,7 @@ namespace Codge.ModelProcessor.Console
                     var files = Directory.EnumerateFiles(options.Input).OrderBy(_ => _).ToList();
                     if (options.Convert)
                     {
-                        files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileNameWithoutExtension(_)+".xml")));
+                        files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileNameWithoutExtension(_) + ".xml")));
                     }
                     else if (options.Merge)
                     {
@@ -70,7 +62,7 @@ namespace Codge.ModelProcessor.Console
         static void ConvertModel(string path, string modelName, string outputPath)
         {
             var model = LoadModel(path, modelName);
-            model.Save(outputPath);   
+            model.Save(outputPath);
         }
 
         static ModelDescriptor LoadModel(string path, string modelName)

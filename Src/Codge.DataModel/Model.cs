@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Codge.DataModel
+﻿namespace Codge.DataModel
 {
-    
-    //class represents a subset of types groupped together
+
+    //class represents a subset of types grouped together
     public class Model
     {
         public Namespace Namespace { get; private set; }
@@ -17,5 +11,4 @@ namespace Codge.DataModel
             Namespace = ns;
         }
     }
-
 }

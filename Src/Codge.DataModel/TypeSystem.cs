@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Codge.DataModel
+﻿namespace Codge.DataModel
 {
     public class TypeSystem : Namespace
     {
-        private static TypeSystem _instance = new TypeSystem();
-        public static TypeSystem Instance { get { return _instance; } }
-
-        public TypeSystem()            
+        public TypeSystem()
         {
             TypeSystem = this;
 
@@ -23,5 +14,4 @@ namespace Codge.DataModel
             _types.Add(new BuiltInType(2005, "long", this));
         }
     }
-    
 }

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Codge.Generator.Common;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Codge.DataModel;
-using Codge.Generator.Common;
 
 namespace Codge.Generator
 {
     public class GeneratorConfig
     {
-        public string BaseDir { get; private set; }
-        public ITaskFactory TaskFactory{ get; private set; }
+        public string BaseDir { get; }
+        public ITaskFactory TaskFactory { get; }
 
         public GeneratorConfig(string baseDir, ITaskFactory taskFactory)
         {

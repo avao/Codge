@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using Codge.Generator;
-using Common.Logging;
-using Codge.DataModel;
-using Codge.DataModel.Descriptors;
-using CommandLine;
-using Codge.DataModel.Descriptors.Serialisation;
+﻿using Codge.DataModel;
 using Codge.DataModel.Framework;
 using Codge.Generator.Presentations;
+using CommandLine;
+using Common.Logging;
+using System.Linq;
 
 
 namespace Codge.Generator.Console
@@ -20,7 +13,7 @@ namespace Codge.Generator.Console
         [Option('m', "model", Required = true, HelpText = "Path to a model file (xml or xsd)")]
         public string Model { get; set; }
 
-        [Option('n', "modelName", Required = false, HelpText = "Name of the model.", DefaultValue="TODO")]
+        [Option('n', "modelName", Required = false, HelpText = "Name of the model.", DefaultValue = "TODO")]
         public string ModelName { get; set; }
 
         [Option('o', "outputDir", Required = false, HelpText = "Path to a output directory.", DefaultValue = @"../../../Generated/CS")]
@@ -50,7 +43,7 @@ namespace Codge.Generator.Console
         {
             var generator = new Codge.Generator.Generator(config, logger);
             generator.Generate(model);
-            
+
             logger.Info("--------------------");
             logger.Info("Files evaluated: " + (generator.Context.Tracker.FilesUpdated.Count() + generator.Context.Tracker.FilesSkipped.Count()));
             logger.Info("Files updated: " + generator.Context.Tracker.FilesUpdated.Count());
@@ -73,7 +66,7 @@ namespace Codge.Generator.Console
         static GeneratorConfig LoadConfig(string path)
         {
             var config = new GeneratorConfig(path, new BasicModel.Templates.CS.TaskFactory(_logger));
-            
+
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Composite.stg"))));
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Primitive.stg"))));
 

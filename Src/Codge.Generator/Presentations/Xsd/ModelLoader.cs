@@ -1,14 +1,10 @@
-﻿using System;
+﻿using Codge.DataModel.Descriptors;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
-using Codge.DataModel;
-using Codge.DataModel.Descriptors;
 
 namespace Codge.Generator.Presentations.Xsd
 {
@@ -16,7 +12,7 @@ namespace Codge.Generator.Presentations.Xsd
     {
         public static ModelDescriptor Load(XmlSchema schema, string modelName)
         {
-            if(!schema.IsCompiled)
+            if (!schema.IsCompiled)
             {
                 var set = new XmlSchemaSet();
                 set.Add(schema);
@@ -65,7 +61,7 @@ namespace Codge.Generator.Presentations.Xsd
                 var descriptor = namespaceDescriptor.CreateEnumerationType(simpleType.Name);
                 foreach (var facet in facets)
                 {
-                    if (!descriptor.Items.Any(_ => _.Name==facet.Value))
+                    if (!descriptor.Items.Any(_ => _.Name == facet.Value))
                         descriptor.AddItem(facet.Value);
                 }
             }
@@ -131,9 +127,9 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static IDictionary<string, string> xsdTypeMappingFQN = new Dictionary<string, string> { 
+        private static IDictionary<string, string> xsdTypeMappingFQN = new Dictionary<string, string> {
                 { "boolean", "bool" },
-               
+
                 { "string", "string" },
 
                 { "date", "string" },
@@ -145,7 +141,7 @@ namespace Codge.Generator.Presentations.Xsd
                 { "gYear", "string" },
                 { "gYearMonth", "string" },
                 { "time", "string" },
- 
+
                 { "ENTITIES", "string" },
                 { "ENTITY", "string" },
                 { "ID", "string" },
@@ -159,12 +155,12 @@ namespace Codge.Generator.Presentations.Xsd
                 { "normalizedString", "string" },
                 { "QName", "string" },
                 { "token", "string" },
- 
+
                 { "anyURI", "string" },
-               
+
                 { "base64Binary", "string" },
                 { "hexBinary", "string" },
- 
+
                 { "byte", "int" },
                 { "decimal", "decimal" },
                 { "float", "double" },
@@ -242,7 +238,7 @@ namespace Codge.Generator.Presentations.Xsd
             var att = item as XmlSchemaAttribute;
             if (att != null)
             {
-                descriptor.AddField(att.Name??att.RefName.Name, ConvertSchemaType(att.AttributeSchemaType.QualifiedName), false, new Dictionary<string, object> { { "isAttribute", true } });
+                descriptor.AddField(att.Name ?? att.RefName.Name, ConvertSchemaType(att.AttributeSchemaType.QualifiedName), false, new Dictionary<string, object> { { "isAttribute", true } });
             }
             else
             {
@@ -288,8 +284,6 @@ namespace Codge.Generator.Presentations.Xsd
                         if (isOptional || element.MinOccurs == 0)
                             field.AttachedData.Add("isOptional", true);
                     }
-
-                    
                 }
                 else
                 {
@@ -311,7 +305,7 @@ namespace Codge.Generator.Presentations.Xsd
                     {//empty particle
                         return;
                     }
-                    else if(item is XmlSchemaAny)
+                    else if (item is XmlSchemaAny)
                     {//TODO skipped for now, should it be a field created?
                         return;
                     }
