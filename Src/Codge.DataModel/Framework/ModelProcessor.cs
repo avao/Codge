@@ -88,10 +88,17 @@ namespace Codge.DataModel.Framework
             {
             }
 
-            public void Handle(CompositeTypeDescriptor composite)
+            public void Handle(CompositeTypeDescriptor compositeDescriptor)
             {
-                var descriptor = Namespace.GetType<CompositeType>(composite.Name);
-                foreach (var field in composite.Fields)
+                var compositeType = Namespace.GetType<CompositeType>(compositeDescriptor.Name);
+
+                if (compositeDescriptor.BaseTypeName != null)
+                {
+                    var baseType = Namespace.findTypeByPartialName(compositeDescriptor.BaseTypeName);
+                    compositeType.AddBase((CompositeType)baseType);
+                }
+                
+                foreach (var field in compositeDescriptor.Fields)
                 {
                     var fieldType = Namespace.findTypeByPartialName(field.TypeName);
                     if (fieldType == null)
@@ -100,12 +107,11 @@ namespace Codge.DataModel.Framework
                     }
 
                     if (field.IsCollection)
-                        descriptor.AddCollectionField(field.Name, fieldType, field.AttachedData);
+                        compositeType.AddCollectionField(field.Name, fieldType, field.AttachedData);
                     else
-                        descriptor.AddField(field.Name, fieldType, field.AttachedData);
+                        compositeType.AddField(field.Name, fieldType, field.AttachedData);
                 }
             }
         }
-
     }
 }

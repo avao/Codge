@@ -19,10 +19,10 @@ namespace Codge.DataModel.Descriptors.Serialisation
             writer.WriteAttributeString("name", descriptor.Name);
             foreach (var type in descriptor.Types)
             {
-                switch(type)
+                switch (type)
                 {
-                    case CompositeTypeDescriptor composite: 
-                        composite.ToXml(writer); 
+                    case CompositeTypeDescriptor composite:
+                        composite.ToXml(writer);
                         break;
                     case EnumerationTypeDescriptor enumeration:
                         enumeration.ToXml(writer);
@@ -73,6 +73,11 @@ namespace Codge.DataModel.Descriptors.Serialisation
         {
             writer.WriteStartElement("Composite");
             writer.WriteAttributeString("name", descriptor.Name);
+            if (descriptor.BaseTypeName != null)
+            {
+                writer.WriteAttributeString("baseType", descriptor.BaseTypeName);
+
+            }
             foreach (var field in descriptor.Fields)
             {
                 field.ToXml(writer);

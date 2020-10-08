@@ -2,19 +2,19 @@
 namespace Types.XsdBasedModel
 {
 	public class elementWithEmbededTypeInPlace
+		: complexTypeWithAField
 	{
 	    public elementWithEmbededTypeInPlace()
 		{}
 
 
-		public elementWithEmbededTypeInPlace(string _aField,string _extraField)
+		public elementWithEmbededTypeInPlace(string _aField, string _extraField)
+			: base(_aField)
 		{
-			aField = _aField;
 			extraField = _extraField;
 		}
 
 
-		public	string aField {get; set;}
 		public	string extraField {get; set;}
 	}
 }

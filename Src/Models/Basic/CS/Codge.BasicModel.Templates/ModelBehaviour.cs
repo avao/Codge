@@ -115,7 +115,7 @@ namespace Codge.BasicModel.Templates.CS
 
         public string GetCtorParamters(CompositeType type)
         {
-            return string.Join(",", type.Fields.Select(f => GetNativeType(f) + " " + GetParameterName(f)));
+            return string.Join(", ", type.GetAllFields().Select(f => GetNativeType(f) + " " + GetParameterName(f)));
         }
     }
 }

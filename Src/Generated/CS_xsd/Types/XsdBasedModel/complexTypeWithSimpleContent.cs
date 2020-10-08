@@ -7,7 +7,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public complexTypeWithSimpleContent(string _anAttribute,string _Content)
+		public complexTypeWithSimpleContent(string _anAttribute, string _Content)
 		{
 			anAttribute = _anAttribute;
 			Content = _Content;

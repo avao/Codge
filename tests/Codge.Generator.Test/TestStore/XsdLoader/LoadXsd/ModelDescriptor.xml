@@ -34,12 +34,7 @@
         </AttachedData>
       </Field>
     </Composite>
-    <Composite name="elementWithEmbededTypeInPlace">
-      <Field name="aField" type="string">
-        <AttachedData>
-          <Item key="isAttribute" value="True" />
-        </AttachedData>
-      </Field>
+    <Composite name="elementWithEmbededTypeInPlace" baseType="complexTypeWithAField">
       <Field name="extraField" type="string" />
     </Composite>
     <Composite name="elemEmptyType_EmptyComplex" />

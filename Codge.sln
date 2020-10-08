@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicModel_CS_Test", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codge.DataModel", "src\Codge.DataModel\Codge.DataModel.csproj", "{2AFFFC73-87D8-4743-96DD-0F6CF1710791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.Generator", "src\Codge.Generator\Codge.Generator.csproj", "{33C5683D-8E50-43D9-92C8-F764D642630A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codge.Generator", "src\Codge.Generator\Codge.Generator.csproj", "{33C5683D-8E50-43D9-92C8-F764D642630A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.Console", "src\Codge.Console\Codge.Console.csproj", "{20D3E344-EAAE-4498-98F1-B0BA3E860F20}"
 EndProject
@@ -46,7 +46,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codge.Models.Common", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codge.Generator.Common", "src\Codge.Generator.Common\Codge.Generator.Common.csproj", "{EB4D5608-72B3-4EB8-86AB-7F17ACDDAB1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codge.Generator.Test", "tests\Codge.Generator.Test\Codge.Generator.Test.csproj", "{2F5F9828-33C9-43CA-8AAB-F7D8F3349E1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Codge.Generator.Test", "tests\Codge.Generator.Test\Codge.Generator.Test.csproj", "{2F5F9828-33C9-43CA-8AAB-F7D8F3349E1A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D7B72A71-B17D-412E-8718-D5AD1E54C0A7}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -26,12 +26,21 @@ namespace Codge.DataModel.Descriptors
     public class CompositeTypeDescriptor : TypeDescriptor
     {
         IList<FieldDescriptor> _fields;
-        public IEnumerable<FieldDescriptor> Fields { get { return _fields; } }
+        public IEnumerable<FieldDescriptor> Fields => _fields;
+
+        public string BaseTypeName { get; }
+        public string BaseTypeNamespace { get; }
 
         public CompositeTypeDescriptor(string name, NamespaceDescriptor nameSpace)
+            : this(name, nameSpace, null, null)
+        { }
+
+        public CompositeTypeDescriptor(string name, NamespaceDescriptor nameSpace, string baseTypeName, string baseTypeNamespace)
             : base(name, nameSpace)
         {
             _fields = new List<FieldDescriptor>();
+            BaseTypeName = baseTypeName;
+            BaseTypeNamespace = baseTypeNamespace;
         }
 
         //TODO should isCollection be part of attached data?

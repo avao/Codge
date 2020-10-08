@@ -2,7 +2,6 @@
 using Codge.Generator.Common;
 using Codge.Models.Common;
 using Common.Logging;
-using System.IO;
 
 namespace Codge.Generator
 {
@@ -58,11 +57,6 @@ namespace Codge.Generator
             {
                 task.Execute(Context);
             }
-        }
-
-        private string GetAbsolutePath(string relativePath)
-        {
-            return Path.Combine(Config.BaseDir, relativePath);
         }
     }
 }

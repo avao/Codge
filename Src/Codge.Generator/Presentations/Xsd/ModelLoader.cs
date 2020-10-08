@@ -26,14 +26,14 @@ namespace Codge.Generator.Presentations.Xsd
                 var simpleType = item.Value as XmlSchemaSimpleType;
                 if (simpleType != null)
                 {
-                    processSimpleType(modelDescriptor.RootNamespace, simpleType);
+                    ProcessSimpleType(modelDescriptor.RootNamespace, simpleType);
                 }
                 else
                 {
                     var complexType = item.Value as XmlSchemaComplexType;
                     if (complexType != null)
                     {
-                        processCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty);
+                        ProcessCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty);
                     }
                 }
             }
@@ -46,14 +46,14 @@ namespace Codge.Generator.Presentations.Xsd
                     var complexType = element.ElementSchemaType as XmlSchemaComplexType;
                     if (complexType != null && complexType.Name == null)
                     {
-                        processCompositeType(modelDescriptor.RootNamespace, complexType, element.Name);
+                        ProcessCompositeType(modelDescriptor.RootNamespace, complexType, element.Name);
                     }
                 }
             }
             return modelDescriptor;
         }
 
-        private static void processSimpleType(NamespaceDescriptor namespaceDescriptor, XmlSchemaSimpleType simpleType)
+        private static void ProcessSimpleType(NamespaceDescriptor namespaceDescriptor, XmlSchemaSimpleType simpleType)
         {
             var facets = simpleType.GetEnumerationFacets();
             if (facets.Any())
@@ -71,59 +71,51 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static void processCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
+        private static void ProcessCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
         {
-            var descriptor = namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint));
+            var descriptor = complexType.BaseXmlSchemaType != null
+                ? namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint), complexType.BaseXmlSchemaType.Name) //TODO namespace
+                : namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint));
 
-            foreach (DictionaryEntry entry in complexType.AttributeUses)
-            {
-                XmlSchemaAttribute attribute = (XmlSchemaAttribute)entry.Value;
-                AddField(descriptor, attribute, false);
-            }
+            ProcessAttributes(descriptor, complexType.Attributes);
 
             AddField(descriptor, complexType.ContentTypeParticle, false);
 
-            if (complexType.ContentModel == null)
-                return;
-
-            var simpleContentModel = complexType.ContentModel as XmlSchemaSimpleContent;
-            if (simpleContentModel != null)
+            switch (complexType.ContentModel)
             {
-                var extension = simpleContentModel.Content as XmlSchemaSimpleContentExtension;
-                if (extension != null)
-                {
-                    descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
-                }
-                else
-                {
-                    var restriction = simpleContentModel.Content as XmlSchemaSimpleContentRestriction;
-                    if (restriction != null)
+                case XmlSchemaSimpleContent simpleContentModel:
+                    switch (simpleContentModel.Content)
                     {
-                        descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
+                        case XmlSchemaSimpleContentExtension extension:
+                            ProcessAttributes(descriptor, extension.Attributes);
+                            descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
+                            break;
+                        case XmlSchemaSimpleContentRestriction restriction:
+                            descriptor.AddField("Content", ConvertSchemaType(restriction.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
+                            break;
+                        default:
+                            throw new NotSupportedException("Not supported simple content model ");
                     }
-                    else
+                    break;
+                case XmlSchemaComplexContent complexContentModel:
+                    switch (complexContentModel.Content)
                     {
-                        throw new NotSupportedException("Not supported simple content model ");
+                        case XmlSchemaComplexContentExtension extension:
+                            ProcessAttributes(descriptor, extension.Attributes);
+                            break;
+                        case XmlSchemaComplexContentRestriction restriction:
+                            //TODO restriction
+                            break;
                     }
-                }
+                    break;
             }
-            else
-            {
-                var complexContentModel = complexType.ContentModel as XmlSchemaComplexContent;
-                if (complexContentModel != null)
-                {
-                    var extension = complexContentModel.Content as XmlSchemaComplexContentExtension;
-                    if (extension != null)
-                    {
-                        /*foreach (var item in extension.Attributes)
-                        {
-                            XmlSchemaAttribute attribute = (XmlSchemaAttribute)item;
-                            AddField(descriptor, attribute, false);
-                        }*/
-                    }
+        }
 
-                    //TODO restriction
-                }
+        private static void ProcessAttributes(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection attributes)
+        {
+            foreach (var attribute in attributes)
+            {
+                AddField(descriptor, attribute, false);
             }
         }
 
@@ -195,20 +187,17 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static string ConvertSchemaType(XmlSchemaType schemaType, string hint)
         {
-            var simpleType = schemaType as XmlSchemaSimpleType;
-            if (simpleType != null)
-                return ConvertSchemaType(simpleType.QualifiedName);
-
-            var complexType = schemaType as XmlSchemaComplexType;
-            if (complexType != null)
+            return schemaType switch
             {
-                if (complexType.Name == null)
-                {
-                    return hint;
-                }
-            }
+                XmlSchemaSimpleType simpleType
+                    => ConvertSchemaType(simpleType.QualifiedName),
 
-            return schemaType.Name;
+                XmlSchemaComplexType complexType when complexType.Name == null
+                    => hint,
+
+                _
+                    => schemaType.Name
+            };
         }
 
 
@@ -260,7 +249,7 @@ namespace Codge.Generator.Presentations.Xsd
                             }
                             else
                             {
-                                processCompositeType(descriptor.Namespace, elementType, element.Name);
+                                ProcessCompositeType(descriptor.Namespace, elementType, element.Name);
                                 type = element.Name;
                             }
                         }

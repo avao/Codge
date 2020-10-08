@@ -7,7 +7,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public ordertype(string _status,string _customer,XsdBasedModel.elementWithEmbededTypeInPlace _elementWithEmbededTypeInPlace,int? _billto,string _shipto,XsdBasedModel.elementWithEmbededType _elementWithEmbededType,string[] _shortStringCollection,XsdBasedModel.simpleType _elemSimpleType,XsdBasedModel.elemEmptyType_EmptyComplex _elemEmptyType,XsdBasedModel.enumType? _enumField,XsdBasedModel.enumType[] _enumFieldCollection)
+		public ordertype(string _status, string _customer, XsdBasedModel.elementWithEmbededTypeInPlace _elementWithEmbededTypeInPlace, int? _billto, string _shipto, XsdBasedModel.elementWithEmbededType _elementWithEmbededType, string[] _shortStringCollection, XsdBasedModel.simpleType _elemSimpleType, XsdBasedModel.elemEmptyType_EmptyComplex _elemEmptyType, XsdBasedModel.enumType? _enumField, XsdBasedModel.enumType[] _enumFieldCollection)
 		{
 			status = _status;
 			customer = _customer;

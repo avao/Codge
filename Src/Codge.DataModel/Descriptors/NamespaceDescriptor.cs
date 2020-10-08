@@ -32,7 +32,12 @@ namespace Codge.DataModel.Descriptors
 
         public CompositeTypeDescriptor CreateCompositeType(string name)
         {
-            var type = new CompositeTypeDescriptor(name, this);
+            return CreateCompositeType(name, null);
+        }
+
+        public CompositeTypeDescriptor CreateCompositeType(string name, string baseTypeName)
+        {
+            var type = new CompositeTypeDescriptor(name, this, baseTypeName, "TODO");//TODO
             _types.Add(type);
             return type;
         }

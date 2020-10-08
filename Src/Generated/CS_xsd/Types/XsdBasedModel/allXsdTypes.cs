@@ -7,7 +7,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public allXsdTypes(string _anyUri,string _base64Binary,bool _boolean,int _byte,string _date,string _dateTime,decimal _decimal,double _double,string _duration,string _Entities,string _Entity,double _float,string _gDay,string _gMonth,string _gMonthDay,string _gYear,string _gYearMonth,string _hexBinary,string _id,string _idRef,string _idRefs,int _int,long _integer,string _language,long _long,string _Name,string _ncName,long _negativeInteger,string _nmToken,string _nmTokens,long _nonNegativeInteger,long _nonPositiveInteger,string _normalizedString,long _positiveInteger,string _QName,int _short,string _string,string _time,string _token,int _unsignedByte,int _unsignedIint,long _unsignedLong,int _unsignedShort)
+		public allXsdTypes(string _anyUri, string _base64Binary, bool _boolean, int _byte, string _date, string _dateTime, decimal _decimal, double _double, string _duration, string _Entities, string _Entity, double _float, string _gDay, string _gMonth, string _gMonthDay, string _gYear, string _gYearMonth, string _hexBinary, string _id, string _idRef, string _idRefs, int _int, long _integer, string _language, long _long, string _Name, string _ncName, long _negativeInteger, string _nmToken, string _nmTokens, long _nonNegativeInteger, long _nonPositiveInteger, string _normalizedString, long _positiveInteger, string _QName, int _short, string _string, string _time, string _token, int _unsignedByte, int _unsignedIint, long _unsignedLong, int _unsignedShort)
 		{
 			anyUri = _anyUri;
 			base64Binary = _base64Binary;

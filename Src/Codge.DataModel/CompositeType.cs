@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using static Codge.DataModel.CompositeType;
 
 namespace Codge.DataModel
 {
     public interface IExtendableType
     {
-        IEnumerable<TypeBase> BaseClasses { get; }
+        CompositeType BaseType { get; }
     }
 
 
@@ -46,12 +46,20 @@ namespace Codge.DataModel
         }
 
         private IList<Field> _fields;
-        public IEnumerable<Field> Fields { get { return _fields; } }
+        public IEnumerable<Field> Fields => _fields;
+
+        public CompositeType BaseType { get; private set; }
+
 
         internal CompositeType(int id, string name, Namespace nameSpace)
             : base(id, name, nameSpace)
         {
             _fields = new List<Field>();
+        }
+
+        public void AddBase(CompositeType baseType)
+        {
+            BaseType = baseType;
         }
 
         public void AddField(string name, TypeBase type, IDictionary<string, object> attachedData)
@@ -68,13 +76,21 @@ namespace Codge.DataModel
         {
             get
             {
-                return Fields.SelectMany(field => field.Type.Dependencies.Concat(new TypeBase[] { field.Type })).ToList();
+                var dependencies = Fields.SelectMany(field => field.Type.Dependencies.Concat(new[] { field.Type }));
+                if (BaseType != null)
+                    dependencies = dependencies.Concat(new[] { BaseType });
+                return dependencies.ToList();
             }
         }
+    }
 
-        public IEnumerable<TypeBase> BaseClasses
+    public static class CompositeTypeExtensions
+    {
+        public static IEnumerable<Field> GetAllFields(this CompositeType compositeType)
         {
-            get { throw new NotImplementedException(); }
+            return compositeType.BaseType != null
+                ? compositeType.BaseType.GetAllFields().Concat(compositeType.Fields)
+                : compositeType.Fields;
         }
     }
 }

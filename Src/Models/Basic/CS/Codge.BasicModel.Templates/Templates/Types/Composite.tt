@@ -10,16 +10,32 @@
 namespace Types.<#= Type.Namespace.GetFullName(".") #>
 {
 	public class <#= Type.Name #>
+<#					
+					if(Type.BaseType != null)
+					{
+#>
+		: <#= Type.BaseType.Name #>
+<#
+					}
+#>
 	{
 	    public <#= Type.Name #>()
 		{}
 
 <#				
-					if(Type.Fields.Any())
+					if(Type.GetAllFields().Any())
 					{
 #>
 
 		public <#= Type.Name #>(<#= ModelBehaviour.GetCtorParamters(Type) #>)
+<#				
+					if(Type.BaseType != null)
+					{
+#>
+			: base(<#= string.Join(", ", Type.BaseType.GetAllFields().Select(ModelBehaviour.GetParameterName)) #>)
+<#				
+					}
+#>
 		{
 <#				
 						foreach(var field in Type.Fields)

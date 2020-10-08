@@ -9,18 +9,13 @@
         </AttachedData>
       </Field>
     </Composite>
-    <Composite name="complexTypeWithContent">
+    <Composite name="complexTypeWithContent" baseType="emptyComplexType">
       <Field name="anElement" type="string" />
     </Composite>
-    <Composite name="complexTypeWithContentAndParentField">
-      <Field name="aField" type="string">
-        <AttachedData>
-          <Item key="isAttribute" value="True" />
-        </AttachedData>
-      </Field>
+    <Composite name="complexTypeWithContentAndParentField" baseType="complexTypeWithAField">
       <Field name="anElement" type="string" />
     </Composite>
-    <Composite name="complexTypeWithContentWithAttribute">
+    <Composite name="complexTypeWithContentWithAttribute" baseType="emptyComplexType">
       <Field name="anAttribute" type="string">
         <AttachedData>
           <Item key="isAttribute" value="True" />

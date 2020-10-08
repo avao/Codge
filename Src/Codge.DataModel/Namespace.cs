@@ -107,6 +107,11 @@ namespace Codge.DataModel
 
         internal CompositeType CreateCompositeType(int id, string name)
         {
+            return CreateCompositeType(id, name, null);
+        }
+
+        internal CompositeType CreateCompositeType(int id, string name, CompositeType baseType)
+        {
             var type = new CompositeType(id, name, this);
             _types.Add(type);
             return type;
