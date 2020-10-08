@@ -1,4 +1,4 @@
-﻿using Common.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System.IO;
 
 namespace Codge.Generator.Common
@@ -9,7 +9,7 @@ namespace Codge.Generator.Common
         public Tracker Tracker { get; private set; }
         public IOutputPathMapper PathMapper { get; private set; }
 
-        public Context(string baseDir, ILog logger, IOutputPathMapper pathMapper)
+        public Context(string baseDir, ILogger logger, IOutputPathMapper pathMapper)
         {
             BaseDir = baseDir;
             Tracker = new Tracker(logger);

@@ -1,5 +1,5 @@
 ﻿using Codge.DataModel.Descriptors;
-using Common.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,12 @@ namespace Codge.DataModel.Framework
 {
     public class ModelProcessor
     {
-        static ILog Logger = LogManager.GetLogger("ModelProcessor");
+        private readonly ILogger _logger;
+
+        public ModelProcessor(ILoggerFactory loggerFactory)
+        {
+            _logger = loggerFactory.CreateLogger<ModelProcessor>();
+        }
 
         public Model Compile(TypeSystem typeSystem, ModelDescriptor model)
         {
@@ -25,16 +30,16 @@ namespace Codge.DataModel.Framework
             return compiledModel;
         }
 
-        public static ModelDescriptor MergeToLhs(ModelDescriptor lhs, ModelDescriptor rhs)
+        public ModelDescriptor MergeToLhs(ModelDescriptor lhs, ModelDescriptor rhs)
         {
-            TypeSystemWalker.Walk(rhs.RootNamespace, new ModelMergeTypeSystemEventHandler(lhs.RootNamespace, Logger));
+            TypeSystemWalker.Walk(rhs.RootNamespace, new ModelMergeTypeSystemEventHandler(lhs.RootNamespace, _logger));
             return lhs;
         }
 
-        public static ModelDescriptor MergeToLhs(IEnumerable<ModelDescriptor> descriptors)
+        public ModelDescriptor MergeToLhs(IEnumerable<ModelDescriptor> descriptors)
         {
             var model = descriptors.First();
-            descriptors.Skip(1).Aggregate(model, DataModel.Framework.ModelProcessor.MergeToLhs);
+            descriptors.Skip(1).Aggregate(model, MergeToLhs);
             return model;
         }
 
@@ -97,7 +102,7 @@ namespace Codge.DataModel.Framework
                     var baseType = Namespace.findTypeByPartialName(compositeDescriptor.BaseTypeName);
                     compositeType.AddBase((CompositeType)baseType);
                 }
-                
+
                 foreach (var field in compositeDescriptor.Fields)
                 {
                     var fieldType = Namespace.findTypeByPartialName(field.TypeName);

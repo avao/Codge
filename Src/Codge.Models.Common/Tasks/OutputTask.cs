@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Common.Logging;
-using Qart.Core.Validation;
+﻿using Codge.Generator.Common;
+using Microsoft.Extensions.Logging;
 using Qart.Core.Io;
-using Codge.Generator.Common;
-
+using Qart.Core.Validation;
+using System.IO;
 
 namespace Codge.Models.Common
 {
     public class OutputTask<T> : ITask<T>
     {
-        public ILog Logger { get; private set; }
+        public ILogger Logger { get; private set; }
 
         IOutputAction<T> Action;
-        public OutputTask(IOutputAction<T> action, ILog logger)
+        public OutputTask(IOutputAction<T> action, ILogger logger)
         {
             Action = action;
             Logger = logger;

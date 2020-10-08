@@ -1,6 +1,5 @@
 ﻿using Codge.BasicModel.CS.Serialisation;
 using NUnit.Framework;
-using Qart.Core.DataStore;
 using Qart.Testing;
 using Qart.Testing.Framework;
 using Serialisers.rootNs;
@@ -11,7 +10,7 @@ namespace BasicModel_CS_Test
 
     public class SerialisationTest
     {
-        public static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/Serialisation"), (datastore) => true, null, null);
+        public static ITestStorage TestSystem = TestStorageFactory.CreateTestStorage("../../../TestStore/Serialisation");
 
         [Test]
         public void SerialiseToXml()

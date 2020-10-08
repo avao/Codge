@@ -1,9 +1,11 @@
 ﻿using Codge.DataModel.Descriptors;
 using Codge.Generator.Presentations;
 using CommandLine;
-using Common.Logging;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using System.IO;
 using System.Linq;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Codge.ModelProcessor.Console
 {
@@ -27,17 +29,26 @@ namespace Codge.ModelProcessor.Console
 
     class Program
     {
-        static ILog Logger = LogManager.GetLogger("");
+        static ILogger Logger = new LoggerFactory().CreateLogger<Program>();
 
         //-m "%scriptDir%\Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd" -o "%scriptDir%/Generated/CS_xsd" -n XsdBasedModel
         static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .MinimumLevel.Debug()
+                    .WriteTo.Console()
+                    .CreateLogger();
+
+            var loggerFactory = new LoggerFactory().AddSerilog(Log.Logger);
+            var logger = loggerFactory.CreateLogger("");
 
             var options = new Options();
-            if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
+            if (Parser.Default.ParseArgumentsStrict(args, options))
             {
                 if (Directory.Exists(options.Input))
                 {//directory
+                    var processor = new DataModel.Framework.ModelProcessor(loggerFactory);
                     var files = Directory.EnumerateFiles(options.Input).OrderBy(_ => _).ToList();
                     if (options.Convert)
                     {
@@ -45,7 +56,7 @@ namespace Codge.ModelProcessor.Console
                     }
                     else if (options.Merge)
                     {
-                        var model = Codge.DataModel.Framework.ModelProcessor.MergeToLhs(files.Select(_ => LoadModel(_, options.ModelName)));
+                        var model = processor.MergeToLhs(files.Select(_ => LoadModel(_, options.ModelName)));
                         model.Save(options.Output);
                     }
                 }

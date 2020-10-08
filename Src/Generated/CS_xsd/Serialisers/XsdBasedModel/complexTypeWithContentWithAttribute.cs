@@ -10,6 +10,7 @@ namespace Serialisers.XsdBasedModel
         public void Serialize(XmlWriter writer, object o, SerialisationContext context)
         {
             var obj = (Types.XsdBasedModel.complexTypeWithContentWithAttribute)o;
+			var baseSerialiser = context;
 
             if(obj.anAttribute != null)
                 writer.WriteAttributeString("anAttribute", obj.anAttribute.ToString());

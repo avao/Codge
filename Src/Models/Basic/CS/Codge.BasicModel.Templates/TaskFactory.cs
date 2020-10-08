@@ -2,19 +2,19 @@
 using Codge.DataModel;
 using Codge.Generator.Common;
 using Codge.Models.Common;
-using Common.Logging;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace Codge.BasicModel.Templates.CS
 {
     public class TaskFactory : ITaskFactory
     {
-        public ILog Logger { get; private set; }
+        public ILogger Logger { get; }
         private ModelBehaviour _modelBehaviour;
 
         static HashSet<string> _reservedNames = new HashSet<string> { "string", "String", "byte", "Byte", "decimal", "Decimal", "double", "Double", "float", "Float", "int", "Int", "long", "Long", "short", "Short" };
 
-        public TaskFactory(ILog logger)
+        public TaskFactory(ILogger logger)
         {
             Logger = logger;
             _modelBehaviour = new ModelBehaviour(_reservedNames);

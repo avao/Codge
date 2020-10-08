@@ -1,6 +1,7 @@
 ﻿using Codge.DataModel.Descriptors;
 using Codge.DataModel.Descriptors.Serialisation;
 using Codge.Generator.Presentations.Xsd;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using Qart.Core.DataStore;
 using Qart.Core.Xml;
@@ -13,7 +14,7 @@ namespace Codge.Generator.Test
 {
     public class XsdLoader
     {
-        public static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/XsdLoader"), dataStore => true, null, null);
+        public static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/XsdLoader"), dataStore => true, null, null, new LoggerFactory());
 
         [TestCase("LoadXsd")]
         [TestCase("SequenceInChoice")]

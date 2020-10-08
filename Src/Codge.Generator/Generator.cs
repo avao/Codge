@@ -1,7 +1,7 @@
 ﻿using Codge.DataModel;
 using Codge.Generator.Common;
 using Codge.Models.Common;
-using Common.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Codge.Generator
 {
@@ -9,10 +9,10 @@ namespace Codge.Generator
     {
         public GeneratorConfig Config { get; }
         public Context Context { get; }
-        public ILog Logger { get; }
+        public ILogger Logger { get; }
 
 
-        public Generator(GeneratorConfig config, ILog logger)
+        public Generator(GeneratorConfig config, ILogger logger)
         {
             Config = config;
             Context = new Context(config.BaseDir, logger, new OutputPathMapper());//TODO inject tracker, mapper
@@ -21,7 +21,7 @@ namespace Codge.Generator
 
         public void Generate(Model model)
         {
-            Logger.Info(m => m("Starting generation for model baseDir=[{0}]", Config.BaseDir));
+            Logger.LogInformation("Starting generation for model baseDir=[{baseDir}]", Config.BaseDir);
             ProcessNamespace(model.Namespace);
 
             foreach (var task in Config.TaskFactory.CreateTasksForModel(model))

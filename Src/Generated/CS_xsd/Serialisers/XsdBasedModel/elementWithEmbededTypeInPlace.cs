@@ -10,6 +10,7 @@ namespace Serialisers.XsdBasedModel
         public void Serialize(XmlWriter writer, object o, SerialisationContext context)
         {
             var obj = (Types.XsdBasedModel.elementWithEmbededTypeInPlace)o;
+			var baseSerialiser = context;
 
             if(obj.aField != null)
                 writer.WriteAttributeString("aField", obj.aField.ToString());

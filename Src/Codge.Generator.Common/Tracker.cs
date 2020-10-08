@@ -1,4 +1,4 @@
-﻿using Common.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace Codge.Generator.Common
@@ -11,9 +11,9 @@ namespace Codge.Generator.Common
         private IList<string> _filesSkipped = new List<string>();
         public IEnumerable<string> FilesSkipped => _filesSkipped;
 
-        public ILog Logger { get; }
+        public ILogger Logger { get; }
 
-        public Tracker(ILog logger)
+        public Tracker(ILogger logger)
         {
             Logger = logger;
         }
@@ -21,13 +21,13 @@ namespace Codge.Generator.Common
         public void OnFileUpdated(string path)
         {
             _filesUdated.Add(path);
-            Logger.Debug(m => m("Updating file [{0}]", path));
+            Logger.LogDebug("Updating file [{path}]", path);
         }
 
         public void OnFileSkipped(string path)
         {
             _filesSkipped.Add(path);
-            Logger.Debug(m => m("Skipping update [{0}]", path));
+            Logger.LogDebug("Skipping update [{path}]", path);
         }
     }
 }

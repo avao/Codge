@@ -1,6 +1,7 @@
 ﻿using Codge.DataModel;
 using Codge.DataModel.Descriptors;
 using Codge.DataModel.Framework;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using Qart.Core.DataStore;
 using Qart.Core.Xml;
@@ -11,13 +12,13 @@ namespace Codge.Generator.Test
 {
     class ModelBuilding
     {
-        public static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/ModelBuilding"), dataStore => true, null, null);
+        public static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/ModelBuilding"), dataStore => true, null, null, new LoggerFactory());
 
         private static void CompileAndAssert(ModelDescriptor model, string testCaseName)
         {
             var typeSystem = new TypeSystem();
 
-            var compiler = new ModelProcessor();
+            var compiler = new ModelProcessor(new LoggerFactory());
 
             var compiledModel = compiler.Compile(typeSystem, model);
 

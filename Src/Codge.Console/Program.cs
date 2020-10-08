@@ -2,9 +2,10 @@
 using Codge.DataModel.Framework;
 using Codge.Generator.Presentations;
 using CommandLine;
-using Common.Logging;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using System.Linq;
-
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Codge.Generator.Console
 {
@@ -22,50 +23,54 @@ namespace Codge.Generator.Console
 
     class Program
     {
-        private static ILog _logger = LogManager.GetLogger("");
-
-
         //-m "%scriptDir%\Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd" -o "%scriptDir%/Generated/CS_xsd" -n XsdBasedModel
         static void Main(string[] args)
         {
-            var options = new Options();
-            if (CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
-            {
-                var model = LoadModel(options.Model, options.ModelName);
+            Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .MinimumLevel.Debug()
+                    .WriteTo.Console()
+                    .CreateLogger();
 
-                ProcessTemplates(LoadConfig(options.OutputDir),
-                                 model,
-                                 _logger);
+            var loggerFactory = new LoggerFactory().AddSerilog(Log.Logger);
+            var logger = loggerFactory.CreateLogger("");
+
+            var options = new Options();
+            if (Parser.Default.ParseArgumentsStrict(args, options))
+            {
+                var model = LoadModel(options.Model, options.ModelName, logger);
+
+                ProcessTemplates(LoadConfig(options.OutputDir, logger), model, logger);
             }
         }
 
-        static void ProcessTemplates(GeneratorConfig config, Model model, ILog logger)
+        static void ProcessTemplates(GeneratorConfig config, Model model, ILogger logger)
         {
-            var generator = new Codge.Generator.Generator(config, logger);
+            var generator = new Generator(config, logger);
             generator.Generate(model);
 
-            logger.Info("--------------------");
-            logger.Info("Files evaluated: " + (generator.Context.Tracker.FilesUpdated.Count() + generator.Context.Tracker.FilesSkipped.Count()));
-            logger.Info("Files updated: " + generator.Context.Tracker.FilesUpdated.Count());
-            logger.Info("--------------------");
+            logger.LogInformation("--------------------");
+            logger.LogInformation("Files evaluated: " + (generator.Context.Tracker.FilesUpdated.Count() + generator.Context.Tracker.FilesSkipped.Count()));
+            logger.LogInformation("Files updated: " + generator.Context.Tracker.FilesUpdated.Count());
+            logger.LogInformation("--------------------");
         }
 
 
-        static Model LoadModel(string path, string modelName)
+        static Model LoadModel(string path, string modelName, ILogger logger)
         {
-            System.Console.WriteLine("Loading model [" + path + "]");
+            logger.LogInformation("Loading model [{path}]", path);
 
-            var model = new ModelLoader(_logger).LoadModel(path, modelName);
+            var model = new ModelLoader(logger).LoadModel(path, modelName);
 
             var typeSystem = new TypeSystem();
-            var compiler = new ModelProcessor();
+            var compiler = new ModelProcessor(new LoggerFactory());
             return compiler.Compile(typeSystem, model);
         }
 
 
-        static GeneratorConfig LoadConfig(string path)
+        static GeneratorConfig LoadConfig(string path, ILogger logger)
         {
-            var config = new GeneratorConfig(path, new BasicModel.Templates.CS.TaskFactory(_logger));
+            var config = new GeneratorConfig(path, new BasicModel.Templates.CS.TaskFactory(logger));
 
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Composite.stg"))));
             //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Primitive.stg"))));

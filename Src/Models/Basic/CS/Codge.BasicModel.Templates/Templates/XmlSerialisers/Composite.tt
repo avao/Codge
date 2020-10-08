@@ -18,6 +18,14 @@ namespace Serialisers.<#= Type.Namespace.GetFullName(".") #>
         public void Serialize(XmlWriter writer, object o, SerialisationContext context)
         {
             var obj = (<#= Type.TypesQName() #>)o;
+<#
+					if(Type.BaseType != null)
+					{
+#>
+			var baseSerialiser = context;
+<#
+					}
+#>
 
 <#
 					foreach(var field in Type.GetAllFields())

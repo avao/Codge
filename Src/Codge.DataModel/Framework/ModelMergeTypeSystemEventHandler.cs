@@ -1,6 +1,6 @@
 ﻿using Codge.DataModel.Descriptors;
 using Codge.DataModel.Descriptors.Serialisation;
-using Common.Logging;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,9 +12,9 @@ namespace Codge.DataModel.Framework
             , IAtomicNodeEnventHandler<CompositeTypeDescriptor>
             , IAtomicNodeEnventHandler<EnumerationTypeDescriptor>
     {
-        private readonly ILog _logger;
+        private readonly ILogger _logger;
 
-        public ModelMergeTypeSystemEventHandler(NamespaceDescriptor ns, ILog logger)
+        public ModelMergeTypeSystemEventHandler(NamespaceDescriptor ns, ILogger logger)
             : base(ns, (n, descriptor) => n.GetOrCreateNamespace(descriptor.Name))
         {
             _logger = logger;
@@ -67,7 +67,7 @@ namespace Codge.DataModel.Framework
                 }
 
                 if (lhsField.IsCollection != field.IsCollection || lhsField.TypeName != field.TypeName)
-                    _logger.WarnFormat("different field definitions lhs:[{0}], rhs:[{1}]", lhsField.ToXml(), field.ToXml());
+                    _logger.LogWarning("different field definitions lhs:[{lhs}], rhs:[{rhs}]", lhsField.ToXml(), field.ToXml());
 
                 field.AttachedData.Where(_ => !lhsField.AttachedData.Keys.Contains(_.Key)).ToList().ForEach(_ => lhsField.AttachedData.Add(_));
             }
@@ -95,7 +95,7 @@ namespace Codge.DataModel.Framework
                 }
                 else
                 {
-                    _logger.WarnFormat("different item definitions lhs:[{0}], rhs:[{1}]", lhsItem.ToXml(), item.ToXml());
+                    _logger.LogWarning("different item definitions lhs:[{lhs}], rhs:[{rhs}]", lhsItem.ToXml(), item.ToXml());
                 }
             }
         }

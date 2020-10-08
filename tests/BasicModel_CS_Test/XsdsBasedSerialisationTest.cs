@@ -1,4 +1,5 @@
 ﻿using Codge.BasicModel.CS.Serialisation;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using Qart.Core.DataStore;
 using Qart.Testing;
@@ -9,10 +10,17 @@ using Types.XsdBasedModel;
 
 namespace BasicModel_CS_Test
 {
+    public static class TestStorageFactory
+    {
+        public static ITestStorage CreateTestStorage(string path)
+        {
+            return new TestStorage(new FileBasedDataStore(path), (dataStore => true), null, null, new LoggerFactory());
+        }
+    }
 
     public class XsdBasedSerialisationTest
     {
-        public static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/Serialisation"), (dataStore=> true), null, null);
+        public static ITestStorage TestSystem = TestStorageFactory.CreateTestStorage("../../../TestStore/Serialisation");
 
         [Test]
         public void SerialiseToXml()
