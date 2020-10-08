@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Qart.Core" Version="1.0.3" />
+    <PackageReference Include="Qart.Core" Version="1.0.39" />
   </ItemGroup>
 
 </Project>
