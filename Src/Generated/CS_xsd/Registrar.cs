@@ -14,6 +14,8 @@ namespace Serialisers.XsdBasedModel
 			context.RegisterSerialiser<Types.XsdBasedModel.elemEmptyType_EmptyComplex>(new Serialisers.XsdBasedModel.elemEmptyType_EmptyComplex());
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithContent>(new Serialisers.XsdBasedModel.complexTypeWithContent());
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithContentAndParentField>(new Serialisers.XsdBasedModel.complexTypeWithContentAndParentField());
+			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithASequence>(new Serialisers.XsdBasedModel.complexTypeWithASequence());
+			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeDerivedFromSequence>(new Serialisers.XsdBasedModel.complexTypeDerivedFromSequence());
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithContentWithAttribute>(new Serialisers.XsdBasedModel.complexTypeWithContentWithAttribute());
 			context.RegisterSerialiser<Types.XsdBasedModel.complexTypeWithSimpleContent>(new Serialisers.XsdBasedModel.complexTypeWithSimpleContent());
 			context.RegisterSerialiser<Types.XsdBasedModel.recursiveType>(new Serialisers.XsdBasedModel.recursiveType());

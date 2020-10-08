@@ -73,6 +73,23 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="complexTypeWithASequence">
+    <xs:sequence>
+      <xs:element name="sequenceElement" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="anAttribute" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="complexTypeDerivedFromSequence">
+    <xs:complexContent>
+      <xs:extension base="complexTypeWithASequence">
+        <xs:sequence>
+          <xs:element name="anotherSequenceElement" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="anotherAttribute" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
 
   <xs:complexType name="complexTypeWithContentWithAttribute">
     <xs:complexContent>

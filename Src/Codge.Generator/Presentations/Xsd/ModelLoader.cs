@@ -77,17 +77,15 @@ namespace Codge.Generator.Presentations.Xsd
                 ? namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint), complexType.BaseXmlSchemaType.Name) //TODO namespace
                 : namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint));
 
-            ProcessAttributes(descriptor, complexType.Attributes);
-
-            AddField(descriptor, complexType.ContentTypeParticle, false);
-
+            ProcessItems(descriptor, complexType.Attributes);
+                        
             switch (complexType.ContentModel)
             {
                 case XmlSchemaSimpleContent simpleContentModel:
                     switch (simpleContentModel.Content)
                     {
                         case XmlSchemaSimpleContentExtension extension:
-                            ProcessAttributes(descriptor, extension.Attributes);
+                            ProcessItems(descriptor, extension.Attributes);
                             descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
                             break;
                         case XmlSchemaSimpleContentRestriction restriction:
@@ -101,17 +99,24 @@ namespace Codge.Generator.Presentations.Xsd
                     switch (complexContentModel.Content)
                     {
                         case XmlSchemaComplexContentExtension extension:
-                            ProcessAttributes(descriptor, extension.Attributes);
+                            ProcessItems(descriptor, extension.Attributes);
+                            if (extension.Particle is XmlSchemaSequence sequence)
+                            {
+                                ProcessItems(descriptor, sequence.Items);
+                            }
                             break;
                         case XmlSchemaComplexContentRestriction restriction:
                             //TODO restriction
                             break;
                     }
                     break;
+                case null:
+                    AddField(descriptor, complexType.ContentTypeParticle, false);
+                    break;
             }
         }
 
-        private static void ProcessAttributes(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection attributes)
+        private static void ProcessItems(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection attributes)
         {
             foreach (var attribute in attributes)
             {
