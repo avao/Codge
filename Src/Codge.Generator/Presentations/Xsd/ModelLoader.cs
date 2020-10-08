@@ -229,10 +229,13 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item, bool isOptional)
         {
-            var att = item as XmlSchemaAttribute;
-            if (att != null)
+            if (item is XmlSchemaAttribute att)
             {
-                descriptor.AddField(att.Name ?? att.RefName.Name, ConvertSchemaType(att.AttributeSchemaType.QualifiedName), false, new Dictionary<string, object> { { "isAttribute", true } });
+                var qualifiedName = att.AttributeSchemaType.QualifiedName.IsEmpty
+                    ? att.AttributeSchemaType.BaseXmlSchemaType.QualifiedName
+                    : att.AttributeSchemaType.QualifiedName;
+
+                descriptor.AddField(att.Name ?? att.RefName.Name, ConvertSchemaType(qualifiedName), false, new Dictionary<string, object> { { "isAttribute", true } });
             }
             else
             {
