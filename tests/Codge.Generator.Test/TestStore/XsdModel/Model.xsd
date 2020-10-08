@@ -33,7 +33,14 @@
   <xs:element name="order" type="ordertype"/>
 
   <xs:complexType name="complexTypeWithAField">
-    <xs:attribute name="aField" type="xs:string"/>
+	  <xs:attribute name="aField">
+		  <xs:simpleType>
+			  <xs:restriction base="xs:decimal">
+				  <xs:enumeration value="1.0" />
+				  <xs:enumeration value="2.0" />
+			  </xs:restriction>
+		  </xs:simpleType>
+	  </xs:attribute>
   </xs:complexType>
   
   
