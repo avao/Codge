@@ -17,7 +17,7 @@ namespace Codge.Generator.Presentations
 
         public ModelDescriptor LoadModel(IReadOnlyCollection<string> paths, string modelName)
         {
-            _logger.LogInformation("Loading model [{0}]", string.Join(", ", paths));
+            _logger.LogInformation("Loading model [{paths}]", paths);
 
             var firstPath = paths.First();
             ModelDescriptor model = null;
