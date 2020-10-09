@@ -244,7 +244,6 @@ namespace Codge.Generator.Presentations.Xsd
                 if (element != null)
                 {
                     string type = GetTypeForAnElement(element);
-                    bool isCollection = false;
 
                     if (string.IsNullOrEmpty(type))
                     {
@@ -264,11 +263,6 @@ namespace Codge.Generator.Presentations.Xsd
                                     type = element.Name;
                                 }
 
-                                if (complexType.ContentTypeParticle.MaxOccurs > 1)
-                                {
-                                    isCollection = true;
-                                }
-
                                 break;
                             }
                             case XmlSchemaSimpleType simpleType:
@@ -281,11 +275,14 @@ namespace Codge.Generator.Presentations.Xsd
                         }
                     }
 
+                    bool isComplexCollection = element.ElementSchemaType is XmlSchemaComplexType schemaComplexType
+                        && schemaComplexType.ContentTypeParticle.MaxOccurs > 1;
+
                     string fieldName = element.Name != null ? element.Name : element.RefName.Name;
                     var field = descriptor.GetField(fieldName);
                     if (field == null)
                     {//TODO what if any of the properties are different?
-                        field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1 || isCollection);
+                        field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1 || isComplexCollection);
 
                         if (isOptional || element.MinOccurs == 0)
                             field.AttachedData.Add("isOptional", true);
