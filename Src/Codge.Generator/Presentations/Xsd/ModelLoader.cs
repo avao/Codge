@@ -58,7 +58,7 @@ namespace Codge.Generator.Presentations.Xsd
             var facets = simpleType.GetEnumerationFacets();
             if (facets.Any())
             {
-                var descriptor = namespaceDescriptor.CreateEnumerationType(simpleType.Name);
+                var descriptor = namespaceDescriptor.CreateEnumerationType(simpleType.Name ?? (simpleType.Parent as XmlSchemaElement)?.Name);
                 foreach (var facet in facets)
                 {
                     if (!descriptor.Items.Any(_ => _.Name == facet.Value))
@@ -244,32 +244,40 @@ namespace Codge.Generator.Presentations.Xsd
                 if (element != null)
                 {
                     string type = GetTypeForAnElement(element);
+                    bool isCollection = false;
 
-                    var elementType = element.ElementSchemaType as XmlSchemaComplexType;
                     if (string.IsNullOrEmpty(type))
                     {
-                        if (elementType != null)
+                        switch (element.ElementSchemaType)
                         {
-                            if (elementType.IsEmptyType())
+                            case XmlSchemaComplexType complexType:
                             {
-                                type = element.Name + "_EmptyComplex"; //TODO should there be the only empty complex?
-                                if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
-                                    descriptor.Namespace.CreateCompositeType(type);
-                            }
-                            else
-                            {
-                                ProcessCompositeType(descriptor.Namespace, elementType, element.Name);
-                                type = element.Name;
-                            }
-                        }
-                    }
+                                if (complexType.IsEmptyType())
+                                {
+                                    type = element.Name + "_EmptyComplex"; //TODO should there be the only empty complex?
+                                    if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
+                                        descriptor.Namespace.CreateCompositeType(type);
+                                }
+                                else
+                                {
+                                    ProcessCompositeType(descriptor.Namespace, complexType, element.Name);
+                                    type = element.Name;
+                                }
 
-                    bool isCollection = false;
-                    if (elementType != null)
-                    {
-                        if (elementType.ContentTypeParticle.MaxOccurs > 1)
-                        {
-                            isCollection = true;
+                                if (complexType.ContentTypeParticle.MaxOccurs > 1)
+                                {
+                                    isCollection = true;
+                                }
+
+                                break;
+                            }
+                            case XmlSchemaSimpleType simpleType:
+                            {
+                                ProcessSimpleType(descriptor.Namespace, simpleType);
+                                type = element.Name;
+
+                                break;
+                            }
                         }
                     }
 
