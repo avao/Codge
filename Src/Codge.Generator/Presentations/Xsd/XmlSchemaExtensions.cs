@@ -32,5 +32,21 @@ namespace Codge.Generator.Presentations.Xsd
         {
             return GetEnumerationFacets(simpleType).Any();
         }
+
+        public static string GetFirstParentWithName(this XmlSchemaObject schemaObject)
+        {
+            while (schemaObject.Parent is { } parent)
+            {
+                if (parent is XmlSchemaType schemaType
+                    && !string.IsNullOrEmpty(schemaType.Name))
+                {
+                    return schemaType.Name;
+                }
+
+                schemaObject = parent;
+            }
+
+            return null;
+        }
     }
 }

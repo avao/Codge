@@ -15,7 +15,7 @@
         </AttachedData>
       </Field>
       <Field name="customer" type="string" />
-      <Field name="elementWithEmbededTypeInPlace" type="elementWithEmbededTypeInPlace" />
+      <Field name="elementWithEmbededTypeInPlace" type="ordertype_elementWithEmbededTypeInPlace" />
       <Field name="billto" type="int">
         <AttachedData>
           <Item key="isOptional" value="True" />
@@ -34,7 +34,7 @@
         </AttachedData>
       </Field>
     </Composite>
-    <Composite name="elementWithEmbededTypeInPlace" baseType="complexTypeWithAField">
+    <Composite name="ordertype_elementWithEmbededTypeInPlace" baseType="complexTypeWithAField">
       <Field name="extraField" type="string" />
     </Composite>
     <Composite name="elemEmptyType_EmptyComplex" />

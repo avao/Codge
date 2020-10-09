@@ -258,8 +258,9 @@ namespace Codge.Generator.Presentations.Xsd
                                 }
                                 else
                                 {
-                                    ProcessCompositeType(descriptor.Namespace, complexType, element.Name);
-                                    type = element.Name;
+                                    var name = GetTypeLessCompositeName(element);
+                                    ProcessCompositeType(descriptor.Namespace, complexType, name);
+                                    type = name;
                                 }
 
                                 break;
@@ -325,6 +326,15 @@ namespace Codge.Generator.Presentations.Xsd
             {
                 AddField(descriptor, item, isOptional);
             }
+        }
+
+        private static string GetTypeLessCompositeName(XmlSchemaElement element)
+        {
+            var parentName = element.GetFirstParentWithName();
+
+            return parentName != null
+                ? $"{parentName}_{element.Name}"
+                : element.Name;
         }
     }
 }

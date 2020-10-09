@@ -132,6 +132,19 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:complexType name="complexTypeWithInlineTypeLessElement">
+    <xs:sequence>
+      <xs:element name="TypeLess">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="element" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+
   <xs:simpleType name="shortString">
     <xs:restriction base="xs:string">
       <xs:maxLength value="3"/>
