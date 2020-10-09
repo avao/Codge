@@ -59,8 +59,6 @@ namespace Codge.Generator.Console
 
         static Model LoadModel(IReadOnlyCollection<string> paths, string modelName, ILogger logger)
         {
-            logger.LogInformation("Loading model [{0}]", string.Join(", ", paths));
-
             var model = new ModelLoader(logger).LoadModel(paths, modelName);
 
             var typeSystem = new TypeSystem();
