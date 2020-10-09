@@ -114,6 +114,24 @@
     </xs:simpleContent>
   </xs:complexType>
 
+  <xs:complexType name="complexTypeWithInlineElement">
+    <xs:complexContent>
+      <xs:extension base="emptyComplexType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="1" name="OptionalEnumeration">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:enumeration value="One"/>
+                <xs:enumeration value="Two"/>
+                <xs:enumeration value="Three"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
   <xs:simpleType name="shortString">
     <xs:restriction base="xs:string">
       <xs:maxLength value="3"/>
