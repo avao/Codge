@@ -10,35 +10,34 @@ namespace Codge.Generator.Presentations.Xsd
 {
     public class ModelLoader
     {
-        public static ModelDescriptor Load(XmlSchema schema, string modelName)
+        public static ModelDescriptor Load(IReadOnlyCollection<XmlSchema> schemas, string modelName)
         {
-            if (!schema.IsCompiled)
+            var set = new XmlSchemaSet();
+            foreach(var schema in schemas)
             {
-                var set = new XmlSchemaSet();
                 set.Add(schema);
-                set.Compile();
             }
+
+            set.Compile();
 
             var modelDescriptor = new ModelDescriptor(modelName, modelName);
 
-            foreach (DictionaryEntry item in schema.SchemaTypes)
+            foreach (XmlSchemaType schemaType in set.GlobalTypes.Values
+                .Cast<XmlSchemaType>()
+                .Where(schemaType => schemaType.Name != null))
             {
-                var simpleType = item.Value as XmlSchemaSimpleType;
-                if (simpleType != null)
+                switch(schemaType)
                 {
-                    ProcessSimpleType(modelDescriptor.RootNamespace, simpleType);
-                }
-                else
-                {
-                    var complexType = item.Value as XmlSchemaComplexType;
-                    if (complexType != null)
-                    {
+                    case XmlSchemaSimpleType simpleType:
+                        ProcessSimpleType(modelDescriptor.RootNamespace, simpleType);
+                        break;
+                    case XmlSchemaComplexType complexType:
                         ProcessCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty);
-                    }
+                        break;
                 }
             }
 
-            foreach (DictionaryEntry item in schema.Elements)
+            foreach (DictionaryEntry item in set.GlobalElements)
             {
                 var element = item.Value as XmlSchemaElement;
                 if (element != null)

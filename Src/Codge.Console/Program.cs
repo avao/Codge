@@ -4,6 +4,7 @@ using Codge.Generator.Presentations;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using System.Collections.Generic;
 using System.Linq;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
@@ -11,8 +12,8 @@ namespace Codge.Generator.Console
 {
     class Options
     {
-        [Option('m', "model", Required = true, HelpText = "Path to a model file (xml or xsd)")]
-        public string Model { get; set; }
+        [OptionList('m', "model", Required = true, Separator = ',', HelpText = "Paths to model files, comma separated (xml or xsd)")]
+        public IReadOnlyCollection<string> Model { get; set; }
 
         [Option('n', "modelName", Required = false, HelpText = "Name of the model.", DefaultValue = "TODO")]
         public string ModelName { get; set; }
@@ -56,11 +57,11 @@ namespace Codge.Generator.Console
         }
 
 
-        static Model LoadModel(string path, string modelName, ILogger logger)
+        static Model LoadModel(IReadOnlyCollection<string> paths, string modelName, ILogger logger)
         {
-            logger.LogInformation("Loading model [{path}]", path);
+            logger.LogInformation("Loading model [{0}]", string.Join(", ", paths));
 
-            var model = new ModelLoader(logger).LoadModel(path, modelName);
+            var model = new ModelLoader(logger).LoadModel(paths, modelName);
 
             var typeSystem = new TypeSystem();
             var compiler = new ModelProcessor(new LoggerFactory());
