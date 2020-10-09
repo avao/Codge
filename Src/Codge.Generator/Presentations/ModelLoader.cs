@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Qart.Core.Xml;
 using Qart.Core.Xsd;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Codge.Generator.Presentations
 {
@@ -13,19 +15,20 @@ namespace Codge.Generator.Presentations
             _logger = logger;
         }
 
-        public ModelDescriptor LoadModel(string path, string modelName)
+        public ModelDescriptor LoadModel(IReadOnlyCollection<string> paths, string modelName)
         {
-            _logger.LogInformation("Loading model [{path}]", path);
+            _logger.LogInformation("Loading model [{0}]", string.Join(", ", paths));
 
+            var firstPath = paths.First();
             ModelDescriptor model = null;
-            if (path.ToLower().EndsWith(".xsd"))
+            if (firstPath.ToLower().EndsWith(".xsd"))
             {//loader type selection
-                var schema = SchemaLoader.Load(path);
-                model = Xsd.ModelLoader.Load(schema, modelName);
+                var schemas = paths.Select(SchemaLoader.Load).ToList();
+                model = Xsd.ModelLoader.Load(schemas, modelName);
             }
             else
             {
-                XmlReaderUtils.UsingXmlReader(path, reader => model = Xml.ModelLoader.Load(reader));
+                XmlReaderUtils.UsingXmlReader(firstPath, reader => model = Xml.ModelLoader.Load(reader));
             }
 
             return model;

@@ -79,7 +79,7 @@ namespace Codge.ModelProcessor.Console
         static ModelDescriptor LoadModel(string path, string modelName)
         {
             System.Console.WriteLine("Loading model [" + path + "]");
-            return new ModelLoader(Logger).LoadModel(path, modelName);
+            return new ModelLoader(Logger).LoadModel(new[] { path }, modelName);
         }
     }
 }

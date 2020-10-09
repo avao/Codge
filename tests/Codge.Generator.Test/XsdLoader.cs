@@ -35,7 +35,7 @@ namespace Codge.Generator.Test
             var testCase = TestSystem.GetTestCase(testId);
 
             XmlSchema schema = testCase.UsingReadStream("Model.xsd", stream => SchemaLoader.Load(stream));
-            ModelDescriptor modelDescriptor = ModelLoader.Load(schema, "AModel");
+            ModelDescriptor modelDescriptor = ModelLoader.Load(new[] { schema }, "AModel");
 
             testCase.AssertContent(XmlWriterUtils.ToXmlString(modelDescriptor.ToXml, true), "ModelDescriptor.xml", true);
         }
