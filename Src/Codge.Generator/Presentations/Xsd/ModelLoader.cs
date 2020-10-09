@@ -154,6 +154,7 @@ namespace Codge.Generator.Presentations.Xsd
                 { "token", "string" },
 
                 { "anyURI", "string" },
+                { "anySimpleType", "string" },
 
                 { "base64Binary", "string" },
                 { "hexBinary", "string" },
