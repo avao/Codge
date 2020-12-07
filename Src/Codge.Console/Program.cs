@@ -22,10 +22,10 @@ namespace Codge.Generator.Console
         public string OutputDir { get; set; }
     }
 
-    class Program
+    public class Program
     {
         //-m "%scriptDir%\Codge.Generator.Test\TestStore\XsdLoader\LoadXsd\Test.xsd" -o "%scriptDir%/Generated/CS_xsd" -n XsdBasedModel
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
