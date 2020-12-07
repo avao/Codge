@@ -43,31 +43,32 @@ namespace Codge.ModelProcessor.Console
             var loggerFactory = new LoggerFactory().AddSerilog(Log.Logger);
             var logger = loggerFactory.CreateLogger("");
 
-            var options = new Options();
-            if (Parser.Default.ParseArgumentsStrict(args, options))
-            {
-                if (Directory.Exists(options.Input))
-                {//directory
-                    var processor = new DataModel.Framework.ModelProcessor(loggerFactory);
-                    var files = Directory.EnumerateFiles(options.Input).OrderBy(_ => _).ToList();
-                    if (options.Convert)
+            Parser.Default.ParseArguments<Options>(args)
+                .WithParsed(options =>
                     {
-                        files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileNameWithoutExtension(_) + ".xml")));
+                        if (Directory.Exists(options.Input))
+                        {//directory
+                            var processor = new DataModel.Framework.ModelProcessor(loggerFactory);
+                            var files = Directory.EnumerateFiles(options.Input).OrderBy(_ => _).ToList();
+                            if (options.Convert)
+                            {
+                                files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileNameWithoutExtension(_) + ".xml")));
+                            }
+                            else if (options.Merge)
+                            {
+                                var model = processor.MergeToLhs(files.Select(_ => LoadModel(_, options.ModelName)));
+                                model.Save(options.Output);
+                            }
+                        }
+                        else
+                        {//file
+                            if (options.Convert)
+                            {
+                                ConvertModel(options.Input, options.ModelName, options.Output);
+                            }
+                        }
                     }
-                    else if (options.Merge)
-                    {
-                        var model = processor.MergeToLhs(files.Select(_ => LoadModel(_, options.ModelName)));
-                        model.Save(options.Output);
-                    }
-                }
-                else
-                {//file
-                    if (options.Convert)
-                    {
-                        ConvertModel(options.Input, options.ModelName, options.Output);
-                    }
-                }
-            }
+                );
         }
 
         static void ConvertModel(string path, string modelName, string outputPath)

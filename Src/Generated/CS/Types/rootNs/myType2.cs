@@ -7,7 +7,7 @@ namespace Types.rootNs
 		{}
 
 
-		public myType2(int _IntField,bool _BoolField,int[] _CollectionOfInt,rootNs.nestedNs.typeInNestedNs[] _CollectionOfComposite,string _CDataField)
+		public myType2(int _IntField, bool _BoolField, int[] _CollectionOfInt, rootNs.nestedNs.typeInNestedNs[] _CollectionOfComposite, string _CDataField)
 		{
 			IntField = _IntField;
 			BoolField = _BoolField;

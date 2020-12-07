@@ -12,13 +12,13 @@ namespace Codge.Generator.Console
 {
     class Options
     {
-        [OptionList('m', "model", Required = true, Separator = ',', HelpText = "Paths to model files, comma separated (xml or xsd)")]
+        [Option('m', "model", Required = true, Separator = ',', HelpText = "Paths to model files, comma separated (xml or xsd)")]
         public IReadOnlyCollection<string> Model { get; set; }
 
-        [Option('n', "modelName", Required = false, HelpText = "Name of the model.", DefaultValue = "TODO")]
+        [Option('n', "modelName", Required = false, HelpText = "Name of the model.", Default = "TODO")]
         public string ModelName { get; set; }
 
-        [Option('o', "outputDir", Required = false, HelpText = "Path to a output directory.", DefaultValue = @"../../../Generated/CS")]
+        [Option('o', "outputDir", Required = false, HelpText = "Path to a output directory.", Default = @"../../../Generated/CS")]
         public string OutputDir { get; set; }
     }
 
@@ -36,13 +36,13 @@ namespace Codge.Generator.Console
             var loggerFactory = new LoggerFactory().AddSerilog(Log.Logger);
             var logger = loggerFactory.CreateLogger("");
 
-            var options = new Options();
-            if (Parser.Default.ParseArgumentsStrict(args, options))
-            {
-                var model = LoadModel(options.Model, options.ModelName, logger);
+            Parser.Default.ParseArguments<Options>(args)
+                .WithParsed(options =>
+                    {
+                        var model = LoadModel(options.Model, options.ModelName, logger);
 
-                ProcessTemplates(LoadConfig(options.OutputDir, logger), model, logger);
-            }
+                        ProcessTemplates(LoadConfig(options.OutputDir, logger), model, logger);
+                    });
         }
 
         static void ProcessTemplates(GeneratorConfig config, Model model, ILogger logger)
