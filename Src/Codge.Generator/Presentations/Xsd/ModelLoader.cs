@@ -312,6 +312,10 @@ namespace Codge.Generator.Presentations.Xsd
                     {//TODO skipped for now, should it be a field created?
                         return;
                     }
+                    else if(item is XmlSchemaAttributeGroupRef attributeGroupRef)
+                    {//TODO skipped for now
+                        return;
+                    }
                     else
                     {
                         throw new NotSupportedException(string.Format("Not supported item line:{0}, position:{1}", item.LineNumber, item.LinePosition));
