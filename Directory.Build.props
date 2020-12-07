@@ -10,6 +10,8 @@
     <Copyright></Copyright>
     <RepositoryUrl>https://github.com/avao/Codge</RepositoryUrl>
     <LangVersion>default</LangVersion>
+
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
 </Project>
