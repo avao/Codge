@@ -29,7 +29,7 @@ namespace Codge.Generator.Presentations.Xml
                 {
                     if (t is Composite composite)
                     {
-                        var descriptor = namespaceDescriptor.CreateCompositeType(composite.name);
+                        var descriptor = namespaceDescriptor.CreateCompositeType(composite.name, composite.baseType);
                         if (composite.Field != null)
                         {
                             foreach (var field in composite.Field)

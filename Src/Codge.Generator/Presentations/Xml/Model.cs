@@ -114,6 +114,8 @@ namespace Codge.Generator.Presentations.Xml {
         
         private string nameField;
         
+        private string baseTypeField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Extends")]
         public Extends[] Extends {
@@ -144,6 +146,17 @@ namespace Codge.Generator.Presentations.Xml {
             }
             set {
                 this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string baseType {
+            get {
+                return this.baseTypeField;
+            }
+            set {
+                this.baseTypeField = value;
             }
         }
     }
