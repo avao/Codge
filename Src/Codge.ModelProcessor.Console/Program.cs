@@ -3,6 +3,7 @@ using Codge.Generator.Presentations;
 using CommandLine;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
@@ -17,11 +18,8 @@ namespace Codge.ModelProcessor.Console
         [Option('n', "modelName", Required = true, HelpText = "Name of the model.")]
         public string ModelName { get; set; }
 
-        [Option('o', "output", Required = true, HelpText = "Path to a output file or directory (depends on input).")]
+        [Option('o', "output", Required = true, HelpText = "Path to a output file")]
         public string Output { get; set; }
-
-        [Option('c', "convert", Required = false, HelpText = "Processing - convert to XML representation.")]
-        public bool Convert { get; set; }
 
         [Option('m', "merge", Required = false, HelpText = "Processing - merge multiple models into one. Files will be processed in alphabetical order.")]
         public bool Merge { get; set; }
@@ -46,41 +44,33 @@ namespace Codge.ModelProcessor.Console
             Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(options =>
                     {
+                        ModelDescriptor model;
                         if (Directory.Exists(options.Input))
                         {//directory
-                            var processor = new DataModel.Framework.ModelProcessor(loggerFactory);
                             var files = Directory.EnumerateFiles(options.Input).OrderBy(_ => _).ToList();
-                            if (options.Convert)
+                            if (options.Merge)
                             {
-                                files.ForEach(_ => ConvertModel(_, options.ModelName, Path.Combine(options.Output, Path.GetFileNameWithoutExtension(_) + ".xml")));
+                                var processor = new DataModel.Framework.ModelProcessor(loggerFactory);
+                                model = processor.MergeToLhs(files.Select(file => LoadModel(new[] { file }, options.ModelName)));
                             }
-                            else if (options.Merge)
+                            else
                             {
-                                var model = processor.MergeToLhs(files.Select(_ => LoadModel(_, options.ModelName)));
-                                model.Save(options.Output);
+                                model = LoadModel(files, options.ModelName);
                             }
                         }
                         else
                         {//file
-                            if (options.Convert)
-                            {
-                                ConvertModel(options.Input, options.ModelName, options.Output);
-                            }
+                            model = LoadModel(new[] { options.Input }, options.ModelName);
                         }
+
+                        model.Save(options.Output);
                     }
                 );
         }
 
-        static void ConvertModel(string path, string modelName, string outputPath)
+        static ModelDescriptor LoadModel(IReadOnlyCollection<string> paths, string modelName)
         {
-            var model = LoadModel(path, modelName);
-            model.Save(outputPath);
-        }
-
-        static ModelDescriptor LoadModel(string path, string modelName)
-        {
-            System.Console.WriteLine("Loading model [" + path + "]");
-            return new ModelLoader(Logger).LoadModel(new[] { path }, modelName);
+            return new ModelLoader(Logger).LoadModel(paths, modelName);
         }
     }
 }
