@@ -13,7 +13,7 @@ namespace Codge.Generator.Presentations.Xsd
         public static ModelDescriptor Load(IReadOnlyCollection<XmlSchema> schemas, string modelName)
         {
             var set = new XmlSchemaSet();
-            foreach(var schema in schemas)
+            foreach (var schema in schemas)
             {
                 set.Add(schema);
             }
@@ -26,7 +26,7 @@ namespace Codge.Generator.Presentations.Xsd
                 .Cast<XmlSchemaType>()
                 .Where(schemaType => schemaType.Name != null))
             {
-                switch(schemaType)
+                switch (schemaType)
                 {
                     case XmlSchemaSimpleType simpleType:
                         ProcessSimpleType(modelDescriptor.RootNamespace, simpleType);
@@ -72,12 +72,12 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static void ProcessCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
         {
-            var descriptor = complexType.BaseXmlSchemaType != null
-                ? namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint), complexType.BaseXmlSchemaType.Name) //TODO namespace
+            var descriptor = complexType.BaseXmlSchemaType is XmlSchemaComplexType baseComplexType
+                ? namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint), baseComplexType.Name) //TODO namespace
                 : namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint));
 
             ProcessItems(descriptor, complexType.Attributes);
-                        
+
             switch (complexType.ContentModel)
             {
                 case XmlSchemaSimpleContent simpleContentModel:
@@ -249,29 +249,29 @@ namespace Codge.Generator.Presentations.Xsd
                         switch (element.ElementSchemaType)
                         {
                             case XmlSchemaComplexType complexType:
-                            {
-                                if (complexType.IsEmptyType())
                                 {
-                                    type = element.Name + "_EmptyComplex"; //TODO should there be the only empty complex?
-                                    if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
-                                        descriptor.Namespace.CreateCompositeType(type);
-                                }
-                                else
-                                {
-                                    var name = GetTypeLessCompositeName(element);
-                                    ProcessCompositeType(descriptor.Namespace, complexType, name);
-                                    type = name;
-                                }
+                                    if (complexType.IsEmptyType())
+                                    {
+                                        type = element.Name + "_EmptyComplex"; //TODO should there be the only empty complex?
+                                        if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
+                                            descriptor.Namespace.CreateCompositeType(type);
+                                    }
+                                    else
+                                    {
+                                        var name = GetTypeLessCompositeName(element);
+                                        ProcessCompositeType(descriptor.Namespace, complexType, name);
+                                        type = name;
+                                    }
 
-                                break;
-                            }
+                                    break;
+                                }
                             case XmlSchemaSimpleType simpleType:
-                            {
-                                ProcessSimpleType(descriptor.Namespace, simpleType);
-                                type = element.Name;
+                                {
+                                    ProcessSimpleType(descriptor.Namespace, simpleType);
+                                    type = element.Name;
 
-                                break;
-                            }
+                                    break;
+                                }
                         }
                     }
 
@@ -312,7 +312,7 @@ namespace Codge.Generator.Presentations.Xsd
                     {//TODO skipped for now, should it be a field created?
                         return;
                     }
-                    else if(item is XmlSchemaAttributeGroupRef attributeGroupRef)
+                    else if (item is XmlSchemaAttributeGroupRef attributeGroupRef)
                     {//TODO skipped for now
                         return;
                     }
