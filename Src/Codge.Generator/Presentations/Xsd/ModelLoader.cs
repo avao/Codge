@@ -10,6 +10,21 @@ namespace Codge.Generator.Presentations.Xsd
 {
     public class ModelLoader
     {
+        private class ProcessingContext
+        {
+            public IReadOnlyCollection<XmlSchema> Schemas { get; }
+            public string ModelName { get; }
+
+            public ModelDescriptor ModelDescriptor { get; }
+
+            public ProcessingContext(string modelName, IReadOnlyCollection<XmlSchema> schemas, ModelDescriptor modelDescriptor)
+            {
+                ModelName = modelName;
+                Schemas = schemas;
+                ModelDescriptor = modelDescriptor;
+            }
+        }
+
         public static ModelDescriptor Load(IReadOnlyCollection<XmlSchema> schemas, string modelName)
         {
             var set = new XmlSchemaSet();
@@ -22,6 +37,8 @@ namespace Codge.Generator.Presentations.Xsd
 
             var modelDescriptor = new ModelDescriptor(modelName, modelName);
 
+            var context = new ProcessingContext(modelName, schemas, modelDescriptor);
+
             foreach (XmlSchemaType schemaType in set.GlobalTypes.Values
                 .Cast<XmlSchemaType>()
                 .Where(schemaType => schemaType.Name != null))
@@ -32,7 +49,7 @@ namespace Codge.Generator.Presentations.Xsd
                         ProcessSimpleType(modelDescriptor.RootNamespace, simpleType);
                         break;
                     case XmlSchemaComplexType complexType:
-                        ProcessCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty);
+                        ProcessCompositeType(modelDescriptor.RootNamespace, complexType, string.Empty, context);
                         break;
                 }
             }
@@ -45,7 +62,7 @@ namespace Codge.Generator.Presentations.Xsd
                     var complexType = element.ElementSchemaType as XmlSchemaComplexType;
                     if (complexType != null && complexType.Name == null)
                     {
-                        ProcessCompositeType(modelDescriptor.RootNamespace, complexType, element.Name);
+                        ProcessCompositeType(modelDescriptor.RootNamespace, complexType, element.Name, context);
                     }
                 }
             }
@@ -70,13 +87,13 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static void ProcessCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint)
+        private static void ProcessCompositeType(NamespaceDescriptor namespaceDescriptor, XmlSchemaComplexType complexType, string typeHint, ProcessingContext context)
         {
             var descriptor = complexType.BaseXmlSchemaType is XmlSchemaComplexType baseComplexType
                 ? namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint), baseComplexType.Name) //TODO namespace
                 : namespaceDescriptor.CreateCompositeType(ConvertSchemaType(complexType, typeHint));
 
-            ProcessItems(descriptor, complexType.Attributes);
+            ProcessItems(descriptor, complexType.Attributes, context);
 
             switch (complexType.ContentModel)
             {
@@ -84,7 +101,7 @@ namespace Codge.Generator.Presentations.Xsd
                     switch (simpleContentModel.Content)
                     {
                         case XmlSchemaSimpleContentExtension extension:
-                            ProcessItems(descriptor, extension.Attributes);
+                            ProcessItems(descriptor, extension.Attributes, context);
                             descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
                             break;
                         case XmlSchemaSimpleContentRestriction restriction:
@@ -98,10 +115,10 @@ namespace Codge.Generator.Presentations.Xsd
                     switch (complexContentModel.Content)
                     {
                         case XmlSchemaComplexContentExtension extension:
-                            ProcessItems(descriptor, extension.Attributes);
+                            ProcessItems(descriptor, extension.Attributes, context);
                             if (extension.Particle is XmlSchemaSequence sequence)
                             {
-                                ProcessItems(descriptor, sequence.Items);
+                                ProcessItems(descriptor, sequence.Items, context);
                             }
                             break;
                         case XmlSchemaComplexContentRestriction restriction:
@@ -110,16 +127,16 @@ namespace Codge.Generator.Presentations.Xsd
                     }
                     break;
                 case null:
-                    AddField(descriptor, complexType.ContentTypeParticle, false);
+                    AddField(descriptor, complexType.ContentTypeParticle, false, context);
                     break;
             }
         }
 
-        private static void ProcessItems(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection attributes)
+        private static void ProcessItems(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection attributes, ProcessingContext context)
         {
             foreach (var attribute in attributes)
             {
-                AddField(descriptor, attribute, false);
+                AddField(descriptor, attribute, false, context);
             }
         }
 
@@ -227,7 +244,7 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item, bool isOptional)
+        private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item, bool isOptional, ProcessingContext context)
         {
             if (item is XmlSchemaAttribute att)
             {
@@ -259,7 +276,7 @@ namespace Codge.Generator.Presentations.Xsd
                                     else
                                     {
                                         var name = GetTypeLessCompositeName(element);
-                                        ProcessCompositeType(descriptor.Namespace, complexType, name);
+                                        ProcessCompositeType(descriptor.Namespace, complexType, name, context);
                                         type = name;
                                     }
 
@@ -293,14 +310,14 @@ namespace Codge.Generator.Presentations.Xsd
                     var groupBase = item as XmlSchemaGroupBase;
                     if (groupBase != null)
                     {
-                        AddFields(descriptor, groupBase.Items, isOptional || groupBase is XmlSchemaChoice || groupBase.MinOccurs == 0);
+                        AddFields(descriptor, groupBase.Items, isOptional || groupBase is XmlSchemaChoice || groupBase.MinOccurs == 0, context);
                         return;
                     }
 
                     var groupRef = item as XmlSchemaGroupRef;
                     if (groupRef != null)
                     {
-                        AddFields(descriptor, groupRef.Particle.Items, false);
+                        AddFields(descriptor, groupRef.Particle.Items, false, context);
                         return;
                     }
 
@@ -314,6 +331,7 @@ namespace Codge.Generator.Presentations.Xsd
                     }
                     else if (item is XmlSchemaAttributeGroupRef attributeGroupRef)
                     {//TODO skipped for now
+                        ProcessItems(descriptor, ResolveRef(attributeGroupRef, context).Attributes, context);
                         return;
                     }
                     else
@@ -324,11 +342,24 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static void AddFields(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection items, bool isOptional)
+        private static XmlSchemaAttributeGroup ResolveRef(XmlSchemaAttributeGroupRef attributeGroupRef, ProcessingContext context)
+        {
+            foreach (var schema in context.Schemas)
+            {
+                var attributeGroup = schema.AttributeGroups.Values.Cast<XmlSchemaAttributeGroup>().SingleOrDefault(g => g.QualifiedName == attributeGroupRef.RefName);
+                if (attributeGroup != default)
+                {
+                    return attributeGroup;
+                }
+            }
+            throw new Exception($"Could not resolve ref {attributeGroupRef.RefName}");
+        }
+
+        private static void AddFields(CompositeTypeDescriptor descriptor, XmlSchemaObjectCollection items, bool isOptional, ProcessingContext context)
         {
             foreach (var item in items)
             {
-                AddField(descriptor, item, isOptional);
+                AddField(descriptor, item, isOptional, context);
             }
         }
 

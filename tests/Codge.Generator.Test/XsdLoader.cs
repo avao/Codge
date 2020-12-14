@@ -8,28 +8,23 @@ using Qart.Core.Xml;
 using Qart.Core.Xsd;
 using Qart.Testing;
 using Qart.Testing.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Schema;
 
 namespace Codge.Generator.Test
 {
     public class XsdLoader
     {
-        public static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/XsdLoader"), dataStore => true, null, null, new LoggerFactory());
+        private static ITestStorage TestSystem = new TestStorage(new FileBasedDataStore("../../../TestStore/XsdLoader"), dataStore => true, null, null, new LoggerFactory());
 
-        [TestCase("LoadXsd")]
-        [TestCase("SequenceInChoice")]
-        [TestCase("BuiltInTypes")]
-        [TestCase("ComplexTypeWithContent")]
-        [TestCase("RecursiveType")]
-        [TestCase("Enumeration")]
-        [TestCase("ElementWithEmbededType")]
-        [TestCase("Group")]
-        [TestCase("ModelXsd")]
-        [TestCase("SimpleType")]
-        [TestCase("UnboundChoice")]
-        [TestCase("AttributeRef")]
-        [TestCase("XsdAny")]
-        [TestCase("OptionalSequenceInSequence")]
+        private static IEnumerable<string> GetTests()
+        {
+            return TestSystem.GetTestCaseIds().Where(id => id != ".");
+        }
+
+
+        [TestCaseSource(nameof(GetTests))]
         public void LoadXsd(string testId)
         {
             var testCase = TestSystem.GetTestCase(testId);

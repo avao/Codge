@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Model name="AModel" xmlns="http://codge/Model.xsd">
+  <Namespace name="AModel">
+    <Primitive name="restrictedString" />
+    <Primitive name="RestrictedString" />
+  </Namespace>
+</Model>
