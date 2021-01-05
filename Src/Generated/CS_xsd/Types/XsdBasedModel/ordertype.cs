@@ -7,7 +7,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public ordertype(string _status, string _customer, XsdBasedModel.elementWithEmbededTypeInPlace _elementWithEmbededTypeInPlace, int? _billto, string _shipto, XsdBasedModel.elementWithEmbededType _elementWithEmbededType, string[] _shortStringCollection, XsdBasedModel.simpleType _elemSimpleType, XsdBasedModel.elemEmptyType_EmptyComplex _elemEmptyType, XsdBasedModel.enumType? _enumField, XsdBasedModel.enumType[] _enumFieldCollection)
+		public ordertype(string _status, string _customer, XsdBasedModel.elementWithEmbededTypeInPlace _elementWithEmbededTypeInPlace, int? _billto, string _shipto, XsdBasedModel.elementWithEmbededType _elementWithEmbededType, string[] _shortStringCollection, XsdBasedModel.simpleType _elemSimpleType, XsdBasedModel.elemEmptyType_EmptyComplex _elemEmptyType, XsdBasedModel.enumType? _enumField, XsdBasedModel.enumType[] _enumFieldCollection, string _elem1, decimal? _elem2)
 		{
 			status = _status;
 			customer = _customer;
@@ -20,6 +20,8 @@ namespace Types.XsdBasedModel
 			elemEmptyType = _elemEmptyType;
 			enumField = _enumField;
 			enumFieldCollection = _enumFieldCollection;
+			elem1 = _elem1;
+			elem2 = _elem2;
 		}
 
 
@@ -34,6 +36,8 @@ namespace Types.XsdBasedModel
 		public	XsdBasedModel.elemEmptyType_EmptyComplex elemEmptyType {get; set;}
 		public	XsdBasedModel.enumType? enumField {get; set;}
 		public	XsdBasedModel.enumType[] enumFieldCollection {get; set;}
+		public	string elem1 {get; set;}
+		public	decimal? elem2 {get; set;}
 	}
 }
 

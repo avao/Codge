@@ -30,6 +30,13 @@
     </xs:sequence>
   </xs:group>
 
+	<xs:group name ="groupWithChoice">
+		<xs:choice>
+			<xs:element name="elem1" type="xs:string" />
+			<xs:element name="elem2" type="xs:decimal" />
+		</xs:choice>
+	</xs:group>
+
   <xs:element name="order" type="ordertype"/>
 
   <xs:complexType name="complexTypeWithAField">
@@ -48,8 +55,11 @@
   </xs:complexType>
   
   <xs:complexType name="ordertype">
-    <xs:group ref="custGroup"/>
-    <xs:attribute name="status" type="xs:string"/>
+	  <xs:sequence>
+		  <xs:group ref="custGroup"/>
+		  <xs:group ref="groupWithChoice"/>
+	  </xs:sequence>
+	  <xs:attribute name="status" type="xs:string"/>
   </xs:complexType>
 
   <xs:element name="elementWithEmbededType">

@@ -307,7 +307,7 @@ namespace Codge.Generator.Presentations.Xsd
 
                     if (item is XmlSchemaGroupRef groupRef)
                     {
-                        AddFields(descriptor, groupRef.Particle.Items, false, context);
+                        AddFields(descriptor, groupRef.Particle.Items, groupRef.Particle is XmlSchemaChoice, context);
                         return;
                     }
 
