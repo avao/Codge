@@ -24,8 +24,8 @@ namespace Codge.DataModel.Descriptors
 
     public class EnumerationTypeDescriptor : TypeDescriptor
     {
-        IList<ItemDescriptor> _items;
-        public IEnumerable<ItemDescriptor> Items { get { return _items; } }
+        private List<ItemDescriptor> _items;
+        public IReadOnlyCollection<ItemDescriptor> Items => _items;
 
         internal EnumerationTypeDescriptor(string name, NamespaceDescriptor nameSpace)
             : base(name, nameSpace)

@@ -40,8 +40,9 @@ namespace Codge.Generator.Console
                 .WithParsed(options =>
                     {
                         var model = LoadModel(options.Model, options.ModelName, logger);
+                        var config = new GeneratorConfig(options.OutputDir, new BasicModel.Templates.CS.TaskFactory(logger));
 
-                        ProcessTemplates(LoadConfig(options.OutputDir, logger), model, logger);
+                        ProcessTemplates(config, model, logger);
                     });
         }
 
@@ -64,18 +65,6 @@ namespace Codge.Generator.Console
             var typeSystem = new TypeSystem();
             var compiler = new ModelProcessor(new LoggerFactory());
             return compiler.Compile(typeSystem, model);
-        }
-
-
-        static GeneratorConfig LoadConfig(string path, ILogger logger)
-        {
-            var config = new GeneratorConfig(path, new BasicModel.Templates.CS.TaskFactory(logger));
-
-            //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Composite.stg"))));
-            //config.AddTypeTask(new OutputTask<TypeDescriptor>(new TypeTask(CreateTaskInput(@"D:\work\2012\ConsoleApplication1\Primitive.stg"))));
-
-            return config;
-
         }
     }
 }

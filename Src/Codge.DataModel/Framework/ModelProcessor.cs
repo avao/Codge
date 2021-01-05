@@ -43,11 +43,6 @@ namespace Codge.DataModel.Framework
             return model;
         }
 
-        static int id = 3000;
-        private static int GetId(string name)
-        {
-            return id++;//TODO
-        }
 
         public class TypeSystemCompileHandlerFirstPass
             : NamespaceTracingTypeSystemEventHandler<Namespace>
@@ -63,17 +58,17 @@ namespace Codge.DataModel.Framework
 
             public void Handle(PrimitiveTypeDescriptor primitive)
             {
-                Namespace.CreatePrimitiveType(GetId(primitive.Name), primitive.Name);
+                Namespace.CreatePrimitiveType(primitive.Name);
             }
 
             public void Handle(CompositeTypeDescriptor composite)
             {
-                Namespace.CreateCompositeType(GetId(composite.Name), composite.Name);
+                Namespace.CreateCompositeType(composite.Name);
             }
 
             public void Handle(EnumerationTypeDescriptor enumeration)
             {
-                var descriptor = Namespace.CreateEnumerationType(GetId(enumeration.Name), enumeration.Name);
+                var descriptor = Namespace.CreateEnumerationType(enumeration.Name);
                 foreach (var item in enumeration.Items)
                 {
                     if (item.Value.HasValue)

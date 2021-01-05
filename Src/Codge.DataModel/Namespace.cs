@@ -105,28 +105,28 @@ namespace Codge.DataModel
             TypeSystem = typeSystem;
         }
 
-        internal CompositeType CreateCompositeType(int id, string name)
+        internal CompositeType CreateCompositeType(string name)
         {
-            return CreateCompositeType(id, name, null);
+            return CreateCompositeType(name, null);
         }
 
-        internal CompositeType CreateCompositeType(int id, string name, CompositeType baseType)
+        internal CompositeType CreateCompositeType(string name, CompositeType baseType)
         {
-            var type = new CompositeType(id, name, this);
+            var type = new CompositeType(name, this);
             _types.Add(type);
             return type;
         }
 
-        internal PrimitiveType CreatePrimitiveType(int id, string name)
+        internal PrimitiveType CreatePrimitiveType(string name)
         {
-            var type = new PrimitiveType(id, name, this);
+            var type = new PrimitiveType(name, this);
             _types.Add(type);
             return type;
         }
 
-        internal EnumerationType CreateEnumerationType(int id, string name)
+        internal EnumerationType CreateEnumerationType(string name)
         {
-            var type = new EnumerationType(id, name, this);
+            var type = new EnumerationType(name, this);
             _types.Add(type);
             return type;
         }

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
 
+using static Codge.Generator.Presentations.AttachedDataExtensions;
+
 namespace Codge.Generator.Presentations.Xsd
 {
     public class ModelLoader
@@ -102,10 +104,10 @@ namespace Codge.Generator.Presentations.Xsd
                     {
                         case XmlSchemaSimpleContentExtension extension:
                             ProcessItems(descriptor, extension.Attributes, context);
-                            descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
+                            descriptor.AddField("Content", ConvertSchemaType(extension.BaseTypeName), false, NewAttachedData().SetIsContent());
                             break;
                         case XmlSchemaSimpleContentRestriction restriction:
-                            descriptor.AddField("Content", ConvertSchemaType(restriction.BaseTypeName), false, new Dictionary<string, object> { { "isContent", true } });
+                            descriptor.AddField("Content", ConvertSchemaType(restriction.BaseTypeName), false, NewAttachedData().SetIsContent());
                             break;
                         default:
                             throw new NotSupportedException("Not supported simple content model ");
@@ -225,23 +227,9 @@ namespace Codge.Generator.Presentations.Xsd
 
         private static string GetTypeForAnElement(XmlSchemaElement element)
         {
-            if (element.Name != null)
-            {
-                XmlSchemaType type = element.ElementSchemaType;
-                var simpleType = type as XmlSchemaSimpleType;
-                if (simpleType != null && simpleType.IsEnumeration())
-                {
-                    return ConvertSchemaType(simpleType.QualifiedName);
-                }
-                else
-                {
-                    return ConvertSchemaType(type.QualifiedName);
-                }
-            }
-            else
-            {
-                return ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
-            }
+            return element.Name != null
+                ? ConvertSchemaType(element.ElementSchemaType.QualifiedName)
+                : ConvertSchemaType(element.ElementSchemaType, element.RefName.Name);
         }
 
         private static void AddField(CompositeTypeDescriptor descriptor, XmlSchemaObject item, bool isOptional, ProcessingContext context)
@@ -252,7 +240,7 @@ namespace Codge.Generator.Presentations.Xsd
                     ? att.AttributeSchemaType.BaseXmlSchemaType.QualifiedName
                     : att.AttributeSchemaType.QualifiedName;
 
-                descriptor.AddField(att.Name ?? att.RefName.Name, ConvertSchemaType(qualifiedName), false, new Dictionary<string, object> { { "isAttribute", true } });
+                descriptor.AddField(att.Name ?? att.RefName.Name, ConvertSchemaType(qualifiedName), false, NewAttachedData().SetIsAttribute());
             }
             else
             {
@@ -271,11 +259,13 @@ namespace Codge.Generator.Presentations.Xsd
                                     {
                                         type = element.Name + "_EmptyComplex"; //TODO should there be the only empty complex?
                                         if (!descriptor.Namespace.Types.Any(_ => _.Name == type))
+                                        {
                                             descriptor.Namespace.CreateCompositeType(type);
+                                        }
                                     }
                                     else
                                     {
-                                        var name = GetTypeLessCompositeName(element);
+                                        var name = GetTypelessCompositeName(element);
                                         ProcessCompositeType(descriptor.Namespace, complexType, name, context);
                                         type = name;
                                     }
@@ -302,20 +292,20 @@ namespace Codge.Generator.Presentations.Xsd
                         field = descriptor.AddField(fieldName, type, element.MaxOccurs > 1 || isComplexCollection);
 
                         if (isOptional || element.MinOccurs == 0)
-                            field.AttachedData.Add("isOptional", true);
+                        {
+                            field.AttachedData.SetIsOptional();
+                        }
                     }
                 }
                 else
                 {
-                    var groupBase = item as XmlSchemaGroupBase;
-                    if (groupBase != null)
+                    if (item is XmlSchemaGroupBase groupBase)
                     {
                         AddFields(descriptor, groupBase.Items, isOptional || groupBase is XmlSchemaChoice || groupBase.MinOccurs == 0, context);
                         return;
                     }
 
-                    var groupRef = item as XmlSchemaGroupRef;
-                    if (groupRef != null)
+                    if (item is XmlSchemaGroupRef groupRef)
                     {
                         AddFields(descriptor, groupRef.Particle.Items, false, context);
                         return;
@@ -330,7 +320,7 @@ namespace Codge.Generator.Presentations.Xsd
                         return;
                     }
                     else if (item is XmlSchemaAttributeGroupRef attributeGroupRef)
-                    {//TODO skipped for now
+                    {
                         ProcessItems(descriptor, ResolveRef(attributeGroupRef, context).Attributes, context);
                         return;
                     }
@@ -363,7 +353,7 @@ namespace Codge.Generator.Presentations.Xsd
             }
         }
 
-        private static string GetTypeLessCompositeName(XmlSchemaElement element)
+        private static string GetTypelessCompositeName(XmlSchemaElement element)
         {
             var parentName = element.GetFirstParentWithName();
 

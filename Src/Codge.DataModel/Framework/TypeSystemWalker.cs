@@ -18,15 +18,6 @@ namespace Codge.DataModel.Framework
 
     public static class NodeEventHandlerExtensions
     {
-        public static void TryInvokeAtomicEventHandler<T, TItem>(this INodeEventHandler handler, TItem item)
-            where T : class
-        {
-            if (item is T typedItem)
-            {
-                InvokeAtomicEventHandler(handler, typedItem);
-            }
-        }
-
         public static void InvokeAtomicEventHandler<T>(this INodeEventHandler handler, T item)
         {
             if (handler is IAtomicNodeEnventHandler<T> atomicEventHandler)
@@ -46,13 +37,13 @@ namespace Codge.DataModel.Framework
                 switch (t)
                 {
                     case CompositeTypeDescriptor composite:
-                        nodeEventHandler.InvokeAtomicEventHandler<CompositeTypeDescriptor>(composite);
+                        nodeEventHandler.InvokeAtomicEventHandler(composite);
                         break;
                     case PrimitiveTypeDescriptor primitive:
-                        nodeEventHandler.InvokeAtomicEventHandler<PrimitiveTypeDescriptor>(primitive);
+                        nodeEventHandler.InvokeAtomicEventHandler(primitive);
                         break;
                     case EnumerationTypeDescriptor enumeration:
-                        nodeEventHandler.InvokeAtomicEventHandler<EnumerationTypeDescriptor>(enumeration);
+                        nodeEventHandler.InvokeAtomicEventHandler(enumeration);
                         break;
                     default:
                         throw new Exception("Unknown type");

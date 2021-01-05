@@ -24,17 +24,15 @@ namespace Codge.DataModel
 
     public abstract class TypeBase
     {
-        public int Id { get; }
         public string Name { get; }
         public Namespace Namespace { get; }
 
         abstract public IEnumerable<TypeBase> Dependencies { get; }
 
-        protected TypeBase(int id, string name, Namespace nameSpace)
+        protected TypeBase(string name, Namespace nameSpace)
         {
             Namespace = nameSpace;
             Name = name;
-            Id = id;
         }
     }
 }

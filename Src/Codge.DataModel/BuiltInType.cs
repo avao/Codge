@@ -5,8 +5,8 @@ namespace Codge.DataModel
 {
     public class BuiltInType : TypeBase
     {
-        internal BuiltInType(int id, string name, Namespace ns)
-            : base(id, name, ns)
+        internal BuiltInType(string name, Namespace ns)
+            : base(name, ns)
         {
         }
 

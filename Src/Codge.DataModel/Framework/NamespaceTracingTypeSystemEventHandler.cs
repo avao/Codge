@@ -5,20 +5,21 @@ using System.Collections.Generic;
 namespace Codge.DataModel.Framework
 {
     public class NamespaceTracingTypeSystemEventHandler<T>
-    : ICompositeNodeEventHandler<NamespaceDescriptor>
+        : ICompositeNodeEventHandler<NamespaceDescriptor>
     {
         private readonly Stack<T> _namespaces;
-        private Func<T, NamespaceDescriptor, T> _converter;
-        public NamespaceTracingTypeSystemEventHandler(T ns, Func<T, NamespaceDescriptor, T> converter)
+        private Func<T, NamespaceDescriptor, T> _converterFunc;
+
+        public NamespaceTracingTypeSystemEventHandler(T ns, Func<T, NamespaceDescriptor, T> converterFunc)
         {
             _namespaces = new Stack<T>();
             _namespaces.Push(ns);
-            _converter = converter;
+            _converterFunc = converterFunc;
         }
 
         public void OnEnter(NamespaceDescriptor node)
         {
-            _namespaces.Push(_converter(Namespace, node));
+            _namespaces.Push(_converterFunc(Namespace, node));
         }
 
         public void OnLeave(NamespaceDescriptor node)

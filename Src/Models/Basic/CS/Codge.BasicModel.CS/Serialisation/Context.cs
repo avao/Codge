@@ -4,7 +4,7 @@ namespace Codge.BasicModel.CS.Serialisation
 {
     public class SerialisationContext
     {
-        private IDictionary<string, IXmlSerialiser> _serialisers;
+        private readonly IDictionary<string, IXmlSerialiser> _serialisers;
 
         public SerialisationContext()
         {

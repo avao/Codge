@@ -51,8 +51,8 @@ namespace Codge.DataModel
         public CompositeType BaseType { get; private set; }
 
 
-        internal CompositeType(int id, string name, Namespace nameSpace)
-            : base(id, name, nameSpace)
+        internal CompositeType(string name, Namespace nameSpace)
+            : base(name, nameSpace)
         {
             _fields = new List<Field>();
         }

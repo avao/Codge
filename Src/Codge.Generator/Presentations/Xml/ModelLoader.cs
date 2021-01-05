@@ -1,4 +1,5 @@
 ﻿using Codge.DataModel.Descriptors;
+using Qart.Core.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,69 +24,50 @@ namespace Codge.Generator.Presentations.Xml
 
         private static void processNamespace(NamespaceDesc ns, NamespaceDescriptor namespaceDescriptor)
         {
-            if (ns.Items != null)
+            foreach (var t in ns.Items.ToEmptyIfNull())
             {
-                foreach (var t in ns.Items)
+                var descriptor = t switch
                 {
-                    if (t is Composite composite)
-                    {
-                        var descriptor = namespaceDescriptor.CreateCompositeType(composite.name, composite.baseType);
-                        if (composite.Field != null)
-                        {
-                            foreach (var field in composite.Field)
-                            {
-                                var newField = descriptor.AddField(field.name, field.type, field.isCollectionSpecified && field.isCollection);
-                                if (field.AttachedData != null)
-                                {//TODO hack for boolean values
-                                    field.AttachedData.Select(_ => new KeyValuePair<string, object>(_.key, _.value == "True" ? (object)true : _.value)).ToList().ForEach(_ => newField.AttachedData.Add(_));
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (t is Primitive primitive)
-                        {
-                            var descriptor = namespaceDescriptor.CreatePrimitiveType(primitive.name);
-                        }
-                        else
-                        {
-                            if (t is Enumeration enumeration)
-                            {
-                                var descriptor = namespaceDescriptor.CreateEnumerationType(enumeration.name);
-
-                                int i = 0;
-                                foreach (var item in enumeration.Item)
-                                {
-                                    if (item.valueSpecified)
-                                    {
-                                        descriptor.AddItem(item.name, item.value);
-                                        i = item.value;
-                                    }
-                                    else
-                                    {
-                                        descriptor.AddItem(item.name, i);
-                                    }
-                                    ++i;
-                                }
-
-                            }
-                            else
-                            {
-                                throw new Exception("Unknown type");
-                            }
-                        }
-                    }
-                }
+                    Composite composite => CreateCompositeType(composite, namespaceDescriptor),
+                    Primitive primitive => namespaceDescriptor.CreatePrimitiveType(primitive.name),
+                    Enumeration enumeration => CreateEnumerationType(enumeration, namespaceDescriptor),
+                    _ => throw new Exception("Unknown type")
+                };
             }
 
-            if (ns.Namespace != null)
+            foreach (var n in ns.Namespace.ToEmptyIfNull())
             {
-                foreach (var n in ns.Namespace)
-                {
-                    processNamespace(n, namespaceDescriptor.GetOrCreateNamespace(n.name));
-                }
+                processNamespace(n, namespaceDescriptor.GetOrCreateNamespace(n.name));
             }
         }
+
+        private static TypeDescriptor CreateCompositeType(Composite composite, NamespaceDescriptor namespaceDescriptor)
+        {
+            var descriptor = namespaceDescriptor.CreateCompositeType(composite.name, composite.baseType);
+            foreach (var field in composite.Field.ToEmptyIfNull())
+            {
+                var newField = descriptor.AddField(field.name, field.type, field.isCollectionSpecified && field.isCollection);
+                if (field.AttachedData != null)
+                {//TODO hack for boolean values
+                    field.AttachedData.Select(_ => new KeyValuePair<string, object>(_.key, _.value == "True" ? (object)true : _.value)).ToList().ForEach(_ => newField.AttachedData.Add(_));
+                }
+            }
+            return descriptor;
+        }
+
+        private static TypeDescriptor CreateEnumerationType(Enumeration enumeration, NamespaceDescriptor namespaceDescriptor)
+        {
+            var descriptor = namespaceDescriptor.CreateEnumerationType(enumeration.name);
+
+            int i = 0;
+            foreach (var item in enumeration.Item)
+            {
+                i = item.valueSpecified ? item.value : i;
+                descriptor.AddItem(item.name, i);
+                ++i;
+            }
+            return descriptor;
+        }
+
     }
 }

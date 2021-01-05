@@ -21,8 +21,8 @@ namespace Codge.DataModel
         }
 
 
-        internal EnumerationType(int id, string name, Namespace nameSpace)
-            : base(id, name, nameSpace)
+        internal EnumerationType(string name, Namespace nameSpace)
+            : base(name, nameSpace)
         {
             _items = new List<Item>();
         }

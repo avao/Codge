@@ -6,8 +6,8 @@ namespace Codge.DataModel
     //string, int, int64, 
     public class PrimitiveType : TypeBase
     {
-        internal PrimitiveType(int id, string name, Namespace nameSpace)
-            : base(id, name, nameSpace)
+        internal PrimitiveType(string name, Namespace nameSpace)
+            : base(name, nameSpace)
         {
         }
 

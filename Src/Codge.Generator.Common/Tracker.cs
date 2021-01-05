@@ -5,29 +5,29 @@ namespace Codge.Generator.Common
 {
     public class Tracker
     {
-        private IList<string> _filesUdated = new List<string>();
-        public IEnumerable<string> FilesUpdated => _filesUdated;
+        private List<string> _filesUdated = new List<string>();
+        public IReadOnlyCollection<string> FilesUpdated => _filesUdated;
 
-        private IList<string> _filesSkipped = new List<string>();
-        public IEnumerable<string> FilesSkipped => _filesSkipped;
+        private List<string> _filesSkipped = new List<string>();
+        public IReadOnlyCollection<string> FilesSkipped => _filesSkipped;
 
-        public ILogger Logger { get; }
+        private ILogger _logger;
 
         public Tracker(ILogger logger)
         {
-            Logger = logger;
+            _logger = logger;
         }
 
         public void OnFileUpdated(string path)
         {
             _filesUdated.Add(path);
-            Logger.LogDebug("Updating file [{path}]", path);
+            _logger.LogDebug("Updating file [{path}]", path);
         }
 
         public void OnFileSkipped(string path)
         {
             _filesSkipped.Add(path);
-            Logger.LogDebug("Skipping update [{path}]", path);
+            _logger.LogDebug("Skipping update [{path}]", path);
         }
     }
 }

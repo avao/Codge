@@ -91,7 +91,7 @@ namespace Codge.BasicModel.CS.Serialisation
         }
 
 
-        public static void SerialiseEnumAsNameIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, SerialisationContext context)
+        public static void SerialiseEnumAsNameIfHasValue<T>(XmlWriter writer, string tag, T? value, SerialisationContext context)
             where T : struct
         {
             if (value.HasValue)
@@ -107,7 +107,7 @@ namespace Codge.BasicModel.CS.Serialisation
         }
 
 
-        public static void SerialiseEnumAsStringIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, Func<T, string> mapValueFunc, SerialisationContext context)
+        public static void SerialiseEnumAsStringIfHasValue<T>(XmlWriter writer, string tag, T? value, Func<T, string> mapValueFunc, SerialisationContext context)
             where T : struct
         {
             if (value.HasValue)
@@ -116,7 +116,7 @@ namespace Codge.BasicModel.CS.Serialisation
             }
         }
 
-        public static void SerialiseIfHasValue<T>(XmlWriter writer, string tag, Nullable<T> value, SerialisationContext context)
+        public static void SerialiseIfHasValue<T>(XmlWriter writer, string tag, T? value, SerialisationContext context)
             where T : struct
         {
             if (value.HasValue)

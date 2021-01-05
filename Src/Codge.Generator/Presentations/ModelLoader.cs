@@ -9,7 +9,7 @@ namespace Codge.Generator.Presentations
 {
     public class ModelLoader
     {
-        private ILogger _logger;
+        private readonly ILogger _logger;
         public ModelLoader(ILogger logger)
         {
             _logger = logger;

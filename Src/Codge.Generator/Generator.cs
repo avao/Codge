@@ -9,19 +9,19 @@ namespace Codge.Generator
     {
         public GeneratorConfig Config { get; }
         public Context Context { get; }
-        public ILogger Logger { get; }
 
+        private readonly ILogger _logger;
 
         public Generator(GeneratorConfig config, ILogger logger)
         {
             Config = config;
             Context = new Context(config.BaseDir, logger, new OutputPathMapper());//TODO inject tracker, mapper
-            Logger = logger;
+            _logger = logger;
         }
 
         public void Generate(Model model)
         {
-            Logger.LogInformation("Starting generation for model baseDir=[{baseDir}]", Config.BaseDir);
+            _logger.LogInformation("Starting generation for model baseDir=[{baseDir}]", Config.BaseDir);
             ProcessNamespace(model.Namespace);
 
             foreach (var task in Config.TaskFactory.CreateTasksForModel(model))
@@ -31,9 +31,8 @@ namespace Codge.Generator
         }
 
 
-        void ProcessNamespace(Namespace ns)
+        private void ProcessNamespace(Namespace ns)
         {
-
             foreach (var task in Config.TaskFactory.CreateTasksForNamespace(ns))
             {
                 task.Execute(Context);
@@ -50,9 +49,8 @@ namespace Codge.Generator
             }
         }
 
-        void ProcessType(TypeBase type)
+        private void ProcessType(TypeBase type)
         {
-
             foreach (var task in Config.TaskFactory.CreateTasksForType(type))
             {
                 task.Execute(Context);
