@@ -5,6 +5,7 @@
       <Field name="aField" type="string">
         <AttachedData>
           <Item key="isAttribute" value="True" />
+          <Item key="isOptional" value="True" />
         </AttachedData>
       </Field>
     </Composite>
@@ -12,6 +13,7 @@
       <Field name="status" type="string">
         <AttachedData>
           <Item key="isAttribute" value="True" />
+          <Item key="isOptional" value="True" />
         </AttachedData>
       </Field>
       <Field name="customer" type="string" />

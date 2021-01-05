@@ -5,6 +5,7 @@
       <Field name="anAttribute" type="string">
         <AttachedData>
           <Item key="isAttribute" value="True" />
+          <Item key="isOptional" value="True" />
         </AttachedData>
       </Field>
       <Field name="anAttribute2" type="string">
