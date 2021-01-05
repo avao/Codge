@@ -8,7 +8,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public complexTypeWithContentAndParentField(decimal _aField, string _anElement)
+		public complexTypeWithContentAndParentField(decimal? _aField, string _anElement)
 			: base(_aField)
 		{
 			anElement = _anElement;

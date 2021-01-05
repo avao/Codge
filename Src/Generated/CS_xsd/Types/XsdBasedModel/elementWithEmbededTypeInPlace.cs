@@ -8,7 +8,7 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public elementWithEmbededTypeInPlace(decimal _aField, string _extraField)
+		public elementWithEmbededTypeInPlace(decimal? _aField, string _extraField)
 			: base(_aField)
 		{
 			extraField = _extraField;

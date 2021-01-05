@@ -240,7 +240,12 @@ namespace Codge.Generator.Presentations.Xsd
                     ? att.AttributeSchemaType.BaseXmlSchemaType.QualifiedName
                     : att.AttributeSchemaType.QualifiedName;
 
-                descriptor.AddField(att.Name ?? att.RefName.Name, ConvertSchemaType(qualifiedName), false, NewAttachedData().SetIsAttribute());
+                var attachedData = NewAttachedData().SetIsAttribute();
+                if(att.Use != XmlSchemaUse.Required)
+                {
+                    attachedData.SetIsOptional();
+                }
+                descriptor.AddField(att.Name ?? att.RefName.Name, ConvertSchemaType(qualifiedName), false, attachedData);
             }
             else
             {

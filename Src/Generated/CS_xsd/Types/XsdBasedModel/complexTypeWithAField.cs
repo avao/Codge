@@ -7,13 +7,13 @@ namespace Types.XsdBasedModel
 		{}
 
 
-		public complexTypeWithAField(decimal _aField)
+		public complexTypeWithAField(decimal? _aField)
 		{
 			aField = _aField;
 		}
 
 
-		public	decimal aField {get; set;}
+		public	decimal? aField {get; set;}
 	}
 }
 
